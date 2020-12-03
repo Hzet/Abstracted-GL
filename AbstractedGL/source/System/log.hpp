@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <string>
-
-#define AGL_LOG(x,...) CLog::SendMessage(x,...)
 
 namespace agl
 {
@@ -23,6 +22,7 @@ namespace agl
 	public:
 		static void MessageTarget(std::ostream &target);
 		template <typename... Args>	static void SendMessage(Args&&... msgs);
+		template <typename... Args> static void SendOneMessage(std::ostream &target, Args&&... msgs);
 
 	private:
 		static std::unique_ptr<CLogInstance> Instance_;
@@ -30,3 +30,22 @@ namespace agl
 
 #include "log.inl"
 }
+
+#define AGL_LOG(x, ...) agl::CLog::SendMessage(x, __VA_ARGS__)
+
+#define AGL_ERROR_LOG(x, ...) \
+	do  \
+	{ \
+		std::ofstream file("error-dump.log", std::ios::out | std::ios::app); \
+		agl::CLog::SendOneMessage(file, x, __VA_ARGS__); \
+	} \
+	while(0) \
+
+#ifdef AGL_DEBUG
+	#define AGL_DEBUG_LOG(x, ...) \
+		do { \
+			std::ofstream file("debug.log", std::ios::out | std::ios::app); \
+			agl::CLog::SendOneMessage(file, AGL_CODE_NAME_COMA, x, __VA_ARGS__); \
+		} while(0) \
+
+#endif

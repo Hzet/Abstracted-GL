@@ -5,7 +5,17 @@ void CLogInstance::log(Args&&... msgs)
 }
 
 template <typename... Args>
-static void CLog::SendMessage(Args&&... msgs)
+void CLog::SendMessage(Args&&... msgs)
 {
 	Instance_->log(std::forward<Args>(msgs)...);
+}
+
+template <typename... Args> 
+void CLog::SendOneMessage(std::ostream &target, Args&&... msgs)
+{
+	std::ostream &prevTarget = Instance_->target_;
+
+	MessageTarget(target);
+	SendMessage(std::forward<Args>(msgs)...);
+	MessageTarget(prevTarget);
 }
