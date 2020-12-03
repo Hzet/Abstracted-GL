@@ -2,7 +2,6 @@
 
 namespace agl
 {
-
 	CLogInstance::CLogInstance(std::ostream &target)
 		: target_(target)
 	{
@@ -13,18 +12,7 @@ namespace agl
 	{
 	}
 
-	void CLogInstance::log(std::initializer_list<std::string> msgs)
-	{
-		for (const auto &str : msgs)
-			target_ << str << std::endl;
-	}
-
-	std::unique_ptr<CLogInstance> Instance_ = {};
-
-	void CLog::SendMessage(std::initializer_list<std::string> msgs)
-	{
-		Instance_->log(msgs);
-	}
+	std::unique_ptr<CLogInstance> CLog::Instance_ = std::unique_ptr<CLogInstance>(new CLogInstance(std::cout));
 
 	void CLog::MessageTarget(std::ostream &target)
 	{

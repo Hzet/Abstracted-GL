@@ -1,4 +1,4 @@
-#include "agl-core.hpp"
+#include "core.hpp"
 
 namespace agl
 {
