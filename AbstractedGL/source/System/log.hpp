@@ -31,21 +31,24 @@ namespace agl
 #include "log.inl"
 }
 
-#define AGL_LOG(x, ...) agl::CLog::SendMessage(x, __VA_ARGS__)
+#define AGL_LOG(message, ...) agl::CLog::SendMessage(x, __VA_ARGS__)
 
-#define AGL_ERROR_LOG(x, ...) \
-	do  \
-	{ \
+#define AGL_ERROR_LOG(message, ...) \
+	do { \
 		std::ofstream file("error-dump.log", std::ios::out | std::ios::app); \
-		agl::CLog::SendOneMessage(file, x, __VA_ARGS__); \
-	} \
-	while(0) \
+		agl::CLog::SendOneMessage(file, message, __VA_ARGS__); \
+	} while(false) \
 
 #ifdef AGL_DEBUG
-	#define AGL_DEBUG_LOG(x, ...) \
+	#define AGL_DEBUG_LOG_IMPL(...) \
 		do { \
 			std::ofstream file("debug.log", std::ios::out | std::ios::app); \
-			agl::CLog::SendOneMessage(file, AGL_CODE_NAME_COMA, x, __VA_ARGS__); \
-		} while(0) \
+			agl::CLog::SendOneMessage(file, __VA_ARGS__); \
+		} while(false) \
+
+	#define AGL_DEBUG_LOG(message, ...) \
+		do { \
+			AGL_DEBUG_LOG_IMPL(AGL_CODE_NAME_COMA, message, __VA_ARGS__); \
+		} while(false) \
 
 #endif
