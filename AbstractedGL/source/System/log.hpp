@@ -51,11 +51,16 @@ namespace agl
 
 #define AGL_LOG_STREAM_TAGGED(stream, tag, message, ...)  agl::CLog::SendOneMessage(stream, AGL_BEGIN_TAG(tag), message, __VA_ARGS__, AGL_END_TAG(tag))
 
-#define AGL_ERROR_LOG(message, ...) AGL_LOG_FILE_TAGGED("error-dump.log", AGL_CODE_NAME_COMA, message, __VA_ARGS__)
+#define AGL_ERROR_LOG(message, ...) AGL_LOG_FILE("error-dump.log", AGL_CODE_NAME_COMA, message, __VA_ARGS__)
+
+#define AGL_ERROR_LOG_TAGGED(tag, message, ...) AGL_LOG_FILE_TAGGED("error-dump.log", tag, AGL_CODE_NAME_COMA, message, __VA_ARGS__)
 
 #define AGL_ERROR_LOG_STREAM(stream, message, ...) AGL_LOG_STREAM(stream, AGL_CODE_NAME_COMA, message, __VA_ARGS__)
 
 #ifdef AGL_DEBUG
-#define AGL_DEBUG_LOG(message, ...) AGL_LOG_FILE_TAGGED("debug-dump.log", AGL_CODE_NAME_COMA, message, __VA_ARGS__)
-
+	#define AGL_DEBUG_LOG(message, ...) AGL_LOG_FILE("debug-dump.log", AGL_CODE_NAME_COMA, message, __VA_ARGS__)
+	#define AGL_DEBUG_LOG_TAGGED(tag, message, ...) AGL_LOG_FILE_TAGGED("debug-dump.log", tag, AGL_CODE_NAME_COMA, message, __VA_ARGS__)
+#else
+	#define AGL_DEBUG_LOG(...)
+	#define AGL_DEBUG_LOG_TAGGED(...)
 #endif
