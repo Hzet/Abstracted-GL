@@ -1,25 +1,20 @@
 #pragma once 
 
-#include <chrono>
-#include <unordered_map>
-#include "log.hpp"
-
-#define AGL_PROFILE() \
-CProfilerClock AGL_PROFILE_VARIABLE(__FILE__ + ' - ' + __FUNCTION__ + ' - ' + __LINE__); \
+#include "assert.hpp"
 
 namespace agl
 {
-	class CProfilerClock
-	{
-	public:
-		CProfilerClock(std::string &&callerName);
-		~CProfilerClock();
+	void OpenGLClearError();
 
-		static const std::unordered_map<std::string, std::uint64_t>& GetClocks();
-	private:
-		static std::unordered_map<std::string, std::uint64_t> Clocks_;
+	bool OpenGLCheckError(std::uint64_t value);
 
-		const std::string name_;
-		const std::chrono::milliseconds myClock_;
-	};
+	std::uint64_t OpenGLGetError();
 }
+
+#define AGL_GLCall(call) \
+	do { \
+		agl::OpenGLClearError(); \
+		call; \
+		std::uint64_t error = agl::OpenGLGetError();
+		AGL_CORE_ASSERT(agl::OpenGLCheckError(error), "Failed to execute OpenGL call!\n", "Error code: [", error, "]\n"); \
+	} while(false) \
