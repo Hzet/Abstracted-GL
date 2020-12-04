@@ -3,23 +3,21 @@
 #include "debug.hpp"
 
 #ifdef AGL_DEBUG
-	#define AGL_ASSERTION_LOG_MARK_COMA(assertionName) "\n--------------------------------------", assertionName, "--------------------------------------\n"
+	#define AGL_CORE_ASSERT(condition, ...) AGL_ASSERT_IMPL(condition, "CORE ASSERT", __VA_ARGS__ )
 
-	#define AGL_CORE_ASSERT(condition, ...) AGL_ASSERT_IMPL(condition, "CORE BEGIN", "CORE END", __VA_ARGS__)
+	#define AGL_ASSERT(condition, ...) AGL_ASSERT_IMPL(condition, "ASSERT", __VA_ARGS__)
 
-	#define AGL_ASSERT(condition, ...) AGL_ASSERT_IMPL(condition, "ASSERT BEGIN", "ASSERT END", __VA_ARGS__)
-
-	#define AGL_ASSERT_IMPL(condition, assertionStart, assertionEnd, ...) \
+	#define AGL_ASSERT_IMPL(condition, tag, message, ...) \
 		do \
 		{ \
 			if(!condition) { \
-				AGL_DEBUG_LOG_IMPL(AGL_ASSERTION_LOG_MARK_COMA(assertionStart), AGL_CODE_NAME_COMA, "- Asertion failed! -\nOn: ", #condition, "\nMessage: ", __VA_ARGS__, AGL_ASSERTION_LOG_MARK_COMA(assertionEnd)); \
+				AGL_DEBUG_LOG_TAGGED("debug-dump.log", tag, message, __VA_ARGS__); \
 				AGL_HALT(); \
 			} \
 		} while(0) \
 
 #else
-	#define AGL_ASSERT(condition) \
+	#define AGL_ASSERT_IMPL(...) \
 		do \
 		{ \
 			(void)sizeof(condition); \
