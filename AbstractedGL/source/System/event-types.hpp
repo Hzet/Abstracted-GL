@@ -6,9 +6,7 @@ namespace agl
 {
 	namespace Event
 	{
-		using Code = std::int16_t;
-
-		enum EType : Code
+		enum EType
 		{
 			INVALID_EVENT,
 			KEY_PRESSED,
@@ -31,9 +29,9 @@ namespace agl
 			WINDOW_GAINED_FOCUS
 		};
 
-		enum EKeycode : Code
+		enum EKeycode
 		{
-			UNKNOWN = -1,
+			UNKNOWN_KEY = -1,
 			SPACE = 32,
 			APOSTROPHE = 39, /* ' */
 			COMMA = 44, /* , */
@@ -156,9 +154,9 @@ namespace agl
 			MENU = 348
 		};
 
-		enum EButton : Code
+		enum EButton
 		{
-			UNKNOWN = -1,
+			UNKNOWN_BUTTON = -1,
 			BUTTON_LEFT = 0,
 			BUTTON_RIGHT = 1,
 			BUTTON_MID = 2,

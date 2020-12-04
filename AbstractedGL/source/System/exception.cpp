@@ -1,4 +1,5 @@
 #include "exception.hpp"
+#include <string>
 
 namespace agl
 {
@@ -14,7 +15,6 @@ namespace agl
 		{
 			return message_.c_str();
 		}
-
 	}
 }
 

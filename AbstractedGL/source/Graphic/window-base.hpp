@@ -12,7 +12,7 @@ namespace agl
 	public:
 		static CWindowBase Create(const std::string &title, std::uint32_t width, std::uint32_t height);
 
-		CWindowBase(CWindowBase &&other);
+		CWindowBase(CWindowBase &&other) = default;
 		~CWindowBase();
 
 	private:

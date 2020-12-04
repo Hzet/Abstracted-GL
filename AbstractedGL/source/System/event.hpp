@@ -4,7 +4,7 @@
 
 namespace agl
 {
-	struct SEvent // alternative name: Event
+	struct SEvent
 	{
 		struct SPosition
 		{
@@ -26,7 +26,7 @@ namespace agl
 
 		struct SKeyboard
 		{
-			Event::Code code;
+			Event::EKeycode code;
 			std::int32_t scancode;
 			std::int32_t modifiers;
 		};
