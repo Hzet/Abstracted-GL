@@ -80,6 +80,9 @@ namespace agl
 		warnLog_(std::unique_ptr<CLogInstance>(new CLogInstance(w))),
 		errorLog_(std::unique_ptr<CLogInstance>(new CLogInstance(e))),
 		criticalLog_(std::unique_ptr<CLogInstance>(new CLogInstance(c)))
+#ifdef AGL_DEBUG
+		,debugLog_(std::unique_ptr<CLogInstance>(new CLogInstance(std::cerr)))
+#endif
 	{
 	}
 

@@ -36,6 +36,10 @@ namespace agl
 		void errorTarget(std::ostream &target);
 		void criticalTarget(std::ostream &target);
 
+#ifdef AGL_DEBUG
+		template <typename... Args> void debug(Args&&... msgs);
+#endif
+
 		const std::string& getPrefix() const;
 		void setPrefix(const std::string &prefix);
 		void setPrefix(const std::vector<std::string> &prefix);
@@ -54,6 +58,11 @@ namespace agl
 		std::unique_ptr<CLogInstance> warnLog_;
 		std::unique_ptr<CLogInstance> errorLog_;
 		std::unique_ptr<CLogInstance> criticalLog_;
+
+#ifdef AGL_DEBUG
+		std::unique_ptr<CLogInstance> debugLog_;
+#endif
+
 		std::string prefix_;
 		std::string suffix_;
 	};
@@ -69,4 +78,24 @@ namespace agl
 		static std::unique_ptr<CLog> ClientLog_;
 	};
 #include "log.inl"
+
+#define AGL_CORE_TRACE(message, ...)		  agl::CLogger::getCoreLogger().trace(message, __VA_ARGS__)
+#define AGL_CORE_INFO(message, ...)			  agl::CLogger::getCoreLogger().info(message, __VA_ARGS__)
+#define AGL_CORE_WARNING(message, ...)		  agl::CLogger::getCoreLogger().warn(message, __VA_ARGS__)
+#define AGL_CORE_ERROR(message, ...)		  agl::CLogger::getCoreLogger().error(message, __VA_ARGS__)
+#define AGL_CORE_CRITICAL_ERROR(message, ...) agl::CLogger::getCoreLogger().critical(message, __VA_ARGS__)
+
+#define AGL_TRACE(message, ...)			 agl::CLogger::getClientLogger().trace(message, __VA_ARGS__)
+#define AGL_INFO(message, ...)			 agl::CLogger::getClientLogger().info(message, __VA_ARGS__)
+#define AGL_WARNING(message, ...)		 agl::CLogger::getClientLogger().warn(message, __VA_ARGS__)
+#define AGL_ERROR(message, ...)			 agl::CLogger::getClientLogger().error(message, __VA_ARGS__)
+#define AGL_CRITICAL_ERROR(message, ...) agl::CLogger::getClientLogger().critical(message, __VA_ARGS__)
+
+#ifdef AGL_DEBUG
+
+	#define AGL_CODE_POINT "\nFilename: ", AGL_LINE, "\nFunction: ", AGL_FUNC_NAME, "\nLine: ", AGL_LINE, "\n"
+
+	#define AGL_CORE_DEBUG(message, ...) agl::CLogger::getCoreLogger().debug(message, __VA_ARGS__)
+	#define AGL_DEBUG(message, ...)		 agl::CLogger::getClientLogger().debug(message, __VA_ARGS__)
+#endif
 }

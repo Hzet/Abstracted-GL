@@ -34,3 +34,9 @@ void CLog::critical(Args&&... msgs)
 {
 	criticalLog_->log(prefix_, "Critical error: ", std::forward<Args>(msgs)..., suffix_);
 }
+
+template <typename... Args>
+void CLog::debug(Args&&... msgs)
+{
+	criticalLog_->log(prefix_, "Debug error: ", std::forward<Args>(msgs)..., suffix_);
+}
