@@ -5,18 +5,32 @@ void CLogInstance::log(Args&&... msgs)
 	(target_ << ... << msgs) << '\n';
 }
 
-template <typename... Args>
-void CLog::SendMessage(Args&&... msgs)
+template <typename... Args> 
+void CLog::trace(Args&&... msgs)
 {
-	Instance_->log(std::forward<Args>(msgs)...);
+	traceLog_->log(prefix_, "Trace: ", std::forward<Args>(msgs)..., suffix_);
 }
 
 template <typename... Args> 
-void CLog::SendOneMessage(std::ostream &target, Args&&... msgs)
+void CLog::info(Args&&... msgs)
 {
-	std::ostream &prevTarget = Instance_->target_;
+	infoLog_->log(prefix_, "Info: ", std::forward<Args>(msgs)..., suffix_);
+}
 
-	MessageTarget(target);
-	SendMessage(std::forward<Args>(msgs)...);
-	MessageTarget(prevTarget);
+template <typename... Args> 
+void CLog::warn(Args&&... msgs)
+{
+	warnLog_->log(prefix_, "Warning: ", std::forward<Args>(msgs)..., suffix_);
+}
+
+template <typename... Args> 
+void CLog::error(Args&&... msgs)
+{
+	errorLog_->log(prefix_, "Error: ", std::forward<Args>(msgs)..., suffix_);
+}
+
+template <typename... Args> 
+void CLog::critical(Args&&... msgs)
+{
+	criticalLog_->log(prefix_, "Critical error: ", std::forward<Args>(msgs)..., suffix_);
 }

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <memory>
+#include "debug.hpp"
 
 namespace agl
 {
@@ -20,47 +22,51 @@ namespace agl
 	class CLog
 	{
 	public:
-		static void MessageTarget(std::ostream &target);
-		template <typename... Args>	static void SendMessage(Args&&... msgs);
-		template <typename... Args> static void SendOneMessage(std::ostream &target, Args&&... msgs);
+		CLog(CLog&&) = default;
+
+		template <typename... Args> void trace(Args&&... msgs);
+		template <typename... Args> void info(Args&&... msgs);
+		template <typename... Args> void warn(Args&&... msgs);
+		template <typename... Args> void error(Args&&... msgs);
+		template <typename... Args> void critical(Args&&... msgs);
+	
+		void traceTarget(std::ostream &target);
+		void infoTarget(std::ostream &target);
+		void warnTarget(std::ostream &target);
+		void errorTarget(std::ostream &target);
+		void criticalTarget(std::ostream &target);
+
+		const std::string& getPrefix() const;
+		void setPrefix(const std::string &prefix);
+		void setPrefix(const std::vector<std::string> &prefix);
+
+		const std::string& getSuffix() const;
+		void setSuffix(const std::string &suffix);
+		void setSuffix(const std::vector<std::string> &suffix);
 
 	private:
-		static std::unique_ptr<CLogInstance> Instance_;
+		friend class CLogger;	
+		
+		CLog(std::ostream &t, std::ostream &i, std::ostream &w, std::ostream &e, std::ostream &c);
+
+		std::unique_ptr<CLogInstance> traceLog_;
+		std::unique_ptr<CLogInstance> infoLog_;
+		std::unique_ptr<CLogInstance> warnLog_;
+		std::unique_ptr<CLogInstance> errorLog_;
+		std::unique_ptr<CLogInstance> criticalLog_;
+		std::string prefix_;
+		std::string suffix_;
 	};
 
+	class CLogger
+	{
+	public:
+		static CLog& getCoreLogger();
+		static CLog& getClientLogger();
+
+	private:
+		static std::unique_ptr<CLog> CoreLog_;
+		static std::unique_ptr<CLog> ClientLog_;
+	};
 #include "log.inl"
 }
-
-#define AGL_BEGIN_TAG(tag) "\n---------------------------------", tag, " BEGIN", "---------------------------------\n"
-#define AGL_END_TAG(tag) "\n---------------------------------", tag, " END", "---------------------------------\n"
-
-#define AGL_LOG(message, ...) agl::CLog::SendMessage(x, __VA_ARGS__)
-
-#define AGL_LOG_TAGGED(tag, message, ...) agl::CLog::SendMessage(AGL_BEGIN_TAG(tag), message, __VA_ARGS__, AGL_END_TAG(tag))
-
-#define AGL_LOG_FILE(filename, message, ...) \
-	{ \
-		std::ofstream file(filename, std::ios::out | std::ios::app); \
-		agl::CLog::SendOneMessage(file, message, __VA_ARGS__); \
-		file.close(); \
-	} \
-
-#define AGL_LOG_FILE_TAGGED(filename, tag, message, ...) AGL_LOG_FILE(filename, AGL_BEGIN_TAG(tag), message, __VA_ARGS__, AGL_END_TAG(tag));
-
-#define AGL_LOG_STREAM(stream, message, ...) agl::CLog::SendOneMessage(stream, message, __VA_ARGS__)
-
-#define AGL_LOG_STREAM_TAGGED(stream, tag, message, ...)  agl::CLog::SendOneMessage(stream, AGL_BEGIN_TAG(tag), message, __VA_ARGS__, AGL_END_TAG(tag))
-
-#define AGL_ERROR_LOG(message, ...) AGL_LOG_FILE("error-dump.log", AGL_CODE_NAME_COMA, message, __VA_ARGS__)
-
-#define AGL_ERROR_LOG_TAGGED(tag, message, ...) AGL_LOG_FILE_TAGGED("error-dump.log", tag, AGL_CODE_NAME_COMA, message, __VA_ARGS__)
-
-#define AGL_ERROR_LOG_STREAM(stream, message, ...) AGL_LOG_STREAM(stream, AGL_CODE_NAME_COMA, message, __VA_ARGS__)
-
-#ifdef AGL_DEBUG
-	#define AGL_DEBUG_LOG(message, ...) AGL_LOG_FILE("debug-dump.log", AGL_CODE_NAME_COMA, message, __VA_ARGS__)
-	#define AGL_DEBUG_LOG_TAGGED(tag, message, ...) AGL_LOG_FILE_TAGGED("debug-dump.log", tag, AGL_CODE_NAME_COMA, message, __VA_ARGS__)
-#else
-	#define AGL_DEBUG_LOG(...)
-	#define AGL_DEBUG_LOG_TAGGED(...)
-#endif
