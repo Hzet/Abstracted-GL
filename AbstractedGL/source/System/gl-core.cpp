@@ -26,7 +26,7 @@ namespace agl
 		return LastGLError;
 	}
 
-	void OpenGLMessageCallback(unsigned source, unsigned type, unsigned id, unsigned severity, int length, const char* message, const void* userParam)
+	void GLDebugMessageCallback(unsigned source, unsigned type, unsigned id, unsigned severity, int length, const char* message, const void* userParam)
 	{
 		switch (severity)
 		{

@@ -25,7 +25,7 @@
 		glEnable(GL_DEBUG_OUTPUT); \
 		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS); \
 		glDebugMessageCallback(GLDebugMessageCallback, nullptr); \
-		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, severity, 0, NULL, GL_FALSE);
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, severity, 0, NULL, GL_FALSE)
 
 #else
 	#define AGL_CALL(call) call
