@@ -1,11 +1,9 @@
 #include "exception.hpp"
-#include <string>
 
 namespace agl
 {
 	namespace exception
 	{
-
 		CException::CException(const std::string &message)
 			: message_(message)
 		{

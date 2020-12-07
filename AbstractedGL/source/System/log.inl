@@ -2,7 +2,9 @@ template <typename... Args>
 void CLogInstance::log(Args&&... msgs)
 {
 	//((target_ << msgs << ' '), ...) << '\n';
+	streamLock_.lock();
 	(target_ << ... << msgs) << '\n';
+	streamLock_.unlock();
 }
 
 template <typename... Args> 
