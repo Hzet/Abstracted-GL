@@ -1,5 +1,4 @@
 #include "gl-core.hpp"
-#include <glad/glad.h>
 
 namespace agl
 {
@@ -24,18 +23,5 @@ namespace agl
 	std::uint64_t GLGetLastError()
 	{
 		return LastGLError;
-	}
-
-	void GLDebugMessageCallback(unsigned source, unsigned type, unsigned id, unsigned severity, int length, const char* message, const void* userParam)
-	{
-		switch (severity)
-		{
-		case GL_DEBUG_SEVERITY_HIGH:         AGL_CORE_LOG_CRITICAL(message); return;
-		case GL_DEBUG_SEVERITY_MEDIUM:       AGL_CORE_LOG_ERROR(message); return;
-		case GL_DEBUG_SEVERITY_LOW:          AGL_CORE_LOG_WARNING(message); return;
-		case GL_DEBUG_SEVERITY_NOTIFICATION: AGL_CORE_LOG_TRACE(message); return;
-		}
-
-		AGL_CORE_ASSERT(false, "Unknown severity level!");
 	}
 }
