@@ -1,44 +1,66 @@
 template <typename... Args>
-void CLogInstance::log(Args&&... msgs)
+void CLogInstance::log(std::string &&message, Args&&... args)
 {
-	//((target_ << msgs << ' '), ...) << '\n';
+	std::string result = combineMessage(std::move(message), parseArgs(std::forward<Args>(args)...));
+
 	streamLock_.lock();
-	(target_ << ... << msgs) << '\n';
+
+	target_ << result;
+
 	streamLock_.unlock();
 }
 
-template <typename... Args> 
-void CLog::trace(Args&&... msgs)
+template <typename... Args>
+std::vector<std::string> CLogInstance::parseArgs(Args&&... args) const
 {
-	traceLog_->log(prefix_, "Trace: ", std::forward<Args>(msgs)..., suffix_);
+	std::stringstream ss;
+
+	((ss << args << " "), ...);
+
+	std::string tmp;
+	std::vector<std::string> result;
+	while (ss >> tmp)
+		result.push_back(tmp);
+
+	return result;
 }
 
-template <typename... Args> 
-void CLog::info(Args&&... msgs)
-{
-	infoLog_->log(prefix_, "Info: ", std::forward<Args>(msgs)..., suffix_);
-}
 
-template <typename... Args> 
-void CLog::warn(Args&&... msgs)
+template <typename... Args>
+void CLog::trace(std::string &&message, Args&&... msgs)
 {
-	warnLog_->log(prefix_, "Warning: ", std::forward<Args>(msgs)..., suffix_);
-}
-
-template <typename... Args> 
-void CLog::error(Args&&... msgs)
-{
-	errorLog_->log(prefix_, "Error: ", std::forward<Args>(msgs)..., suffix_);
-}
-
-template <typename... Args> 
-void CLog::critical(Args&&... msgs)
-{
-	criticalLog_->log(prefix_, "Critical error: ", std::forward<Args>(msgs)..., suffix_);
+	traceLog_->log(prefix_ + "Trace: " + message + suffix_, std::forward<Args>(msgs)...);
 }
 
 template <typename... Args>
-void CLog::debug(Args&&... msgs)
+void CLog::info(std::string &&message, Args&&... msgs)
 {
-	criticalLog_->log(prefix_, "Debug error: ", std::forward<Args>(msgs)..., suffix_);
+	infoLog_->log(prefix_ + "Info: " + message + suffix_, std::forward<Args>(msgs)...);
 }
+
+template <typename... Args>
+void CLog::warn(std::string &&message, Args&&... msgs)
+{
+	warnLog_->log(prefix_ + "Warning: " + message + suffix_, std::forward<Args>(msgs)...);
+}
+
+template <typename... Args>
+void CLog::error(std::string &&message, Args&&... msgs)
+{
+	errorLog_->log(prefix_ + "Error: " + message + suffix_, std::forward<Args>(msgs)...);
+}
+
+template <typename... Args>
+void CLog::critical(std::string &&message, Args&&... msgs)
+{
+	criticalLog_->log(prefix_ + "Critical error: " + message + suffix_, std::forward<Args>(msgs)...);
+}
+
+
+#ifdef AGL_DEBUG
+template <typename... Args>
+void CLog::debug(std::string &&message, Args&&... msgs)
+{
+	debugLog_->log(prefix_ + "Debug error: " + message + suffix_, std::forward<Args>(msgs)...);
+}
+#endif

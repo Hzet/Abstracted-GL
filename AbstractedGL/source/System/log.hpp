@@ -3,18 +3,24 @@
 #include <string>
 #include <memory>
 #include <mutex>
-#include "debug.hpp"
+#include <sstream>
+#include <vector>
 
 namespace agl
 {
 	class CLogInstance
 	{
+	public:
 		friend class CLog;
 
 		CLogInstance(std::ostream &target);
 		CLogInstance(const CLogInstance &other);
 
-		template <typename... Args>	void log(Args&&... msgs);
+		template <typename... Args>	void log(std::string &&message, Args&&... args);
+
+		template <typename... Args> std::vector<std::string> parseArgs(Args&&... args) const;
+
+		std::string combineMessage(std::string &&message, std::vector<std::string> &&args) const;
 
 		std::ostream &target_;
 		std::mutex streamLock_;
@@ -25,12 +31,12 @@ namespace agl
 	public:
 		CLog(CLog&&) = default;
 
-		template <typename... Args> void trace(Args&&... msgs);
-		template <typename... Args> void info(Args&&... msgs);
-		template <typename... Args> void warn(Args&&... msgs);
-		template <typename... Args> void error(Args&&... msgs);
-		template <typename... Args> void critical(Args&&... msgs);
-	
+		template <typename... Args> void trace(std::string &&message, Args&&... args);
+		template <typename... Args> void info(std::string &&message, Args&&... args);
+		template <typename... Args> void warn(std::string &&message, Args&&... args);
+		template <typename... Args> void error(std::string &&message, Args&&... args);
+		template <typename... Args> void critical(std::string &&message, Args&&... args);
+
 		void traceTarget(std::ostream &target);
 		void infoTarget(std::ostream &target);
 		void warnTarget(std::ostream &target);
@@ -38,7 +44,7 @@ namespace agl
 		void criticalTarget(std::ostream &target);
 
 #ifdef AGL_DEBUG
-		template <typename... Args> void debug(Args&&... msgs);
+		template <typename... Args> void debug(std::string &&message, Args&&... args);
 #endif
 
 		const std::string& getPrefix() const;
@@ -50,8 +56,8 @@ namespace agl
 		void setSuffix(const std::vector<std::string> &suffix);
 
 	private:
-		friend class CLogger;	
-		
+		friend class CLogger;
+
 		CLog(std::ostream &t, std::ostream &i, std::ostream &w, std::ostream &e, std::ostream &c);
 
 		std::unique_ptr<CLogInstance> traceLog_;
@@ -78,8 +84,9 @@ namespace agl
 		static std::unique_ptr<CLog> CoreLog_;
 		static std::unique_ptr<CLog> ClientLog_;
 	};
-#include "log.inl"
 
+#include "log.inl"
+}
 	/*
 	* TRACE - function enter / end
 	* INFO - print info
@@ -88,23 +95,23 @@ namespace agl
 	* CRITICAL - unrecoverable error
 	*/
 
-#define AGL_CORE_LOG_TRACE(message, ...)	agl::CLogger::getCoreLogger().trace(AGL_CODE_POINT, message, __VA_ARGS__)
-#define AGL_CORE_LOG_INFO(message, ...)		agl::CLogger::getCoreLogger().info(message, __VA_ARGS__)
-#define AGL_CORE_LOG_WARNING(message, ...)	agl::CLogger::getCoreLogger().warn(message, __VA_ARGS__)
-#define AGL_CORE_LOG_ERROR(message, ...)	agl::CLogger::getCoreLogger().error(message, __VA_ARGS__)
-#define AGL_CORE_LOG_CRITICAL(message, ...)	agl::CLogger::getCoreLogger().critical(message, __VA_ARGS__)
+#define AGL_CORE_LOG_TRACE(message, ...)	::agl::CLogger::getCoreLogger().trace(AGL_CODE_POINT + message, __VA_ARGS__)
+#define AGL_CORE_LOG_INFO(message, ...)		::agl::CLogger::getCoreLogger().info(message, __VA_ARGS__)
+#define AGL_CORE_LOG_WARNING(message, ...)	::agl::CLogger::getCoreLogger().warn(message, __VA_ARGS__)
+#define AGL_CORE_LOG_ERROR(message, ...)	::agl::CLogger::getCoreLogger().error(message, __VA_ARGS__)
+#define AGL_CORE_LOG_CRITICAL(message, ...)	::agl::CLogger::getCoreLogger().critical(message, __VA_ARGS__)
 
-#define AGL_LOG_TRACE(message, ...)		agl::CLogger::getClientLogger().trace(AGL_CODE_POINT, message, __VA_ARGS__)
-#define AGL_LOG_INFO(message, ...)		agl::CLogger::getClientLogger().info(message, __VA_ARGS__)
-#define AGL_LOG_WARNING(message, ...)	agl::CLogger::getClientLogger().warn(message, __VA_ARGS__)
-#define AGL_LOG_ERROR(message, ...)		agl::CLogger::getClientLogger().error(message, __VA_ARGS__)
-#define AGL_LOG_CRITICAL(message, ...)  agl::CLogger::getClientLogger().critical(message, __VA_ARGS__)
+#define AGL_LOG_TRACE(message, ...)		::agl::CLogger::getClientLogger().trace(AGL_CODE_POINT + message, __VA_ARGS__)
+#define AGL_LOG_INFO(message, ...)		::agl::CLogger::getClientLogger().info(message, __VA_ARGS__)
+#define AGL_LOG_WARNING(message, ...)	::agl::CLogger::getClientLogger().warn(message, __VA_ARGS__)
+#define AGL_LOG_ERROR(message, ...)		::agl::CLogger::getClientLogger().error(message, __VA_ARGS__)
+#define AGL_LOG_CRITICAL(message, ...)  ::agl::CLogger::getClientLogger().critical(message, __VA_ARGS__)
 
 #ifdef AGL_DEBUG
-	#define AGL_CORE_DEBUG(message, ...) agl::CLogger::getCoreLogger().debug(message, __VA_ARGS__)
-	#define AGL_DEBUG(message, ...)		 agl::CLogger::getClientLogger().debug(message, __VA_ARGS__)
+	#define AGL_CORE_LOG_DEBUG(message, ...) ::agl::CLogger::getCoreLogger().debug(message, __VA_ARGS__)
+	#define AGL_LOG_DEBUG(message, ...)		 ::agl::CLogger::getClientLogger().debug(message, __VA_ARGS__)
 #else 
-	#define AGL_CORE_DEBUG(...)
-	#define AGL_DEBUG(...)		
+	#define AGL_CORE_LOG_DEBUG(...)
+	#define AGL_LOG_DEBUG(...)		
 #endif
 }
