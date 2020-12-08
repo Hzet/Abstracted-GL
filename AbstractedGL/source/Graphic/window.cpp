@@ -4,8 +4,6 @@
 
 namespace agl
 {
-
-
 	static void windowSizeCallback(GLFWwindow *window, int width, int height)
 	{
 		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
@@ -14,7 +12,7 @@ namespace agl
 		event.type = Event::WINDOW_RESIZED;
 		event.size = { static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) };
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowCloseCallback(GLFWwindow *window)
@@ -24,7 +22,7 @@ namespace agl
 		SEvent event;
 		event.type = Event::WINDOW_CLOSED;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowFocusCallback(GLFWwindow *window, int focused)
@@ -34,7 +32,7 @@ namespace agl
 		SEvent event;
 		event.type = focused ? Event::WINDOW_GAINED_FOCUS : Event::WINDOW_LOST_FOCUS;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowMaximizeCallback(GLFWwindow *window, int maximnized)
@@ -44,7 +42,7 @@ namespace agl
 		SEvent event;
 		event.type = maximnized ? Event::WINDOW_MAXIMIZED : Event::WINDOW_RESTORED;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowIconifyCallback(GLFWwindow *window, int iconified)
@@ -54,7 +52,7 @@ namespace agl
 		SEvent event;
 		event.type = iconified ? Event::WINDOW_MINIMIZED : Event::WINDOW_RESTORED;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowScaleCallback(GLFWwindow *window, float xscale, float yscale)
@@ -65,7 +63,7 @@ namespace agl
 		event.type = Event::WINDOW_RESCALED;
 		event.scale = { xscale, yscale };
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowKeyInputCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -90,7 +88,7 @@ namespace agl
 		event.key.scancode = scancode;
 		event.key.modifiers = mods;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowCharCallback(GLFWwindow *window, unsigned int codepoint)
@@ -101,7 +99,7 @@ namespace agl
 		event.type = Event::TEXT_ENTERED;
 		event.character = codepoint;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowCursorPosCallback(GLFWwindow *window, double xpos, double ypos)
@@ -112,7 +110,7 @@ namespace agl
 		event.type = Event::MOUSE_MOVED;
 		event.position = { xpos, ypos };
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowCursorEnterCallback(GLFWwindow *window, int entered)
@@ -122,7 +120,7 @@ namespace agl
 		SEvent event;
 		event.type = entered ? Event::MOUSE_ENTERED : Event::MOUSE_LEFT;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowButtonInputCallback(GLFWwindow *window, int button, int action, int mods)
@@ -143,7 +141,7 @@ namespace agl
 		event.button.code = static_cast<Event::EButton>(button);
 		event.button.bit_modifiers = mods;
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowScrollInputCallback(GLFWwindow *window, double xoffset, double yoffset)
@@ -154,7 +152,7 @@ namespace agl
 		event.type = Event::MOUSE_SCROLL_MOVED;
 		event.scroll = { xoffset, yoffset };
 
-		queue.pushBack(event);
+		queue.push(event);
 	}
 
 	static void windowFramebufferSizeCallback(GLFWwindow *window, int width, int height)
@@ -188,7 +186,8 @@ namespace agl
 	{
 		if (WindowsCount_ == 0u)
 		{
-			AGL_CORE_CRITICAL(glfwInit(), ==, GL_TRUE, "Failed to initialize GLFW!");
+			if (!glfwInit())
+				AGL_CORE_CRITICAL("Failed to initialize GLFW!");
 
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -210,11 +209,14 @@ namespace agl
 		
 		result.window_ = std::unique_ptr<GLFWwindow, SGLFWwindowDeleter>(glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr));
 
-		AGL_CORE_CRITICAL(static_cast<bool>(result.window_), == , true, "Failed to create a window!");
 
-		glfwMakeContextCurrent(result.window_.get());
+		if (result.window_ == nullptr)
+			AGL_CORE_CRITICAL("Failed to create a window!");
 
-		AGL_CORE_CRITICAL(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), != , 0, "Failed to initialize OpenGL context");
+		/*glfwMakeContextCurrent(result.window_.get());*/
+
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!");
 
 		glfwSetWindowUserPointer(result.window_.get(), reinterpret_cast<void*>(&result.queue_));
 
@@ -268,10 +270,15 @@ namespace agl
 		queue_(std::move(other.queue_))
 	{
 		other.move_ = true;
+
+		glfwSetWindowUserPointer(window_.get(), &queue_);
 	}
 
 	void CWindow::shutdown()
 	{
+		if (WindowsCount_ == 0u)
+			return;
+
 		WindowsCount_--;
 
 		if (WindowsCount_ == 0u)
@@ -308,12 +315,12 @@ namespace agl
 		close_ = true;
 	}
 
-	bool CWindow::pollEvents(SEvent &event)
+	bool CWindow::pollEvent(SEvent &event)
 	{
-		if (queue_.pending() == 0)
+		if (queue_.count() == 0)
 			return false;
 
-		event = queue_.popFront();
+		event = queue_.pop();
 		return true;
 	}
 }

@@ -13,7 +13,6 @@ namespace agl
 	{
 		void operator()(GLFWwindow *window)
 		{
-			glfwDestroyWindow(window);
 		}
 	};
 
@@ -28,7 +27,7 @@ namespace agl
 		bool isOpen();
 		void close();
 
-		bool pollEvents(SEvent &event);
+		bool pollEvent(SEvent &event);
 
 	private:
 		static std::size_t WindowsCount_;
