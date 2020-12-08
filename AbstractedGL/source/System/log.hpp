@@ -6,6 +6,8 @@
 #include <sstream>
 #include <vector>
 
+#include "debug.hpp"
+
 namespace agl
 {
 	class CLogInstance
@@ -18,7 +20,9 @@ namespace agl
 
 		template <typename... Args>	void log(std::string &&message, Args&&... args);
 
-		template <typename... Args> std::vector<std::string> parseArgs(Args&&... args) const;
+		template <typename Tuple, std::size_t... Sequence> std::vector<std::string> parseArgs(Tuple &&t, std::index_sequence<Sequence...>) const;
+
+		template <typename T> std::string toString(T &&arg) const;
 
 		std::string combineMessage(std::string &&message, std::vector<std::string> &&args) const;
 
@@ -114,4 +118,3 @@ namespace agl
 	#define AGL_CORE_LOG_DEBUG(...)
 	#define AGL_LOG_DEBUG(...)		
 #endif
-}

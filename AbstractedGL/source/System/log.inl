@@ -1,7 +1,10 @@
 template <typename... Args>
 void CLogInstance::log(std::string &&message, Args&&... args)
 {
-	std::string result = combineMessage(std::move(message), parseArgs(std::forward<Args>(args)...));
+
+	std::vector<std::string> parsed = parseArgs(std::forward_as_tuple(std::forward<Args>(args)...), std::make_index_sequence<sizeof...(Args)>{});
+
+	std::string result = combineMessage(std::move(message), std::move(parsed));
 
 	streamLock_.lock();
 
@@ -10,21 +13,25 @@ void CLogInstance::log(std::string &&message, Args&&... args)
 	streamLock_.unlock();
 }
 
-template <typename... Args>
-std::vector<std::string> CLogInstance::parseArgs(Args&&... args) const
+template <typename T>
+std::string CLogInstance::toString(T &&arg) const
 {
 	std::stringstream ss;
 
-	((ss << args << " "), ...);
+	ss << arg;
 
-	std::string tmp;
+	return ss.str();
+}
+
+template <typename Tuple, std::size_t... Sequence>
+std::vector<std::string> CLogInstance::parseArgs(Tuple &&t, std::index_sequence<Sequence...>) const
+{
 	std::vector<std::string> result;
-	while (ss >> tmp)
-		result.push_back(tmp);
+
+	(result.push_back(toString(std::get<Sequence>(t))), ...);
 
 	return result;
 }
-
 
 template <typename... Args>
 void CLog::trace(std::string &&message, Args&&... msgs)
