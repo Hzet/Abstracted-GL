@@ -41,9 +41,9 @@ namespace agl
 		#define AGL_FUNC_NAME "AGL_FUNC_NAME could not be established!"
 	#endif
 
-	#define AGL_CODE_POINT "Filename: ", AGL_FILE, "\nFunction: ", AGL_FUNC_NAME, "\nLine: ", AGL_LINE, "\n"
+	#define AGL_CODE_POINT std::string("Filename: ") + AGL_FILE + "\nFunction: " + AGL_FUNC_NAME + "\nLine: " + std::to_string(AGL_LINE)
 
-	#define AGL_PROFILE_THIS() agl::CProfilerClock AGL_PROFILER_VARIABLE(AGL_CODE_NAME)
+	#define AGL_PROFILE_THIS() ::agl::CProfilerClock AGL_PROFILER_VARIABLE(AGL_CODE_NAME)
 
 	#define AGL_HALT() __debugbreak()
 
