@@ -6,11 +6,11 @@ void CLogInstance::log(std::string &&message, Args&&... args)
 
 	std::string result = combineMessage(std::move(message), std::move(parsed));
 
-	streamLock_.lock();
+	//streamLock_.lock();
 
 	target_ << result;
 
-	streamLock_.unlock();
+	//streamLock_.unlock();
 }
 
 template <typename T>

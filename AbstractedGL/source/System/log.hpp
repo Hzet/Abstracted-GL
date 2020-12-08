@@ -12,7 +12,6 @@ namespace agl
 {
 	class CLogInstance
 	{
-	public:
 		friend class CLog;
 
 		CLogInstance(std::ostream &target);

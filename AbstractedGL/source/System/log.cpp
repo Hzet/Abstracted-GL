@@ -126,11 +126,15 @@ namespace agl
 		suffix_ = "";
 		for (const auto &str : suffix)
 			suffix_ += str;
+		suffix_.insert(suffix_.begin(), '\n');
+		suffix_ += "\n";
 	}
 
 	void CLog::setSuffix(const std::string &suffix)
 	{
 		suffix_ = suffix;
+		suffix_.insert(suffix_.begin(), '\n');
+		suffix_ += "\n";
 	}
 
 	const std::string& CLog::getPrefix() const
@@ -143,11 +147,13 @@ namespace agl
 		prefix_ = "";
 		for (const auto &str : prefix)
 			prefix_ += str;
+		prefix_.insert(prefix_.end(), '\n');
 	}
 
 	void CLog::setPrefix(const std::string &prefix)
 	{
 		prefix_ = prefix;
+		prefix_.insert(prefix_.end(), '\n');
 	}
 
 	CLog::CLog(std::ostream &t, std::ostream &i, std::ostream &w, std::ostream &e, std::ostream &c)
@@ -172,8 +178,8 @@ namespace agl
 		if (CoreLog_ == nullptr)
 		{
 			CoreLog_ = std::unique_ptr<CLog>(new CLog(std::cout, std::cout, std::cerr, std::cerr, std::cerr));
-			CoreLog_->setPrefix("[ CORE BEGIN ] ");
-			CoreLog_->setSuffix(" [ CORE END ]");
+			CoreLog_->setPrefix("[ CORE BEGIN ]");
+			CoreLog_->setSuffix("[ CORE END ]");
 		}
 
 		return *CoreLog_;
@@ -184,8 +190,8 @@ namespace agl
 		if (ClientLog_ == nullptr)
 		{
 			ClientLog_ = std::unique_ptr<CLog>(new CLog(std::cout, std::cout, std::cerr, std::cerr, std::cerr));
-			ClientLog_->setPrefix("[ CLIENT BEGIN ] ");
-			ClientLog_->setSuffix(" [ CLIENT END ]");
+			ClientLog_->setPrefix("[ CLIENT BEGIN ]");
+			ClientLog_->setSuffix("[ CLIENT END ]");
 		}
 
 		return *ClientLog_;
