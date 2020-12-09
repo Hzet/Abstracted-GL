@@ -1,6 +1,7 @@
 #include "window.hpp"
 
 #include "../System/error.hpp"
+#include "../System/core-error-codes.hpp"
 
 namespace agl
 {
@@ -162,7 +163,7 @@ namespace agl
 
 	static void errorCallback(int error, const char *description)
 	{
-		AGL_CORE_LOG_ERROR("GLFW has failed!\nError code [{}] - {}", error, description);
+		AGL_CORE_ERROR("GLFW has failed!\nError code [{}] - {}", error, description);
 	}
 
 /*
@@ -213,7 +214,7 @@ namespace agl
 		if (result.window_ == nullptr)
 			AGL_CORE_CRITICAL("Failed to create a window!");
 
-		/*glfwMakeContextCurrent(result.window_.get());*/
+		glfwMakeContextCurrent(result.window_.get());
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!");
