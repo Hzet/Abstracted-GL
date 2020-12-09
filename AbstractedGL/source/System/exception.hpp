@@ -4,17 +4,23 @@
 
 namespace agl
 {
+	namespace Error
+	{
+		enum EError : std::uint64_t;
+	}
 	namespace exception
 	{
 		class CException
 			: public std::exception
 		{
 		public:
-			explicit CException(const std::string &message);
+			explicit CException(const std::string &message, Error::EError code);
 
+			Error::EError code() const;
 			virtual char const* what() const override;
 
 		private:
+			Error::EError code_;	
 			const std::string message_;
 		};
 	}

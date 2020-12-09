@@ -3,48 +3,49 @@
 #include "log.hpp"
 #include "assert.hpp"
 #include "exception.hpp"
+#include "error.hpp"
 
 #ifdef AGL_DEBUG
-	#define AGL_CORE_CRITICAL(message, ...) \
+	#define AGL_CORE_CRITICAL(message, code, ...) \
 		{ \
-			AGL_CORE_ASSERT(false, message, __VA_ARGS__); \
+			AGL_CORE_ASSERT(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
 
-	#define AGL_CORE_ERROR(message, ...) \
+	#define AGL_CORE_ERROR(message, code, ...) \
 		{ \
-			AGL_CORE_ASSERT(false, message, __VA_ARGS__); \
+			AGL_CORE_ASSERT(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
 
-	#define AGL_CRITICAL(message, ...) \
+	#define AGL_CRITICAL(message, code, ...) \
 		{ \
-			AGL_ASSERT(false, message, __VA_ARGS__); \
+			AGL_ASSERT(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
 
-	#define AGL_ERRORL(message, ...) \
+	#define AGL_ERRORL(message, code, ...) \
 		{ \
-			AGL_ASSERT(false, message, __VA_ARGS__); \
+			AGL_ASSERT(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
 #else
 
-	#define AGL_CORE_CRITICAL(message, ...) \
+	#define AGL_CORE_CRITICAL(message, code, ...) \
 		{ \
-			AGL_CORE_LOG_CRITICAL(message, __VA_ARGS__); \
-			throw ::agl::exception::CException("AbstractedGL core encountered a critical error!"); \
+			AGL_CORE_LOG_CRITICAL(std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
+			throw ::agl::exception::CException("AbstractedGL core encountered a critical error!", code); \
 		}
 
-	#define AGL_CORE_ERROR(message, ...) \
+	#define AGL_CORE_ERROR(message, code, ...) \
 		{ \
-			AGL_CORE_LOG_ERROR(message, __VA_ARGS__); \
+			AGL_CORE_LOG_ERROR(std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
 
-	#define AGL_CRITICAL(message, ...) \
+	#define AGL_CRITICAL(message, code, ...) \
 		{ \
-			AGL_LOG_CRITICAL(false, message, __VA_ARGS__); \
-			throw ::agl::exception::CException("Critical error occured!"); \
+			AGL_LOG_CRITICAL(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
+			throw ::agl::exception::CException("Critical error occured!", code); \
 		}
 
-	#define AGL_ERROR(message, ...) \
+	#define AGL_ERROR(message, code, ...) \
 		{ \
-			AGL_LOG_ERROR(message, __VA_ARGS__); \
+			AGL_LOG_ERROR(std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
 #endif
