@@ -26,22 +26,13 @@ namespace agl
 
 		CSubShader::CSubShader()
 			: programID_(0u),
-			type_(0u),
-			move_(false)
+			type_(0u)
 		{
-		}
-
-		CSubShader::CSubShader(CSubShader &&other)
-			: programID_(std::move(other.programID_)),
-			type_(std::move(other.type_)),
-			move_(std::move(other.move_))
-		{
-			other.move_ = true;
 		}
 
 		CSubShader::~CSubShader()
 		{
-			if(!move_)
+			if(!isMoveConstructing())
 				destroy();
 		}
 

@@ -3,21 +3,24 @@
 #include <string>
 #include <cstdint>
 
+#include "../System/move-only.hpp"
+
 namespace agl
 {
 	class CShader;
 
 	namespace graphics
 	{
-		class CSubShader
+		class CSubShader final
+			: public system::CMoveOnly
 		{
+			using system::CMoveOnly::CMoveOnly;
+
 			friend class CShader;
 			
 			static bool VerifyType(const std::uint64_t type);
 
 			CSubShader();
-			CSubShader(CSubShader&&) = delete;
-			CSubShader(const CSubShader&) = delete;
 			~CSubShader();
 
 			std::uint32_t getID() const;
@@ -30,7 +33,6 @@ namespace agl
 			bool compile(); // may throw
 			void destroy();
 
-			bool move_;
 			std::uint32_t programID_;
 			std::uint64_t type_;
 			std::string source_;
