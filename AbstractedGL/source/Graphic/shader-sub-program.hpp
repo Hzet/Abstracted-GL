@@ -12,16 +12,21 @@ namespace agl
 	namespace graphics
 	{
 		class CSubShader final
-			: public system::CMoveOnly
+			: protected system::CMoveOnly
 		{
+		public:
 			using system::CMoveOnly::CMoveOnly;
 
+			CSubShader();
+			CSubShader(CSubShader&&) = default;
+			~CSubShader();
+
+			CSubShader& operator=(CSubShader&&) = default;
+
+		private:
 			friend class CShader;
 			
 			static bool VerifyType(const std::uint64_t type);
-
-			CSubShader();
-			~CSubShader();
 
 			std::uint32_t getID() const;
 			std::uint64_t getType() const;

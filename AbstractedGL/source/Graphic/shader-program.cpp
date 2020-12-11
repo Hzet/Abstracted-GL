@@ -22,19 +22,16 @@ namespace agl
 	{
 		switch (type)
 		{
-			switch (type)
-			{
 			case GL_VERTEX_SHADER: return GL_VERTEX_SHADER_BIT;
 			case GL_TESS_CONTROL_SHADER: return GL_TESS_CONTROL_SHADER_BIT;
 			case GL_TESS_EVALUATION_SHADER: return GL_TESS_EVALUATION_SHADER_BIT;
 			case GL_GEOMETRY_SHADER: return GL_GEOMETRY_SHADER_BIT;
 			case GL_FRAGMENT_SHADER: return GL_FRAGMENT_SHADER_BIT;
 			case GL_COMPUTE_SHADER: return GL_COMPUTE_SHADER_BIT;
-			}
-
-			AGL_CORE_ERROR("Invalid shader type - {}", Error::INVALID_VALUE, type);
-			return 0u;
 		}
+
+		AGL_CORE_ERROR("Invalid shader type - {}", Error::INVALID_VALUE, type);
+		return 0u;
 	}
 
 	CShader::CShader()
@@ -104,11 +101,14 @@ namespace agl
 		AGL_CALL(programID_ = glCreateProgram());
 
 		for (const auto &v : subshaders_)
-			AGL_CALL(glAttachShader(v.getType(), v.getID()));
+			AGL_CALL(glAttachShader(programID_, v.getID()));
+
+		AGL_CALL(glLinkProgram(programID_));
 
 		std::int32_t result;
-
 		AGL_CALL(glGetProgramiv(programID_, GL_LINK_STATUS, &result));
+
+		subshaders_.clear();
 
 		if (!result)
 		{
@@ -120,9 +120,6 @@ namespace agl
 
 			AGL_CALL(glGetProgramInfoLog(programID_, length, NULL, &message[0u]));
 			AGL_CORE_ERROR("Failed to link a shader program! \nDescription: {}", Error::SHADER_LINK, message);
-
-			for (auto &v : subshaders_)
-				v.destroy();
 
 			return false;
 		}
@@ -140,42 +137,42 @@ namespace agl
 		return (shaderBits_ & bit);
 	}
 
-	float CShader::setFloat(const std::string &name, const float value) const
+	void CShader::setFloat(const std::string &name, const float value) const
 	{
 		AGL_CALL(glUniform1f(getLocation(programID_, name), value));
 	}
 
-	glm::vec2 CShader::setVec2(const std::string &name, const glm::vec2 &value) const
+	void CShader::setVec2(const std::string &name, const glm::vec2 &value) const
 	{
 		AGL_CALL(glUniform2f(getLocation(programID_, name), value.x, value.y));
 	}
 
-	glm::vec3 CShader::setVec3(const std::string &name, const glm::vec3 &value) const
+	void CShader::setVec3(const std::string &name, const glm::vec3 &value) const
 	{
 		AGL_CALL(glUniform3f(getLocation(programID_, name), value.x, value.y, value.z));
 	}
 
-	glm::vec4 CShader::setVec4(const std::string &name, const glm::vec4 &value) const
+	void CShader::setVec4(const std::string &name, const glm::vec4 &value) const
 	{
 		AGL_CALL(glUniform4f(getLocation(programID_, name), value.x, value.y, value.z, value.w));
 	}
 
-	glm::mat4 CShader::setMat4(const std::string &name, const glm::mat4 &value) const
+	void CShader::setMat4(const std::string &name, const glm::mat4 &value) const
 	{
 		AGL_CALL(glUniformMatrix4fv(getLocation(programID_, name), 1u, GL_FALSE, glm::value_ptr(value)));
 	}
 
-	std::int32_t CShader::setInt(const std::string &name, const std::int32_t value) const
+	void CShader::setInt(const std::string &name, const std::int32_t value) const
 	{
 		AGL_CALL(glUniform1i(getLocation(programID_, name), value));
 	}
 
-	std::uint32_t CShader::setUnsigned(const std::string &name, const std::uint32_t value) const
+	void CShader::setUnsigned(const std::string &name, const std::uint32_t value) const
 	{
 		AGL_CALL(glUniform1ui(getLocation(programID_, name), value));
 	}
 
-	std::vector<std::int32_t> CShader::setIntArray(const std::string &name, std::int32_t const * const value, std::uint64_t count) const
+	void CShader::setIntArray(const std::string &name, std::int32_t const * const value, std::uint64_t count) const
 	{
 		AGL_CALL(glUniform1iv(getLocation(programID_, name), count, value));
 	}
@@ -203,8 +200,7 @@ namespace agl
 		}
 
 		if (!result)
-			for (auto &v : subshaders_)
-				v.destroy();
+			subshaders_.clear();
 
 		return result;
 	}

@@ -21,6 +21,7 @@ namespace agl
 				case GL_FRAGMENT_SHADER: return true;
 				case GL_COMPUTE_SHADER: return true;
 			}
+
 			return false;
 		}
 
@@ -57,24 +58,16 @@ namespace agl
 				return false;
 			}
 
-			file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
 			source_ = "";
 			std::string line;
-			try
-			{
-				while (std::getline(file, line))
-					source_ += line + '\n';
+			std::uint64_t read = 0u;
 
-				file.close();
-			}
-			catch (std::ifstream::failure &e)
-			{
-				AGL_CORE_ERROR("Filename: {}\nAt position: {}\n{}", Error::READ_FILE, filename, source_.size(), e.what());
-				file.close();
+			while (std::getline(file, line))
+				source_ += line + '\n';
 
-				return false;
-			}
+			file.close();
+
+			type_ = type;
 
 			return true;
 		}
@@ -90,6 +83,8 @@ namespace agl
 
 			source_ += '\0';
 
+			type_ = type;
+
 			return true;
 		}
 
@@ -98,7 +93,9 @@ namespace agl
 			if (source.empty())
 				return false;
 
-			source_ = source;
+			source_ = source;	
+			type_ = type;
+
 			return true;
 		}
 
