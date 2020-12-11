@@ -43,7 +43,7 @@ namespace agl
 		const std::string title_;
 		std::uint32_t width_;
 		std::uint32_t height_;
-		agl::CEventQueue queue_;
+		agl::system::CEventQueue queue_;
 		std::unique_ptr<GLFWwindow, SGLFWwindowDeleter> window_;
 	};
 }

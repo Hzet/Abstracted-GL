@@ -7,7 +7,7 @@ namespace agl
 {
 	static void windowSizeCallback(GLFWwindow *window, int width, int height)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = Event::WINDOW_RESIZED;
@@ -18,7 +18,7 @@ namespace agl
 
 	static void windowCloseCallback(GLFWwindow *window)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = Event::WINDOW_CLOSED;
@@ -28,7 +28,7 @@ namespace agl
 
 	static void windowFocusCallback(GLFWwindow *window, int focused)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = focused ? Event::WINDOW_GAINED_FOCUS : Event::WINDOW_LOST_FOCUS;
@@ -38,7 +38,7 @@ namespace agl
 
 	static void windowMaximizeCallback(GLFWwindow *window, int maximnized)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = maximnized ? Event::WINDOW_MAXIMIZED : Event::WINDOW_RESTORED;
@@ -48,7 +48,7 @@ namespace agl
 
 	static void windowIconifyCallback(GLFWwindow *window, int iconified)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = iconified ? Event::WINDOW_MINIMIZED : Event::WINDOW_RESTORED;
@@ -58,7 +58,7 @@ namespace agl
 
 	static void windowScaleCallback(GLFWwindow *window, float xscale, float yscale)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = Event::WINDOW_RESCALED;
@@ -69,7 +69,7 @@ namespace agl
 
 	static void windowKeyInputCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		switch (action)
@@ -94,7 +94,7 @@ namespace agl
 
 	static void windowCharCallback(GLFWwindow *window, unsigned int codepoint)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = Event::TEXT_ENTERED;
@@ -105,7 +105,7 @@ namespace agl
 
 	static void windowCursorPosCallback(GLFWwindow *window, double xpos, double ypos)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = Event::MOUSE_MOVED;
@@ -116,7 +116,7 @@ namespace agl
 
 	static void windowCursorEnterCallback(GLFWwindow *window, int entered)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = entered ? Event::MOUSE_ENTERED : Event::MOUSE_LEFT;
@@ -126,7 +126,7 @@ namespace agl
 
 	static void windowButtonInputCallback(GLFWwindow *window, int button, int action, int mods)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		switch (action)
@@ -147,7 +147,7 @@ namespace agl
 
 	static void windowScrollInputCallback(GLFWwindow *window, double xoffset, double yoffset)
 	{
-		CEventQueue &queue = *reinterpret_cast<CEventQueue*>(glfwGetWindowUserPointer(window));
+		system::CEventQueue &queue = *reinterpret_cast<system::CEventQueue*>(glfwGetWindowUserPointer(window));
 
 		SEvent event;
 		event.type = Event::MOUSE_SCROLL_MOVED;
@@ -188,7 +188,7 @@ namespace agl
 		if (WindowsCount_ == 0u)
 		{
 			if (!glfwInit())
-				AGL_CORE_CRITICAL("Failed to initialize GLFW!");
+				AGL_CORE_CRITICAL("Failed to initialize GLFW!", Error::GLFW_FAILURE);
 
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -212,12 +212,12 @@ namespace agl
 
 
 		if (result.window_ == nullptr)
-			AGL_CORE_CRITICAL("Failed to create a window!");
+			AGL_CORE_CRITICAL("Failed to create a window!", Error::GLFW_FAILURE);
 
 		glfwMakeContextCurrent(result.window_.get());
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!");
+			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!", Error::GLAD_FAILURE);
 
 		glfwSetWindowUserPointer(result.window_.get(), reinterpret_cast<void*>(&result.queue_));
 
