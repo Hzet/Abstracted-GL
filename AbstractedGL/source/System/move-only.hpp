@@ -2,15 +2,18 @@
 
 namespace agl
 {
-	class CMoveOnly
+	namespace system
 	{
-	public:
-		CMoveOnly();
-		CMoveOnly(CMoveOnly &&other);
-		virtual ~CMoveOnly() = default;
+		class CMoveOnly
+		{
+		public:
+			CMoveOnly();
+			CMoveOnly(CMoveOnly &&other);
+			virtual ~CMoveOnly() = default;
 
-		bool isMoveConstructing() const;
-	private:
-		bool move_;
-	};
+			bool isMoveConstructing() const;
+		private:
+			bool move_;
+		};
+	}
 }

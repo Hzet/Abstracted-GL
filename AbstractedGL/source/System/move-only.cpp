@@ -2,20 +2,22 @@
 
 namespace agl
 {
-	CMoveOnly::CMoveOnly()
-		: move_(false)
+	namespace system
 	{
-	}
+		CMoveOnly::CMoveOnly()
+			: move_(false)
+		{
+		}
 
-	CMoveOnly::CMoveOnly(CMoveOnly &&other)
-	{
-		other.move_ = true;
-	}
+		CMoveOnly::CMoveOnly(CMoveOnly &&other)
+		{
+			other.move_ = true;
+		}
 
-	bool CMoveOnly::isMoveConstructing() const
-	{
-		return move_;
+		bool CMoveOnly::isMoveConstructing() const
+		{
+			return move_;
+		}
 	}
-
 }
 
