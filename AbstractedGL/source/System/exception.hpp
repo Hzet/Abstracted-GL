@@ -8,7 +8,7 @@ namespace agl
 	{
 		enum EError : std::uint64_t;
 	}
-	namespace exception
+	namespace system
 	{
 		class CException
 			: public std::exception

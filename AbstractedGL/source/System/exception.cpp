@@ -3,7 +3,7 @@
 
 namespace agl
 {
-	namespace exception
+	namespace system
 	{
 		CException::CException(const std::string &message, Error::EError code)
 			: message_(message),

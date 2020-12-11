@@ -5,20 +5,23 @@
 
 namespace agl
 {
-	class CProfilerClock
+	namespace system
 	{
-	public:
-		CProfilerClock(std::string &&callerName);
-		~CProfilerClock();
+		class CProfilerClock
+		{
+		public:
+			CProfilerClock(std::string &&callerName);
+			~CProfilerClock();
 
-		static const std::unordered_map<std::string, std::uint64_t>& GetClocks();
-	private:
-		static std::unordered_map<std::string, std::uint64_t> Clocks_;
+			static const std::unordered_map<std::string, std::uint64_t>& GetClocks();
+		private:
+			static std::unordered_map<std::string, std::uint64_t> Clocks_;
 
-		const std::string name_;
-		const std::chrono::milliseconds myClock_;
-	};
-
+			const std::string name_;
+			const std::chrono::milliseconds myClock_;
+		};
+	}
+}
 #ifdef AGL_DEBUG
 	#define AGL_FILE __FILE__
 	#define AGL_LINE __LINE__
@@ -43,11 +46,10 @@ namespace agl
 
 	#define AGL_CODE_POINT std::string("Filename: ") + AGL_FILE + "\nFunction: " + AGL_FUNC_NAME + "\nLine: " + std::to_string(AGL_LINE)
 
-	#define AGL_PROFILE_THIS() ::agl::CProfilerClock AGL_PROFILER_VARIABLE(AGL_CODE_NAME)
+	#define AGL_PROFILE_THIS() ::agl::system::CProfilerClock AGL_PROFILER_VARIABLE(AGL_CODE_NAME)
 
 	#define AGL_HALT() __debugbreak()
 
 #else
 	#define AGL_PROFILE_THIS()
-#endif // AGL_DEBUG
-}
+#endif

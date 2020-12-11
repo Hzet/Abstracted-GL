@@ -5,26 +5,29 @@
 
 namespace agl
 {
-	class CEventQueue
+	namespace system
 	{
-	public:
-		CEventQueue();
+		class CEventQueue
+		{
+		public:
+			CEventQueue();
 
-		constexpr static std::size_t QueueCount = 512u;
-		constexpr static std::size_t QueueOverload = QueueCount + 1u;
+			constexpr static std::size_t QueueCount = 512u;
+			constexpr static std::size_t QueueOverload = QueueCount + 1u;
 
-		const std::size_t count() const; // number of events pending to be processed
-		
-		const SEvent& pop() const;
-		void push(const SEvent &event);
+			const std::size_t count() const; // number of events pending to be processed
 
-	private:
-		inline const std::size_t getFirst() const;
-		inline const std::size_t getLast() const;
+			const SEvent& pop() const;
+			void push(const SEvent &event);
 
-		SEvent queue_[QueueCount];
+		private:
+			inline const std::size_t getFirst() const;
+			inline const std::size_t getLast() const;
 
-		mutable std::size_t first_;
-		mutable std::size_t count_;
-	};
+			SEvent queue_[QueueCount];
+
+			mutable std::size_t first_;
+			mutable std::size_t count_;
+		};
+	}
 }
