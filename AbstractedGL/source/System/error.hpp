@@ -30,7 +30,7 @@
 	#define AGL_CORE_CRITICAL(message, code, ...) \
 		{ \
 			AGL_CORE_LOG_CRITICAL(std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
-			throw ::agl::exception::CException("AbstractedGL core encountered a critical error!", code); \
+			throw ::agl::system::CException("AbstractedGL core encountered a critical error!", code); \
 		}
 
 	#define AGL_CORE_ERROR(message, code, ...) \
@@ -41,7 +41,7 @@
 	#define AGL_CRITICAL(message, code, ...) \
 		{ \
 			AGL_LOG_CRITICAL(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
-			throw ::agl::exception::CException("Critical error occured!", code); \
+			throw ::agl::system::CException("Critical error occured!", code); \
 		}
 
 	#define AGL_ERROR(message, code, ...) \
