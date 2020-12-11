@@ -12,6 +12,9 @@ namespace agl
 			CMoveOnly(const CMoveOnly &) = delete;
 			virtual ~CMoveOnly() = default;
 
+			CMoveOnly& operator=(CMoveOnly&&) = default;
+			CMoveOnly& operator=(const CMoveOnly&) = default;
+
 			bool isMoveConstructing() const;
 
 		private:
