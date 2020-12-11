@@ -11,7 +11,7 @@ namespace agl
 	namespace system
 	{
 		class CException
-			: public std::exception
+			: virtual public std::exception
 		{
 		public:
 			explicit CException(const std::string &message, Error::EError code);
