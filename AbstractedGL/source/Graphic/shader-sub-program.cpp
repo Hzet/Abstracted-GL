@@ -8,7 +8,7 @@
 
 namespace agl
 {
-	namespace utility
+	namespace graphics
 	{
 		bool CSubShader::VerifyType(const std::uint64_t type)
 		{
@@ -26,13 +26,23 @@ namespace agl
 
 		CSubShader::CSubShader()
 			: programID_(0u),
-			type_(0u)
+			type_(0u),
+			move_(false)
 		{
+		}
+
+		CSubShader::CSubShader(CSubShader &&other)
+			: programID_(std::move(other.programID_)),
+			type_(std::move(other.type_)),
+			move_(std::move(other.move_))
+		{
+			other.move_ = true;
 		}
 
 		CSubShader::~CSubShader()
 		{
-			destroy();
+			if(!move_)
+				destroy();
 		}
 
 		std::uint32_t CSubShader::getID() const
@@ -69,7 +79,7 @@ namespace agl
 			}
 			catch (std::ifstream::failure &e)
 			{
-				AGL_CORE_ERROR("Filename: {}\nAt position: {}", Error::READ_FILE, filename, source_.size());
+				AGL_CORE_ERROR("Filename: {}\nAt position: {}\n{}", Error::READ_FILE, filename, source_.size(), e.what());
 				file.close();
 
 				return false;
@@ -80,16 +90,25 @@ namespace agl
 
 		bool CSubShader::loadFromMemory(const std::uint64_t type, const char *source, std::uint64_t size)
 		{
+			if (source == nullptr)
+				return false;
+
 			source_.resize(size);
 			for (std::uint64_t i = 0u; i < size; i++)
 				source_[i] = *(source + i);
 
 			source_ += '\0';
+
+			return true;
 		}
 
 		bool CSubShader::setSource(const std::uint64_t type, const std::string &source)
 		{
+			if (source.empty())
+				return false;
+
 			source_ = source;
+			return true;
 		}
 
 		bool CSubShader::compile()
