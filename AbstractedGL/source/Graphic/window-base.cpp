@@ -1,4 +1,4 @@
-#include "window.hpp"
+#include "window-base.hpp"
 
 #include "../System/error.hpp"
 #include "../System/core-error-codes.hpp"
@@ -181,18 +181,23 @@ namespace agl
 	}
 */
 	
-	std::size_t CWindow::WindowsCount_ = 0u;
+	std::size_t CWindowBase::WindowsCount_ = 0u;
 
-	CWindow CWindow::Create(const std::string &title, std::uint32_t width, std::uint32_t height)
+	std::unordered_map<std::uint64_t, std::uint64_t> CWindowBase::WindowHints_ = {
+		{GLFW_CONTEXT_VERSION_MAJOR, 3}, 
+		{GLFW_CONTEXT_VERSION_MINOR, 3},
+		{GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE}
+	};
+
+	CWindowBase CWindowBase::Create(const std::string &title, std::uint32_t width, std::uint32_t height)
 	{
 		if (WindowsCount_ == 0u)
 		{
 			if (!glfwInit())
 				AGL_CORE_CRITICAL("Failed to initialize GLFW!", Error::GLFW_FAILURE);
 
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+			for (const auto &m : WindowHints_)
+				glfwWindowHint(m.first, m.second);
 
 			glfwSetErrorCallback(errorCallback);
 
@@ -206,7 +211,7 @@ namespace agl
 #endif
 		}
 
-		CWindow result(title, width, height);
+		CWindowBase result(title, width, height);
 		
 		result.window_ = std::unique_ptr<GLFWwindow, SGLFWwindowDeleter>(glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr));
 
@@ -221,49 +226,24 @@ namespace agl
 
 		glfwSetWindowUserPointer(result.window_.get(), reinterpret_cast<void*>(&result.queue_));
 
-		// set event callback functions
-		glfwSetWindowSizeCallback(result.window_.get(), windowSizeCallback);
-
-		glfwSetWindowCloseCallback(result.window_.get(), windowCloseCallback);
-
-		glfwSetWindowFocusCallback(result.window_.get(), windowFocusCallback);
-
-		glfwSetWindowMaximizeCallback(result.window_.get(), windowMaximizeCallback);
-
-		glfwSetWindowIconifyCallback(result.window_.get(), windowIconifyCallback);
-
-		glfwSetWindowContentScaleCallback(result.window_.get(), windowScaleCallback);
-
-		glfwSetKeyCallback(result.window_.get(), windowKeyInputCallback);
-
-		glfwSetCharCallback(result.window_.get(), windowCharCallback);
-
-		glfwSetCursorPosCallback(result.window_.get(), windowCursorPosCallback);
-
-		glfwSetCursorEnterCallback(result.window_.get(), windowCursorEnterCallback);
-
-		glfwSetMouseButtonCallback(result.window_.get(), windowButtonInputCallback);
-
-		glfwSetScrollCallback(result.window_.get(), windowScrollInputCallback);
-
-		glfwSetFramebufferSizeCallback(result.window_.get(), windowFramebufferSizeCallback);
-
 		return result;
 	}
 
-	CWindow::CWindow(const std::string &title, std::uint32_t width, std::uint32_t height)
-		: close_(false),
-		move_(false),
-		title_(title),
+	void CWindowBase::SetHint(std::uint64_t hint, std::uint64_t value)
+	{
+		WindowHints_[hint] = value;
+	}
+
+	CWindowBase::CWindowBase(const std::string &title, std::uint32_t width, std::uint32_t height)
+		: title_(title),
 		width_(width),
 		height_(height)
 	{
 		WindowsCount_++;
 	}
 
-	CWindow::CWindow(CWindow &&other)
+	CWindowBase::CWindowBase(CWindowBase &&other)
 		: CMoveOnly(std::move(other)),
-		close_(std::move(other.close_)),
 		title_(std::move(other.title_)),
 		width_(std::move(other.width_)),
 		height_(std::move(other.height_)),
@@ -273,7 +253,13 @@ namespace agl
 		glfwSetWindowUserPointer(window_.get(), &queue_);
 	}
 
-	void CWindow::shutdown()
+	CWindowBase::~CWindowBase()
+	{
+		if (!isMoveConstructing())
+			shutdown();
+	}
+
+	void CWindowBase::shutdown()
 	{
 		if (WindowsCount_ == 0u)
 			return;
@@ -286,40 +272,60 @@ namespace agl
 			glfwDestroyWindow(window_.get());
 	}
 
-	CWindow::~CWindow()
+	bool CWindowBase::isOpen()
 	{
-		if(!isMoveConstructing())
-			shutdown();
-	}
-
-	bool CWindow::isOpen()
-	{
-		const bool result = !glfwWindowShouldClose(window_.get()) && !close_; // false if should close
-
-		if (result)
+		if (glfwWindowShouldClose(window_.get()))
 		{
-			glfwPollEvents();
-			glfwSwapBuffers(window_.get());
-
-			return true;
+			shutdown();
+			return false;
 		}
 
-		shutdown();
+		glfwPollEvents();
+		glfwSwapBuffers(window_.get());
 
-		return false;
+		return true;
 	}
 
-	void CWindow::close()
+	void CWindowBase::close()
 	{
-		close_ = true;
+		glfwSetWindowShouldClose(window_.get(), GLFW_TRUE);
 	}
 
-	bool CWindow::pollEvent(SEvent &event)
+	bool CWindowBase::pollEvent(SEvent &event)
 	{
 		if (queue_.count() == 0)
 			return false;
 
 		event = queue_.pop();
 		return true;
+	}
+
+	void CWindowBase::setGLFWCallbacks()
+	{
+		glfwSetWindowSizeCallback(window_.get(), windowSizeCallback);
+
+		glfwSetWindowCloseCallback(window_.get(), windowCloseCallback);
+
+		glfwSetWindowFocusCallback(window_.get(), windowFocusCallback);
+
+		glfwSetWindowMaximizeCallback(window_.get(), windowMaximizeCallback);
+
+		glfwSetWindowIconifyCallback(window_.get(), windowIconifyCallback);
+
+		glfwSetWindowContentScaleCallback(window_.get(), windowScaleCallback);
+
+		glfwSetKeyCallback(window_.get(), windowKeyInputCallback);
+
+		glfwSetCharCallback(window_.get(), windowCharCallback);
+
+		glfwSetCursorPosCallback(window_.get(), windowCursorPosCallback);
+
+		glfwSetCursorEnterCallback(window_.get(), windowCursorEnterCallback);
+
+		glfwSetMouseButtonCallback(window_.get(), windowButtonInputCallback);
+
+		glfwSetScrollCallback(window_.get(), windowScrollInputCallback);
+
+		glfwSetFramebufferSizeCallback(window_.get(), windowFramebufferSizeCallback);
 	}
 }

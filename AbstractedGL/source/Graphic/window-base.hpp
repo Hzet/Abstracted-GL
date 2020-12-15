@@ -7,19 +7,21 @@
 #include "../System/event-static-queue.hpp"
 
 #include <GLFW/glfw3.h>
+#include <unordered_map>
 
 namespace agl
 {
-	class CWindow
+	class CWindowBase
 		: public system::CMoveOnly
 	{
 	public:
 		using system::CMoveOnly::CMoveOnly;
 
-		static CWindow Create(const std::string &title, std::uint32_t width, std::uint32_t height);
+		static CWindowBase Create(const std::string &title, std::uint32_t width, std::uint32_t height);
+		static void SetHint(std::uint64_t hint, std::uint64_t value);
 
-		CWindow(CWindow &&other);
-		~CWindow();
+		CWindowBase(CWindowBase &&other);
+		~CWindowBase();
 
 		bool isOpen();
 		void close();
@@ -33,18 +35,18 @@ namespace agl
 		};
 
 		static std::size_t WindowsCount_;
+		static std::unordered_map<std::uint64_t, std::uint64_t> WindowHints_;
 
-		CWindow();
-		CWindow(const std::string &title, std::uint32_t width, std::uint32_t height);
+		CWindowBase();
+		CWindowBase(const std::string &title, std::uint32_t width, std::uint32_t height);
 
 		void shutdown();
+		void setGLFWCallbacks();
 
-		bool move_;
-		bool close_;
 		const std::string title_;
 		std::uint32_t width_;
 		std::uint32_t height_;
-		agl::system::CEventQueue queue_;
+		system::CEventQueue queue_;
 		std::unique_ptr<GLFWwindow, SGLFWwindowDeleter> window_;
 	};
 }
