@@ -19,6 +19,7 @@ namespace agl
 
 		CTransform getInverse() const;
 
+		operator glm::mat4&();
 		operator const glm::mat4&() const;
 		CTransform& operator*=(const CTransform &other);
 		CTransform operator*(const CTransform &other) const;

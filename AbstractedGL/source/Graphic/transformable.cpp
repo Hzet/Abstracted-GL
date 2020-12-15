@@ -74,4 +74,10 @@ namespace agl
 	{
 		return transform_;
 	}
+
+	agl::CTransform& CTransformable::getTransform()
+	{
+		return transform_;
+	}
+
 }
