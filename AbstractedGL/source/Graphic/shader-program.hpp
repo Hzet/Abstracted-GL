@@ -24,9 +24,9 @@ namespace agl
 		bool attachFromMemory(std::uint64_t type, const char *data, std::uint64_t size);
 
 		bool link();
-		void setActive();
+		void setActive() const;
 
-		bool hasShader(std::uint64_t bit);
+		bool hasShader(std::uint64_t bit) const;
 
 		void setFloat(const std::string &name, const float value) const;
 		void setVec2(const std::string &name, const glm::vec2 &value) const;

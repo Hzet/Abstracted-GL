@@ -127,12 +127,12 @@ namespace agl
 		return true;
 	}
 
-	void CShader::setActive()
+	void CShader::setActive() const
 	{
 		AGL_CALL(glUseProgram(programID_));
 	}
 
-	bool CShader::hasShader(std::uint64_t bit)
+	bool CShader::hasShader(std::uint64_t bit) const
 	{
 		return (shaderBits_ & bit);
 	}
