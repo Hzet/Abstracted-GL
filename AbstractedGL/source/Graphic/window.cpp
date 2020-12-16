@@ -6,7 +6,7 @@
 namespace agl
 {
 	CWindow::CWindow(const std::string &title, const std::uint32_t width, const std::uint32_t height)
-		: CWindowBase(CWindowBase::Create(title, width, height))
+		: CWindowBase(std::move(CWindowBase::Create(title, width, height)))
 	{
 	}
 
