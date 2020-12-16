@@ -85,7 +85,7 @@ namespace agl
 			break;
 		}
 
-		event.key.code = static_cast<Event::EKeycode>(key);
+		event.key.code = static_cast<Keyboard::EKeycode>(key);
 		event.key.scancode = scancode;
 		event.key.modifiers = mods;
 
@@ -139,7 +139,7 @@ namespace agl
 			break;
 		}
 
-		event.button.code = static_cast<Event::EButton>(button);
+		event.button.code = static_cast<Mouse::EButton>(button);
 		event.button.bit_modifiers = mods;
 
 		queue.push(event);
@@ -163,7 +163,7 @@ namespace agl
 
 	static void errorCallback(int error, const char *description)
 	{
-		AGL_CORE_ERROR("GLFW has failed!\nError code [{}] - {}", error, description);
+		AGL_CORE_ERROR("GLFW has failed!\nError code [{}] - {}", Error::GLFW_FAILURE, error, description);
 	}
 
 /*
@@ -226,15 +226,17 @@ namespace agl
 
 		glfwSetWindowUserPointer(result.window_.get(), reinterpret_cast<void*>(&result.queue_));
 
+		result.setGLFWCallbacks();
+
 		return result;
 	}
 
-	void CWindowBase::SetHint(std::uint64_t hint, std::uint64_t value)
+	void CWindowBase::SetHint(const std::uint64_t hint, const std::uint64_t value)
 	{
 		WindowHints_[hint] = value;
 	}
 
-	CWindowBase::CWindowBase(const std::string &title, std::uint32_t width, std::uint32_t height)
+	CWindowBase::CWindowBase(const std::string &title, const std::uint32_t width, const std::uint32_t height)
 		: title_(title),
 		width_(width),
 		height_(height)
@@ -298,6 +300,16 @@ namespace agl
 
 		event = queue_.pop();
 		return true;
+	}
+
+	std::int32_t CWindowBase::getInputMode(const std::int32_t mode) const
+	{
+		return glfwGetInputMode(window_.get(), mode);
+	}
+
+	void CWindowBase::setInputMode(const std::int32_t mode, const std::int32_t value) const
+	{
+		glfwSetInputMode(window_.get(), mode, value);
 	}
 
 	void CWindowBase::setGLFWCallbacks()

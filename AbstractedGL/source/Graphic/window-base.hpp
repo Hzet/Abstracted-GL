@@ -17,8 +17,8 @@ namespace agl
 	public:
 		using system::CMoveOnly::CMoveOnly;
 
-		static CWindowBase Create(const std::string &title, std::uint32_t width, std::uint32_t height);
-		static void SetHint(std::uint64_t hint, std::uint64_t value);
+		static CWindowBase Create(const std::string &title, const std::uint32_t width, const std::uint32_t height);
+		static void SetHint(const std::uint64_t hint, const std::uint64_t value);
 
 		CWindowBase(CWindowBase &&other);
 		~CWindowBase();
@@ -27,6 +27,9 @@ namespace agl
 		void close();
 
 		bool pollEvent(SEvent &event);
+
+		std::int32_t getInputMode(const std::int32_t) const;
+		void setInputMode(const std::int32_t mode, const std::int32_t value) const;
 
 	private:
 		struct SGLFWwindowDeleter
