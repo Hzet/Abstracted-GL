@@ -28,7 +28,10 @@ namespace agl
 			WINDOW_LOST_FOCUS,
 			WINDOW_GAINED_FOCUS
 		};
+	}
 
+	namespace Keyboard
+	{
 		enum EKeycode
 		{
 			UNKNOWN_KEY = -1,
@@ -153,7 +156,10 @@ namespace agl
 			RIGHT_SUPER = 347,
 			MENU = 348
 		};
+	}
 
+	namespace Mouse
+	{
 		enum EButton
 		{
 			UNKNOWN_BUTTON = -1,

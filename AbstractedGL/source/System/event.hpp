@@ -26,14 +26,14 @@ namespace agl
 
 		struct SKeyboard
 		{
-			Event::EKeycode code;
+			Keyboard::EKeycode code;
 			std::int32_t scancode;
 			std::int32_t modifiers;
 		};
 
 		struct SMouse
 		{
-			Event::EButton code;
+			Mouse::EButton code;
 			std::int32_t bit_modifiers;
 		};
 
