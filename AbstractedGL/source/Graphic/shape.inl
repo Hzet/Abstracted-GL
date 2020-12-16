@@ -100,7 +100,8 @@ void CShape<Args...>::draw(const CRenderer &renderer) const
 template <class... Args>
 void CShape<Args...>::updateIBuffer() const
 {
-	iBuffer_.allocate(indices_.data(), indices_.size());
+	if(!indices_.empty())
+		iBuffer_.allocate(indices_.data(), indices_.size());
 }
 
 template <class... Args>
