@@ -31,12 +31,16 @@ namespace agl
 		const glm::vec2& getPlanes() const;
 		void setPlanes(const glm::vec2 &planes);
 		
+		const glm::vec3& getScale() const;
+		void setScale(const glm::vec3 &scale);
+
 		const glm::vec3& getPosition() const;
 		void setPosition(const glm::vec3 &position);
 
 		const glm::vec3& getRotation() const;
 		void setRotation(const glm::vec3 &rotation);
 
+		void scale(const glm::vec3 &scale);
 		void move(const glm::vec3 &offset);
 		void rotate(const glm::vec3 &angle);
 
@@ -56,6 +60,7 @@ namespace agl
 
 		glm::uvec2 frameDimensions_;
 
+		glm::vec3 scale_;
 		glm::vec3 position_;
 		glm::vec3 rotation_;
 

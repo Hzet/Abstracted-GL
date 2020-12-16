@@ -40,6 +40,18 @@ namespace agl
 		planes_ = planes;
 	}
 
+	const glm::vec3& ICamera::getScale() const
+	{
+		return scale_;
+	}
+
+	void ICamera::setScale(const glm::vec3 &scale)
+	{
+		viewUpdate_ = true;
+
+		scale_ = scale;
+	}
+
 	const glm::vec3& ICamera::getPosition() const
 	{
 		return position_;
@@ -70,6 +82,11 @@ namespace agl
 
 		rotation_.x = std::fmodf(rotation.x, 360.f);
 		rotation_.z = std::fmodf(rotation.z, 360.f);
+	}
+
+	void ICamera::scale(const glm::vec3 &scale)
+	{
+		setScale(scale_ * scale);
 	}
 
 	void ICamera::move(const glm::vec3 &offset)
@@ -122,5 +139,6 @@ namespace agl
 		direction_.up = glm::normalize(glm::cross(direction_.right, direction_.forward));
 
 		view_ = glm::lookAt(position_, position_ + direction_.forward, direction_.up);
+		view_.scale(scale_);
 	}
 }
