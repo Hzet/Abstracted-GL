@@ -13,13 +13,16 @@ namespace agl
 		public CTransformable
 	{
 	public:
+		void addPoint(Args&&... args);
+		template <std::uint64_t I> auto& get(const std::uint64_t index);
+		template <std::uint64_t I> const auto& get(const std::uint64_t index) const;
+
 		void setVertices(const CTupleBuffer<Args...> &vertices);
-		
 		template <std::size_t I, class T> void setVertices(const std::vector<T> &vertices);
-		template <std::size_t I, class T> void setVertices(T const * const vertices, std::uint64_t count);
+		template <std::size_t I, class T> void setVertices(T const * const vertices, const std::uint64_t count);
 
 		void setIndices(const std::vector<std::uint32_t> &indices);
-		void setIndices(std::uint32_t const * const indices, std::uint64_t count);
+		void setIndices(std::uint32_t const * const indices, const std::uint64_t count);
 
 		void setDrawType(const std::uint64_t drawType);
 		std::uint64_t getDrawType() const;

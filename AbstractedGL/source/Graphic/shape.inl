@@ -2,6 +2,31 @@ template <class... Args>
 const CVertexLayout CShape<Args...>::Layout_ = CShape<Args...>::GetLayout();
 
 template <class... Args>
+void CShape<Args...>::addPoint(Args&&... args)
+{
+	vbUpdate_ = true;
+
+	vertices_.push_back(std::forward<Args>(args)...);
+}
+
+template <class... Args>
+template <std::uint64_t I> 
+auto& CShape<Args...>::get(const std::uint64_t index)
+{
+	vbUpdate_ = true;
+
+	return vertices_.get<I>(index);
+}
+
+template <class... Args>
+template <std::uint64_t I> 
+const auto& CShape<Args...>::get(const std::uint64_t index) const
+{
+	return vertices_.get<I>(index);
+}
+
+
+template <class... Args>
 void CShape<Args...>::setVertices(const CTupleBuffer<Args...> &vertices)
 {
 	vbUpdate_ = true;
@@ -17,7 +42,7 @@ void CShape<Args...>::setVertices(const std::vector<T> &vertices)
 
 template <class... Args>
 template <std::size_t I, class T>
-void CShape<Args...>::setVertices(T const * const vertices, std::uint64_t count)
+void CShape<Args...>::setVertices(T const * const vertices, const std::uint64_t count)
 {
 	vbUpdate_ = true;
 
@@ -37,7 +62,7 @@ void CShape<Args...>::setIndices(const std::vector<std::uint32_t> &indices)
 }
 
 template <class... Args>
-void CShape<Args...>::setIndices(std::uint32_t const * const indices, std::uint64_t count)
+void CShape<Args...>::setIndices(std::uint32_t const * const indices, const std::uint64_t count)
 {
 	ibUpdate_ = true;
 	
