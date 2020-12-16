@@ -9,7 +9,7 @@ namespace agl
 	{
 	}
 
-	CTransform::CTransform(const glm::mat4 matrix)
+	CTransform::CTransform(const glm::mat4 &matrix)
 		: matrix_(matrix)
 	{
 	}

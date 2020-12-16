@@ -28,7 +28,6 @@ namespace agl
 		void scale(const glm::vec3 &ratio);
 		void rotate(const glm::vec3 &angle);
 
-
 		CTransform& getTransform();
 		const CTransform& getTransform() const;
 

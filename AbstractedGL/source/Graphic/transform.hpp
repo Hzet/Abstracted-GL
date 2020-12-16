@@ -8,10 +8,13 @@ namespace agl
 	{
 	public:
 		CTransform();
-		CTransform(const glm::mat4 matrix);
+		CTransform(const glm::mat4 &matrix);
 		CTransform(CTransform&&) = default;
 		CTransform(const CTransform&) = default;
 		virtual ~CTransform() = default;
+
+		CTransform& operator=(CTransform&&) = default;
+		CTransform& operator=(const CTransform&) = default;
 
 		void scale(const glm::vec3 &scale);
 		void rotate(const glm::vec3 &angle);
