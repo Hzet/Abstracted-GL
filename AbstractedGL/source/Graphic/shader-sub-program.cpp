@@ -10,6 +10,21 @@ namespace agl
 {
 	namespace graphics
 	{
+		static const char* getShaderName(std::uint64_t type)
+		{
+			switch (type)
+			{
+			case GL_VERTEX_SHADER: return "vertex";
+			case GL_TESS_CONTROL_SHADER: return "tessellation control";
+			case GL_TESS_EVALUATION_SHADER: return "tessellation evaluation";
+			case GL_GEOMETRY_SHADER: return "geometry";
+			case GL_FRAGMENT_SHADER: return "fragment";
+			case GL_COMPUTE_SHADER: return "compute";
+			}
+
+			return "invalid";
+		}
+
 		bool CSubShader::VerifyType(const std::uint64_t type)
 		{
 			switch (type)
@@ -103,7 +118,7 @@ namespace agl
 		{
 			if (source_.empty())
 			{
-				AGL_CORE_ERROR("Shader source code has not been loaded!", Error::INVALID_VALUE);
+				AGL_CORE_ERROR("Shader [{}] source code has not been loaded!", Error::INVALID_VALUE, getShaderName(type_));
 				return false;
 			}
 
@@ -132,7 +147,7 @@ namespace agl
 				message.resize(length);
 				AGL_CALL(glGetShaderInfoLog(programID_, length, nullptr, &message[0u]));
 
-				AGL_CORE_ERROR("Shader sub program could not be compiled!\n{}", Error::SUBSHADER_COMPILE, message);
+				AGL_CORE_ERROR("Shader [{}] sub program could not be compiled!\n{}", Error::SUBSHADER_COMPILE, getShaderName(type_), message);
 
 				return false;
 			}
