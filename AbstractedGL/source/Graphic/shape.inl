@@ -73,13 +73,25 @@ void CShape<Args...>::setIndices(std::uint32_t const * const indices, const std:
 }
 
 template <class... Args>
-std::uint64_t agl::CShape<Args...>::getDrawType() const
+const IShaderData& CShape<Args...>::getShaderData() const
+{
+	return *shaderData_;
+}
+
+template <class... Args>
+void CShape<Args...>::setShaderData(const IShaderData &data)
+{
+	shaderData_ = data.clone();
+}
+
+template <class... Args>
+std::uint64_t CShape<Args...>::getDrawType() const
 {
 	return drawType_;
 }
 
 template <class... Args>
-void agl::CShape<Args...>::setDrawType(const std::uint64_t drawType)
+void CShape<Args...>::setDrawType(const std::uint64_t drawType)
 {
 	drawType_ = drawType;
 }

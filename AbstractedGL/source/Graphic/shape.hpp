@@ -1,6 +1,7 @@
 #pragma once
 
 #include "drawable.hpp"
+#include "shader-data.hpp"
 #include "transformable.hpp"
 #include "vertex-array.hpp"
 #include "../System/tuple-buffer.hpp"
@@ -23,6 +24,9 @@ namespace agl
 
 		void setIndices(const std::vector<std::uint32_t> &indices);
 		void setIndices(std::uint32_t const * const indices, const std::uint64_t count);
+
+		const IShaderData& getShaderData() const;
+		void setShaderData(const IShaderData &data);
 
 		void setDrawType(const std::uint64_t drawType);
 		std::uint64_t getDrawType() const;
@@ -47,10 +51,10 @@ namespace agl
 		mutable CVertexArray vArray_;
 
 		std::uint64_t drawType_;
+		std::unique_ptr<IShaderData> shaderData_;
 		CTupleBuffer<Args...> vertices_;
 		std::vector<std::uint32_t> indices_;
 	};
-
 
 #include "shape.inl"
 }
