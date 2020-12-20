@@ -7,6 +7,9 @@
 
 namespace agl
 {
+	class CMaterial;
+	class IShaderData;
+
 	class CShader
 		: protected system::CMoveOnly
 	{
@@ -34,6 +37,7 @@ namespace agl
 		void setVec4(const std::string &name, const glm::vec4 &value) const;
 		void setMat4(const std::string &name, const glm::mat4 &value) const;
 		void setInt(const std::string &name, const std::int32_t value) const;
+		void setShaderData(const std::string &name, const IShaderData &data) const;
 		void setUnsigned(const std::string &name, const std::uint32_t value) const;
 		void setIntArray(const std::string &name, std::int32_t const * const value, std::uint64_t count) const;
 

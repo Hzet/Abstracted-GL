@@ -2,6 +2,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
+#include "material-data.hpp"
 #include "../System/gl-core.hpp"
 #include "../System/error.hpp"
 #include "../System/core-error-codes.hpp"
@@ -13,7 +14,7 @@ namespace agl
 		std::int32_t result;
 
 		AGL_CALL(result = glGetUniformLocation(programID, name.c_str()));
-		AGL_CORE_ASSERT(result != -1, "Uniform with such name does not exist!");
+		AGL_CORE_ASSERT(result != -1, "Uniform with such name does not exist!\nName: {}", name);
 
 		return result;
 	}
@@ -165,6 +166,11 @@ namespace agl
 	void CShader::setInt(const std::string &name, const std::int32_t value) const
 	{
 		AGL_CALL(glUniform1i(getLocation(programID_, name), value));
+	}
+
+	void CShader::setShaderData(const std::string &name, const IShaderData &data) const
+	{
+		data.setData(name, *this);
 	}
 
 	void CShader::setUnsigned(const std::string &name, const std::uint32_t value) const
