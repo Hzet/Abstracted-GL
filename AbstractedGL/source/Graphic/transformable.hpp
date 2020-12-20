@@ -28,14 +28,20 @@ namespace agl
 		void scale(const glm::vec3 &ratio);
 		void rotate(const glm::vec3 &angle);
 
-		CTransform& getTransform();
 		const CTransform& getTransform() const;
 
+		const CTransform& getInverseTransform() const;
+
 	private:
+		void update() const;
+
 		glm::vec3 scale_;
 		glm::vec3 origin_;
 		glm::vec3 position_;
 		glm::vec3 rotation_;
-		CTransform transform_;
+
+		mutable bool requireUpdate_;
+		mutable CTransform transform_;
+		mutable CTransform inverseTransform_;
 	};
 }

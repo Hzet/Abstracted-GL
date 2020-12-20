@@ -1,10 +1,13 @@
 #include "transformable.hpp"
+#include <iostream>
+#include <glm/ext.hpp>
 
 namespace agl
 {
 
 	CTransformable::CTransformable()
-		: scale_(1.f),
+		: requireUpdate_(false),
+		scale_(1.f),
 		origin_(0.f),
 		position_(0.f),
 		rotation_(0.f)
@@ -13,12 +16,15 @@ namespace agl
 
 	const glm::vec3& CTransformable::getScale() const
 	{
+		requireUpdate_ = true;
+
 		return scale_;
 	}
 
 	void CTransformable::setScale(const glm::vec3 &scale)
 	{
-		transform_.scale(scale / scale_);
+		requireUpdate_ = true;
+
 		scale_ = scale;
 	}
 
@@ -29,7 +35,8 @@ namespace agl
 
 	void CTransformable::setOrigin(const glm::vec3 &origin)
 	{
-		transform_.translate(origin - origin_);
+		requireUpdate_ = true;
+
 		origin_ = origin;
 	}
 
@@ -40,7 +47,8 @@ namespace agl
 
 	void CTransformable::setPosition(const glm::vec3 &position)
 	{
-		transform_.translate(origin_ + position - position_);
+		requireUpdate_ = true;
+
 		position_ = position;
 	}
 
@@ -51,7 +59,8 @@ namespace agl
 
 	void CTransformable::setRotation(const glm::vec3 &rotation)
 	{
-		transform_.rotate(rotation - rotation_);
+		requireUpdate_ = true;
+
 		rotation_ = rotation;
 	}
 
@@ -70,14 +79,35 @@ namespace agl
 		setRotation(rotation_ + angle);
 	}
 
-	const agl::CTransform& CTransformable::getTransform() const
+	const CTransform& CTransformable::getTransform() const
 	{
+		update();
+
 		return transform_;
 	}
 
-	agl::CTransform& CTransformable::getTransform()
+	const CTransform& CTransformable::getInverseTransform() const
 	{
-		return transform_;
+		update();
+	
+		return inverseTransform_;
+	}
+
+	void CTransformable::update() const
+	{
+		if (!requireUpdate_)
+			return;
+
+		transform_ = CTransform();
+		inverseTransform_ = CTransform();
+
+		transform_.scale(scale_);
+		transform_.translate(origin_ + position_);
+		transform_.rotate(rotation_);
+
+		inverseTransform_ = glm::inverse(static_cast<glm::mat4>(transform_));
+
+		requireUpdate_ = false;
 	}
 
 }

@@ -52,8 +52,9 @@ namespace agl
 		return matrix_;
 	}
 
+/*
 	CTransform::operator glm::mat4&()
 	{
 		return matrix_;
-	}
+	}*/
 }
