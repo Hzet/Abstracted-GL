@@ -17,7 +17,7 @@ namespace agl
 
 	void CVertexBuffer::bind() const
 {
-		AGL_CALL(glBindBuffer(GL_ARRAY_BUFFER, bufferID_));
+		AGL_CALL(glBindBuffer(GL_ARRAY_BUFFER, objectID_));
 	}
 
 	void CVertexBuffer::unbind() const
@@ -27,19 +27,19 @@ namespace agl
 
 	void CVertexBuffer::create()
 	{
-		if (bufferID_ != 0u)
+		if (isCreated())
 			destroy();
 
-		AGL_CALL(glGenBuffers(1u, &bufferID_));
+		AGL_CALL(glGenBuffers(1u, &objectID_));
 	}
 
 	void CVertexBuffer::destroy()
 	{
-		AGL_CALL(glDeleteBuffers(1u, &bufferID_));
+		AGL_CALL(glDeleteBuffers(1u, &objectID_));
 
 		size_ = 0u;
 		count_ = 0u;
-		bufferID_ = 0u;
+		objectID_ = 0u;
 	}
 
 	void CVertexBuffer::allocate(void const * const data, const std::uint64_t size, const std::uint64_t count)

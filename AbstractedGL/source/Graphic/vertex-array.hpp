@@ -7,10 +7,10 @@
 namespace agl
 {
 	class CVertexArray final
-		: public graphics::CBufferBase
+		: public system::IGLObject
 	{
 	public:
-		using graphics::CBufferBase::CBufferBase;
+		using system::IGLObject::IGLObject;
 
 		CVertexArray();
 		CVertexArray(CVertexArray&&) = default;

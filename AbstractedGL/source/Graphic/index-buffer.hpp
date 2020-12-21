@@ -1,14 +1,14 @@
 #pragma once
 
-#include "buffer-base.hpp"
+#include "../System/gl-object.hpp"
 
 namespace agl
 {
 	class CIndexBuffer final
-		: public graphics::CBufferBase
+		: public system::IGLObject
 	{
 	public:
-		using graphics::CBufferBase::CBufferBase;
+		using system::IGLObject::IGLObject;
 
 		CIndexBuffer();
 		CIndexBuffer(CIndexBuffer&&) = default;

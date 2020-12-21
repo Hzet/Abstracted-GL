@@ -18,7 +18,7 @@ namespace agl
 
 	void CIndexBuffer::bind() const
 {
-		AGL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferID_));
+		AGL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, objectID_));
 	}
 
 	void CIndexBuffer::unbind() const
@@ -28,17 +28,17 @@ namespace agl
 
 	void CIndexBuffer::create()
 	{
-		if (bufferID_ != 0u)
+		if (isCreated())
 			destroy();
 
-		AGL_CALL(glGenBuffers(1u, &bufferID_));
+		AGL_CALL(glGenBuffers(1u, &objectID_));
 	}
 
 	void CIndexBuffer::destroy()
 	{
-		AGL_CALL(glDeleteBuffers(1u, &bufferID_));
+		AGL_CALL(glDeleteBuffers(1u, &objectID_));
 
-		bufferID_ = 0u;
+		objectID_ = 0u;
 		count_ = 0u;
 	}
 

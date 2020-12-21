@@ -18,7 +18,7 @@ namespace agl
 
 	void CVertexArray::bind() const
 	{
-		AGL_CALL(glBindVertexArray(bufferID_));
+		AGL_CALL(glBindVertexArray(objectID_));
 	}
 
 	void CVertexArray::unbind() const
@@ -28,17 +28,17 @@ namespace agl
 
 	void CVertexArray::create()
 	{
-		if (bufferID_ != 0u)
+		if (isCreated())
 			destroy();
 
-		AGL_CALL(glGenVertexArrays(1u, &bufferID_));
+		AGL_CALL(glGenVertexArrays(1u, &objectID_));
 	}
 
 	void CVertexArray::destroy()
 	{
-		AGL_CALL(glDeleteVertexArrays(1u, &bufferID_));
+		AGL_CALL(glDeleteVertexArrays(1u, &objectID_));
 
-		bufferID_ = 0u;
+		objectID_ = 0u;
 		iCount_ = 0u;
 		vCount_ = 0u;
 	}
