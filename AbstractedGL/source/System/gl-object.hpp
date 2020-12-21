@@ -24,8 +24,8 @@ namespace agl
 			virtual void create() = 0;
 			virtual void destroy() = 0;
 
-			virtual void bind() const = 0;
-			virtual void unbind() const = 0;
+			virtual void bind() const {};
+			virtual void unbind() const {};
 
 		protected:
 			std::uint32_t objectID_;
