@@ -29,32 +29,31 @@ namespace agl
 		{
 			switch (type)
 			{
-				case GL_VERTEX_SHADER: return true;
-				case GL_TESS_CONTROL_SHADER: return true;
-				case GL_TESS_EVALUATION_SHADER: return true;
-				case GL_GEOMETRY_SHADER: return true;
-				case GL_FRAGMENT_SHADER: return true;
-				case GL_COMPUTE_SHADER: return true;
+			case GL_VERTEX_SHADER: return true;
+			case GL_TESS_CONTROL_SHADER: return true;
+			case GL_TESS_EVALUATION_SHADER: return true;
+			case GL_GEOMETRY_SHADER: return true;
+			case GL_FRAGMENT_SHADER: return true;
+			case GL_COMPUTE_SHADER: return true;
 			}
 
 			return false;
 		}
 
 		CSubShader::CSubShader()
-			: programID_(0u),
-			type_(0u)
+			: type_(0u)
 		{
 		}
 
 		CSubShader::~CSubShader()
 		{
-			if(!isMoveConstructing())
+			if (!isMoveConstructing())
 				destroy();
 		}
 
 		std::uint32_t CSubShader::getID() const
 		{
-			return programID_;
+			return objectID_;
 		}
 
 		std::uint64_t CSubShader::getType() const
@@ -64,7 +63,6 @@ namespace agl
 
 		bool CSubShader::loadFromFile(const std::uint64_t type, const std::string &filename)
 		{
-
 			std::ifstream file(filename, std::ios::in | std::ios::beg);
 
 			if (!file.is_open())
@@ -108,7 +106,7 @@ namespace agl
 			if (source.empty())
 				return false;
 
-			source_ = source;	
+			source_ = source;
 			type_ = type;
 
 			return true;
@@ -130,22 +128,22 @@ namespace agl
 
 			const char *source = source_.c_str();
 
-			AGL_CALL(programID_ = glCreateShader(type_));
-			AGL_CALL(glShaderSource(programID_, 1u, &source, NULL));
-			AGL_CALL(glCompileShader(programID_));
+			create();
+			AGL_CALL(glShaderSource(objectID_, 1u, &source, NULL));
+			AGL_CALL(glCompileShader(objectID_));
 
 			std::int32_t result;
 
-			AGL_CALL(glGetShaderiv(programID_, GL_COMPILE_STATUS, &result));
+			AGL_CALL(glGetShaderiv(objectID_, GL_COMPILE_STATUS, &result));
 
 			if (!result)
 			{
 				std::int32_t length;
 				std::string message;
-				AGL_CALL(glGetShaderiv(programID_, GL_INFO_LOG_LENGTH, &length));
+				AGL_CALL(glGetShaderiv(objectID_, GL_INFO_LOG_LENGTH, &length));
 
 				message.resize(length);
-				AGL_CALL(glGetShaderInfoLog(programID_, length, nullptr, &message[0u]));
+				AGL_CALL(glGetShaderInfoLog(objectID_, length, nullptr, &message[0u]));
 
 				AGL_CORE_ERROR("Shader [{}] sub program could not be compiled!\n{}", Error::SUBSHADER_COMPILE, getShaderName(type_), message);
 
@@ -154,9 +152,21 @@ namespace agl
 			return true;
 		}
 
+		void CSubShader::create()
+		{
+			if (isCreated())
+				destroy();
+
+			AGL_CALL(objectID_ = glCreateShader(type_));
+		}
+
 		void CSubShader::destroy()
 		{
-			AGL_CALL(glDeleteShader(programID_));
+			AGL_CALL(glDeleteShader(objectID_));
+
+			type_ = 0u;
+			objectID_ = 0u;
+			source_.clear();
 		}
 	}
 }

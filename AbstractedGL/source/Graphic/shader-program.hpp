@@ -3,18 +3,17 @@
 #include <glm/glm.hpp>
 
 #include "shader-sub-program.hpp"
-#include "../System/move-only.hpp"
+#include "../System/gl-object.hpp"
 
 namespace agl
 {
-	class CMaterial;
 	class IShaderData;
 
 	class CShader
-		: protected system::CMoveOnly
+		: public system::IGLObject
 	{
 	public:
-		using system::CMoveOnly::CMoveOnly;
+		using system::IGLObject::IGLObject;
 
 		CShader();
 		CShader(CShader&&) = default;
@@ -46,11 +45,16 @@ namespace agl
 
 		void setBit(std::uint64_t bit);
 
-		void destroy();
+		virtual void create() override;
+		virtual void destroy() override;
+
+		virtual void bind() const override;
+
 		bool compileSubshaders();
 
-		std::uint32_t programID_;
 		std::uint64_t shaderBits_; // bitmap to check whether the shader has already been attached
+
+		// TODO - it is used only in compilation, thus is temporary, so it can be removed from here in the future
 		std::vector<graphics::CSubShader> subshaders_;
 	};
 }

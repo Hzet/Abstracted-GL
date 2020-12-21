@@ -3,7 +3,7 @@
 #include <string>
 #include <cstdint>
 
-#include "../System/move-only.hpp"
+#include "../System/gl-object.hpp"
 
 namespace agl
 {
@@ -12,10 +12,10 @@ namespace agl
 	namespace graphics
 	{
 		class CSubShader final
-			: protected system::CMoveOnly
+			: protected system::IGLObject
 		{
 		public:
-			using system::CMoveOnly::CMoveOnly;
+			using system::IGLObject::IGLObject;
 
 			CSubShader();
 			CSubShader(CSubShader&&) = default;
@@ -36,9 +36,10 @@ namespace agl
 			bool loadFromMemory(const std::uint64_t type, const char *source, std::uint64_t size);
 
 			bool compile(); // may throw
-			void destroy();
 
-			std::uint32_t programID_;
+			virtual void create() override;
+			virtual void destroy() override;
+
 			std::uint64_t type_;
 			std::string source_;
 		};
