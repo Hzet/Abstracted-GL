@@ -73,8 +73,14 @@ namespace agl
 	{
 		viewUpdate_ = true;
 
+		if (rotation.y < -89.f)
+			rotation_.y = -89.f;
+		else if (rotation.y > 89.f)
+			rotation_.y = 89.f;
+		else
+			rotation_.y = rotation.y;
+
 		rotation_.x = std::fmodf(rotation.x, 360.f);
-		rotation_.y = std::fmodf(rotation.y, 89.5f);
 		rotation_.z = std::fmodf(rotation.z, 360.f);
 	}
 
