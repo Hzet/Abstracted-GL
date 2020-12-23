@@ -161,13 +161,13 @@ namespace agl
 		AGL_CALL(glViewport(0, 0, width, height));
 	}
 
-	static void errorCallback(int error, const char *description)
+	static void GLFWerrorCallback(int error, const char *description)
 	{
 		AGL_CORE_ERROR("GLFW has failed!\nError code [{}] - {}", Error::GLFW_FAILURE, error, description);
 	}
 
 /*
-	static void GLDebugMessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
+	static void GLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
 	{
 		switch (severity)
 		{
@@ -178,8 +178,8 @@ namespace agl
 		}
 
 		AGL_CORE_ASSERT(false, "Unknown severity level!");
-	}
-*/
+	}*/
+
 	
 	std::size_t CWindowBase::WindowsCount_ = 0u;
 
@@ -199,16 +199,7 @@ namespace agl
 			for (const auto &m : WindowHints_)
 				glfwWindowHint(m.first, m.second);
 
-			glfwSetErrorCallback(errorCallback);
-
-#ifdef AGL_DEBUG
-/*
-			glEnable(GL_DEBUG_OUTPUT); 
-			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS); 
-			glDebugMessageCallback(GLDebugMessageCallback, nullptr); 
-			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
-*/
-#endif
+			glfwSetErrorCallback(GLFWerrorCallback);
 		}
 
 		CWindowBase result(title, width, height);
@@ -223,6 +214,15 @@ namespace agl
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!", Error::GLAD_FAILURE);
+
+/*
+#ifdef AGL_DEBUG
+		AGL_CALL(glEnable(GL_DEBUG_OUTPUT));
+		AGL_CALL(glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS));
+		AGL_CALL(glDebugMessageCallback(GLDebugCallback, nullptr));
+		AGL_CALL(glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE));
+
+#endif*/
 
 		glfwSetWindowUserPointer(result.window_.get(), reinterpret_cast<void*>(&result.queue_));
 
