@@ -23,11 +23,17 @@ namespace agl
 			return target_;
 		}
 
+		std::uint32_t CTextureBase::getSlotNumber() const
+		{
+			return textureSlot_;
+		}
+
 		void CTextureBase::setParameter(const std::uint64_t setting, const std::uint64_t value) const
 		{
 			AGL_CORE_ASSERT(isCreated(), "Can not set a parameter on non existing texture!");
 
 			bind();
+			//AGL_CALL(glBindTexture(getTarget(), objectID_));
 			AGL_CALL(glTexParameteri(target_, setting, value));
 		}
 
@@ -52,8 +58,8 @@ namespace agl
 
 		void CTextureBase::bind() const
 		{
-			AGL_CALL(glBindTexture(target_, objectID_));
 			AGL_CALL(glActiveTexture(GL_TEXTURE0 + textureSlot_));
+			AGL_CALL(glBindTexture(target_, objectID_));
 		}
 
 		void CTextureBase::unbind() const

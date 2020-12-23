@@ -10,7 +10,7 @@ namespace agl
 	namespace graphics
 	{
 		class CTextureBase
-			: system::IGLObject
+			: public system::IGLObject
 		{
 		public:
 			using system::IGLObject::IGLObject;
@@ -24,6 +24,7 @@ namespace agl
 			void setParameter(const std::uint64_t setting, const std::uint64_t value) const;
 
 			std::uint64_t getTarget() const;
+			std::uint32_t getSlotNumber() const;
 
 			virtual void create() override;
 			virtual void destroy() override;
