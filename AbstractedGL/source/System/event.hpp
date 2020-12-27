@@ -4,6 +4,9 @@
 
 namespace agl
 {
+	/// <summary>
+	/// An aggregation data struct that can contain only one type and only one event data.
+	/// </summary>
 	struct SEvent
 	{
 		struct SPosition

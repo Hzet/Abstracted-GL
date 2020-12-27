@@ -25,7 +25,7 @@ namespace agl
 			return "invalid";
 		}
 
-		bool CSubShader::VerifyType(const std::uint64_t type)
+		static bool VerifyType(const std::uint64_t type)
 		{
 			switch (type)
 			{

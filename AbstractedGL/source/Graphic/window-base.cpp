@@ -302,7 +302,7 @@ namespace agl
 		return true;
 	}
 
-	std::int32_t CWindowBase::getInputMode(const std::int32_t mode) const
+	std::int32_t CWindowBase::getInputMode() const
 	{
 		return glfwGetInputMode(window_.get(), mode);
 	}

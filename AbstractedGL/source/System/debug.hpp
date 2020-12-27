@@ -7,13 +7,31 @@ namespace agl
 {
 	namespace system
 	{
+		/// <summary>
+		/// The clock that counts the time taken by a method/function.
+		/// </summary>
 		class CProfilerClock
 		{
 		public:
+			/// <summary>
+			/// Set the 'name_' to 'callerName' and start the timer.
+			/// </summary>
+			/// <param name="callerName">The name under which the time passed will be added</param>
 			CProfilerClock(std::string &&callerName);
+
+			/// <summary>
+			/// Stop the timer and add it's time to the 'name_'
+			/// </summary>
 			~CProfilerClock();
 
+			/// <summary>
+			/// Get all names and corresponding clocks.
+			/// </summary>
+			/// <returns>
+			/// The 'Clocks_'
+			/// </returns>
 			static const std::unordered_map<std::string, std::uint64_t>& GetClocks();
+
 		private:
 			static std::unordered_map<std::string, std::uint64_t> Clocks_;
 

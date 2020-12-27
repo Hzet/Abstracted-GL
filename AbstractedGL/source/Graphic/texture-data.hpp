@@ -4,6 +4,9 @@
 
 namespace agl
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	class CTextureData
 		: public IShaderData
 	{

@@ -6,6 +6,9 @@ namespace agl
 {
 	namespace Event
 	{
+		/// <summary>
+		/// Window events enum.
+		/// </summary>
 		enum EType
 		{
 			INVALID_EVENT,
@@ -32,6 +35,9 @@ namespace agl
 
 	namespace Keyboard
 	{
+		/// <summary>
+		/// Keyboard key enum.
+		/// </summary>
 		enum EKeycode
 		{
 			UNKNOWN_KEY = -1,
@@ -160,6 +166,9 @@ namespace agl
 
 	namespace Mouse
 	{
+		/// <summary>
+		/// Mouse button enum.
+		/// </summary>
 		enum EButton
 		{
 			UNKNOWN_BUTTON = -1,

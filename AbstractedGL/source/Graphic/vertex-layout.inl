@@ -30,26 +30,32 @@ template <class T> constexpr CVertexLayout::SElement CVertexLayout::GetElement()
 {
 	static_assert(false, "No specialization found for type T");
 }
+
 template <> constexpr CVertexLayout::SElement CVertexLayout::GetElement<std::uint8_t>()
 {
 	return { GL_UNSIGNED_BYTE, GetTypeSize(GL_UNSIGNED_BYTE), 1u, true };
 }
+
 template <> constexpr CVertexLayout::SElement CVertexLayout::GetElement<std::uint32_t>()
 {
 	return { GL_UNSIGNED_INT, GetTypeSize(GL_UNSIGNED_INT), 1u, true };
 }
+
 template <> constexpr CVertexLayout::SElement CVertexLayout::GetElement<float>()
 {
 	return { GL_UNSIGNED_INT, GetTypeSize(GL_UNSIGNED_INT), 1u, true };
 }
+
 template <> constexpr CVertexLayout::SElement CVertexLayout::GetElement<glm::vec2>()
 {
 	return { GL_FLOAT, GetTypeSize(GL_FLOAT) * 2u, 2u, true };
 }
+
 template <> constexpr CVertexLayout::SElement CVertexLayout::GetElement<glm::vec3>()
 {
 	return { GL_FLOAT, GetTypeSize(GL_FLOAT) * 3u, 3u, true };
 }
+
 template <> constexpr CVertexLayout::SElement CVertexLayout::GetElement<glm::vec4>()
 {
 	return { GL_FLOAT, GetTypeSize(GL_FLOAT) * 4u, 4u, true };

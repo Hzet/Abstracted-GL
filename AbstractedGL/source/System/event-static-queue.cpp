@@ -11,7 +11,7 @@ namespace agl
 		{
 		}
 
-		const std::size_t CEventQueue::count() const
+		const std::uint32_t CEventQueue::count() const
 		{
 			return count_;
 		}
@@ -20,7 +20,7 @@ namespace agl
 		{
 			AGL_CORE_ASSERT(count_ != 0, "Cannot pop from an empty queue");
 
-			const std::size_t prevFirst = first_;
+			const std::uint32_t prevFirst = first_;
 
 			first_ = (first_ + 1u) % QueueCount;
 			count_--;
@@ -40,12 +40,12 @@ namespace agl
 			}
 		}
 
-		inline const std::size_t CEventQueue::getFirst() const
+		inline const std::uint32_t CEventQueue::getFirst() const
 		{
 			return first_;
 		}
 
-		const std::size_t CEventQueue::getLast() const
+		const std::uint32_t CEventQueue::getLast() const
 		{
 			return (first_ + count_) % QueueCount;
 		}
