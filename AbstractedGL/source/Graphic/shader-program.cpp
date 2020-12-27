@@ -19,7 +19,7 @@ namespace agl
 		return result;
 	}
 
-	constexpr std::uint64_t CShader::GetBit(std::uint64_t type)
+	constexpr std::uint64_t GetBit(std::uint64_t type)
 	{
 		switch (type)
 		{
