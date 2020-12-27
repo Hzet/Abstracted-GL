@@ -37,6 +37,7 @@ namespace agl
 			case SHADER_COMPILE: return "Shader program has failed to compile";
 			case SHADER_LINK: return "Shader program has failed to link";
 			}
+			return "Unknown error!";
 		}
 	}
 }
