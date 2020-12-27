@@ -11,7 +11,7 @@ namespace agl
 		{
 		}
 
-		const std::uint32_t CEventQueue::count() const
+		std::uint32_t CEventQueue::count() const
 		{
 			return count_;
 		}
