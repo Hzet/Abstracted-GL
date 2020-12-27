@@ -18,7 +18,7 @@ namespace agl
 
 	void CLightData::setData(const std::string &name, const CShader &shader) const
 	{
-		shader.setVec4(name + ".ambient", specular);
+		shader.setVec4(name + ".ambient", ambient);
 		shader.setVec4(name + ".diffuse", diffuse);
 		shader.setVec4(name + ".specular", specular);
 		shader.setVec3(name + ".position", position);
