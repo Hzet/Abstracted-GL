@@ -20,10 +20,10 @@ namespace agl
 		struct SElement
 		{
 			SElement();
-			constexpr SElement(const std::uint64_t t, const std::uint64_t s, const std::uint32_t c, const bool n);
+			constexpr SElement(const std::uint32_t t, const std::uint32_t s, const std::uint32_t c, const bool n);
 
-			std::uint64_t type;
-			std::uint64_t size;
+			std::uint32_t type;
+			std::uint32_t size;
 			std::uint32_t count;
 			bool normalized;
 		};
@@ -34,7 +34,7 @@ namespace agl
 		/// <returns>
 		/// The size
 		/// </return>
-		std::uint64_t getStride() const;
+		std::uint32_t getStride() const;
 
 		/// <summary>
 		/// Get the count of elements
@@ -42,14 +42,14 @@ namespace agl
 		/// <returns>
 		/// The count
 		/// </returns>
-		std::uint64_t getCount() const;
+		std::uint32_t getCount() const;
 
 		/// <summary>
 		/// Get the element.
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		const SElement& operator[](const std::uint64_t index) const;
+		const SElement& operator[](const std::uint32_t index) const;
 
 		/// <summary>
 		/// Add element of type 'T' to the layout.
@@ -76,9 +76,9 @@ namespace agl
 		/// <returns>
 		/// The size
 		/// </returns>
-		static constexpr std::uint64_t GetTypeSize(const std::uint64_t type);
+		static constexpr std::uint32_t GetTypeSize(const std::uint32_t type);
 
-		std::uint64_t stride_;
+		std::uint32_t stride_;
 		std::vector<SElement> elements_;
 	};
 

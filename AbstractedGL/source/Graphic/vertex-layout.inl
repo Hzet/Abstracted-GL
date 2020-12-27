@@ -1,4 +1,4 @@
-constexpr CVertexLayout::SElement::SElement(const std::uint64_t t, const std::uint64_t s, const std::uint32_t c, const bool n)
+constexpr CVertexLayout::SElement::SElement(const std::uint32_t t, const std::uint32_t s, const std::uint32_t c, const bool n)
 	: type(t),
 	size(s),
 	count(c),
@@ -6,7 +6,7 @@ constexpr CVertexLayout::SElement::SElement(const std::uint64_t t, const std::ui
 {
 }
 
-constexpr std::uint64_t CVertexLayout::GetTypeSize(const std::uint64_t type)
+constexpr std::uint32_t CVertexLayout::GetTypeSize(const std::uint32_t type)
 {
 	switch (type)
 	{

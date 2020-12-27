@@ -42,7 +42,7 @@ namespace agl
 		objectID_ = 0u;
 	}
 
-	void CVertexBuffer::allocate(void const * const data, const std::uint64_t size, const std::uint64_t count)
+	void CVertexBuffer::allocate(void const * const data, const std::uint32_t size, const std::uint32_t count)
 	{
 		AGL_CORE_ASSERT(size != 0u, "Reserving an empty buffer!");
 		AGL_CORE_ASSERT(count != 0u, "Count is required!");
@@ -56,7 +56,7 @@ namespace agl
 		AGL_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 	}
 
-	void CVertexBuffer::buffer(void const * const data, const std::uint64_t offset, const std::uint64_t size)
+	void CVertexBuffer::buffer(void const * const data, const std::uint32_t offset, const std::uint32_t size)
 	{
 		AGL_CORE_ASSERT(data != nullptr, "Can not set nullptr data!");
 		AGL_CORE_ASSERT(offset + size <= getSize(), "Buffer overflow!");
@@ -66,12 +66,12 @@ namespace agl
 		AGL_CALL(glBufferSubData(GL_ARRAY_BUFFER, offset, size, data));
 	}
 
-	std::uint64_t CVertexBuffer::getSize() const
+	std::uint32_t CVertexBuffer::getSize() const
 	{
 		return size_;
 	}
 
-	std::uint64_t CVertexBuffer::getCount() const
+	std::uint32_t CVertexBuffer::getCount() const
 	{
 		return count_;
 	}

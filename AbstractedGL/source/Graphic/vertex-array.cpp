@@ -53,7 +53,7 @@ namespace agl
 
 		std::uint64_t offset = 0u;
 
-		for (std::size_t i = 0u; i < layout.getCount(); i++)
+		for (std::uint32_t i = 0u; i < layout.getCount(); i++)
 		{
 			AGL_CALL(glVertexAttribPointer(i, layout[i].count, layout[i].type, layout[i].normalized, layout.getStride(), reinterpret_cast<void*>(offset)));
 			AGL_CALL(glEnableVertexAttribArray(i));
@@ -74,7 +74,7 @@ namespace agl
 
 		std::uint64_t offset = 0u;
 
-		for (std::size_t i = 0u; i < layout.getCount(); i++)
+		for (std::uint32_t i = 0u; i < layout.getCount(); i++)
 		{
 			AGL_CALL(glVertexAttribPointer(i, layout[i].count, layout[i].type, layout[i].normalized ? GL_TRUE : GL_FALSE, layout.getStride(), reinterpret_cast<void*>(offset)));
 			AGL_CALL(glEnableVertexAttribArray(i));
@@ -82,12 +82,12 @@ namespace agl
 		}
 	}
 
-	std::uint64_t CVertexArray::getIndexCount() const
+	std::uint32_t CVertexArray::getIndexCount() const
 	{
 		return iCount_;
 	}
 
-	std::uint64_t CVertexArray::getVertexCount() const
+	std::uint32_t CVertexArray::getVertexCount() const
 	{
 		return vCount_;
 	}

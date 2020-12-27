@@ -42,7 +42,7 @@ namespace agl
 		count_ = 0u;
 	}
 
-	void CIndexBuffer::allocate(std::uint32_t const * const data, std::uint64_t count)
+	void CIndexBuffer::allocate(std::uint32_t const * const data, std::uint32_t count)
 	{
 		AGL_CORE_ASSERT(count != 0u, "Can not allocate no memory!");
 		AGL_CORE_ASSERT(count_ == 0u, "Overriding previous allocation!");
@@ -54,7 +54,7 @@ namespace agl
 		AGL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count_ * sizeof(std::uint32_t), data, GL_STATIC_DRAW));
 	}
 
-	void CIndexBuffer::buffer(std::uint32_t const * const data, std::uint64_t offset, std::uint64_t count)
+	void CIndexBuffer::buffer(std::uint32_t const * const data, std::uint32_t offset, std::uint32_t count)
 	{
 		AGL_CORE_ASSERT(count != 0u, "Buffering data of zero size!");
 		AGL_CORE_ASSERT(count_ != 0u, "Buffer has not been allocated yet!");
@@ -64,7 +64,7 @@ namespace agl
 		AGL_CALL(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset * sizeof(std::uint32_t), count * sizeof(std::uint32_t), data));
 	}
 
-	std::uint64_t CIndexBuffer::getCount() const
+	std::uint32_t CIndexBuffer::getCount() const
 	{
 		return count_;
 	}

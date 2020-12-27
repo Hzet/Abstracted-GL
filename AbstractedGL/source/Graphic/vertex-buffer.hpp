@@ -63,7 +63,7 @@ namespace agl
 		/// <param name="data">The data</param>
 		/// <param name="size">The size</param>
 		/// <param name="count">The count</param>
-		void allocate(void const * const data, const std::uint64_t size, const std::uint64_t count); // data, overall size, vertex count (amount of strides)
+		void allocate(void const * const data, const std::uint32_t size, const std::uint32_t count); // data, overall size, vertex count (amount of strides)
 
 		/// <summary>
 		/// Call OpenGL to insert 'data' of 'size' bytes in the buffer's memory at 'offset'.
@@ -71,7 +71,7 @@ namespace agl
 		/// <param name="data">The data</param>
 		/// <param name="offset">The offset</param>
 		/// <param name="size">The size</param>
-		void buffer(void const * const data, const std::uint64_t offset, const std::uint64_t size);
+		void buffer(void const * const data, const std::uint32_t offset, const std::uint32_t size);
 
 		/// <summary>
 		/// Get the size of the memory allocated for this buffer in bytes.
@@ -79,7 +79,7 @@ namespace agl
 		/// <returns>
 		/// The size
 		/// </returns>
-		std::uint64_t getSize() const;
+		std::uint32_t getSize() const;
 
 		/// <summary>
 		/// Get the count of vertices that this buffer contains.
@@ -87,11 +87,11 @@ namespace agl
 		/// <returns>
 		/// The count
 		/// </returns>
-		std::uint64_t getCount() const;
+		std::uint32_t getCount() const;
 
 	private:
-		std::uint64_t size_;
-		std::uint64_t count_;
+		std::uint32_t size_;
+		std::uint32_t count_;
 	};
 
 }

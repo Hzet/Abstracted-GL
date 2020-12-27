@@ -79,7 +79,7 @@ namespace agl
 		/// <returns>
 		/// The count
 		/// </returns>
-		std::uint64_t getIndexCount() const;
+		std::uint32_t getIndexCount() const;
 
 		/// <summary>
 		/// Get the count of vertices.
@@ -87,10 +87,10 @@ namespace agl
 		/// <returns>
 		/// The count
 		/// </returns>
-		std::uint64_t getVertexCount() const;
+		std::uint32_t getVertexCount() const;
 
 	private:
-		std::uint64_t iCount_;
-		std::uint64_t vCount_;
+		std::uint32_t iCount_;
+		std::uint32_t vCount_;
 	};
 }

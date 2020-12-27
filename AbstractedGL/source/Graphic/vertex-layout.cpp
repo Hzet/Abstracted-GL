@@ -2,17 +2,17 @@
 
 namespace agl
 {
-	std::uint64_t CVertexLayout::getStride() const
+	std::uint32_t CVertexLayout::getStride() const
 	{
 		return stride_;
 	}
 
-	std::uint64_t CVertexLayout::getCount() const
+	std::uint32_t CVertexLayout::getCount() const
 	{
 		return elements_.size();
 	}
 
-	const agl::CVertexLayout::SElement& CVertexLayout::operator[](const std::uint64_t index) const
+	const agl::CVertexLayout::SElement& CVertexLayout::operator[](const std::uint32_t index) const
 	{
 		return elements_[index];
 	}

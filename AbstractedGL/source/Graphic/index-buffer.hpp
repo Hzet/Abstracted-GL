@@ -55,19 +55,19 @@ namespace agl
 		virtual void destroy() override;
 
 		/// <summary>
-		/// Call OpenGL to allocate 'sizeof(uint64_t) * count' bytes of memory for 'count' objects and insert 'data'.
+		/// Call OpenGL to allocate 'sizeof(uint32_t) * count' bytes of memory for 'count' objects and insert 'data'.
 		/// </summary>
 		/// <param name="data">The data</param>
 		/// <param name="count">The count</param>
-		void allocate(std::uint32_t const * const data, std::uint64_t count);
+		void allocate(std::uint32_t const * const data, std::uint32_t count);
 
 		/// <summary>
-		/// Call OpenGL to insert 'data' of 'sizeof(uint64_t) * count' bytes in the buffer's memory at 'sizeof(uint64_t) * offset'.
+		/// Call OpenGL to insert 'data' of 'sizeof(uint32_t) * count' bytes in the buffer's memory at 'sizeof(uint32_t) * offset'.
 		/// </summary>
 		/// <param name="data">The data</param>
 		/// <param name="offset">The offset in elements</param>
 		/// <param name="count">The count</param>
-		void buffer(std::uint32_t const * const data, std::uint64_t offset, std::uint64_t count);
+		void buffer(std::uint32_t const * const data, std::uint32_t offset, std::uint32_t count);
 
 		/// <summary>
 		/// Get the count of the elements.
@@ -75,9 +75,9 @@ namespace agl
 		/// <returns>
 		/// The count
 		/// </returns>
-		std::uint64_t getCount() const;
+		std::uint32_t getCount() const;
 
 	private:
-		std::uint64_t count_;
+		std::uint32_t count_;
 	};
 }
