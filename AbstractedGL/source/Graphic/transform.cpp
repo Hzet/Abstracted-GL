@@ -31,11 +31,6 @@ namespace agl
 		matrix_ = glm::translate(matrix_, offset);
 	}
 
-	CTransform CTransform::getInverse() const
-	{
-		return glm::inverse(matrix_);
-	}
-
 	CTransform& CTransform::operator*=(const CTransform &other)
 	{
 		matrix_ = matrix_ * other.matrix_;
