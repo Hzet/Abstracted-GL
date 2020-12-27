@@ -78,14 +78,6 @@ namespace agl
 		bool pollEvent(SEvent &event);
 
 		/// <summary>
-		/// Return the input mode.
-		/// </summary>
-		/// <returns>
-		/// The mode
-		/// </returns>
-		std::int32_t getInputMode() const;
-
-		/// <summary>
 		/// Set the input 'mode' to be 'value'.
 		/// </summary>
 		/// <param name="mode">The mode</param>
