@@ -131,7 +131,7 @@ void CShape<Args...>::draw(const CRenderer &renderer) const
 
 	renderer.getActiveShader().setMat4("model_transform", getTransform());
 
-	renderer.draw(vArray_, GL_TRIANGLES);
+	renderer.draw(vArray_, drawType_);
 }
 
 template <class... Args>
