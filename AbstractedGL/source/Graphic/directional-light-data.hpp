@@ -6,7 +6,8 @@
 namespace agl
 {
 	/// <summary>
-	/// 
+	/// Directional light source is the source that affects every object in the same manner -
+	/// it creates an illusion of light source being infinitely far away, so it's beams are parallel to each other.
 	/// </summary>
 	class CDirLightData
 		: public IShaderData

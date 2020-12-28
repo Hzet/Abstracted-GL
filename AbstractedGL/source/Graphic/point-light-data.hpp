@@ -6,6 +6,20 @@
 
 namespace agl
 {
+	/// <summary>
+	/// A point light data represents the type of light that loses its strength over distance.
+	/// The light is lightening objects which are placed on it's trajectory.
+	/// The main beam has reach of 'innerCutOff' degrees, then the light is diffused up to 'outerCutOff'.
+	/// The strength of the light beams over distance is calculated with this equation:
+	///			 1.f
+	/// --------------------------
+	/// KC + KL * d + KQ * (d ^ 2)
+	/// where:
+	/// KC - constant (range.x)
+	/// KL - linear (range.y)
+	/// KQ - quadratic (range.z)
+	/// d - distance between the light source and the object vertex
+	/// </summary>
 	class CPointLightData
 		: public IShaderData
 	{
