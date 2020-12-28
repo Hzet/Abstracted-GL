@@ -10,6 +10,7 @@ namespace agl
 		: planes_(0.f, 100.f),
 		position_(0.f),
 		rotation_(0.f),
+		scale_(glm::vec3(1.f)),
 		viewUpdate_(false),
 		projUpdate_(false),
 		direction_(WorldDirection)
