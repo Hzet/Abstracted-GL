@@ -4,7 +4,7 @@
 
 namespace agl
 {
-	class  CRenderer;
+	class CRenderer;
 
 	/// <summary>
 	/// Interface for drawable objects
