@@ -1,9 +1,11 @@
 #pragma once
 
 #include "drawable.hpp"
-#include "shader-data.hpp"
 #include "transformable.hpp"
 #include "vertex-array.hpp"
+#include "renderer.hpp"
+#include "shader-entry-manager.hpp"
+#include "shader-entry-vector.hpp"
 #include "../System/tuple-buffer.hpp"
 
 namespace agl
@@ -11,12 +13,18 @@ namespace agl
 	template <class... Args>
 	class CShape
 		: public IDrawable,
-		public CTransformable
+		public CTransformable,
+		public CShaderEntryObject
 	{
 	public:
-		void addPoint(Args&&... args);
-		template <std::uint64_t I> auto& get(const std::uint64_t index);
-		template <std::uint64_t I> const auto& get(const std::uint64_t index) const;
+		CShape();
+		CShape(CShape&&) = default;
+		CShape(const CShape&) = default;
+		virtual ~CShape() = default;
+
+		void addVertex(Args&&... args);
+		template <std::uint64_t I> auto& getVertexAttribute(const std::uint64_t index);
+		template <std::uint64_t I> const auto& getVertexAttribute(const std::uint64_t index) const;
 
 		void setVertices(const CTupleBuffer<Args...> &vertices);
 		template <std::size_t I, class T> void setVertices(const std::vector<T> &vertices);
@@ -25,11 +33,15 @@ namespace agl
 		void setIndices(const std::vector<std::uint32_t> &indices);
 		void setIndices(std::uint32_t const * const indices, const std::uint64_t count);
 
-		const IShaderData& getShaderData() const;
-		void setShaderData(const IShaderData &data);
-
-		void setDrawType(const std::uint64_t drawType);
 		std::uint64_t getDrawType() const;
+		void setDrawType(const std::uint64_t drawType);
+
+		const CShaderUID& getShader() const;
+		void setShader(const CShaderUID &uid);
+
+		CShaderEntryVector& getShaderEntries() const;
+		void addShaderEntry(const IShaderEntry &entry);
+		void setShaderEntries(const CShaderEntryVector &shaderEntries);
 
 		virtual void draw(const CRenderer &renderer) const override;
 
@@ -50,8 +62,9 @@ namespace agl
 		mutable CIndexBuffer iBuffer_;
 		mutable CVertexArray vArray_;
 
+		CShaderUID myShader_;
 		std::uint64_t drawType_;
-		std::unique_ptr<IShaderData> shaderData_;
+		CShaderEntryVector shaderEntries_;
 		CTupleBuffer<Args...> vertices_;
 		std::vector<std::uint32_t> indices_;
 	};

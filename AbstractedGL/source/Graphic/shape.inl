@@ -2,7 +2,15 @@ template <class... Args>
 const CVertexLayout CShape<Args...>::Layout_ = CShape<Args...>::GetLayout();
 
 template <class... Args>
-void CShape<Args...>::addPoint(Args&&... args)
+CShape<Args...>::CShape()
+	: myShader_(Shader::LIGHT_SHADER)
+{
+	entriesManager_.createEntry("agl_model_transform", Shader::LIGHT_SHADER);
+	entriesManager_.createEntry("agl_model_inverse_transform", Shader::LIGHT_SHADER);
+}
+
+template <class... Args>
+void CShape<Args...>::addVertex(Args&&... args)
 {
 	vbUpdate_ = true;
 
@@ -11,7 +19,7 @@ void CShape<Args...>::addPoint(Args&&... args)
 
 template <class... Args>
 template <std::uint64_t I> 
-auto& CShape<Args...>::get(const std::uint64_t index)
+auto& CShape<Args...>::getVertexAttribute(const std::uint64_t index)
 {
 	vbUpdate_ = true;
 
@@ -20,7 +28,7 @@ auto& CShape<Args...>::get(const std::uint64_t index)
 
 template <class... Args>
 template <std::uint64_t I> 
-const auto& CShape<Args...>::get(const std::uint64_t index) const
+const auto& CShape<Args...>::getVertexAttribute(const std::uint64_t index) const
 {
 	return vertices_.get<I>(index);
 }
@@ -51,7 +59,6 @@ void CShape<Args...>::setVertices(T const * const vertices, const std::uint64_t 
 
 	for (std::uint64_t i = 0u; i < count; i++)
 		vertices_.get<I>(i) = *(vertices + i);
-
 }
 
 template <class... Args>
@@ -73,21 +80,39 @@ void CShape<Args...>::setIndices(std::uint32_t const * const indices, const std:
 }
 
 template <class... Args>
-const IShaderData& CShape<Args...>::getShaderData() const
+CShaderEntryVector& CShape<Args...>::getShaderEntries() const
 {
-	return *shaderData_;
+	return shaderEntries_;
 }
 
 template <class... Args>
-void CShape<Args...>::setShaderData(const IShaderData &data)
+void CShape<Args...>::addShaderEntry(const IShaderEntry &entry)
 {
-	shaderData_ = data.clone();
+	shaderEntries_.push_back(entry.clone());
+}
+
+template <class... Args>
+void CShape<Args...>::setShaderEntries(const CShaderEntryVector &shaderEntries)
+{
+	shaderEntries_ = shaderEntries;
 }
 
 template <class... Args>
 std::uint64_t CShape<Args...>::getDrawType() const
 {
 	return drawType_;
+}
+
+template <class... Args>
+void CShape<Args...>::setShader(const CShaderUID &uid)
+{
+	myShader_ = uid;
+}
+
+template <class... Args>
+const CShaderUID& CShape<Args...>::getShader() const
+{
+	return myShader_;
 }
 
 template <class... Args>
@@ -129,8 +154,12 @@ void CShape<Args...>::draw(const CRenderer &renderer) const
 	if (ibUpdate_ || vbUpdate_)
 		updateVArray();
 
-	renderer.getActiveShader().setMat4("model_transform", getTransform());
+	entriesManager_.pass("agl_model_transform", getTransform());
+	entriesManager_.pass("agl_model_inverse_transform", getInverseTransform());
 
+	shaderEntries_.passToShader();
+
+	CShaderManager::GetShader(myShader_).setActive();
 	renderer.draw(vArray_, drawType_);
 }
 
