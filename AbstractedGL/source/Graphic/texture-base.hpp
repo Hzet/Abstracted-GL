@@ -2,7 +2,6 @@
 
 #include <cstdint>
 #include <string>
-
 #include "../System/gl-object.hpp"
 
 namespace agl
@@ -13,35 +12,17 @@ namespace agl
 		/// The base class for texture providing IGLObject implementation
 		/// and general texture specific methods.
 		/// </summary>
-		class CTextureBase
+		struct ITextureBase
 			: public system::IGLObject
 		{
-		public:
 			using system::IGLObject::IGLObject;
 
-			/// <summary>
-			/// Create the texture of type 'target'.
-			/// </summary>
-			/// <param name="target">OpenGL texture target enum</param>
-			CTextureBase(const std::uint64_t target);
-
-			/// <summary>
-			/// Default move constructor.
-			/// </summary>
-			/// <param name=""></param>
-			CTextureBase(CTextureBase&&) = default;
+			ITextureBase() = default;
 
 			/// <summary>
 			/// Default virtual destructor.
 			/// </summary>
-			virtual ~CTextureBase();
-
-			/// <summary>
-			/// Default move assignment operator.
-			/// </summary>
-			/// <param name=""></param>
-			/// <returns></returns>
-			CTextureBase& operator=(CTextureBase&&) = default;
+			virtual ~ITextureBase();
 
 			/// <summary>
 			/// Set the texture parameter.
@@ -50,21 +31,6 @@ namespace agl
 			/// <param name="setting">OpenGL texture setting enumn</param>
 			/// <param name="value">Value related to the 'setting'</param>
 			void setParameter(const std::uint64_t setting, const std::uint64_t value) const;
-
-			/// <summary>
-			/// Get the texture's target.
-			/// </summary>
-			/// <returns>
-			/// OpenGL texture target enum
-			/// </returns>
-			std::uint64_t getTarget() const;
-
-			/// <summary>
-			/// Get the number of this texture slot.
-			/// </summary>
-			/// <returns></returns>
-			std::uint32_t getSlotNumber() const;
-
 
 			/// <summary>
 			/// Register OpenGL object.
@@ -87,18 +53,12 @@ namespace agl
 			virtual void unbind() const override;
 
 			/// <summary>
-			/// Interface for loading the texture from a file.
+			/// Pure virtual method to get the texture's target.
 			/// </summary>
-			/// <param name="filename">The filepath</param>
 			/// <returns>
-			/// True - texture loaded successfully
-			/// False - texture has not been loaded
+			/// OpenGL texture target enum
 			/// </returns>
-			virtual bool loadFromFile(const std::string &filename) = 0;
-
-		private:
-			const std::uint64_t target_;
-			std::uint32_t textureSlot_;
+			virtual std::uint64_t getTarget() const = 0;
 		};
 	}
 }
