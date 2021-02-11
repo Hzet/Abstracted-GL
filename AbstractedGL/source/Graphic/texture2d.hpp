@@ -9,10 +9,10 @@ namespace agl
 	/// 2D texture
 	/// </summary>
 	class CTexture2D
-		: public graphics::CTextureBase
+		: public graphics::ITextureBase
 	{
 	public:
-		using graphics::CTextureBase::CTextureBase;
+		using graphics::ITextureBase::ITextureBase;
 
 		/// <summary>
 		/// Set dimensions to 0.
@@ -35,7 +35,9 @@ namespace agl
 		/// True - texture loaded successfully
 		/// False - failed to load the texture
 		/// </returns>
-		virtual bool loadFromFile(const std::string &filename) override;
+		bool loadFromFile(const std::string &filename);
+
+		virtual std::uint64_t getTarget() const override;
 
 	private:
 		glm::uvec2 dimensions_;

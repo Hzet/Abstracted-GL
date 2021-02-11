@@ -5,12 +5,9 @@
 
 #include <stb_image.hpp>
 
-
 namespace agl
 {
-
 	CTexture2D::CTexture2D()
-		: CTextureBase(GL_TEXTURE_2D)
 	{
 	}
 
@@ -21,7 +18,6 @@ namespace agl
 
 	bool CTexture2D::loadFromFile(const std::string &filename)
 	{
-
 		std::int32_t w, h, channels;
 
 		stbi_set_flip_vertically_on_load(true);
@@ -40,12 +36,16 @@ namespace agl
 
 		create();
 		bind();
-		//AGL_CALL(glBindTexture(getTarget(), objectID_));
 
 		AGL_CALL(glTexImage2D(getTarget(), 0u, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data));
 		AGL_CALL(glGenerateMipmap(getTarget()));
 
 		stbi_image_free(data);
 		return true;
+	}
+
+	std::uint64_t CTexture2D::getTarget() const
+	{
+		return GL_TEXTURE_2D;
 	}
 }
