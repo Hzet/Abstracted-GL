@@ -9,44 +9,44 @@ namespace agl
 		/// The class obligates the user to declare the constructors and assignment operators as default
 		/// or delegate this object's constructors and assignment operators.
 		/// </summary>
-		class CMoveOnly
+		class CDestructiveMove
 		{
 		public:
 			/// <summary>
 			/// Set the 'move_' to false.
 			/// </summary>
-			CMoveOnly();
+			CDestructiveMove();
 
 			/// <summary>
 			/// Set the 'other' 'move_' to true.
 			/// </summary>
 			/// <param name="other"></param>
-			CMoveOnly(CMoveOnly &&other);
+			CDestructiveMove(CDestructiveMove &&other);
 
 			/// <summary>
 			/// Deleted copy constructor.
 			/// </summary>
 			/// <param name=""></param>
-			CMoveOnly(const CMoveOnly&) = delete;
+			CDestructiveMove(const CDestructiveMove&) = delete;
 			
 			/// <summary>
 			/// Default virtual destructor.
 			/// </summary>
-			virtual ~CMoveOnly() = default;
+			virtual ~CDestructiveMove() = default;
 
 			/// <summary>
 			/// Default move assignment operator.
 			/// </summary>
 			/// <param name=""></param>
 			/// <returns></returns>
-			CMoveOnly& operator=(CMoveOnly&&) = default;
+			CDestructiveMove& operator=(CDestructiveMove&&) = default;
 
 			/// <summary>
 			/// Deleted copy assignment operator.
 			/// </summary>
 			/// <param name=""></param>
 			/// <returns></returns>
-			CMoveOnly& operator=(const CMoveOnly&) = default;
+			CDestructiveMove& operator=(const CDestructiveMove&) = default;
 
 			/// <summary>
 			/// Check whether 'this' object is being moved to other object.
