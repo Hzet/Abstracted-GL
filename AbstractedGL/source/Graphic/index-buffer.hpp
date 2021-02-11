@@ -4,6 +4,9 @@
 
 namespace agl
 {
+	/// <summary>
+	/// OpenGL index array abstraction.
+	/// </summary>
 	class CIndexBuffer final
 		: public system::IGLObject
 	{
@@ -20,7 +23,6 @@ namespace agl
 		/// </summary>
 		/// <param name=""></param>
 		CIndexBuffer(CIndexBuffer&&) = default;
-
 
 		/// <summary>
 		/// Destroy the object.
