@@ -7,7 +7,7 @@ namespace agl
 	class CRenderer;
 
 	/// <summary>
-	/// Interface for drawable objects
+	/// Interface for drawable objects.
 	/// </summary>
 	struct IDrawable
 	{
