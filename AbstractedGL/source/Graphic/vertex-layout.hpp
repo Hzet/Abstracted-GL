@@ -5,7 +5,6 @@
 
 #include "../System/gl-core.hpp"
 
-
 namespace agl
 {
 	/// <summary>
