@@ -2,6 +2,7 @@
 
 #include "../System/error.hpp"
 #include "../System/core-error-codes.hpp"
+#include "../Graphic/shader-manager.hpp"
 
 namespace agl
 {
@@ -166,8 +167,8 @@ namespace agl
 		AGL_CORE_ERROR("GLFW has failed!\nError code [{}] - {}", Error::GLFW_FAILURE, error, description);
 	}
 
-/*
-	static void GLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
+#ifdef AGL_DEBUG
+	void GLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
 	{
 		switch (severity)
 		{
@@ -175,16 +176,15 @@ namespace agl
 		case GL_DEBUG_SEVERITY_MEDIUM:       AGL_CORE_LOG_ERROR(message); return;
 		case GL_DEBUG_SEVERITY_LOW:          AGL_CORE_LOG_WARNING(message); return;
 		case GL_DEBUG_SEVERITY_NOTIFICATION: AGL_CORE_LOG_TRACE(message); return;
+		default: break;
 		}
-
-		AGL_CORE_ASSERT(false, "Unknown severity level!");
-	}*/
-
+	}
+#endif
 	
 	std::size_t CWindowBase::WindowsCount_ = 0u;
 
 	std::unordered_map<std::uint64_t, std::uint64_t> CWindowBase::WindowHints_ = {
-		{GLFW_CONTEXT_VERSION_MAJOR, 3}, 
+		{GLFW_CONTEXT_VERSION_MAJOR, 4}, 
 		{GLFW_CONTEXT_VERSION_MINOR, 3},
 		{GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE}
 	};
@@ -215,14 +215,16 @@ namespace agl
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!", Error::GLAD_FAILURE);
 
-/*
+		if (!CShaderManager::LinkAllShaders())
+			AGL_CORE_CRITICAL("Failed to link AGL default shaders!", Error::SHADER_LINK);
+
 #ifdef AGL_DEBUG
 		AGL_CALL(glEnable(GL_DEBUG_OUTPUT));
 		AGL_CALL(glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS));
-		AGL_CALL(glDebugMessageCallback(GLDebugCallback, nullptr));
+		AGL_CALL(glDebugMessageCallback(GLDebugCallback, 0));
 		AGL_CALL(glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE));
 
-#endif*/
+#endif
 
 		glfwSetWindowUserPointer(result.window_.get(), reinterpret_cast<void*>(&result.queue_));
 
@@ -245,7 +247,7 @@ namespace agl
 	}
 
 	CWindowBase::CWindowBase(CWindowBase &&other)
-		: CMoveOnly(std::move(other)),
+		: CDestructiveMove(std::move(other)),
 		title_(std::move(other.title_)),
 		width_(std::move(other.width_)),
 		height_(std::move(other.height_)),

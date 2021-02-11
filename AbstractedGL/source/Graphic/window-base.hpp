@@ -15,10 +15,10 @@ namespace agl
 	/// A base window class that acts like a wrapper over GLFW's window related functions.
 	/// </summary>
 	class CWindowBase
-		: public system::CMoveOnly
+		: public system::CDestructiveMove
 	{
 	public:
-		using system::CMoveOnly::CMoveOnly;
+		using system::CDestructiveMove::CDestructiveMove;
 
 		/// <summary>
 		/// Create the window and set the it's context as current.
