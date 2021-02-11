@@ -101,8 +101,8 @@ namespace agl
 		transform_ = CTransform();
 		inverseTransform_ = CTransform();
 
-		transform_.scale(scale_);
 		transform_.translate(origin_ + position_);
+		transform_.scale(scale_);
 		transform_.rotate(rotation_);
 
 		inverseTransform_ = glm::inverse(static_cast<glm::mat4>(transform_));
