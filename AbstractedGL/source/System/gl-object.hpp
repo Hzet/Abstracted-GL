@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "move-only.hpp"
+#include "destructive-move.hpp"
 
 namespace agl
 {
@@ -16,6 +16,8 @@ namespace agl
 			: public CDestructiveMove
 		{
 		public:
+			using CDestructiveMove::CDestructiveMove;
+
 			/// <summary>
 			/// Set the id to 0.
 			/// </summary>
