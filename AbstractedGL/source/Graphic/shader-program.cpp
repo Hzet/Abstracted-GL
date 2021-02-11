@@ -2,24 +2,13 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-#include "material-data.hpp"
 #include "../System/gl-core.hpp"
 #include "../System/error.hpp"
 #include "../System/core-error-codes.hpp"
 
 namespace agl
 {
-	static std::int32_t getLocation(std::uint32_t programID, const std::string &name)
-	{
-		std::int32_t result;
-		
-		AGL_CALL(result = glGetUniformLocation(programID, name.c_str()));
-		AGL_CORE_ASSERT(result != -1, "Uniform with such name does not exist!\nName: {}", name);
-
-		return result;
-	}
-
-	constexpr std::uint64_t GetBit(std::uint64_t type)
+	constexpr static std::uint64_t GetBit(std::uint64_t type)
 	{
 		switch (type)
 		{
@@ -35,6 +24,32 @@ namespace agl
 		return 0u;
 	}
 
+	CShader CShader::LoadFromFile(const std::string &vertex, const std::string &fragment, const std::string &geometry /*= ""*/, const std::string &tessControl /*= ""*/, const std::string &tessEvaluation /*= ""*/, const std::string &compute /*= ""*/)
+	{
+		CShader result;
+		result.attachFromFile(GL_VERTEX_SHADER, vertex);
+		result.attachFromFile(GL_FRAGMENT_SHADER, fragment);
+		result.attachFromFile(GL_GEOMETRY_SHADER, geometry);
+		result.attachFromFile(GL_TESS_CONTROL_SHADER, tessControl);
+		result.attachFromFile(GL_TESS_EVALUATION_SHADER, tessEvaluation);
+		result.attachFromFile(GL_COMPUTE_SHADER, compute);
+
+		return result;
+	}
+
+	CShader CShader::LoadFromSource(const std::string &vertex, const std::string &fragment, const std::string &geometry /*= ""*/, const std::string &tessControl /*= ""*/, const std::string &tessEvaluation /*= ""*/, const std::string &compute /*= ""*/)
+	{
+		CShader result;
+		result.attachFromSource(GL_VERTEX_SHADER, vertex);
+		result.attachFromSource(GL_FRAGMENT_SHADER, fragment);
+		result.attachFromSource(GL_GEOMETRY_SHADER, geometry);
+		result.attachFromSource(GL_TESS_CONTROL_SHADER, tessControl);
+		result.attachFromSource(GL_TESS_EVALUATION_SHADER, tessEvaluation);
+		result.attachFromSource(GL_COMPUTE_SHADER, compute);
+
+		return result;
+	}
+
 	CShader::CShader()
 		: shaderBits_(0u)
 	{
@@ -46,8 +61,11 @@ namespace agl
 			destroy();
 	}
 
-	bool CShader::attachFromString(std::uint64_t type, const std::string &source)
+	bool CShader::attachFromSource(std::uint64_t type, const std::string &source)
 	{
+		if (source.empty())
+			return false;
+
 		subshaders_.emplace_back(graphics::CSubShader());
 		const bool result = subshaders_.back().setSource(type, source);
 
@@ -59,6 +77,9 @@ namespace agl
 
 	bool CShader::attachFromFile(std::uint64_t type, const std::string &filename)
 	{
+		if (filename.empty())
+			return false;
+
 		subshaders_.emplace_back(graphics::CSubShader());
 		const bool result = subshaders_.back().loadFromFile(type, filename);
 
@@ -137,51 +158,6 @@ namespace agl
 		return (shaderBits_ & bit);
 	}
 
-	void CShader::setFloat(const std::string &name, const float value) const
-	{
-		AGL_CALL(glUniform1f(getLocation(objectID_, name), value));
-	}
-
-	void CShader::setVec2(const std::string &name, const glm::vec2 &value) const
-	{
-		AGL_CALL(glUniform2f(getLocation(objectID_, name), value.x, value.y));
-	}
-
-	void CShader::setVec3(const std::string &name, const glm::vec3 &value) const
-	{
-		AGL_CALL(glUniform3f(getLocation(objectID_, name), value.x, value.y, value.z));
-	}
-
-	void CShader::setVec4(const std::string &name, const glm::vec4 &value) const
-	{
-		AGL_CALL(glUniform4f(getLocation(objectID_, name), value.x, value.y, value.z, value.w));
-	}
-
-	void CShader::setMat4(const std::string &name, const glm::mat4 &value) const
-	{
-		AGL_CALL(glUniformMatrix4fv(getLocation(objectID_, name), 1u, GL_FALSE, glm::value_ptr(value)));
-	}
-
-	void CShader::setInt(const std::string &name, const std::int32_t value) const
-	{
-		AGL_CALL(glUniform1i(getLocation(objectID_, name), value));
-	}
-
-	void CShader::setShaderData(const std::string &name, const IShaderData &data) const
-	{
-		data.setData(name, *this);
-	}
-
-	void CShader::setUnsigned(const std::string &name, const std::uint32_t value) const
-	{
-		AGL_CALL(glUniform1ui(getLocation(objectID_, name), value));
-	}
-
-	void CShader::setIntArray(const std::string &name, std::int32_t const * const value, std::uint64_t count) const
-	{
-		AGL_CALL(glUniform1iv(getLocation(objectID_, name), count, value));
-	}
-
 	void CShader::create()
 	{
 		if (isCreated())
@@ -222,6 +198,57 @@ namespace agl
 
 		if (!result)
 			subshaders_.clear();
+
+		return result;
+	}
+
+	void CShader::setUniform(const std::string &name, const float value) const
+	{
+		glUniform1f(getLocation(name), value);
+	}
+
+	void CShader::setUniform(const std::string &name, const std::int32_t value) const
+	{
+		AGL_CALL(glUniform1i(getLocation(name), value));
+	}
+
+	void CShader::setUniform(const std::string &name, const std::uint32_t value) const
+	{
+		AGL_CALL(glUniform1ui(getLocation(name), value));
+
+	}
+
+	void CShader::setUniform(const std::string &name, const glm::vec2 &value) const
+	{
+		AGL_CALL(glUniform2f(getLocation(name), value.x, value.y));
+	}
+
+	void CShader::setUniform(const std::string &name, const glm::vec3 &value) const
+	{
+		AGL_CALL(glUniform3f(getLocation(name), value.x, value.y, value.z));
+	}
+
+	void CShader::setUniform(const std::string &name, const glm::vec4 &value) const
+	{
+		AGL_CALL(glUniform4f(getLocation(name), value.x, value.y, value.z, value.w));
+	}
+
+	void CShader::setUniform(const std::string &name, const glm::mat4 &value) const
+	{
+		AGL_CALL(glUniformMatrix4fv(getLocation(name), 1u, GL_FALSE, glm::value_ptr(value)));
+	}
+
+	void CShader::setUniform(const std::string &name, std::int32_t const * const value, std::uint64_t count) const
+	{
+		AGL_CALL(glUniform1iv(getLocation(name), count, value));
+	}
+
+	std::int32_t CShader::getLocation(const std::string &name) const
+	{
+		std::int32_t result;
+
+		AGL_CALL(result = glGetUniformLocation(objectID_, name.c_str()));
+		AGL_CORE_ASSERT(result != -1, "Uniform with such name does not exist!\nName: {}", name);
 
 		return result;
 	}

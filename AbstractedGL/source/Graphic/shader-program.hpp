@@ -1,9 +1,11 @@
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
-#include "shader-sub-program.hpp"
 #include "../System/gl-object.hpp"
+#include "../System/gl-core.hpp"
+#include "shader-sub-program.hpp"
 
 namespace agl
 {
@@ -17,6 +19,9 @@ namespace agl
 	{
 	public:
 		using system::IGLObject::IGLObject;
+
+		static CShader LoadFromFile(const std::string &vertex, const std::string &fragment, const std::string &geometry = "", const std::string &tessControl = "", const std::string &tessEvaluation = "", const std::string &compute = "");
+		static CShader LoadFromSource(const std::string &vertex, const std::string &fragment, const std::string &geometry = "", const std::string &tessControl = "", const std::string &tessEvaluation = "", const std::string &compute = "");
 
 		/// <summary>
 		/// Set shader bits to zero.
@@ -50,7 +55,7 @@ namespace agl
 		/// True - success
 		/// False - failure, no partial shader has been attached
 		/// </returns>
-		bool attachFromString(std::uint64_t type, const std::string &source);
+		bool attachFromSource(std::uint64_t type, const std::string &source);
 
 		/// <summary>
 		/// Loads the partial shader program's source from a file.
@@ -102,59 +107,51 @@ namespace agl
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void setFloat(const std::string &name, const float value) const;
-
-		/// <summary>
-		/// Assign 'value' to a glm::vec2 uniform named 'name'.
-		/// </summary>
-		/// <param name="name">Uniform name</param>
-		/// <param name="value">New value</param>
-		void setVec2(const std::string &name, const glm::vec2 &value) const;
-
-		/// <summary>
-		/// Assign 'value' to a glm::vec3 uniform named 'name'.
-		/// </summary>
-		/// <param name="name">Uniform name</param>
-		/// <param name="value">New value</param>
-		void setVec3(const std::string &name, const glm::vec3 &value) const;
-
-		/// <summary>
-		/// Assign 'value' to a glm::vec4 uniform named 'name'.
-		/// </summary>
-		/// <param name="name">Uniform name</param>
-		/// <param name="value">New value</param>
-		void setVec4(const std::string &name, const glm::vec4 &value) const;
-
-		/// <summary>
-		/// Assign 'value' to a glm::mat4 uniform named 'name'.
-		/// </summary>
-		/// <param name="name">Uniform name</param>
-		/// <param name="value">New value</param>
-		void setMat4(const std::string &name, const glm::mat4 &value) const;
+		void setUniform(const std::string &name, const float value) const;
 
 		/// <summary>
 		/// Assign 'value' to a std::int32_t uniform named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void setInt(const std::string &name, const std::int32_t value) const;
-
-		/// <summary>
-		/// Assign 'value' to a struct uniform named 'name'.
-		/// </summary>
-		/// <param name="name">Uniform name</param>
-		/// <param name="value">New value</param>
-		void setShaderData(const std::string &name, const IShaderData &data) const;
+		void setUniform(const std::string &name, const std::int32_t value) const;
 
 		/// <summary>
 		/// Assign 'value' to a std::uint32_t uniform named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void setUnsigned(const std::string &name, const std::uint32_t value) const;
+		void setUniform(const std::string &name, const std::uint32_t value) const;
 
 		/// <summary>
-		
+		/// Assign 'value' to a glm::vec2 uniform named 'name'.
+		/// </summary>
+		/// <param name="name">Uniform name</param>
+		/// <param name="value">New value</param>
+		void setUniform(const std::string &name, const glm::vec2 &value) const;
+
+		/// <summary>
+		/// Assign 'value' to a glm::vec3 uniform named 'name'.
+		/// </summary>
+		/// <param name="name">Uniform name</param>
+		/// <param name="value">New value</param>
+		void setUniform(const std::string &name, const glm::vec3 &value) const;
+
+		/// <summary>
+		/// Assign 'value' to a glm::vec4 uniform named 'name'.
+		/// </summary>
+		/// <param name="name">Uniform name</param>
+		/// <param name="value">New value</param>
+		void setUniform(const std::string &name, const glm::vec4 &value) const;
+
+		/// <summary>
+		/// Assign 'value' to a glm::mat4 uniform named 'name'.
+		/// </summary>
+		/// <param name="name">Uniform name</param>
+		/// <param name="value">New value</param>
+		void setUniform(const std::string &name, const glm::mat4 &value) const;
+
+		/// <summary>
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
@@ -164,9 +161,17 @@ namespace agl
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
 		/// <param name="count">Element count</param>
-		void setIntArray(const std::string &name, std::int32_t const * const value, std::uint64_t count) const;
+		void setUniform(const std::string &name, std::int32_t const * const value, std::uint64_t count) const;
+
 
 	private:
+		/// <summary>
+		/// Returns the location in the shader program of the variable 'name'.
+		/// </summary>
+		/// <param name="name">The variable's name</param>
+		/// <returns>The location of the variable</returns>
+		std::int32_t getLocation(const std::string &name) const;
+
 		/// <summary>
 		/// Set shader type 'bit'.
 		/// </summary>
