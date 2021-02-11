@@ -13,33 +13,21 @@ namespace agl
 		/// If the 'objectID_' is equal to zero, the object is considered to be in invalid state - it is not registered.
 		/// </summary>
 		class IGLObject
-			: public CMoveOnly
+			: public CDestructiveMove
 		{
 		public:
-			using CMoveOnly::CMoveOnly;
-
 			/// <summary>
 			/// Set the id to 0.
 			/// </summary>
 			IGLObject();
 
-			/// <summary>
-			/// Default move constructor.
-			/// </summary>
-			/// <param name=""></param>
 			IGLObject(IGLObject&&) = default;
+			IGLObject& operator=(IGLObject&&) = default;
 
 			/// <summary>
-			/// Default virtual constructor.
+			/// Default virtual destructor.
 			/// </summary>
 			virtual ~IGLObject() = default;
-
-			/// <summary>
-			/// Default move assignment operator.
-			/// </summary>
-			/// <param name=""></param>
-			/// <returns></returns>
-			IGLObject& operator=(IGLObject&&) = default;
 
 			/// <summary>
 			/// Check whether this object's status is active.
