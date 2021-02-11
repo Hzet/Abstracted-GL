@@ -5,6 +5,7 @@
 #include "../System/gl-core.hpp"
 #include "../System/error.hpp"
 #include "../System/core-error-codes.hpp"
+#include <cerrno>
 
 namespace agl
 {
@@ -67,13 +68,12 @@ namespace agl
 
 			if (!file.is_open())
 			{
-				AGL_CORE_ERROR("\nFilename: {}", Error::OPEN_FILE, filename);
+				AGL_CORE_ERROR("\nFilename: {} {}", Error::OPEN_FILE, filename);
 				return false;
 			}
 
 			source_ = "";
 			std::string line;
-			std::uint64_t read = 0u;
 
 			while (std::getline(file, line))
 				source_ += line + '\n';
