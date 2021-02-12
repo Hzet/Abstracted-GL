@@ -23,14 +23,6 @@ namespace agl
 			/// </summary>
 			IGLObject();
 
-			IGLObject(IGLObject&&) = default;
-			IGLObject& operator=(IGLObject&&) = default;
-
-			/// <summary>
-			/// Default virtual destructor.
-			/// </summary>
-			virtual ~IGLObject() = default;
-
 			/// <summary>
 			/// Check whether this object's status is active.
 			/// </summary>

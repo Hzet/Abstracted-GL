@@ -24,10 +24,10 @@ namespace agl
 			CDestructiveMove(CDestructiveMove &&other);
 
 			/// <summary>
-			/// Deleted copy constructor.
+			/// Default copy constructor.
 			/// </summary>
 			/// <param name=""></param>
-			CDestructiveMove(const CDestructiveMove&) = delete;
+			CDestructiveMove(const CDestructiveMove&) = default;
 			
 			/// <summary>
 			/// Default virtual destructor.
@@ -42,7 +42,7 @@ namespace agl
 			CDestructiveMove& operator=(CDestructiveMove&&) = default;
 
 			/// <summary>
-			/// Deleted copy assignment operator.
+			/// Default copy assignment operator.
 			/// </summary>
 			/// <param name=""></param>
 			/// <returns></returns>

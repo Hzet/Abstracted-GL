@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "../System/gl-core.hpp"
-#include "../System/move-only.hpp"
+#include "../System/destructive-move.hpp"
 #include "../System/event-static-queue.hpp"
 
 #include <GLFW/glfw3.h>
