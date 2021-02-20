@@ -32,8 +32,8 @@ struct SPointLight
 	vec2 cutOff;
 };
 
-vec4 getDirLight(SDirLight light, vec3 normal, vec3 viewDirection);
-vec4 getPointLight(SPointLight light, vec3 normal, vec3 vpos, vec3 viewDirection);
+vec4 getDirLight(SDirLight light, vec3 viewDirection);
+vec4 getPointLight(SPointLight light, vec3 viewDirection);
 
 in vec3 vPos;
 in vec4 vColor;
