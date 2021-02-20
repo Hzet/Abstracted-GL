@@ -1,45 +1,5 @@
 #pragma once
-#include <string>
-#include <chrono>
-#include <unordered_map>
 
-namespace agl
-{
-	namespace system
-	{
-		/// <summary>
-		/// The clock that counts the time taken by a method/function.
-		/// </summary>
-		class CProfilerClock
-		{
-		public:
-			/// <summary>
-			/// Set the 'name_' to 'callerName' and start the timer.
-			/// </summary>
-			/// <param name="callerName">The name under which the time passed will be added</param>
-			CProfilerClock(std::string &&callerName);
-
-			/// <summary>
-			/// Stop the timer and add it's time to the 'name_'
-			/// </summary>
-			~CProfilerClock();
-
-			/// <summary>
-			/// Get all names and corresponding clocks.
-			/// </summary>
-			/// <returns>
-			/// The 'Clocks_'
-			/// </returns>
-			static const std::unordered_map<std::string, std::uint64_t>& GetClocks();
-
-		private:
-			static std::unordered_map<std::string, std::uint64_t> Clocks_;
-
-			const std::string name_;
-			const std::chrono::milliseconds myClock_;
-		};
-	}
-}
 #ifdef AGL_DEBUG
 	#define AGL_FILE __FILE__
 	#define AGL_LINE __LINE__
@@ -64,10 +24,6 @@ namespace agl
 
 	#define AGL_CODE_POINT std::string("Filename: ") + AGL_FILE + "\nFunction: " + AGL_FUNC_NAME + "\nLine: " + std::to_string(AGL_LINE)
 
-	#define AGL_PROFILE_THIS() ::agl::system::CProfilerClock AGL_PROFILER_VARIABLE(AGL_CODE_NAME)
-
 	#define AGL_HALT() __debugbreak()
 
-#else
-	#define AGL_PROFILE_THIS()
 #endif
