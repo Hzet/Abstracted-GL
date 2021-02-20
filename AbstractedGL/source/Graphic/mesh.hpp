@@ -4,23 +4,22 @@
 #include "transformable.hpp"
 #include "vertex-array.hpp"
 #include "renderer.hpp"
-#include "shader-entry-manager.hpp"
-#include "shader-entry-vector.hpp"
+#include "shader-uniform-manager.hpp"
+#include "shader-uniform-vector.hpp"
 #include "../System/tuple-buffer.hpp"
 
 namespace agl
 {
 	template <class... Args>
-	class CShape
+	class CMesh
 		: public IDrawable,
-		public CTransformable,
-		public CShaderEntryObject
+		public CTransformable
 	{
 	public:
-		CShape();
-		CShape(CShape&&) = default;
-		CShape(const CShape&) = default;
-		virtual ~CShape() = default;
+		CMesh();
+		CMesh(CMesh&&) = default;
+		CMesh(const CMesh&) = default;
+		virtual ~CMesh() = default;
 
 		void addVertex(Args&&... args);
 		template <std::uint64_t I> auto& getVertexAttribute(const std::uint64_t index);
@@ -39,9 +38,12 @@ namespace agl
 		const CShaderUID& getShader() const;
 		void setShader(const CShaderUID &uid);
 
-		CShaderEntryVector& getShaderEntries() const;
-		void addShaderEntry(const IShaderEntry &entry);
-		void setShaderEntries(const CShaderEntryVector &shaderEntries);
+		CUniformVector& getUniforms() const;
+		void addUniform(const IUniform &uniform);
+		void setUniforms(const CUniformVector &shaderEntries);
+
+		const CUniformManager& getUniformManager() const;
+		void redirectUniform(const std::string &name, const CShaderUID &shaderUID);
 
 		virtual void draw(const CRenderer &renderer) const override;
 
@@ -63,11 +65,16 @@ namespace agl
 		mutable CVertexArray vArray_;
 
 		CShaderUID myShader_;
+
+	protected:
+		CUniformManager uniformManager_;
+	private:
+		CUniformVector uniforms_;
+
 		std::uint64_t drawType_;
-		CShaderEntryVector shaderEntries_;
 		CTupleBuffer<Args...> vertices_;
 		std::vector<std::uint32_t> indices_;
 	};
 
-#include "shape.inl"
+#include "mesh.inl"
 }
