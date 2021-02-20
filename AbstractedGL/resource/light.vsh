@@ -21,7 +21,7 @@ void main()
 
 	vPos = vec3(pos);
 	vColor = aColor;
-	vNormal = normalize(mat3(agl_model_inverse_transform) * aNormal);
+	vNormal = normalize(mat3(transpose(agl_model_inverse_transform)) * aNormal);
 	vTexCoord = aTexCoord;
 
 	gl_Position = agl_camera_projection * agl_camera_view * pos;
