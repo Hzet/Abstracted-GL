@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 
 #include "shader-uniform-variable.hpp"
+#include "shader-uniform-pack.hpp"
 
 namespace agl
 {
@@ -10,34 +11,22 @@ namespace agl
 	/// All of the sub entries are named same as below.
 	/// </summary>
 	class CDirectionalLight
-		: public IUniformVariable
+		: public IUniformPack
 	{
 	public:
-		using IUniformVariable::IUniformVariable;
+		CDirectionalLight(const std::string &name, IUniform const * const parent = nullptr);
+		CDirectionalLight(CDirectionalLight &&other);
+		CDirectionalLight(const CDirectionalLight &other);
 
-		/// <summary>
-		/// Sets the name of the uniform.
-		/// </summary>
-		/// <param name="name">The name</param>
-		virtual void setName(const std::string &name) override;
+		CDirectionalLight& operator=(CDirectionalLight &&other) = default;
+		CDirectionalLight& operator=(const CDirectionalLight &other) = default;
 
-		/// <summary>
-		/// Sends the members of this uniform to it's destination shader. 
-		/// </summary>
-		virtual void passToShader() const override;
+		CUniform<glm::vec3> direction;
 
-		/// <summary>
-		/// Returns a copy of this instance.
-		/// </summary>
-		/// <returns></returns>
-		virtual std::unique_ptr<IUniform> clone() const override;
+		CUniform<glm::vec4> ambient;
+		CUniform<glm::vec4> diffuse;
+		CUniform<glm::vec4> specular;
 
-		glm::vec3 direction;
-
-		glm::vec4 ambient;
-		glm::vec4 diffuse;
-		glm::vec4 specular;
-
-		glm::vec4 color;
+		CUniform<glm::vec4> color;
 	};
 }
