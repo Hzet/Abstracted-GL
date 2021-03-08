@@ -9,10 +9,12 @@ namespace agl
 	/// 2D texture
 	/// </summary>
 	class CTexture2D
-		: public graphics::ITextureBase
+		: public ITexture
 	{
 	public:
-		using graphics::ITextureBase::ITextureBase;
+		static CTexture2D LoadFromFile(const std::string &filepath);
+
+		using ITexture::ITexture;
 
 		/// <summary>
 		/// Set dimensions to 0.

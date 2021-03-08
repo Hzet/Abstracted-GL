@@ -2,63 +2,76 @@
 
 #include <cstdint>
 #include <string>
+
+#include "texture-uid.hpp"
 #include "../System/gl-object.hpp"
 
 namespace agl
 {
-	namespace graphics
+	/// <summary>
+	/// The base class for texture providing IGLObject implementation
+	/// and general texture specific methods.
+	/// </summary>
+	class ITexture
+		: public system::IGLObject
 	{
+	public:
+		using system::IGLObject::IGLObject;
+
+		ITexture() = default;
+
 		/// <summary>
-		/// The base class for texture providing IGLObject implementation
-		/// and general texture specific methods.
+		/// Default virtual destructor.
 		/// </summary>
-		struct ITextureBase
-			: public system::IGLObject
-		{
-			using system::IGLObject::IGLObject;
+		virtual ~ITexture();
 
-			ITextureBase() = default;
+		const CTextureUID getUID() const;
+		std::string getFilepath() const;
+		const std::string &getFilename() const;
+		const std::string &getDirectory() const;
 
-			/// <summary>
-			/// Default virtual destructor.
-			/// </summary>
-			virtual ~ITextureBase();
+		/// <summary>
+		/// Set the texture parameter.
+		/// The texture must be first bound in the current context.
+		/// </summary>
+		/// <param name="setting">OpenGL texture setting enumn</param>
+		/// <param name="value">Value related to the 'setting'</param>
+		void setParameter(const std::uint64_t setting, const std::uint64_t value) const;
 
-			/// <summary>
-			/// Set the texture parameter.
-			/// The texture must be first bound in the current context.
-			/// </summary>
-			/// <param name="setting">OpenGL texture setting enumn</param>
-			/// <param name="value">Value related to the 'setting'</param>
-			void setParameter(const std::uint64_t setting, const std::uint64_t value) const;
-
-			/// <summary>
-			/// Register OpenGL object.
-			/// </summary>
-			virtual void create() override;
+		/// <summary>
+		/// Register OpenGL object.
+		/// </summary>
+		virtual void create() override;
 			
-			/// <summary>
-			/// Unregister the OpenGL object and clear resources.
-			/// </summary>
-			virtual void destroy() override;
+		/// <summary>
+		/// Unregister the OpenGL object and clear resources.
+		/// </summary>
+		virtual void destroy() override;
 
-			/// <summary>
-			/// Bind OpenGL object.
-			/// </summary>
-			virtual void bind() const override;
+		/// <summary>
+		/// Bind OpenGL object.
+		/// </summary>
+		virtual void bind() const override;
 
-			/// <summary>
-			/// Unbind OpenGL object.
-			/// </summary>
-			virtual void unbind() const override;
+		/// <summary>
+		/// Unbind OpenGL object.
+		/// </summary>
+		virtual void unbind() const override;
 
-			/// <summary>
-			/// Pure virtual method to get the texture's target.
-			/// </summary>
-			/// <returns>
-			/// OpenGL texture target enum
-			/// </returns>
-			virtual std::uint64_t getTarget() const = 0;
-		};
-	}
+		/// <summary>
+		/// Pure virtual method to get the texture's target.
+		/// </summary>
+		/// <returns>
+		/// OpenGL texture target enum
+		/// </returns>
+		virtual std::uint64_t getTarget() const = 0;
+
+	protected:
+		void setFilepath(const std::string &filepath);
+
+	private:
+		CTextureUID uid_;
+		std::string filename_;
+		std::string directory_;
+	};
 }

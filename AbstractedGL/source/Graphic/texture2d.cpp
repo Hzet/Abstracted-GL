@@ -1,4 +1,5 @@
 #include "texture2d.hpp"
+#include "texture-atlas.hpp"
 #include "../System/gl-core.hpp"
 #include "../System/error.hpp"
 #include "../System/core-error-codes.hpp"
@@ -7,6 +8,16 @@
 
 namespace agl
 {
+	CTexture2D CTexture2D::LoadFromFile(const std::string &filepath)
+	{
+		CTexture2D texture;
+		texture.loadFromFile(filepath);
+
+		CTextureAtlas::AddTexture(texture);
+
+		return texture;
+	}
+
 	CTexture2D::CTexture2D()
 	{
 	}
