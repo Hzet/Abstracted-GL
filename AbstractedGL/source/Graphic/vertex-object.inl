@@ -2,6 +2,18 @@ template <class... Args>
 const CVertexLayout CVertexObject<Args...>::Layout_ = CVertexObject<Args...>::GetLayout();
 
 template <class... Args>
+CVertexObject<Args...>::CVertexObject(CVertexObject &&other)
+	: CTransformable(std::move(other))
+{
+}
+
+template <class... Args>
+CVertexObject<Args...>::CVertexObject(const CVertexObject &other)
+	: CTransformable(other)
+{
+}
+
+template <class... Args>
 void CVertexObject<Args...>::addVertex(Args&&... args)
 {
 	vbUpdate_ = true;
