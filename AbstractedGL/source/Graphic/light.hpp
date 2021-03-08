@@ -22,6 +22,7 @@ namespace agl
 		virtual void draw(const CRenderer &renderer) const override;
 
 		CSpotLight spotLight;
+		CUniform<const glm::vec3&, const CTransformable&> position;
 	};
 
 #include "light.inl"
