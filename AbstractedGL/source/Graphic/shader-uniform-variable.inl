@@ -44,25 +44,25 @@ void CUniform<TReturn>::setShader(const CShaderUID &shaderUID)
 }
 
 template <typename TReturn>
-TReturn& CUniform<TReturn>::operator()()
+std::remove_const_t<std::remove_reference_t<TReturn>>& CUniform<TReturn>::operator()()
 {
 	return value_;
 }
 
 template <typename TReturn>
-const TReturn& CUniform<TReturn>::operator()() const
+const std::remove_const_t<std::remove_reference_t<TReturn>>& CUniform<TReturn>::operator()() const
 {
 	return value_;
 }
 
 template <typename TReturn>
-CUniform<TReturn>::operator TReturn()
+CUniform<TReturn>::operator auto&()
 {
 	return value_;
 }
 
 template <typename TReturn>
-CUniform<TReturn>::operator TReturn() const
+CUniform<TReturn>::operator const auto&() const
 {
 	return value_;
 }
@@ -128,25 +128,25 @@ void CUniform<TReturn, TObject, detail::is_class_t<TObject>>::setShader(const CS
 }
 
 template <typename TReturn, typename TObject>
-TReturn CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator()()
+auto& CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator()()
 {
 	return static_cast<TReturn>(std::invoke(method_, object_));
 }
 
 template <typename TReturn, typename TObject>
-TReturn CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator()() const
+const auto& CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator()() const
 {
 	return static_cast<TReturn>(std::invoke(method_, object_));
 }
 
 template <typename TReturn, typename TObject>
-CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator TReturn()
+CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator auto&()
 {
 	return (*this)();
 }
 
 template <typename TReturn, typename TObject>
-CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator TReturn() const
+CUniform<TReturn, TObject, detail::is_class_t<TObject>>::operator auto&() const
 {
 	return (*this)();
 }
@@ -205,25 +205,25 @@ void CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::set
 }
 
 template <typename TReturn, typename TFunction>
-TReturn CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator()()
+auto& CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator()()
 {
 	return std::invoke(function_);
 }
 
 template <typename TReturn, typename TFunction>
-TReturn CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator()() const
+const auto & CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator()() const
 {
 	return std::invoke(function_);
 }
 
 template <typename TReturn, typename TFunction>
-CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator TReturn()
+CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator auto&()
 {
 	return (*this)();
 }
 
 template <typename TReturn, typename TFunction>
-CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator TReturn() const
+CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>::operator const auto&() const
 {
 	return (*this)();
 }
@@ -285,25 +285,25 @@ void CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMetho
 }
 
 template <typename TReturn, typename TObject, typename TMethod>
-TReturn CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator()()
+auto& CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator()()
 {
 	return std::invoke(method_, object_);
 }
 
 template <typename TReturn, typename TObject, typename TMethod>
-TReturn CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator()() const
+const auto& CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator()() const
 {
 	return std::invoke(method_, object_);
 }
 
 template <typename TReturn, typename TObject, typename TMethod>
-CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator TReturn()
+CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator auto&()
 {
 	return (*this)();
 }
 
 template <typename TReturn, typename TObject, typename TMethod>
-CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator TReturn() const
+CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>::operator const auto&() const
 {
 	return (*this)();
 }

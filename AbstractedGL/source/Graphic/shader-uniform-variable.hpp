@@ -155,25 +155,25 @@ namespace agl
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()();
+		TType& operator()();
 
 		/// <summary>
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()() const;
+		const auto& operator()() const;
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn();
+		operator auto&();
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn() const;
+		operator const auto&() const;
 
 		/// <summary>
 		/// Passes the uniform to it's shader.
@@ -261,25 +261,25 @@ namespace agl
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()();
+		auto& operator()();
 
 		/// <summary>
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()() const;
+		const auto& operator()() const;
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn();
+		operator auto&();
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn() const;
+		operator const auto&() const;
 
 		/// <summary>
 		/// Passes the uniform to it's shader.
@@ -365,25 +365,25 @@ namespace agl
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()();
+		auto& operator()();
 
 		/// <summary>
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()() const;
+		const auto& operator()() const;
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn();
+		operator auto&();
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn() const;
+		operator const auto&() const;
 
 		/// <summary>
 		/// Passes the uniform to it's shader.
@@ -470,25 +470,25 @@ namespace agl
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()();
+		auto& operator()();
 
 		/// <summary>
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TReturn operator()() const;
+		const auto& operator()() const;
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn();
+		operator auto&();
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator TReturn() const;
+		operator const auto&() const;
 
 		/// <summary>
 		/// Passes the uniform to it's shader.

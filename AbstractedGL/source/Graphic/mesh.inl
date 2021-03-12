@@ -29,13 +29,6 @@ void CMesh<Args...>::addUniform(const IUniform &uniform)
 }
 
 template <class... Args>
-template <typename ForwardIterator>
-void CMesh<Args...>::setUniforms(ForwardIterator first, ForwardIterator last)
-{
-	uniforms_.assign(first, last);
-}
-
-template <class... Args>
 void CMesh<Args...>::setShader(const CShaderUID &uid)
 {
 	myShader_ = uid;

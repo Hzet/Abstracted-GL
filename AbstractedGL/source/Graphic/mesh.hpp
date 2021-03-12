@@ -1,4 +1,4 @@
-s#pragma once
+#pragma once
 
 #include "vertex-object.hpp"
 #include "shader-manager.hpp"
