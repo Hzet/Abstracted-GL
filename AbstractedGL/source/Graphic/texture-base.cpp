@@ -9,13 +9,7 @@ namespace agl
 			destroy();
 	}
 
-
-	const CTextureUID ITexture::getUID() const
-	{
-		return uid_;
-	}
-
-
+/*
 	std::string ITexture::getFilepath() const
 	{
 		return directory_ + filename_;
@@ -32,6 +26,7 @@ namespace agl
 	{
 		return directory_;
 	}
+*/
 
 	void ITexture::setParameter(const std::uint64_t setting, const std::uint64_t value) const
 	{
@@ -65,18 +60,4 @@ namespace agl
 	{
 		AGL_CALL(glBindTexture(getTarget(), 0u));
 	}
-
-	void ITexture::setFilepath(const std::string &filepath)
-	{
-		std::uint64_t found = filepath.find_last_of('/');
-
-		if (found == std::string::npos)
-			filename_ = filepath;
-		else
-		{
-			directory_ = filepath.substr(0, found);
-			filename_ = filepath.substr(found + 1u);
-		}
-	}
-
 }

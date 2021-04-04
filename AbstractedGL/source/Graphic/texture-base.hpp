@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <string>
 
-#include "texture-uid.hpp"
 #include "../System/gl-object.hpp"
 
 namespace agl
@@ -24,11 +23,6 @@ namespace agl
 		/// Default virtual destructor.
 		/// </summary>
 		virtual ~ITexture();
-
-		const CTextureUID getUID() const;
-		std::string getFilepath() const;
-		const std::string &getFilename() const;
-		const std::string &getDirectory() const;
 
 		/// <summary>
 		/// Set the texture parameter.
@@ -65,13 +59,5 @@ namespace agl
 		/// OpenGL texture target enum
 		/// </returns>
 		virtual std::uint64_t getTarget() const = 0;
-
-	protected:
-		void setFilepath(const std::string &filepath);
-
-	private:
-		CTextureUID uid_;
-		std::string filename_;
-		std::string directory_;
 	};
 }
