@@ -58,5 +58,10 @@ namespace agl
 		addUniform(direction);
 		addUniform(color);
 	}
+
+	std::unique_ptr<agl::IUniform> CSpotLight::clone() const
+	{
+		return std::unique_ptr<IUniform>(new CSpotLight(*this));
+	}
 }
 

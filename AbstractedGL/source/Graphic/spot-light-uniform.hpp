@@ -23,6 +23,8 @@ namespace agl
 		CSpotLight& operator=(CSpotLight &&other) = default;
 		CSpotLight& operator=(const CSpotLight &other) = default;
 
+		virtual std::unique_ptr<IUniform> clone() const override;
+
 		CUniform<glm::vec4> ambient;
 		CUniform<glm::vec4> diffuse;
 		CUniform<glm::vec4> specular;
