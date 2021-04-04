@@ -1,7 +1,7 @@
 #include "window-base.hpp"
 
 #include "../System/error.hpp"
-#include "../System/core-error-codes.hpp"
+#include "../System/error-code.hpp"
 #include "../Graphic/shader-manager.hpp"
 
 namespace agl
@@ -164,7 +164,7 @@ namespace agl
 
 	static void GLFWerrorCallback(int error, const char *description)
 	{
-		AGL_CORE_ERROR("GLFW has failed!\nError code [{}] - {}", Error::GLFW_FAILURE, error, description);
+		AGL_CORE_ERROR("GLFW has failed!\nError code [{}] - {}", error::GLFW_FAILURE, error, description);
 	}
 
 #ifdef AGL_DEBUG
@@ -194,7 +194,7 @@ namespace agl
 		if (WindowsCount_ == 0u)
 		{
 			if (!glfwInit())
-				AGL_CORE_CRITICAL("Failed to initialize GLFW!", Error::GLFW_FAILURE);
+				AGL_CORE_CRITICAL("Failed to initialize GLFW!", error::GLFW_FAILURE);
 
 			for (const auto &m : WindowHints_)
 				glfwWindowHint(m.first, m.second);
@@ -208,15 +208,15 @@ namespace agl
 
 
 		if (result.window_ == nullptr)
-			AGL_CORE_CRITICAL("Failed to create a window!", Error::GLFW_FAILURE);
+			AGL_CORE_CRITICAL("Failed to create a window!", error::GLFW_FAILURE);
 
 		glfwMakeContextCurrent(result.window_.get());
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!", Error::GLAD_FAILURE);
+			AGL_CORE_CRITICAL("Failed to initialize OpenGL context!", error::GLAD_FAILURE);
 
 		if (!CShaderManager::LinkAllShaders())
-			AGL_CORE_CRITICAL("Failed to link AGL default shaders!", Error::SHADER_LINK);
+			AGL_CORE_CRITICAL("Failed to link AGL default shaders!", error::SHADER_LINK);
 
 #ifdef AGL_DEBUG
 		AGL_CALL(glEnable(GL_DEBUG_OUTPUT));
