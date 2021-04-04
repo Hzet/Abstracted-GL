@@ -47,4 +47,9 @@ namespace agl
 		addUniform(direction);
 		addUniform(color);
 	}
+
+	std::unique_ptr<agl::IUniform> CDirectionalLight::clone() const
+	{
+		return std::unique_ptr<IUniform>(new CDirectionalLight(*this));
+	}
 }

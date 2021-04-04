@@ -21,6 +21,8 @@ namespace agl
 		CDirectionalLight& operator=(CDirectionalLight &&other) = default;
 		CDirectionalLight& operator=(const CDirectionalLight &other) = default;
 
+		virtual std::unique_ptr<IUniform> clone() const override;
+
 		CUniform<glm::vec3> direction;
 
 		CUniform<glm::vec4> ambient;
