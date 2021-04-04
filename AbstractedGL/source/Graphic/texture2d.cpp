@@ -2,20 +2,21 @@
 #include "texture-atlas.hpp"
 #include "../System/gl-core.hpp"
 #include "../System/error.hpp"
-#include "../System/core-error-codes.hpp"
+#include "../System/error-code.hpp"
 
 #include <stb_image.hpp>
 
 namespace agl
 {
-	CTexture2D CTexture2D::LoadFromFile(const std::string &filepath)
+	CTextureUID CTexture2D::LoadFromFile(const std::string &filepath)
 	{
-		CTexture2D texture;
-		texture.loadFromFile(filepath);
+		if (CTextureAtlas::HasTexture2D(filepath))
+			return CTextureAtlas::GetTextureUID(filepath);
 
-		CTextureAtlas::AddTexture(texture);
+		CTexture2D result;
+		result.loadFromFile(filepath);
 
-		return texture;
+		return CTextureAtlas::AddTexture2D(result, filepath);
 	}
 
 	CTexture2D::CTexture2D()
@@ -37,7 +38,7 @@ namespace agl
 
 		if (data == nullptr)
 		{
-			AGL_CORE_ERROR("Failed to load the texture from the file", agl::Error::READ_FILE);
+			AGL_CORE_ERROR("Failed to load the texture from the file", agl::error::READ_FILE);
 			stbi_image_free(data);
 			return false;
 		}
@@ -45,10 +46,18 @@ namespace agl
 		dimensions_.x = w;
 		dimensions_.y = h;
 
+		std::uint32_t format;
+		if (channels == 1)
+			format = GL_RED;
+		else if (channels == 3)
+			format = GL_RGB;
+		else if (channels == 4)
+			format = GL_RGBA;
+
 		create();
 		bind();
 
-		AGL_CALL(glTexImage2D(getTarget(), 0u, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data));
+		AGL_CALL(glTexImage2D(getTarget(), 0u, format, w, h, 0, format, GL_UNSIGNED_BYTE, data));
 		AGL_CALL(glGenerateMipmap(getTarget()));
 
 		stbi_image_free(data);

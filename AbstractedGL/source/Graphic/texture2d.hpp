@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "texture-base.hpp"
+#include "texture-uid.hpp"
 
 namespace agl
 {
@@ -12,7 +13,7 @@ namespace agl
 		: public ITexture
 	{
 	public:
-		static CTexture2D LoadFromFile(const std::string &filepath);
+		static CTextureUID LoadFromFile(const std::string &filepath);
 
 		using ITexture::ITexture;
 
