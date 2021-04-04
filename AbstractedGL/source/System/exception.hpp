@@ -4,7 +4,7 @@
 
 namespace agl
 {
-	namespace Error
+	namespace error
 	{
 		enum EError : std::uint64_t;
 	}
@@ -22,7 +22,7 @@ namespace agl
 			/// </summary>
 			/// <param name="message">The message</param>
 			/// <param name="code">The AGL error code</param>
-			explicit CException(const std::string &message, Error::EError code);
+			explicit CException(const std::string &message, error::EError code);
 
 			/// <summary>
 			/// Get the error code.
@@ -30,7 +30,7 @@ namespace agl
 			/// <returns>
 			/// The error code
 			/// </returns>
-			Error::EError code() const;
+			error::EError code() const;
 
 			/// <summary>
 			/// Get the error message.
@@ -41,7 +41,7 @@ namespace agl
 			virtual char const* what() const override;
 
 		private:
-			Error::EError code_;	
+			error::EError code_;	
 			const std::string message_;
 		};
 	}

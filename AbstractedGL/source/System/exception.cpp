@@ -1,17 +1,17 @@
 #include "exception.hpp"
-#include "core-error-codes.hpp"
+#include "error-code.hpp"
 
 namespace agl
 {
 	namespace system
 	{
-		CException::CException(const std::string &message, Error::EError code)
+		CException::CException(const std::string &message, error::EError code)
 			: message_(message),
 			code_(code)
 		{
 		}
 
-		agl::Error::EError CException::code() const
+		agl::error::EError CException::code() const
 		{
 			return code_;
 		}
