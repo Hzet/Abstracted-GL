@@ -29,7 +29,7 @@ namespace agl
 		/// TODO: make it bracket initiallizable in the future - you should not use this method yet.
 		/// </summary>
 		/// <param name="...elems"></param>
-		explicit CTupleBuffer(Args&&... elems);
+		//CTupleBuffer(Args&&... elems);
 
 		/// <summary>
 		/// Destruct all the elements contained by the buffer.
@@ -43,11 +43,24 @@ namespace agl
 		CTupleBuffer(CTupleBuffer&&) = default;
 
 		/// <summary>
+		/// Default copy constructor.
+		/// </summary>
+		/// <param name=""></param>
+		CTupleBuffer(const CTupleBuffer&) = default;
+
+		/// <summary>
 		/// Default move assignment.
 		/// </summary>
 		/// <param name=""></param>
 		/// <returns></returns>
 		CTupleBuffer& operator=(CTupleBuffer&&) = default;
+
+		/// <summary>
+		/// Default copy assignment operator.
+		/// </summary>
+		/// <param name=""></param>
+		/// <returns></returns>
+		CTupleBuffer& operator=(const CTupleBuffer&) = default;
 
 		/// <summary>
 		/// Push back a stride.

@@ -1,12 +1,14 @@
 template <class... Args>
 CTupleBuffer<Args...>::CTupleBuffer() noexcept
 {}
+/*
 
 template <class... Args>
 CTupleBuffer<Args...>::CTupleBuffer(Args&&... elems)
 {
 	push_back(std::forward<Args>(elems)...);
 }
+*/
 
 template <class... Args>
 CTupleBuffer<Args...>::~CTupleBuffer()
