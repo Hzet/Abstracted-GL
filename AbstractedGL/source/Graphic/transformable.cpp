@@ -79,6 +79,13 @@ namespace agl
 		setRotation(rotation_ + angle);
 	}
 
+	void CTransformable::setTransform(const CTransform &transform)
+	{
+		requireUpdate_ = true;
+
+		transform_ = transform;
+	}
+
 	const CTransform& CTransformable::getTransform() const
 	{
 		update();

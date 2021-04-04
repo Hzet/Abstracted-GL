@@ -29,6 +29,20 @@ namespace agl
 		CTransformable(const CTransformable&) = default;
 
 		/// <summary>
+		/// Default move assignment operator.
+		/// </summary>
+		/// <param name=""></param>
+		/// <returns></returns>
+		CTransformable& operator=(CTransformable&&) = default;
+
+		/// <summary>
+		/// Default move assignment operator.
+		/// </summary>
+		/// <param name=""></param>
+		/// <returns></returns>
+		CTransformable& operator=(const CTransformable&) = default;
+
+		/// <summary>
 		/// Default virtual destructor.
 		/// </summary>
 		virtual ~CTransformable() = default;
@@ -106,6 +120,12 @@ namespace agl
 		/// </summary>
 		/// <param name="angle">The angle</param>
 		void rotate(const glm::vec3 &angle);
+
+		/// <summary>
+		/// Sets the transformation matrix.
+		/// </summary>
+		/// <param name="transform">The matrix</param>
+		void setTransform(const CTransform &transform);
 
 		/// <summary>
 		/// Get the transform matrix.
