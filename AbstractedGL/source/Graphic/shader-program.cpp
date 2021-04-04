@@ -4,7 +4,7 @@
 
 #include "../System/gl-core.hpp"
 #include "../System/error.hpp"
-#include "../System/core-error-codes.hpp"
+#include "../System/error-code.hpp"
 
 namespace agl
 {
@@ -20,7 +20,7 @@ namespace agl
 			case GL_COMPUTE_SHADER: return GL_COMPUTE_SHADER_BIT;
 		}
 
-		AGL_CORE_ERROR("Invalid shader type - {}", Error::INVALID_VALUE, type);
+		AGL_CORE_ERROR("Invalid shader type - {}", error::INVALID_VALUE, type);
 		return 0u;
 	}
 
@@ -104,18 +104,18 @@ namespace agl
 	{
 		if (!hasShader(GL_VERTEX_SHADER_BIT))
 		{
-			AGL_CORE_ERROR("Vertex shader is obligatory to compile a shader program!", Error::SHADER_LINK);
+			AGL_CORE_ERROR("Vertex shader is obligatory to compile a shader program!", error::SHADER_LINK);
 			return false;
 		}
 		else if (!hasShader(GL_FRAGMENT_SHADER_BIT))
 		{
-			AGL_CORE_ERROR("Fragment shader is obligatory to compile a shader program!", Error::SHADER_LINK);
+			AGL_CORE_ERROR("Fragment shader is obligatory to compile a shader program!", error::SHADER_LINK);
 			return false;
 		}
 
 		if (!compileSubshaders())
 		{
-			AGL_CORE_ERROR("Shader could not be linked!", Error::SHADER_LINK);
+			AGL_CORE_ERROR("Shader could not be linked!", error::SHADER_LINK);
 			return false;
 		}
 
@@ -140,7 +140,7 @@ namespace agl
 			message.resize(length);
 
 			AGL_CALL(glGetProgramInfoLog(objectID_, length, NULL, &message[0u]));
-			AGL_CORE_ERROR("Failed to link a shader program! \nDescription: {}", Error::SHADER_LINK, message);
+			AGL_CORE_ERROR("Failed to link a shader program! \nDescription: {}", error::SHADER_LINK, message);
 
 			return false;
 		}
