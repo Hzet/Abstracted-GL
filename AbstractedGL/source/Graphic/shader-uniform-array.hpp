@@ -43,48 +43,20 @@ namespace agl
 	template <typename T>
 	class CUniformArray<T, detail::is_agl_uniform_t<T>>
 		: public IUniform,
-		public system::CInheritableVector<T>
+		public system::IInheritableVector<T>
 	{
 	public:
+		/// <summary>
+		/// Defaulted constructor.
+		/// </summary>
+		CUniformArray() = default;
+
 		/// <summary>
 		/// Creates the uniform with 'name' in 'parent's scope.
 		/// </summary>
 		/// <param name="name">The uniform's name</param>
 		/// <param name="parent">The parent which aggregates this uniform</param>
 		CUniformArray(const std::string &name, IUniform const * const parent = nullptr);
-
-		/// <summary>
-		/// Move constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniformArray(CUniformArray &&other);
-
-		/// <summary>
-		/// Copy constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniformArray(const CUniformArray &other);
-
-		/// <summary>
-		/// Copy constructor with the scope change.
-		/// </summary>
-		/// <param name="other">The other instance</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
-		CUniformArray(const CUniformArray &other, IUniform const * const parent);
-
-		/// <summary>
-		/// Default move assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniformArray& operator=(CUniformArray&&) = default;
-
-		/// <summary>
-		/// Default copy assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniformArray& operator=(const CUniformArray&) = default;
 
 		/// <summary>
 		/// Passes all of the uniforms to it's shaders.
@@ -103,6 +75,18 @@ namespace agl
 		/// <param name="shaderUID">The shaderUID</param>
 		virtual void setShader(const CShaderUID &shaderUID) override;
 
+		/// <summary>
+		/// Returns a copy of this uniform in a unique_ptr wrapper.
+		/// </summary>
+		/// <returns>The unique pointer</returns>
+		virtual std::unique_ptr<IUniform> clone() const override;
+
+	protected:
+		/// <summary>
+		/// Re-indexes contained uniforms.
+		/// </summary>
+		virtual void onUpdate() override;
+
 	private:
 		/// <summary>
 		/// Helper method. Updates the namespace of this and contained uniforms.
@@ -110,6 +94,7 @@ namespace agl
 		/// <param name="name">new namespace</param>
 		virtual void updateNamespace(const std::string &name) override;
 
+		CShaderUID shaderUID_;
 		std::uint64_t lastCount_;
 	};
 
