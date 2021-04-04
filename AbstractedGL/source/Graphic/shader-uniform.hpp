@@ -23,30 +23,16 @@ namespace agl
 	{
 	public:
 		/// <summary>
+		/// Defaulted constructor.
+		/// </summary>
+		IUniform() = default;
+
+		/// <summary>
 		/// Creates the uniform with 'name' in 'parent's scope.
 		/// </summary>
 		/// <param name="name">The uniform's name</param>
 		/// <param name="parent">The parent which aggregates this uniform</param>
 		IUniform(const std::string &name, IUniform const * const parent = nullptr);
-
-		/// <summary>
-		/// Move constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		IUniform(IUniform &&other);
-
-		/// <summary>
-		/// Copy constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		IUniform(const IUniform &other);
-
-		/// <summary>
-		/// Copy constructor with the scope change.
-		/// </summary>
-		/// <param name="other">The other instance</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
-		IUniform(const IUniform &other, IUniform const * const parent);
 
 		/// <summary>
 		/// Default virtual destructor.
@@ -82,14 +68,21 @@ namespace agl
 		/// <param name="shaderUID">The destination shader unique identifier</param>
 		virtual void setShader(const CShaderUID &shaderUID) = 0;
 
-	//protected:
 		/// <summary>
 		/// Change the namespace of the uniform.
 		/// </summary>
 		/// <param name="name"></param>
 		virtual void updateNamespace(const std::string &name);
 
+		/// <summary>
+		/// Returns a copy of this uniform in a unique_ptr wrapper.
+		/// </summary>
+		/// <returns>The unique pointer</returns>
+		virtual std::unique_ptr<IUniform> clone() const = 0;
+
 	private:
+		template <typename T, typename U> friend class CUniformArray;
+
 		/// <summary>
 		/// Helper method to set the fullname of the instance.
 		/// </summary>

@@ -23,28 +23,7 @@ namespace agl
 		fullname_(name)
 	{
 		if (parent != nullptr)
-			setFullName(parent->fullname_);
-	}
-
-	IUniform::IUniform(IUniform &&other)
-		: name_(std::move(other.name_)),
-		fullname_(std::move(other.fullname_))
-	{
-	}
-
-	IUniform::IUniform(const IUniform &other)
-		: name_(other.name_),
-		fullname_(other.fullname_)
-	{
-	}
-
-
-	IUniform::IUniform(const IUniform &other, IUniform const * const parent)
-		: name_(other.name_),
-		fullname_(name_)
-	{
-		if (parent != nullptr)
-			setFullName(parent->fullname_);
+			IUniform::updateNamespace(parent->name_);
 	}
 
 	void IUniform::setIndex(std::uint64_t index)
@@ -65,14 +44,14 @@ namespace agl
 
 	void IUniform::updateNamespace(const std::string &name)
 	{
-		fullname_ = name + "." + name_;
+		if (name.empty())
+			fullname_ = name;
+		else
+			fullname_ = name + "." + name_;
 	}
 
 	void IUniform::setFullName(const std::string &fullname)
 	{
-		if (fullname.empty())
-			fullname_ = name_;
-		else
-			fullname_ = fullname + "." + name_;
+		fullname_ = fullname;
 	}
 }
