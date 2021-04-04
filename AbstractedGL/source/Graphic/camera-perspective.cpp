@@ -10,7 +10,14 @@ namespace agl
 
 	void CCameraPerspective::setFOV(float fov)
 	{
-		fov_ = std::abs(std::fmodf(fov, 180.f));
+		projUpdate_ = true;
+	
+		if (fov < 0.f)
+			fov = 0.f;
+		else if (fov >= 179.f)
+			fov = 179.f;
+
+		fov_ = fov;
 	}
 
 	void CCameraPerspective::updateProjection() const
