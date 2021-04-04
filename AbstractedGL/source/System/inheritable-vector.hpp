@@ -11,7 +11,7 @@ namespace agl
 		/// avoiding the need to provide implementation of it's features.
 		/// </summary>
 		template <typename T>
-		class CInheritableVector
+		class IInheritableVector
 		{
 		public:
 			using value_type		 = typename std::vector<T>::value_type;
@@ -25,44 +25,44 @@ namespace agl
 			/// <summary>
 			/// Default constructor.
 			/// </summary>
-			CInheritableVector() = default;
+			IInheritableVector() = default;
 
 			/// <summary>
 			/// Resizes the vector to be capable of storing 'count' elements.
 			/// </summary>
 			/// <param name="count"></param>
-			CInheritableVector(std::uint64_t count);
+			IInheritableVector(std::uint64_t count);
 
 			/// <summary>
 			/// Default move constructor.
 			/// </summary>
 			/// <param name=""></param>
-			CInheritableVector(CInheritableVector&&) = default;
+			IInheritableVector(IInheritableVector&&) = default;
 
 			/// <summary>
 			/// Default copy constructor.
 			/// </summary>
 			/// <param name=""></param>
-			CInheritableVector(const CInheritableVector&) = default;
+			IInheritableVector(const IInheritableVector&) = default;
 
 			/// <summary>
 			/// Clear the underlying vector.
 			/// </summary>
-			virtual ~CInheritableVector();
+			virtual ~IInheritableVector();
 
 			/// <summary>
 			/// Default move assignment operator.
 			/// </summary>
 			/// <param name=""></param>
 			/// <returns></returns>
-			CInheritableVector& operator=(CInheritableVector&&) = default;
+			IInheritableVector& operator=(IInheritableVector&&) = default;
 
 			/// <summary>
 			/// Default copy assignment operator.
 			/// </summary>
 			/// <param name=""></param>
 			/// <returns></returns>
-			CInheritableVector& operator=(const CInheritableVector&) = default;
+			IInheritableVector& operator=(const IInheritableVector&) = default;
 
 			/// <summary>
 			/// Returns the reference to the element at position 'index'.
@@ -133,13 +133,13 @@ namespace agl
 			/// Returns the iterator pointing to the first element in the vector.
 			/// </summary>
 			/// <returns>The iterator to the first element or CShaderEntryVector::end() if the vector is empty</returns>
-			iterator begin() const;
+			iterator begin();
 
 			/// <summary>
 			/// Returns the iterator pointing to the element behind the last element in the vector.
 			/// </summary>
 			/// <returns>The iterator to the element behind the last element</returns>
-			iterator end() const;
+			iterator end();
 
 			/// <summary>
 			/// Returns the const iterator pointing to the first element in the vector. 
@@ -274,6 +274,13 @@ namespace agl
 			/// </summary>
 			/// <param name="count">The new count</param>
 			void resize(std::uint64_t count);
+
+		protected:
+			/// <summary>
+			/// Method that will be called each time, the vector's size is modified.
+			/// The vector does not track the modify status of stored elements.
+			/// </summary>
+			virtual void onUpdate() {};
 
 		private:
 			std::vector<T> vector_;
