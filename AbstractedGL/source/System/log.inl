@@ -8,7 +8,8 @@ void CLogInstance::log(std::string &&message, Args&&... args)
 
 	//streamLock_.lock();
 
-	target_ << result;
+	std::time_t tt = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	target_ << std::put_time(std::localtime(&tt), "%H:%M:%S") << " " << result << '\n';
 
 	//streamLock_.unlock();
 }
@@ -36,31 +37,31 @@ std::vector<std::string> CLogInstance::parseArgs(Tuple &&t, std::index_sequence<
 template <typename... Args>
 void CLog::trace(std::string &&message, Args&&... msgs)
 {
-	traceLog_->log(prefix_ + "Trace: " + message + suffix_, std::forward<Args>(msgs)...);
+	traceLog_->log(prefix_ + "Trace: " + message, std::forward<Args>(msgs)...);
 }
 
 template <typename... Args>
 void CLog::info(std::string &&message, Args&&... msgs)
 {
-	infoLog_->log(prefix_ + "Info: " + message + suffix_, std::forward<Args>(msgs)...);
+	infoLog_->log(prefix_ + "Info: " + message, std::forward<Args>(msgs)...);
 }
 
 template <typename... Args>
 void CLog::warn(std::string &&message, Args&&... msgs)
 {
-	warnLog_->log(prefix_ + "Warning: " + message + suffix_, std::forward<Args>(msgs)...);
+	warnLog_->log(prefix_ + "Warning: " + message, std::forward<Args>(msgs)...);
 }
 
 template <typename... Args>
 void CLog::error(std::string &&message, Args&&... msgs)
 {
-	errorLog_->log(prefix_ + "Error: " + message + suffix_, std::forward<Args>(msgs)...);
+	errorLog_->log(prefix_ + "Error: " + message, std::forward<Args>(msgs)...);
 }
 
 template <typename... Args>
 void CLog::critical(std::string &&message, Args&&... msgs)
 {
-	criticalLog_->log(prefix_ + "Critical error: " + message + suffix_, std::forward<Args>(msgs)...);
+	criticalLog_->log(prefix_ + "Critical error: " + message, std::forward<Args>(msgs)...);
 }
 
 
@@ -68,6 +69,6 @@ void CLog::critical(std::string &&message, Args&&... msgs)
 template <typename... Args>
 void CLog::debug(std::string &&message, Args&&... msgs)
 {
-	debugLog_->log(prefix_ + "Debug error: " + message + suffix_, std::forward<Args>(msgs)...);
+	debugLog_->log(prefix_ + "Debug error: " + message , std::forward<Args>(msgs)...);
 }
 #endif

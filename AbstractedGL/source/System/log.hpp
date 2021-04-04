@@ -1,10 +1,13 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <memory>
 #include <mutex>
 #include <sstream>
 #include <vector>
+#include <chrono> 
+#include <ctime>
 
 #include "debug.hpp"
 
@@ -183,26 +186,6 @@ namespace agl
 			/// <param name="prefix">The prefixes</param>
 			void setPrefix(const std::vector<std::string> &prefix);
 
-			/// <summary>
-			/// Get the suffix that will be added to every message.
-			/// </summary>
-			/// <returns>
-			/// The suffix
-			/// </returns>
-			const std::string& getSuffix() const;
-
-			/// <summary>
-			/// Set the suffix that will be added to every message.
-			/// </summary>
-			/// <param name="prefix">The suffix</param>
-			void setSuffix(const std::string &suffix);
-
-			/// <summary>
-			/// Set the suffixes that will be added to every message.
-			/// </summary>
-			/// <param name="prefix">The suffixes</param>
-			void setSuffix(const std::vector<std::string> &suffix);
-
 		private:
 			friend class CLogger;
 
@@ -226,7 +209,6 @@ namespace agl
 #endif
 
 			std::string prefix_;
-			std::string suffix_;
 		};
 
 		/// <summary>
