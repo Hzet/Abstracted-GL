@@ -18,38 +18,33 @@ namespace agl
 
 		/// <summary>
 		/// Move constructor.
+		/// Does not move it's member uniforms.
 		/// </summary>
 		/// <param name="other">The other object</param>
 		IUniformPack(IUniformPack &&other);
 
 		/// <summary>
 		/// Copy constructor.
-		/// The newly copied object will not keep track of aggregated uniforms - these must be re-added by hand.
+		/// Does not copy it's member uniforms.
 		/// </summary>
 		/// <param name="other">The other object</param>
 		IUniformPack(const IUniformPack &other);
 
 		/// <summary>
-		/// Copy constructor with the scope change.
-		/// The newly copied object will not keep track of aggregated uniforms - these must be re-added by hand.
+		/// Move assignment operator.
+		/// Does not move it's member uniforms.
 		/// </summary>
-		/// <param name="other">The other instance</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
-		IUniformPack(const IUniformPack &other, IUniform const * const parent);		
+		/// <param name="other">The other object</param>
+		/// <returns>A reference to this</returns>
+		IUniformPack& operator=(IUniformPack &&other);
 
 		/// <summary>
-		/// Default move assignment operator.
+		/// Copy assignment operator.
+		/// Does not copy it's member uniforms.
 		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		IUniformPack& operator=(IUniformPack&&) = default;
-
-		/// <summary>
-		/// Default copy assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		IUniformPack& operator=(const IUniformPack&) = default;
+		/// <param name="other">The other object</param>
+		/// <returns>A reference to this</returns>
+		IUniformPack& operator=(const IUniformPack &other);
 
 		/// <summary>
 		/// Default virtual destructor.

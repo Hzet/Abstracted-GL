@@ -7,14 +7,22 @@ namespace agl
 	{
 	}
 
+
 	IUniformPack::IUniformPack(const IUniformPack &other)
 		: IUniform(other)
 	{
 	}
 
-	IUniformPack::IUniformPack(const IUniformPack &other, IUniform const * const parent)
-		: IUniform(other, parent)
+	IUniformPack& IUniformPack::operator=(IUniformPack &&other)
 	{
+		IUniform::operator=(std::move(other));
+		return *this;
+	}
+
+	IUniformPack& IUniformPack::operator=(const IUniformPack &other)
+	{
+		IUniform::operator=(other);
+		return *this;
 	}
 
 	void IUniformPack::addUniform(IUniform &uniform)
@@ -26,7 +34,7 @@ namespace agl
 	void IUniformPack::passUniform() const
 	{
 		for (const auto &v : uniforms_)
-			v->passUniform();
+				v->passUniform();
 	}
 
 	void IUniformPack::setIndex(std::uint64_t index)
