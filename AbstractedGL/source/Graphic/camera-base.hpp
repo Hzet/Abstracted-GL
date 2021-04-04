@@ -63,7 +63,7 @@ namespace agl
 		/// </summary>
 		/// <param name="planes">The planes</param>
 		void setPlanes(const glm::vec2 &planes);
-		
+
 		/// <summary>
 		/// Get the view's 'scale'.
 		/// </summary>
@@ -139,7 +139,7 @@ namespace agl
 		/// The projection matrix
 		/// </returns>
 		const CTransform& getProjection() const;
-	
+
 		/// <summary>
 		/// Get the directions of the camera.
 		/// </summary>
@@ -147,6 +147,12 @@ namespace agl
 		/// The direction
 		/// </returns>
 		const SDirection& getDirection() const;
+
+		/// <summary>
+		/// Directs the camera forward direction towards given 'position'.
+		/// </summary>
+		/// <param name="position"></param>
+		void lookAt(const glm::vec3 &position);
 
 	protected:
 		/// <summary>
@@ -161,6 +167,9 @@ namespace agl
 
 		mutable CTransform projection_;
 
+		mutable bool viewUpdate_;
+		mutable bool projUpdate_;
+
 	private:
 		glm::vec2 planes_; // near / far
 
@@ -168,10 +177,8 @@ namespace agl
 
 		glm::vec3 scale_;
 		glm::vec3 position_;
-		glm::vec3 rotation_;
+		glm::vec3 rotation_; // yaw, pitch, roll
 
-		mutable bool viewUpdate_;
-		mutable bool projUpdate_;
 		mutable CTransform view_;
 		mutable SDirection direction_;
 	};

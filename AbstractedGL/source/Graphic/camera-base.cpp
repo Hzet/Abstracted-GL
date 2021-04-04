@@ -1,10 +1,15 @@
 #include "camera-base.hpp"
 #include <glm/ext.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
+
+
+
+
+#include <iostream>
 namespace agl
 {
-
-	const SDirection ICamera::WorldDirection = { glm::vec3(0.f, 0.f, -1.f), glm::vec3(0.f, 1.f, 0.f ), glm::vec3( 1.f, 0.f, 0.f ) };
+	const SDirection ICamera::WorldDirection = { glm::vec3(0.f, 0.f, -1.f), glm::vec3(0.f, 1.f, 0.f), glm::vec3(1.f, 0.f, 0.f) };
 
 	ICamera::ICamera()
 		: planes_(0.f, 100.f),
@@ -74,9 +79,9 @@ namespace agl
 	{
 		viewUpdate_ = true;
 
-		if (rotation.y < -89.f)
+		if (rotation_.y < -89.f)
 			rotation_.y = -89.f;
-		else if (rotation.y > 89.f)
+		else if (rotation_.y > 89.f)
 			rotation_.y = 89.f;
 		else
 			rotation_.y = rotation.y;
@@ -129,6 +134,18 @@ namespace agl
 		return direction_;
 	}
 
+	void ICamera::lookAt(const glm::vec3 &position)
+	{
+		viewUpdate_ = true;
+
+		direction_.forward = glm::normalize(position - position_);
+		direction_.right = glm::normalize(glm::cross(direction_.forward, WorldDirection.up));
+		direction_.up = glm::normalize(glm::cross(direction_.right, direction_.forward));
+
+		rotation_.x = glm::degrees(glm::atan(direction_.forward.z, direction_.forward.x));
+		rotation_.y = glm::degrees(glm::atan(direction_.forward.y, glm::length(glm::vec2(direction_.forward.x, direction_.forward.z))));
+	}
+
 	void ICamera::updateView() const
 	{
 		direction_.forward.x = glm::cos(glm::radians(rotation_.x)) * glm::cos(glm::radians(rotation_.y));
@@ -136,7 +153,7 @@ namespace agl
 		direction_.forward.z = glm::sin(glm::radians(rotation_.x)) * glm::cos(glm::radians(rotation_.y));
 
 		direction_.forward = glm::normalize(direction_.forward);
-		direction_.right = -glm::normalize(glm::cross(direction_.forward, WorldDirection.up));
+		direction_.right = glm::normalize(glm::cross(direction_.forward, WorldDirection.up));
 		direction_.up = glm::normalize(glm::cross(direction_.right, direction_.forward));
 
 		view_ = glm::lookAt(position_, position_ + direction_.forward, direction_.up);
