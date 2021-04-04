@@ -4,7 +4,7 @@
 
 #include "../System/gl-core.hpp"
 #include "../System/error.hpp"
-#include "../System/core-error-codes.hpp"
+#include "../System/error-code.hpp"
 #include <cerrno>
 
 namespace agl
@@ -68,7 +68,7 @@ namespace agl
 
 			if (!file.is_open())
 			{
-				AGL_CORE_ERROR("\nFilename: {} {}", Error::OPEN_FILE, filename);
+				AGL_CORE_ERROR("\nFilename: {} {}", error::OPEN_FILE, filename);
 				return false;
 			}
 
@@ -116,13 +116,13 @@ namespace agl
 		{
 			if (source_.empty())
 			{
-				AGL_CORE_ERROR("Shader [{}] source code has not been loaded!", Error::INVALID_VALUE, getShaderName(type_));
+				AGL_CORE_ERROR("Shader [{}] source code has not been loaded!", error::INVALID_VALUE, getShaderName(type_));
 				return false;
 			}
 
 			if (!VerifyType(type_))
 			{
-				AGL_CORE_ERROR("Invalid shader sub-program type! [{}]", Error::INVALID_VALUE, type_);
+				AGL_CORE_ERROR("Invalid shader sub-program type! [{}]", error::INVALID_VALUE, type_);
 				return false;
 			}
 
@@ -145,7 +145,7 @@ namespace agl
 				message.resize(length);
 				AGL_CALL(glGetShaderInfoLog(objectID_, length, nullptr, &message[0u]));
 
-				AGL_CORE_ERROR("Shader [{}] sub program could not be compiled!\n{}", Error::SUBSHADER_COMPILE, getShaderName(type_), message);
+				AGL_CORE_ERROR("Shader [{}] sub program could not be compiled!\n{}", error::SUBSHADER_COMPILE, getShaderName(type_), message);
 
 				return false;
 			}
