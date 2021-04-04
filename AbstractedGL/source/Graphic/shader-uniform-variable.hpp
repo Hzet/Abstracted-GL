@@ -4,8 +4,8 @@
 #include "shader-manager.hpp"
 #include "shader-uid.hpp"
 
-#include <iomanip>
 
+#include <type_traits>
 namespace agl
 {
 	namespace detail
@@ -35,7 +35,8 @@ namespace agl
 		/// Combines the 'is_class_t' and 'is_function_pointer_t' typedefs.
 		/// </summary>
 		template <typename TObject, typename TMethod>
-		using is_class_method = std::enable_if_t<std::is_class_v<std::remove_reference_t<TObject>> && std::is_member_function_pointer_v<std::remove_reference_t<TMethod>>>;
+		using is_class_method = std::enable_if_t<std::is_class_v<std::remove_reference_t<TObject>> 
+												 && std::is_member_function_pointer_v<std::remove_reference_t<TMethod>>>;
 
 		/// <summary>
 		/// A declaration of a type to specialize.
@@ -49,7 +50,7 @@ namespace agl
 		/// 'type' is a const method type belonging to class 'TObject' and returning 'TReturn'.
 		/// </summary>
 		template <typename TReturn, typename TObject>
-		struct method_pointer<TReturn, TObject, typename std::enable_if<std::is_const<typename std::remove_reference<TObject>::type>::value>::type>
+		struct method_pointer<TReturn, TObject, std::enable_if_t<std::is_const_v<std::remove_reference_t<TObject>>>>
 		{
 			using type = TReturn(std::remove_reference<TObject>::type::*)() const;
 		};
@@ -58,7 +59,7 @@ namespace agl
 		/// 'type' is a method type belonging to class 'TObject' and returning 'TReturn'.
 		/// </summary>
 		template <typename TReturn, typename TObject>
-		struct method_pointer<TReturn, TObject, typename std::enable_if<!std::is_const<typename std::remove_reference<TObject>::type>::value>::type>
+		struct method_pointer<TReturn, TObject, std::enable_if_t<!std::is_const_v<std::remove_reference_t<TObject>>>>
 		{
 			using type = TReturn(std::remove_reference<TObject>::type::*)();
 		};
@@ -68,9 +69,10 @@ namespace agl
 		/// </summary>
 		template <typename TReturn, typename TObject>
 		using method_pointer_t = typename method_pointer<TReturn, TObject>::type;
+
+		template <typename T>
+		using true_type_t = std::remove_reference_t<T>;
 	}
-
-
 
 	/// <summary>
 	/// Declaration of a class to be specialized.
@@ -80,8 +82,6 @@ namespace agl
 	{
 	};
 
-
-
 	/// <summary>
 	/// Uniform variable that contains a variable of type 'TReturn'.
 	/// </summary>
@@ -89,7 +89,10 @@ namespace agl
 	class CUniform<TReturn>
 		: public IUniform
 	{
+		using TType = std::conditional_t<std::is_reference_v<TReturn>, std::reference_wrapper<std::remove_reference_t<TReturn>>, TReturn>;
 	public:
+		using IUniform::IUniform;
+
 		/// <summary>
 		/// Constructs a uniform with 'name', namespace of 'parent' to contain 'value' and be passed to 'shaderUID'.
 		/// </summary>
@@ -98,41 +101,22 @@ namespace agl
 		/// <param name="value">The value</param>
 		/// <param name="shaderUID">the shader's unique identifier</param>
 		CUniform(const std::string &name, IUniform const * const parent = nullptr, detail::TValue<TReturn> &&value = {}, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
-		
-		/// <summary>
-		/// Move constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(CUniform &&other);
 
 		/// <summary>
-		/// Copy constructor. Is disabled for non assignable classes.
+		/// Move constructor with the scope change.
+		/// Can be used for reference types.
 		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(const CUniform &other);
+		/// <param name="other">The other instance</param>
+		/// <param name="value">The value</param>
+		CUniform(CUniform &&other, detail::TValue<TReturn> &&value);
 
 		/// <summary>
 		/// Copy constructor with the scope change.
 		/// Can be used for reference types.
 		/// </summary>
 		/// <param name="other">The other instance</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
 		/// <param name="value">The value</param>
-		CUniform(const CUniform &other, detail::TValue<TReturn> &&value, IUniform const * const parent = nullptr);
-
-		/// <summary>
-		/// Default move assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(CUniform&&) = default;
-
-		/// <summary>
-		/// Default copy assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(const CUniform&) = default;
+		CUniform(const CUniform &other, detail::TValue<TReturn> &&value);
 
 		/// <summary>
 		/// Default virtual destructor.
@@ -155,33 +139,39 @@ namespace agl
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		TType& operator()();
+		detail::true_type_t<TReturn>& operator()();
 
 		/// <summary>
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		const auto& operator()() const;
+		const detail::true_type_t<TReturn>& operator()() const;
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator auto&();
+		operator detail::true_type_t<TReturn>&();
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator const auto&() const;
+		operator const detail::true_type_t<TReturn>&() const;
 
 		/// <summary>
 		/// Passes the uniform to it's shader.
 		/// </summary>
 		virtual void passUniform() const override;
+		
+		/// <summary>
+		/// Returns a copy of this uniform in a unique_ptr wrapper.
+		/// </summary>
+		/// <returns>The unique pointer</returns>
+		virtual std::unique_ptr<IUniform> clone() const override;
 
 	private:
-		TReturn value_;
+		TType value_;
 		CShaderUID shaderUID_;
 	};
 
@@ -197,6 +187,8 @@ namespace agl
 		using TMethod = detail::method_pointer_t<TReturn, TObject>;
 
 	public:
+		using IUniform::IUniform;
+
 		/// <summary>
 		/// Constructs a uniform with 'name', namespace of 'parent' to retrieve the value of type 'TReturn' from an 'object' with a 'method' and be send to 'shaderUID'
 		/// </summary>
@@ -206,39 +198,22 @@ namespace agl
 		/// <param name="method">An address of a method that will be called on an 'object'</param>
 		/// <param name="shaderUID">the shader's unique identifier</param>
 		CUniform(const std::string &name, detail::TValue<TObject> &&object, detail::TValue<TMethod> &&method, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
-		
-		/// <summary>
-		/// Move constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(CUniform &&other);
 
 		/// <summary>
-		/// Copy constructor. Is disabled for non assignable classes.
+		/// Move constructor with the scope change.
+		/// Can be used for reference types.
 		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(const CUniform &other);
+		/// <param name="other">The other instance</param>
+		/// <param name="object">The object on which the method will be called</param>
+		CUniform(CUniform &&other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Copy constructor with the scope change.
 		/// Can be used for reference types.
 		/// </summary>
 		/// <param name="other">The other instance</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
 		/// <param name="object">The object on which the method will be called</param>
-		CUniform(const CUniform &other, detail::TValue<TObject> &&object, IUniform const * const parent = nullptr);
-		
-		/// Default move assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(CUniform&&) = default;
-
-		/// Default copy assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(const CUniform&) = default;
+		CUniform(const CUniform &other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Default virtual destructor.
@@ -261,140 +236,42 @@ namespace agl
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		auto& operator()();
+		TReturn operator()();
 
 		/// <summary>
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		const auto& operator()() const;
+		TReturn operator()() const;
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator auto&();
+		operator TReturn();
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator const auto&() const;
+		operator TReturn() const;
 
 		/// <summary>
 		/// Passes the uniform to it's shader.
 		/// </summary>
 		virtual void passUniform() const override;
 
+		/// <summary>
+		/// Returns a copy of this uniform in a unique_ptr wrapper.
+		/// </summary>
+		/// <returns>The unique pointer</returns>
+		virtual std::unique_ptr<IUniform> clone() const override;
+
 	private:
-		TObject object_;
+		std::reference_wrapper<std::remove_reference_t<TObject>> object_;
 		TMethod method_;
 		CShaderUID shaderUID_;
 	};
-
-
-
-	/// <summary>
-	/// Uniform that must be updated every time it's retrieved.
-	/// The function which is used to return updated value is of 'TFunction' type.
-	/// The value returned by that function is of 'TReturn' type.
-	/// </summary>
-	template <typename TReturn, typename TFunction>
-	class CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>
-		: public IUniform
-	{
-	public:
-		/// <summary>
-		/// Constructs a uniform with 'name', namespace of 'parent' retrieved with the 'function'.
-		/// </summary>
-		/// <param name="name">The name of the uniform</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
-		/// <param name="method">An address of a function that will be called to retrieve the value</param>
-		/// <param name="shaderUID">the shader's unique identifier</param>
-		CUniform(const std::string &name, detail::TValue<TFunction> &&function, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
-
-		/// <summary>
-		/// Move constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(CUniform &&other);
-
-		/// <summary>
-		/// Copy constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(const CUniform &other);
-
-		/// <summary>
-		/// Copy constructor with the scope change.
-		/// </summary>
-		/// <param name="other">The other instance</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
-		CUniform(const CUniform &other, IUniform const * const parent);
-
-		/// Default move assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(CUniform&&) = default;
-		
-		/// Default copy assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(const CUniform&) = default;
-
-		/// <summary>
-		/// Default virtual destructor.
-		/// </summary>
-		virtual ~CUniform() = default;
-
-		/// <summary>
-		/// Returns the uniform destination shader.
-		/// </summary>
-		/// <returns>The shader's unique identifier</returns>
-		const CShaderUID& getShader() const;
-
-		/// <summary>
-		/// Sets the uniform destination shader.
-		/// </summary>
-		/// <param name="shaderUID">The shader's unique identifier</param>
-		virtual void setShader(const CShaderUID &shaderUID) override;
-
-		/// <summary>
-		/// Returns the value.
-		/// </summary>
-		/// <returns>The value</returns>
-		auto& operator()();
-
-		/// <summary>
-		/// Returns the value.
-		/// </summary>
-		/// <returns>The value</returns>
-		const auto& operator()() const;
-
-		/// <summary>
-		/// Cast operator to value type the 'TReturn'.
-		/// </summary>
-		/// <returns>The value</returns>
-		operator auto&();
-
-		/// <summary>
-		/// Cast operator to value type the 'TReturn'.
-		/// </summary>
-		/// <returns>The value</returns>
-		operator const auto&() const;
-
-		/// <summary>
-		/// Passes the uniform to it's shader.
-		/// </summary>
-		virtual void passUniform() const override;
-
-	private:
-		TFunction function_;
-		CShaderUID shaderUID_;
-	};
-
 
 	/// <summary>
 	/// Uniform that it's value must be updated every time it's retrieved.
@@ -406,6 +283,8 @@ namespace agl
 		: public IUniform
 	{
 	public:
+		using IUniform::IUniform;
+
 		/// <summary>
 		/// Constructs a uniform with 'name', namespace of 'parent' to retrieve the value of type 'TReturn' from an 'object' with a 'method' and be send to 'shaderUID'
 		/// </summary>
@@ -417,37 +296,20 @@ namespace agl
 		CUniform(const std::string &name, detail::TValue<TObject> &&object, detail::TValue<TMethod> &&method, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
 
 		/// <summary>
-		/// Move constructor.
+		/// Move constructor with the scope change.
+		/// Can be used for reference types.
 		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(CUniform &&other);
-
-		/// <summary>
-		/// Copy constructor.
-		/// </summary>
-		/// <param name="other">The other object</param>
-		CUniform(const CUniform &other);
+		/// <param name="other">The other instance</param>
+		/// <param name="object">The object on which the method will be called</param>
+		CUniform(CUniform &&other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Copy constructor with the scope change.
 		/// Can be used for reference types.
 		/// </summary>
 		/// <param name="other">The other instance</param>
-		/// <param name="parent">The parent which aggregates this uniform</param>
 		/// <param name="object">The object on which the method will be called</param>
-		CUniform(const CUniform &other, detail::TValue<TObject> &&object, IUniform const * const parent = nullptr);
-
-		/// Default move assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(CUniform&&) = default;
-
-		/// Default copy assignment operator.
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns></returns>
-		CUniform& operator=(const CUniform&) = default;
+		CUniform(const CUniform &other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Default virtual destructor.
@@ -470,34 +332,118 @@ namespace agl
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		auto& operator()();
+		TReturn operator()();
 
 		/// <summary>
 		/// Returns the value.
 		/// </summary>
 		/// <returns>The value</returns>
-		const auto& operator()() const;
+		TReturn operator()() const;
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator auto&();
+		operator TReturn();
 
 		/// <summary>
 		/// Cast operator to value type the 'TReturn'.
 		/// </summary>
 		/// <returns>The value</returns>
-		operator const auto&() const;
+		operator TReturn() const;
 
 		/// <summary>
 		/// Passes the uniform to it's shader.
 		/// </summary>
 		virtual void passUniform() const override;
 
+		/// <summary>
+		/// Returns a copy of this uniform in a unique_ptr wrapper.
+		/// </summary>
+		/// <returns>The unique pointer</returns>
+		virtual std::unique_ptr<IUniform> clone() const override;
+
 	private:
-		TObject object_;
+		std::reference_wrapper<std::remove_reference_t<TObject>> object_;
 		TMethod method_;
+		CShaderUID shaderUID_;
+	};
+
+	/// <summary>
+	/// Uniform that must be updated every time it's retrieved.
+	/// The function which is used to return updated value is of 'TFunction' type.
+	/// The value returned by that function is of 'TReturn' type.
+	/// </summary>
+	template <typename TReturn, typename TFunction>
+	class CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>
+		: public IUniform
+	{
+	public:
+		using IUniform::IUniform;
+
+		/// <summary>
+		/// Constructs a uniform with 'name', namespace of 'parent' retrieved with the 'function'.
+		/// </summary>
+		/// <param name="name">The name of the uniform</param>
+		/// <param name="parent">The parent which aggregates this uniform</param>
+		/// <param name="method">An address of a function that will be called to retrieve the value</param>
+		/// <param name="shaderUID">the shader's unique identifier</param>
+		CUniform(const std::string &name, detail::TValue<TFunction> &&function, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
+
+		/// <summary>
+		/// Default virtual destructor.
+		/// </summary>
+		virtual ~CUniform() = default;
+
+		/// <summary>
+		/// Returns the uniform destination shader.
+		/// </summary>
+		/// <returns>The shader's unique identifier</returns>
+		const CShaderUID& getShader() const;
+
+		/// <summary>
+		/// Sets the uniform destination shader.
+		/// </summary>
+		/// <param name="shaderUID">The shader's unique identifier</param>
+		virtual void setShader(const CShaderUID &shaderUID) override;
+
+		/// <summary>
+		/// Returns the value.
+		/// </summary>
+		/// <returns>The value</returns>
+		TReturn operator()();
+
+		/// <summary>
+		/// Returns the value.
+		/// </summary>
+		/// <returns>The value</returns>
+		TReturn operator()() const;
+
+		/// <summary>
+		/// Cast operator to value type the 'TReturn'.
+		/// </summary>
+		/// <returns>The value</returns>
+		operator TReturn();
+
+		/// <summary>
+		/// Cast operator to value type the 'TReturn'.
+		/// </summary>
+		/// <returns>The value</returns>
+		operator TReturn() const;
+
+		/// <summary>
+		/// Passes the uniform to it's shader.
+		/// </summary>
+		virtual void passUniform() const override;
+
+		/// <summary>
+		/// Returns a copy of this uniform in a unique_ptr wrapper.
+		/// </summary>
+		/// <returns>The unique pointer</returns>
+		virtual std::unique_ptr<IUniform> clone() const override;
+
+	private:
+		TFunction function_;
 		CShaderUID shaderUID_;
 	};
 
