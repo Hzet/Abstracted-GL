@@ -3,7 +3,6 @@
 #include "log.hpp"
 #include "assert.hpp"
 #include "exception.hpp"
-#include "error.hpp"
 
 #ifdef AGL_DEBUG
 	#define AGL_CORE_CRITICAL(message, code, ...) \
@@ -21,7 +20,7 @@
 			AGL_ASSERT(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
 
-	#define AGL_ERRORL(message, code, ...) \
+	#define AGL_ERROR(message, code, ...) \
 		{ \
 			AGL_ASSERT(false, std::string("AGL error: [{}]\n") + message, code, __VA_ARGS__); \
 		}
