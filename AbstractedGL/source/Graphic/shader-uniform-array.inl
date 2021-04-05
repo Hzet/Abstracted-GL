@@ -1,19 +1,19 @@
 template <typename T>
-CUniformArray<T, detail::is_agl_uniform_t<T>>::CUniformArray(const std::string &name, IUniform const * const parent /*= nullptr*/)
+TUniformArray<T, detail::is_agl_uniform_t<T>>::TUniformArray(const std::string &name, IUniform const * const parent /*= nullptr*/)
 	: IUniform(name, parent),
 	lastCount_(0u)
 {
 }
 
 template <typename T>
-void CUniformArray<T, detail::is_agl_uniform_t<T>>::passUniform() const
+void TUniformArray<T, detail::is_agl_uniform_t<T>>::passUniform() const
 {
 	for (auto it = this->cbegin(); it != this->cend(); ++it)
 		it->passUniform();
 }
 
 template <typename T>
-void CUniformArray<T, detail::is_agl_uniform_t<T>>::setIndex(std::uint64_t index)
+void TUniformArray<T, detail::is_agl_uniform_t<T>>::setIndex(std::uint64_t index)
 {
 	IUniform::setIndex(index);
 
@@ -22,7 +22,7 @@ void CUniformArray<T, detail::is_agl_uniform_t<T>>::setIndex(std::uint64_t index
 }
 
 template <typename T>
-void CUniformArray<T, detail::is_agl_uniform_t<T>>::setShader(const CShaderUID &shaderUID)
+void TUniformArray<T, detail::is_agl_uniform_t<T>>::setShader(const CShaderUID &shaderUID)
 {
 	shaderUID_ = shaderUID;
 
@@ -31,7 +31,7 @@ void CUniformArray<T, detail::is_agl_uniform_t<T>>::setShader(const CShaderUID &
 }
 
 template <typename T>
-void CUniformArray<T, detail::is_agl_uniform_t<T>>::updateNamespace(const std::string &name)
+void TUniformArray<T, detail::is_agl_uniform_t<T>>::updateNamespace(const std::string &name)
 {
 	IUniform::updateNamespace(name);
 
@@ -40,7 +40,7 @@ void CUniformArray<T, detail::is_agl_uniform_t<T>>::updateNamespace(const std::s
 }
 
 template <typename T>
-void CUniformArray<T, detail::is_agl_uniform_t<T>>::onUpdate()
+void TUniformArray<T, detail::is_agl_uniform_t<T>>::onUpdate()
 {
 	std::uint64_t i = 0u;
 	for (auto it = this->begin(); it != this->end(); ++it, i++)
@@ -52,7 +52,7 @@ void CUniformArray<T, detail::is_agl_uniform_t<T>>::onUpdate()
 }
 
 template <typename T>
-std::unique_ptr<IUniform> CUniformArray<T, detail::is_agl_uniform_t<T>>::clone() const
+std::unique_ptr<IUniform> TUniformArray<T, detail::is_agl_uniform_t<T>>::clone() const
 {
-	return std::unique_ptr<IUniform>(new CUniformArray<T>(*this));
+	return std::unique_ptr<IUniform>(new TUniformArray<T>(*this));
 }

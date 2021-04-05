@@ -78,7 +78,7 @@ namespace agl
 	/// Declaration of a class to be specialized.
 	/// </summary>
 	template <typename, typename = void, typename = void, typename = void>
-	class CUniform
+	class TUniform
 	{
 	};
 
@@ -86,7 +86,7 @@ namespace agl
 	/// Uniform variable that contains a variable of type 'TReturn'.
 	/// </summary>
 	template <typename TReturn>
-	class CUniform<TReturn>
+	class TUniform<TReturn>
 		: public IUniform
 	{
 		using TType = std::conditional_t<std::is_reference_v<TReturn>, std::reference_wrapper<std::remove_reference_t<TReturn>>, TReturn>;
@@ -100,7 +100,7 @@ namespace agl
 		/// <param name="parent">The parent which aggregates this uniform</param>
 		/// <param name="value">The value</param>
 		/// <param name="shaderUID">the shader's unique identifier</param>
-		CUniform(const std::string &name, IUniform const * const parent = nullptr, detail::TValue<TReturn> &&value = {}, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
+		TUniform(const std::string &name, IUniform const * const parent = nullptr, detail::TValue<TReturn> &&value = {}, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
 
 		/// <summary>
 		/// Move constructor with the scope change.
@@ -108,7 +108,7 @@ namespace agl
 		/// </summary>
 		/// <param name="other">The other instance</param>
 		/// <param name="value">The value</param>
-		CUniform(CUniform &&other, detail::TValue<TReturn> &&value);
+		TUniform(TUniform &&other, detail::TValue<TReturn> &&value);
 
 		/// <summary>
 		/// Copy constructor with the scope change.
@@ -116,12 +116,12 @@ namespace agl
 		/// </summary>
 		/// <param name="other">The other instance</param>
 		/// <param name="value">The value</param>
-		CUniform(const CUniform &other, detail::TValue<TReturn> &&value);
+		TUniform(const TUniform &other, detail::TValue<TReturn> &&value);
 
 		/// <summary>
 		/// Default virtual destructor.
 		/// </summary>
-		virtual ~CUniform() = default;
+		virtual ~TUniform() = default;
 
 		/// <summary>
 		/// Returns the uniform destination shader.
@@ -181,7 +181,7 @@ namespace agl
 	/// The retrieve of the value is done by a method returning type 'TReturn' belonging to object 'TObject'.
 	/// </summary>
 	template <typename TReturn, typename TObject>
-	class CUniform<TReturn, TObject, detail::is_class_t<TObject>>
+	class TUniform<TReturn, TObject, detail::is_class_t<TObject>>
 		: public IUniform
 	{
 		using TMethod = detail::method_pointer_t<TReturn, TObject>;
@@ -197,7 +197,7 @@ namespace agl
 		/// <param name="object">An object on which the 'method' will be called</param>
 		/// <param name="method">An address of a method that will be called on an 'object'</param>
 		/// <param name="shaderUID">the shader's unique identifier</param>
-		CUniform(const std::string &name, detail::TValue<TObject> &&object, detail::TValue<TMethod> &&method, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
+		TUniform(const std::string &name, detail::TValue<TObject> &&object, detail::TValue<TMethod> &&method, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
 
 		/// <summary>
 		/// Move constructor with the scope change.
@@ -205,7 +205,7 @@ namespace agl
 		/// </summary>
 		/// <param name="other">The other instance</param>
 		/// <param name="object">The object on which the method will be called</param>
-		CUniform(CUniform &&other, detail::TValue<TObject> &&object);
+		TUniform(TUniform &&other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Copy constructor with the scope change.
@@ -213,12 +213,12 @@ namespace agl
 		/// </summary>
 		/// <param name="other">The other instance</param>
 		/// <param name="object">The object on which the method will be called</param>
-		CUniform(const CUniform &other, detail::TValue<TObject> &&object);
+		TUniform(const TUniform &other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Default virtual destructor.
 		/// </summary>
-		virtual ~CUniform() = default;
+		virtual ~TUniform() = default;
 
 		/// <summary>
 		/// Returns the uniform destination shader.
@@ -279,7 +279,7 @@ namespace agl
 	/// The method return value of 'TReturn' type and is called on object of type 'TObject'.
 	/// </summary>
 	template <typename TReturn, typename TObject, typename TMethod>
-	class CUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>
+	class TUniform<TReturn, TObject, TMethod, detail::is_class_method<TObject, TMethod>>
 		: public IUniform
 	{
 	public:
@@ -293,7 +293,7 @@ namespace agl
 		/// <param name="object">An object on which the 'method' will be called</param>
 		/// <param name="method">An address of a method that will be called on an 'object'</param>
 		/// <param name="shaderUID">the shader's unique identifier</param>
-		CUniform(const std::string &name, detail::TValue<TObject> &&object, detail::TValue<TMethod> &&method, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
+		TUniform(const std::string &name, detail::TValue<TObject> &&object, detail::TValue<TMethod> &&method, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
 
 		/// <summary>
 		/// Move constructor with the scope change.
@@ -301,7 +301,7 @@ namespace agl
 		/// </summary>
 		/// <param name="other">The other instance</param>
 		/// <param name="object">The object on which the method will be called</param>
-		CUniform(CUniform &&other, detail::TValue<TObject> &&object);
+		TUniform(TUniform &&other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Copy constructor with the scope change.
@@ -309,12 +309,12 @@ namespace agl
 		/// </summary>
 		/// <param name="other">The other instance</param>
 		/// <param name="object">The object on which the method will be called</param>
-		CUniform(const CUniform &other, detail::TValue<TObject> &&object);
+		TUniform(const TUniform &other, detail::TValue<TObject> &&object);
 
 		/// <summary>
 		/// Default virtual destructor.
 		/// </summary>
-		virtual ~CUniform() = default;
+		virtual ~TUniform() = default;
 
 		/// <summary>
 		/// Returns the uniform destination shader.
@@ -375,7 +375,7 @@ namespace agl
 	/// The value returned by that function is of 'TReturn' type.
 	/// </summary>
 	template <typename TReturn, typename TFunction>
-	class CUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>
+	class TUniform<TReturn, TFunction, detail::is_function_pointer_t<TFunction>>
 		: public IUniform
 	{
 	public:
@@ -388,12 +388,12 @@ namespace agl
 		/// <param name="parent">The parent which aggregates this uniform</param>
 		/// <param name="method">An address of a function that will be called to retrieve the value</param>
 		/// <param name="shaderUID">the shader's unique identifier</param>
-		CUniform(const std::string &name, detail::TValue<TFunction> &&function, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
+		TUniform(const std::string &name, detail::TValue<TFunction> &&function, IUniform const * const parent = nullptr, const CShaderUID &shaderUID = CShaderUID::InvalidValue{});
 
 		/// <summary>
 		/// Default virtual destructor.
 		/// </summary>
-		virtual ~CUniform() = default;
+		virtual ~TUniform() = default;
 
 		/// <summary>
 		/// Returns the uniform destination shader.

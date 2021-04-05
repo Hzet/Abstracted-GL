@@ -5,7 +5,7 @@
 
 namespace agl
 {
-	static std::int32_t updateTexture(const std::vector<CTextureUID>& textures, std::uint32_t count, CUniformArray<CUniform<std::int32_t>> &bindings, std::int32_t textureOffset)
+	static std::int32_t updateTexture(const std::vector<CTextureUID>& textures, std::uint32_t count, TUniformArray<TUniform<std::int32_t>> &bindings, std::int32_t textureOffset)
 	{
 		if (textures.size() != bindings.count())
 		{
@@ -24,11 +24,11 @@ namespace agl
 
 	CTextureMaterial::CTextureMaterial(const std::string &name, IUniform const * const parent /*= nullptr*/)
 		: IUniformPack(name, parent),
-		ambientCount_("ambient_count", { ambientBindings_ }, { &CUniformArray<CUniform<std::int32_t>>::count }, this),
+		ambientCount_("ambient_count", { ambientBindings_ }, { &TUniformArray<TUniform<std::int32_t>>::count }, this),
 		ambientBindings_("ambient", this),
-		specularCount_("specular_count", { specularBindings_ }, { &CUniformArray<CUniform<std::int32_t>>::count }, this),
+		specularCount_("specular_count", { specularBindings_ }, { &TUniformArray<TUniform<std::int32_t>>::count }, this),
 		specularBindings_("specular", this),
-		diffuseCount_("diffuse_count", { diffuseBindings_ }, { &CUniformArray<CUniform<std::int32_t>>::count }, this),
+		diffuseCount_("diffuse_count", { diffuseBindings_ }, { &TUniformArray<TUniform<std::int32_t>>::count }, this),
 		diffuseBindings_("diffuse", this)
 	{
 		addUniforms();

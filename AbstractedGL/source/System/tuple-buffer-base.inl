@@ -1,27 +1,27 @@
 
 template <class... Args>
 template <std::size_t I>
-constexpr void CTupleBufferBase<Args...>::CheckRange()
+constexpr void TTupleBufferBase<Args...>::CheckRange()
 {
 	if constexpr (I >= sizeof...(Args))
 		static_assert(false, "Buffer index out of bounds!");
 }
 
 template <class... Args>
-constexpr std::size_t CTupleBufferBase<Args...>::GetStrideCount()
+constexpr std::size_t TTupleBufferBase<Args...>::GetStrideCount()
 {
 	return sizeof...(Args);
 }
 
 template <class... Args>
-constexpr std::size_t CTupleBufferBase<Args...>::GetStrideSize()
+constexpr std::size_t TTupleBufferBase<Args...>::GetStrideSize()
 {
 	return GetElementOffset<sizeof...(Args)>();
 }
 
 template <class... Args>
 template <std::size_t I>
-constexpr std::size_t CTupleBufferBase<Args...>::GetElementSize()
+constexpr std::size_t TTupleBufferBase<Args...>::GetElementSize()
 {
 	if constexpr (I < sizeof...(Args))
 		return sizeof(std::tuple_element_t<I, std::tuple<Args...>>);
@@ -31,14 +31,14 @@ constexpr std::size_t CTupleBufferBase<Args...>::GetElementSize()
 
 template <class... Args>
 template <std::size_t I>
-constexpr std::size_t CTupleBufferBase<Args...>::GetElementOffset()
+constexpr std::size_t TTupleBufferBase<Args...>::GetElementOffset()
 {
 	return GetElementOffset_impl<I>() - GetElementSize<I>();
 }
 
 template <class... Args>
 template <std::size_t I>
-constexpr std::size_t CTupleBufferBase<Args...>::GetElementOffset_impl()
+constexpr std::size_t TTupleBufferBase<Args...>::GetElementOffset_impl()
 {
 	if constexpr (I == 0u)
 		return GetElementSize<I>();
@@ -48,7 +48,7 @@ constexpr std::size_t CTupleBufferBase<Args...>::GetElementOffset_impl()
 
 template <class... Args>
 template <std::size_t I>
-void CTupleBufferBase<Args...>::DestructElement(std::byte * const data)
+void TTupleBufferBase<Args...>::DestructElement(std::byte * const data)
 {
 	CheckRange<I>();
 
@@ -60,7 +60,7 @@ void CTupleBufferBase<Args...>::DestructElement(std::byte * const data)
 
 template <class... Args>
 template <std::size_t I>
-void CTupleBufferBase<Args...>::ConstructElement(std::byte * const data)
+void TTupleBufferBase<Args...>::ConstructElement(std::byte * const data)
 {
 	CheckRange<I>();
 
@@ -71,7 +71,7 @@ void CTupleBufferBase<Args...>::ConstructElement(std::byte * const data)
 
 template <class... Args>
 template <std::size_t I>
-void CTupleBufferBase<Args...>::DestructAll(std::byte * const data)
+void TTupleBufferBase<Args...>::DestructAll(std::byte * const data)
 {
 	CheckRange<I>();
 
@@ -83,7 +83,7 @@ void CTupleBufferBase<Args...>::DestructAll(std::byte * const data)
 
 template <class... Args>
 template <std::size_t I>
-void CTupleBufferBase<Args...>::ConstructAll(std::byte * const data)
+void TTupleBufferBase<Args...>::ConstructAll(std::byte * const data)
 {
 	CheckRange<I>();
 
@@ -95,7 +95,7 @@ void CTupleBufferBase<Args...>::ConstructAll(std::byte * const data)
 
 template <class... Args>
 template <std::size_t I, class U>
-void CTupleBufferBase<Args...>::ConstructElementValue(std::byte * const data, U &&value)
+void TTupleBufferBase<Args...>::ConstructElementValue(std::byte * const data, U &&value)
 {
 	CheckRange<I>();
 
@@ -108,7 +108,7 @@ void CTupleBufferBase<Args...>::ConstructElementValue(std::byte * const data, U 
 }
 
 template <class... Args>
-void CTupleBufferBase<Args...>::ConstructValueAll(std::byte * const data, Args&&... elems)
+void TTupleBufferBase<Args...>::ConstructValueAll(std::byte * const data, Args&&... elems)
 {
 	ConstructValueAll_impl(data, std::forward_as_tuple(std::forward<Args>(elems)...), std::make_index_sequence<sizeof...(Args)>{});
 }
@@ -116,14 +116,14 @@ void CTupleBufferBase<Args...>::ConstructValueAll(std::byte * const data, Args&&
 
 template <class... Args>
 template <class Tuple, std::size_t... Sequence>
-void CTupleBufferBase<Args...>::ConstructValueAll_impl(std::byte * const data, Tuple &&t, std::index_sequence<Sequence...>)
+void TTupleBufferBase<Args...>::ConstructValueAll_impl(std::byte * const data, Tuple &&t, std::index_sequence<Sequence...>)
 {
 	(ConstructElementValue<Sequence>(data, std::get<Sequence>(t)), ...);
 }
 
 template <class... Args>
 template <std::size_t I>
-auto * const  CTupleBufferBase<Args...>::GetPointer(std::byte * const data)
+auto * const  TTupleBufferBase<Args...>::GetPointer(std::byte * const data)
 {
 	CheckRange<I>();
 
@@ -134,7 +134,7 @@ auto * const  CTupleBufferBase<Args...>::GetPointer(std::byte * const data)
 
 template <class... Args>
 template <std::size_t I>
-auto const * const CTupleBufferBase<Args...>::GetPointer(std::byte const * const data)
+auto const * const TTupleBufferBase<Args...>::GetPointer(std::byte const * const data)
 {
 	CheckRange<I>();
 

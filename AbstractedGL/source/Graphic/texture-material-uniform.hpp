@@ -31,8 +31,8 @@ namespace agl
 		std::vector<CTextureUID> specular;
 
 	private:
-		using BindUniform = CUniformArray<CUniform<std::int32_t>>;
-		using CountUniform = CUniform<std::int32_t, const CUniformArray<CUniform<std::int32_t>>&, std::uint64_t(CUniformArray<CUniform<std::int32_t>>::*)()const>;
+		using BindUniform = TUniformArray<TUniform<std::int32_t>>;
+		using CountUniform = TUniform<std::int32_t, const TUniformArray<TUniform<std::int32_t>>&, std::uint64_t(TUniformArray<TUniform<std::int32_t>>::*)()const>;
 
 		void addUniforms();
 

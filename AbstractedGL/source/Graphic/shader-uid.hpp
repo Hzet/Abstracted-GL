@@ -14,7 +14,7 @@ namespace agl
 	/// <summary>
 	/// The unique identifier for shaders.
 	/// </summary>
-	using CShaderUID = system::CUID<graphics::SShaderUID>;
+	using CShaderUID = system::TUID<graphics::SShaderUID>;
 }
 
 namespace std

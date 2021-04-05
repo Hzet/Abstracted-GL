@@ -15,14 +15,14 @@ namespace agl
 	/// The buffer is a crossover the std::vector and std::tuple.
 	/// </summary>
 	template <class... Args>
-	class CTupleBuffer
-		: private impl::CTupleBufferBase<Args...>
+	class TTupleBuffer
+		: private impl::TTupleBufferBase<Args...>
 	{
 	public:
 		/// <summary>
 		/// Construct no elements, set the 'size_' to 0.
 		/// </summary>
-		CTupleBuffer() noexcept;
+		TTupleBuffer() noexcept;
 
 		/// <summary>
 		/// Construct only the first stride from variadic template parameters which is damn broken to me.
@@ -34,33 +34,33 @@ namespace agl
 		/// <summary>
 		/// Destruct all the elements contained by the buffer.
 		/// </summary>
-		~CTupleBuffer();
+		~TTupleBuffer();
 		
 		/// <summary>
 		/// Default move constructor.
 		/// </summary>
 		/// <param name=""></param>
-		CTupleBuffer(CTupleBuffer&&) = default;
+		TTupleBuffer(TTupleBuffer&&) = default;
 
 		/// <summary>
 		/// Default copy constructor.
 		/// </summary>
 		/// <param name=""></param>
-		CTupleBuffer(const CTupleBuffer&) = default;
+		TTupleBuffer(const TTupleBuffer&) = default;
 
 		/// <summary>
 		/// Default move assignment.
 		/// </summary>
 		/// <param name=""></param>
 		/// <returns></returns>
-		CTupleBuffer& operator=(CTupleBuffer&&) = default;
+		TTupleBuffer& operator=(TTupleBuffer&&) = default;
 
 		/// <summary>
 		/// Default copy assignment operator.
 		/// </summary>
 		/// <param name=""></param>
 		/// <returns></returns>
-		CTupleBuffer& operator=(const CTupleBuffer&) = default;
+		TTupleBuffer& operator=(const TTupleBuffer&) = default;
 
 		/// <summary>
 		/// Push back a stride.

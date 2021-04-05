@@ -81,7 +81,7 @@ namespace agl
 		virtual std::unique_ptr<IUniform> clone() const = 0;
 
 	private:
-		template <typename T, typename U> friend class CUniformArray;
+		template <typename T, typename U> friend class TUniformArray;
 
 		/// <summary>
 		/// Helper method to set the fullname of the instance.

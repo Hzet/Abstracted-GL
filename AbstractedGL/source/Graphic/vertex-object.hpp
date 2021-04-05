@@ -5,6 +5,7 @@
 #include "vertex-array.hpp"
 #include "renderer.hpp"
 #include "../System/tuple-buffer.hpp"
+#include "../System/importable.hpp"
 
 namespace agl
 {
@@ -14,46 +15,47 @@ namespace agl
 		/// An object that can be represented graphically. It has it's transform and is capable of storing vertices and indices.
 		/// </summary>
 		template <class... Args>
-		class CVertexObject
+		class TVertexObject
 			: public IDrawable,
-			public CTransformable
+			public CTransformable,
+			public importer::IImportable
 		{
 		public:
 			/// <summary>
 			/// Default constructor.
 			/// </summary>
-			CVertexObject() = default;
+			TVertexObject();
 
 			/// <summary>
 			/// Move constructor.
 			/// </summary>
 			/// <param name="other">The other object</param>
-			CVertexObject(CVertexObject &&other);
+			TVertexObject(TVertexObject &&other);
 
 			/// <summary>
 			/// Copy constructor.
 			/// </summary>
 			/// <param name="other">The other object</param>
-			CVertexObject(const CVertexObject &other);
+			TVertexObject(const TVertexObject &other);
 
 			/// <summary>
 			/// Default move assignment operator.
 			/// </summary>
 			/// <param name="other"></param>
 			/// <returns></returns>
-			CVertexObject& operator=(CVertexObject &&other) = default;
+			TVertexObject& operator=(TVertexObject &&other) = default;
 
 			/// <summary>
 			/// Default move assignment operator.
 			/// </summary>
 			/// <param name="other"></param>
 			/// <returns></returns>
-			CVertexObject& operator=(const CVertexObject &other) = default;
+			TVertexObject& operator=(const TVertexObject &other);
 
 			/// <summary>
 			/// Default virtual constructor.
 			/// </summary>
-			virtual ~CVertexObject() = default;
+			virtual ~TVertexObject() = default;
 
 			/// <summary>
 			/// Adds a stride of data to the vertices.
@@ -76,10 +78,22 @@ namespace agl
 			template <std::uint64_t I> const auto& getVertexAttribute(const std::uint64_t index) const;
 
 			/// <summary>
+			/// Returns the tuple buffer.
+			/// </summary>
+			/// <returns>The buffer</returns>
+			TTupleBuffer<Args...>& getVertices();
+
+			/// <summary>
+			/// Returns the tuple buffer.
+			/// </summary>
+			/// <returns>The buffer</returns>
+			const TTupleBuffer<Args...>& getVertices() const;
+
+			/// <summary>
 			/// Sets the vertices from a tuple buffer.
 			/// </summary>
 			/// <param name="vertices">The buffer</param>
-			void setVertices(const CTupleBuffer<Args...> &vertices);
+			void setVertices(const TTupleBuffer<Args...> &vertices);
 
 			/// <summary>
 			/// Sets the vertex attributes at 'I'th type index to contain 'vertices'.
@@ -161,7 +175,7 @@ namespace agl
 			void updateVArray() const;
 
 			std::uint64_t drawType_;
-			CTupleBuffer<Args...> vertices_;
+			TTupleBuffer<Args...> vertices_;
 			std::vector<std::uint32_t> indices_;
 
 			mutable bool vbUpdate_;
@@ -171,6 +185,17 @@ namespace agl
 			mutable CIndexBuffer iBuffer_;
 			mutable CVertexArray vArray_;
 		};
+
+		template <class... Args>
+		TVertexObject<Args...>& TVertexObject<Args...>::operator=(const TVertexObject &other)
+		{
+			CTransformable::operator=(other);
+			vertices_ = other.vertices_;
+			vbUpdate_ = true;
+			ibUpdate_ = true;
+
+			return *this;
+		}
 
 #include "vertex-object.inl"
 	}

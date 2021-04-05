@@ -2,6 +2,7 @@
 
 #include "vertex-object.hpp"
 #include "shader-manager.hpp"
+#include "default-agl-shaders.hpp"
 #include "shader-uniform-variable.hpp"
 
 namespace agl
@@ -10,46 +11,46 @@ namespace agl
 	/// Represents the mesh, to which is possible to add different non-owning uniforms.
 	/// </summary>
 	template <class... Args>
-	class CMesh
-		: public graphics::CVertexObject<Args...>
+	class TMesh
+		: public graphics::TVertexObject<Args...>
 	{
 	public:
 		/// <summary>
 		/// Constructor. 
 		/// Sets the 'transform' and 'inverseTransform' destinations to LIGHT_SHADER.
 		/// </summary>
-		CMesh();
+		TMesh();
 
 		/// <summary>
 		/// Move constructor.
 		/// </summary>
 		/// <param name="other">The other object</param>
-		CMesh(CMesh &&other);
+		TMesh(TMesh &&other);
 
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
 		/// <param name="other">The other object</param>
-		CMesh(const CMesh &other);
+		TMesh(const TMesh &other);
 
 		/// <summary>
 		/// Default move assignment operator.
 		/// </summary>
 		/// <param name="other"></param>
 		/// <returns></returns>
-		CMesh& operator=(CMesh &&other) = default;
+		TMesh& operator=(TMesh &&other);
 
 		/// <summary>
 		/// Default copy assignment operator.
 		/// </summary>
 		/// <param name="other"></param>
 		/// <returns></returns>
-		CMesh& operator=(const CMesh &other) = default;
+		TMesh& operator=(const TMesh &other);
 
 		/// <summary>
 		/// Default virtual destructor.
 		/// </summary>
-		virtual ~CMesh() = default;
+		virtual ~TMesh() = default;
 		
 		/// <summary>
 		/// Returns assigned destination shader.
@@ -75,8 +76,8 @@ namespace agl
 		/// <param name="renderer">The renderer</param>
 		virtual void draw(const CRenderer &renderer) const override;
 	
-		CUniform<const CTransform&, const CTransformable&> transform;
-		CUniform<const CTransform&, const CTransformable&> inverseTransform;
+		TUniform<const CTransform&, const CTransformable&> transform;
+		TUniform<const CTransform&, const CTransformable&> inverseTransform;
 	private:
 		CShaderUID myShader_;
 		std::vector<std::unique_ptr<IUniform>> uniforms_;

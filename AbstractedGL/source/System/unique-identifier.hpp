@@ -9,7 +9,7 @@ namespace agl
 		/// Helper template class to create a register of unique identifiers for a dummy template typename T.
 		/// </summary>
 		template <typename T>
-		class CUID
+		class TUID
 		{
 		public:
 			/// <summary>
@@ -20,43 +20,43 @@ namespace agl
 			/// <summary>
 			/// Registers the unique identifier for this instance.
 			/// </summary>
-			CUID();
+			TUID();
 
 			/// <summary>
 			/// Creates the instance but postpones the registration of the unique identifier.
 			/// </summary>
 			/// <param name="">The invalid type</param>
-			CUID(InvalidValue);
+			TUID(InvalidValue);
 
 			/// <summary>
 			/// Move constructor.
 			/// </summary>
 			/// <param name="other">the other object</param>
-			CUID(CUID &&other);
+			TUID(TUID &&other);
 
 			/// <summary>
 			/// Increases the unique identifier's references count.
 			/// </summary>
 			/// <param name="other">the other object</param>
-			CUID(const CUID &other);
+			TUID(const TUID &other);
 
 			/// <summary>
 			/// Unregister the unique identifier.
 			/// </summary>
-			virtual ~CUID();
+			virtual ~TUID();
 
 			/// <summary>
 			/// Swap the identifiers.
 			/// </summary>
 			/// <param name="other">the other object</param>
 			/// <returns>reference to *this</returns>
-			CUID& operator=(CUID &&other);
+			TUID& operator=(TUID &&other);
 
 			/// <summary>
 			/// Increases the unique identifier's references count.
 			/// </summary>
 			/// <param name="other">the other object</param>
-			CUID& operator=(const CUID &other);
+			TUID& operator=(const TUID &other);
 
 			/// <summary>
 			/// Implicit cast operator.
@@ -75,7 +75,7 @@ namespace agl
 			/// Unregister the unique identifier.
 			/// </summary>
 			/// <param name="uid">The unique identifier's value</param>
-			static void Unregister(CUID<T> &uid);
+			static void Unregister(TUID<T> &uid);
 
 			/// <summary>
 			/// Returns a reference to the registered identifiers.
@@ -87,7 +87,7 @@ namespace agl
 			/// Helper constructor.
 			/// </summary>
 			/// <param name="uid"></param>
-			CUID(std::uint64_t uid);
+			TUID(std::uint64_t uid);
 
 			std::uint64_t uid_;
 		};

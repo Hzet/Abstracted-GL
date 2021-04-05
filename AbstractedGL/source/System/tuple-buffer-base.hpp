@@ -6,7 +6,7 @@
 
 namespace agl
 {
-	template <class... Args> class CTupleBuffer;
+	template <class... Args> class TTupleBuffer;
 
 	namespace impl
 	{
@@ -15,9 +15,9 @@ namespace agl
 		/// to manage and maintain the buffer's data.
 		/// </summary>
 		template <class... Args>
-		class CTupleBufferBase
+		class TTupleBufferBase
 		{
-			friend class agl::CTupleBuffer<Args...>;
+			friend class agl::TTupleBuffer<Args...>;
 
 			/// <summary>
 			/// Get the size of the stride in bytes.

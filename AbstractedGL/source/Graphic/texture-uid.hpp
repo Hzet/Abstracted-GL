@@ -9,7 +9,7 @@ namespace agl
 		struct STextureUID {};
 	}
 
-	using CTextureUID = system::CUID<texture::STextureUID>;
+	using CTextureUID = system::TUID<texture::STextureUID>;
 }
 
 namespace std

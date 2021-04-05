@@ -1,5 +1,5 @@
 template <class... Args>
-CTupleBuffer<Args...>::CTupleBuffer() noexcept
+TTupleBuffer<Args...>::TTupleBuffer() noexcept
 {}
 /*
 
@@ -11,13 +11,13 @@ CTupleBuffer<Args...>::CTupleBuffer(Args&&... elems)
 */
 
 template <class... Args>
-CTupleBuffer<Args...>::~CTupleBuffer()
+TTupleBuffer<Args...>::~TTupleBuffer()
 {
 	clear();
 }
 
 template <class... Args>
-void CTupleBuffer<Args...>::push_back(Args&&... elems)
+void TTupleBuffer<Args...>::push_back(Args&&... elems)
 {
 	data_.resize((getCount() + 1u) * getStrideSize());
 
@@ -25,7 +25,7 @@ void CTupleBuffer<Args...>::push_back(Args&&... elems)
 }
 
 template <class... Args>
-void CTupleBuffer<Args...>::clear()
+void TTupleBuffer<Args...>::clear()
 {
 	const std::size_t size = data_.size();
 	std::byte * const data = data_.data();
@@ -37,7 +37,7 @@ void CTupleBuffer<Args...>::clear()
 }
 
 template <class... Args>
-void CTupleBuffer<Args...>::resize(std::size_t count)
+void TTupleBuffer<Args...>::resize(std::size_t count)
 {
 	if (count == getCount())
 		return;
@@ -70,32 +70,32 @@ void CTupleBuffer<Args...>::resize(std::size_t count)
 
 
 template <class... Args>
-std::size_t CTupleBuffer<Args...>::getSize() const
+std::size_t TTupleBuffer<Args...>::getSize() const
 {
 	return data_.size();
 }
 
 template <class... Args>
-std::size_t CTupleBuffer<Args...>::getCount() const
+std::size_t TTupleBuffer<Args...>::getCount() const
 {
 	return getSize() / getStrideSize();
 }
 
 template <class... Args>
-std::size_t CTupleBuffer<Args...>::getStrideSize() const
+std::size_t TTupleBuffer<Args...>::getStrideSize() const
 {
 	return this->StrideSize_;
 }
 
 template <class... Args>
-std::size_t CTupleBuffer<Args...>::getStrideCount() const
+std::size_t TTupleBuffer<Args...>::getStrideCount() const
 {
 	return this->StrideCount_;
 }
 
 template <class... Args>
 template <std::size_t I>
-auto& CTupleBuffer<Args...>::get(std::size_t index)
+auto& TTupleBuffer<Args...>::get(std::size_t index)
 {
 	this->CheckRange<I>();
 
@@ -104,7 +104,7 @@ auto& CTupleBuffer<Args...>::get(std::size_t index)
 
 template <class... Args>
 template <std::size_t I>
-const auto& CTupleBuffer<Args...>::get(std::size_t index) const
+const auto& TTupleBuffer<Args...>::get(std::size_t index) const
 {
 	this->CheckRange<I>();
 
@@ -112,35 +112,35 @@ const auto& CTupleBuffer<Args...>::get(std::size_t index) const
 }
 
 template <class... Args>
-std::byte const * const CTupleBuffer<Args...>::getData() const
+std::byte const * const TTupleBuffer<Args...>::getData() const
 {
 	return data_.data();
 }
 
 template <class... Args>
 template <std::size_t I>
-auto * const CTupleBuffer<Args...>::getPointer(std::size_t index)
+auto * const TTupleBuffer<Args...>::getPointer(std::size_t index)
 {
 	return this->GetPointer<I>(data_.data() + getStrideSize() * index);
 }
 
 template <class... Args>
 template <std::size_t I>
-auto const * const CTupleBuffer<Args...>::getPointer(std::size_t index) const
+auto const * const TTupleBuffer<Args...>::getPointer(std::size_t index) const
 {
 	return this->GetPointer<I>(data_.data() + getStrideSize() * index);
 }
 
 template <class... Args>
 template <std::size_t I>
-std::byte * const CTupleBuffer<Args...>::getStoragePointer(std::size_t index)
+std::byte * const TTupleBuffer<Args...>::getStoragePointer(std::size_t index)
 {
 	return data_.data() + this->GetElementOffset<I>() + getStrideSize() * index;
 }
 
 template <class... Args>
 template <std::size_t I>
-std::byte const * const CTupleBuffer<Args...>::getStoragePointer(std::size_t index) const
+std::byte const * const TTupleBuffer<Args...>::getStoragePointer(std::size_t index) const
 {
 	return data_.data() + this->GetElementOffset<I>() + getStrideSize() * index;
 }

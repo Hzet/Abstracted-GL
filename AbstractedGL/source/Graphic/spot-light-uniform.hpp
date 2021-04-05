@@ -25,16 +25,16 @@ namespace agl
 
 		virtual std::unique_ptr<IUniform> clone() const override;
 
-		CUniform<glm::vec4> ambient;
-		CUniform<glm::vec4> diffuse;
-		CUniform<glm::vec4> specular;
+		TUniform<glm::vec4> ambient;
+		TUniform<glm::vec4> diffuse;
+		TUniform<glm::vec4> specular;
 
-		CUniform<glm::vec3> range; // constant, linear, quadratic
+		TUniform<glm::vec3> range; // constant, linear, quadratic
 
-		CUniform<glm::vec2> cutOff; // inner, outer
+		TUniform<glm::vec2> cutOff; // inner, outer
 
-		CUniform<glm::vec3> direction;
-		CUniform<glm::vec4> color;
+		TUniform<glm::vec3> direction;
+		TUniform<glm::vec4> color;
 	};
 
 }

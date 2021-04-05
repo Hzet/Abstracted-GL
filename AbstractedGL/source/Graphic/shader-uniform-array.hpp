@@ -31,7 +31,7 @@ namespace agl
 	/// A declaration of the array of the uniforms.
 	/// </summary>
 	template <typename T, typename = void>
-	class CUniformArray
+	class TUniformArray
 	{
 	};
 
@@ -41,7 +41,7 @@ namespace agl
 	/// The array itself is an uniform and the appropriate interface is implemented within it.
 	/// </summary>
 	template <typename T>
-	class CUniformArray<T, detail::is_agl_uniform_t<T>>
+	class TUniformArray<T, detail::is_agl_uniform_t<T>>
 		: public IUniform,
 		public system::IInheritableVector<T>
 	{
@@ -49,14 +49,14 @@ namespace agl
 		/// <summary>
 		/// Defaulted constructor.
 		/// </summary>
-		CUniformArray() = default;
+		TUniformArray() = default;
 
 		/// <summary>
 		/// Creates the uniform with 'name' in 'parent's scope.
 		/// </summary>
 		/// <param name="name">The uniform's name</param>
 		/// <param name="parent">The parent which aggregates this uniform</param>
-		CUniformArray(const std::string &name, IUniform const * const parent = nullptr);
+		TUniformArray(const std::string &name, IUniform const * const parent = nullptr);
 
 		/// <summary>
 		/// Passes all of the uniforms to it's shaders.
