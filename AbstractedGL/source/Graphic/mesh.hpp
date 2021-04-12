@@ -1,87 +1,51 @@
 #pragma once
 
-#include "vertex-object.hpp"
-#include "shader-manager.hpp"
-#include "default-agl-shaders.hpp"
-#include "shader-uniform-variable.hpp"
+#include "mesh-template.hpp"
 
 namespace agl
 {
 	/// <summary>
-	/// Represents the mesh, to which is possible to add different non-owning uniforms.
+	/// Default mesh class for users that do not want or need to go into the details.
+	/// Contains Vertices, Normals, Texture Coordinates
 	/// </summary>
-	template <class... Args>
-	class TMesh
-		: public graphics::TVertexObject<Args...>
+	class CMesh
+		: public TMesh<glm::vec3, glm::vec3, glm::vec2>
 	{
 	public:
 		/// <summary>
-		/// Constructor. 
-		/// Sets the 'transform' and 'inverseTransform' destinations to LIGHT_SHADER.
+		/// Returns the vertices.
 		/// </summary>
-		TMesh();
+		/// <returns>The vertices</returns>
+		const std::vector<glm::vec3>& getVertices() const;
 
 		/// <summary>
-		/// Move constructor.
+		/// Sets the vertices.
 		/// </summary>
-		/// <param name="other">The other object</param>
-		TMesh(TMesh &&other);
+		/// <param name="vertices">The vertices</param>
+		void setVertices(const std::vector<glm::vec3> &vertices);
 
 		/// <summary>
-		/// Copy constructor.
+		/// Returns the normals.
 		/// </summary>
-		/// <param name="other">The other object</param>
-		TMesh(const TMesh &other);
+		/// <returns>The normals</returns>
+		const std::vector<glm::vec3>& getNormals() const;
 
 		/// <summary>
-		/// Default move assignment operator.
+		/// Sets the normals.
 		/// </summary>
-		/// <param name="other"></param>
-		/// <returns></returns>
-		TMesh& operator=(TMesh &&other);
+		/// <param name="normals">The normals</param>
+		void setNormals(const std::vector<glm::vec3> &normals);
 
 		/// <summary>
-		/// Default copy assignment operator.
+		/// Returns the texture coordinates.
 		/// </summary>
-		/// <param name="other"></param>
-		/// <returns></returns>
-		TMesh& operator=(const TMesh &other);
+		/// <returns>The texture coordinates</returns>
+		const std::vector<glm::vec2>& getTexCoords() const;
 
 		/// <summary>
-		/// Default virtual destructor.
+		/// Sets the texture coordinates.
 		/// </summary>
-		virtual ~TMesh() = default;
-		
-		/// <summary>
-		/// Returns assigned destination shader.
-		/// </summary>
-		/// <returns>The shader's unique identifier</returns>
-		const CShaderUID& getShader() const;
-
-		/// <summary>
-		/// Sets the destination shader.
-		/// </summary>
-		/// <param name="uid">The shader's unique identifier</param>
-		void setShader(const CShaderUID &uid);
-
-		/// <summary>
-		/// Adds a uniform to be send on every 'draw' call.
-		/// </summary>
-		/// <param name="uniform">The uniform</param>
-		void addUniform(const IUniform &uniform);
-
-		/// <summary>
-		/// Draw the vertices and pass all uniforms to the shaders.
-		/// </summary>
-		/// <param name="renderer">The renderer</param>
-		virtual void draw(const CRenderer &renderer) const override;
-	
-		TUniform<const CTransform&, const CTransformable&> transform;
-		TUniform<const CTransform&, const CTransformable&> inverseTransform;
-	private:
-		CShaderUID myShader_;
-		std::vector<std::unique_ptr<IUniform>> uniforms_;
+		/// <param name="coords">The texture coordinates</param>
+		void setTexCoords(const std::vector<glm::vec2> &coords);
 	};
-
-#include "mesh.inl"
 }
