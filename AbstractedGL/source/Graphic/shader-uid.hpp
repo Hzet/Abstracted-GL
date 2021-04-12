@@ -3,18 +3,15 @@
 
 namespace agl
 {
-	namespace graphics
-	{
-		/// <summary>
-		/// The dummy type.
-		/// </summary>
-		struct SShaderUID {};
-	}
-
 	/// <summary>
 	/// The unique identifier for shaders.
 	/// </summary>
-	using CShaderUID = system::TUID<graphics::SShaderUID>;
+	class CShaderUID
+		: public system::TUID<CShaderUID>
+	{
+	public:
+		using system::TUID<CShaderUID>::TUID;
+	};
 }
 
 namespace std

@@ -3,13 +3,16 @@
 #include "../System/unique-identifier.hpp"
 
 namespace agl
-{
-	namespace texture
+{	
+	/// <summary>
+	/// The unique identifier for shaders.
+	/// </summary>
+	class CTextureUID
+		: public system::TUID<CTextureUID>
 	{
-		struct STextureUID {};
-	}
-
-	using CTextureUID = system::TUID<texture::STextureUID>;
+	public:
+		using system::TUID<CTextureUID>::TUID;
+	};
 }
 
 namespace std
