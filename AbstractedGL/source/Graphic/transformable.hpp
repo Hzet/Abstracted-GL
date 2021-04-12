@@ -17,16 +17,18 @@ namespace agl
 		CTransformable();
 
 		/// <summary>
-		/// Default move constructor.
+		/// Move constructor.
+		/// Sets the parent transformation to nullptr.
 		/// </summary>
 		/// <param name=""></param>
-		CTransformable(CTransformable&&) = default;
+		CTransformable(CTransformable &&other);
 
 		/// <summary>
-		/// Default copy constructor.
+		/// Copy constructor.
+		/// Sets the parent transformation to nullptr.
 		/// </summary>
 		/// <param name=""></param>
-		CTransformable(const CTransformable&) = default;
+		CTransformable(const CTransformable &other);
 
 		/// <summary>
 		/// Default move assignment operator.
@@ -143,6 +145,28 @@ namespace agl
 		/// </returns>
 		const CTransform& getInverseTransform() const;
 
+		/// <summary>
+		/// Checks whether this object has a precedent transformation.
+		/// </summary>
+		/// <returns>
+		/// True - the object has got a parent transformation
+		/// False - the object has not got a parent transformation 
+		/// </returns>
+		bool hasParent() const;
+
+		/// <summary>
+		/// Returns the parent transformation.
+		/// Before using this method, the user is obligated to check whether, the object has a parent transformation.
+		/// </summary>
+		/// <returns>The parent transformation</returns>
+		const CTransformable& getParent() const;
+
+		/// <summary>
+		/// Sets the preceding transformation to this object.
+		/// </summary>
+		/// <param name="parent">The parent transformation</param>
+		void setParent(const CTransformable &parent);
+
 	private:
 		/// <summary>
 		/// Update matrices.
@@ -153,6 +177,7 @@ namespace agl
 		glm::vec3 origin_;
 		glm::vec3 position_;
 		glm::vec3 rotation_;
+		const CTransformable *parent_;
 
 		mutable bool requireUpdate_;
 		mutable CTransform transform_;

@@ -10,7 +10,30 @@ namespace agl
 		scale_(1.f),
 		origin_(0.f),
 		position_(0.f),
-		rotation_(0.f)
+		rotation_(0.f),
+		parent_(nullptr)
+	{
+	}
+
+
+	CTransformable::CTransformable(CTransformable &&other)
+		: requireUpdate_(false),
+		scale_(std::move(other.scale_)),
+		origin_(std::move(other.origin_)),
+		position_(std::move(other.position_)),
+		rotation_(std::move(other.rotation_)),
+		parent_(nullptr)
+	{
+	}
+
+
+	CTransformable::CTransformable(const CTransformable &other)
+		: requireUpdate_(false),
+		scale_(other.scale_),
+		origin_(other.origin_),
+		position_(other.position_),
+		rotation_(other.rotation_),
+		parent_(nullptr)
 	{
 	}
 
@@ -100,17 +123,37 @@ namespace agl
 		return inverseTransform_;
 	}
 
+	bool CTransformable::hasParent() const
+	{
+		return parent_ != nullptr;
+	}
+
+	const CTransformable& CTransformable::getParent() const
+	{
+		return *parent_;
+	}
+
+	void CTransformable::setParent(const CTransformable &parent)
+	{
+		parent_ = &parent;
+	}
+
 	void CTransformable::update() const
 	{
-		if (!requireUpdate_)
+		if (!requireUpdate_ && !hasParent())
 			return;
-
+		else if (hasParent())
+			if (!getParent().requireUpdate_)
+				return;
+		
 		transform_ = CTransform();
-		inverseTransform_ = CTransform();
 
 		transform_.translate(origin_ + position_);
 		transform_.scale(scale_);
 		transform_.rotate(rotation_);
+
+		if (hasParent())
+			transform_ = getParent().getTransform() * transform_;
 
 		inverseTransform_ = glm::inverse(static_cast<glm::mat4>(transform_));
 
