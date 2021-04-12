@@ -30,6 +30,17 @@ TVertexObject<Args...>::TVertexObject(const TVertexObject &other)
 }
 
 template <class... Args>
+TVertexObject<Args...>& TVertexObject<Args...>::operator=(const TVertexObject &other)
+{
+	CTransformable::operator=(other);
+	vertices_ = other.vertices_;
+	vbUpdate_ = true;
+	ibUpdate_ = true;
+
+	return *this;
+}
+
+template <class... Args>
 void TVertexObject<Args...>::addVertex(Args&&... args)
 {
 	vbUpdate_ = true;
@@ -63,6 +74,19 @@ template <class... Args>
 const TTupleBuffer<Args...>& TVertexObject<Args...>::getVertices() const
 {
 	return vertices_;
+}
+
+template <class... Args>
+template <std::size_t I>
+auto TVertexObject<Args...>::getVertices() const
+{
+	using TType = std::tuple_element_t<I, std::tuple<Args...>>;
+	std::vector<TType> result(vertices_.getStrideSize());
+
+	for (std::uint64_t i = 0u; i < result.size(); i++)
+		result[i] = vertices_.get<I>(i);
+
+	return result;
 }
 
 template <class... Args>

@@ -5,7 +5,6 @@
 #include "vertex-array.hpp"
 #include "renderer.hpp"
 #include "../System/tuple-buffer.hpp"
-#include "../System/importable.hpp"
 
 namespace agl
 {
@@ -17,8 +16,7 @@ namespace agl
 		template <class... Args>
 		class TVertexObject
 			: public IDrawable,
-			public CTransformable,
-			public importer::IImportable
+			public CTransformable
 		{
 		public:
 			/// <summary>
@@ -88,6 +86,12 @@ namespace agl
 			/// </summary>
 			/// <returns>The buffer</returns>
 			const TTupleBuffer<Args...>& getVertices() const;
+
+			/// <summary>
+			/// Returns the vertices converted to std::vector from a given index in the tuple buffer
+			/// </summary>
+			/// <returns>The vertices</returns>
+			template <std::size_t I> auto getVertices() const;
 
 			/// <summary>
 			/// Sets the vertices from a tuple buffer.
@@ -185,17 +189,6 @@ namespace agl
 			mutable CIndexBuffer iBuffer_;
 			mutable CVertexArray vArray_;
 		};
-
-		template <class... Args>
-		TVertexObject<Args...>& TVertexObject<Args...>::operator=(const TVertexObject &other)
-		{
-			CTransformable::operator=(other);
-			vertices_ = other.vertices_;
-			vbUpdate_ = true;
-			ibUpdate_ = true;
-
-			return *this;
-		}
 
 #include "vertex-object.inl"
 	}
