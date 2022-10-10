@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resource">
+      <UniqueIdentifier>{bb71c470-f3b3-4829-9a26-93140371a731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{05af622e-aae6-484f-9343-8b3cbd99330d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics">
+      <UniqueIdentifier>{565660cb-c148-4d58-b624-2e8918ceb231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\texture">
+      <UniqueIdentifier>{d6f1c6de-3460-44e7-9667-63ab249b4931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\shader">
+      <UniqueIdentifier>{ccffec08-3519-40cb-b87b-26c19764e2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\render">
+      <UniqueIdentifier>{8a896899-a42e-4b06-ae2f-73d6220f98b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system">
+      <UniqueIdentifier>{92ac5055-9d89-4368-8088-884a64bc4c17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system\debug">
+      <UniqueIdentifier>{5a01e9c9-e48f-4a45-91f1-955d83aeb4c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system\glcore">
+      <UniqueIdentifier>{4168e172-cbc1-4a41-a1cd-11f39aaaf36c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility">
+      <UniqueIdentifier>{fbc07623-80a0-4da8-9e1a-7e6350075e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{88879dd7-b77e-49b6-b946-eb60baad9f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs">
+      <UniqueIdentifier>{98077b1a-1563-490e-90a1-1ee5605bdc40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\component">
+      <UniqueIdentifier>{baa72dc1-1c98-4948-855b-40def71adb7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\registry">
+      <UniqueIdentifier>{b630ffdd-e835-4350-8b59-7b87417edfdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\registry\component">
+      <UniqueIdentifier>{19056726-e857-4bc8-86ae-da1cba17a7ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\registry\system">
+      <UniqueIdentifier>{86356da8-ab3a-4382-8e0c-dc0cab51a7d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\registry\entity">
+      <UniqueIdentifier>{64f048df-0280-463a-8313-4821c634457d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\entity">
+      <UniqueIdentifier>{94fef62b-de81-4ed7-80e5-eb84416e219c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\system">
+      <UniqueIdentifier>{ddc05a8b-e9ca-4183-b80d-c92ef99cfdb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\signal">
+      <UniqueIdentifier>{8f3e1f9b-0ab3-4d1c-b2c9-3eb19d9fe3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\view">
+      <UniqueIdentifier>{296b0250-093a-4895-880e-d60759332ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\ecs\signature">
+      <UniqueIdentifier>{e820bf3f-3b6d-4def-99c3-32454fac2cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs">
+      <UniqueIdentifier>{c07483ac-80c7-4950-b21e-84ff70b42e20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component">
+      <UniqueIdentifier>{dbc25d03-b3cd-43ad-a79d-df9c720a0593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component\render">
+      <UniqueIdentifier>{71cb7039-1a8a-4887-b1a0-f29fa5e6c233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component\transform">
+      <UniqueIdentifier>{06aec539-794b-4185-8e43-b363eb48b4d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\system">
+      <UniqueIdentifier>{6dbd9bc7-c1b0-4152-81ee-dedba937edc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component\uniform">
+      <UniqueIdentifier>{7e0db879-5d30-40fc-a8c4-d5103025f08b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\system\render">
+      <UniqueIdentifier>{d4eb9594-e7e9-4173-a2e5-19595c9b7c96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component\camera">
+      <UniqueIdentifier>{50d60df8-8384-4122-bf24-0cd4c2fe821a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\shader\uniforms">
+      <UniqueIdentifier>{0cb11dcb-4616-4097-97c9-c2f4798fae94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utility\uid">
+      <UniqueIdentifier>{0e19f87d-d1e3-49c3-8477-a41f65a3353e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\system\uniform">
+      <UniqueIdentifier>{adbe0090-e4ac-458a-9092-095887c0df0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\types">
+      <UniqueIdentifier>{35387ca7-89fc-4e0b-a6b0-b4de0e819f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component\material">
+      <UniqueIdentifier>{c8af1e54-275c-4e46-b789-06ebb6f99c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system\core">
+      <UniqueIdentifier>{d83e5971-417a-4430-a95f-faae49584c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system\core\misc">
+      <UniqueIdentifier>{a6785101-8dc4-4822-8f67-45258bbd06c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system\core\app">
+      <UniqueIdentifier>{fc1f0441-a1bf-4b54-8152-d0fc0d1b67f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system\core\enums">
+      <UniqueIdentifier>{4ea0416c-c4d5-472a-97e7-7f9637c5a40b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component\light">
+      <UniqueIdentifier>{4944a26c-e777-4d8f-8e17-a0e4706707e3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\graphics\render\index-buffer.cpp">
+      <Filter>src\graphics\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\render\vertex-array.cpp">
+      <Filter>src\graphics\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\render\vertex-buffer.cpp">
+      <Filter>src\graphics\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\render\vertex-layout.cpp">
+      <Filter>src\graphics\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\shader-manager.cpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\shader-program.cpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\shader-sub-program.cpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\texture\texture2d.cpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\texture\texture-atlas.cpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\texture\texture-base.cpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system\debug\exceptions.cpp">
+      <Filter>src\system\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system\glcore\destructive-move.cpp">
+      <Filter>src\system\glcore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system\glcore\gl-core.cpp">
+      <Filter>src\system\glcore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\system\glcore\gl-object.cpp">
+      <Filter>src\system\glcore</Filter>
+    </ClCompile>
+    <ClCompile Include="external\glad\glad.c">
+      <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\registry.cpp">
+      <Filter>src\utility\ecs\registry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\registry-component.cpp">
+      <Filter>src\utility\ecs\registry\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\registry-entity.cpp">
+      <Filter>src\utility\ecs\registry\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\registry-system.cpp">
+      <Filter>src\utility\ecs\registry\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\entity.cpp">
+      <Filter>src\utility\ecs\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\signature.cpp">
+      <Filter>src\utility\ecs\signature</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\transform.cpp">
+      <Filter>src\graphics\ecs\component\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\system\render-system.cpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\camera-base.cpp">
+      <Filter>src\graphics\ecs\component\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\camera-orthographic.cpp">
+      <Filter>src\graphics\ecs\component\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\camera-perspective.cpp">
+      <Filter>src\graphics\ecs\component\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\group-base.cpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\ecs\system-base.cpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\transformable.cpp">
+      <Filter>src\graphics\ecs\component\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp">
+      <Filter>src\utility\ecs\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility\unique-identifier-manager.cpp">
+      <Filter>src\utility\uid</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\render\render-buffer.cpp">
+      <Filter>src\graphics\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp">
+      <Filter>src\graphics\ecs\system\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\types\color.cpp">
+      <Filter>src\graphics\types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\entry-point.cpp">
+      <Filter>src\system\core\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\window.cpp">
+      <Filter>src\system\core\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\misc\timestep.cpp">
+      <Filter>src\system\core\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\misc\timer.cpp">
+      <Filter>src\system\core\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\misc\log.cpp">
+      <Filter>src\system\core\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\application.cpp">
+      <Filter>src\system\core\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\input.cpp">
+      <Filter>src\system\core\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\uniform-array.cpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\uniform-group.cpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\uniform-wrapper.cpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\uniform-base.cpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
+      <Filter>src\graphics\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\render\vertex-array.hpp">
+      <Filter>src\graphics\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\render\vertex-buffer.hpp">
+      <Filter>src\graphics\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\render\vertex-layout.hpp">
+      <Filter>src\graphics\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\shader-manager.hpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\shader-program.hpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\shader-sub-program.hpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\shader-uid.hpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture2d.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-atlas.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-base.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-uid.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\system\debug\assert.hpp">
+      <Filter>src\system\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\system\debug\debug.hpp">
+      <Filter>src\system\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\system\debug\error.hpp">
+      <Filter>src\system\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\system\debug\exceptions.hpp">
+      <Filter>src\system\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\system\glcore\destructive-move.hpp">
+      <Filter>src\system\glcore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\system\glcore\gl-core.hpp">
+      <Filter>src\system\glcore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\system\glcore\gl-object.hpp">
+      <Filter>src\system\glcore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\inheritable-vector.hpp">
+      <Filter>src\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\tuple-buffer.hpp">
+      <Filter>src\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\tuple-buffer-base.hpp">
+      <Filter>src\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\benchmark.hpp">
+      <Filter>src\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\config.hpp">
+      <Filter>src\utility\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\component-array.hpp">
+      <Filter>src\utility\ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\component-array-base.hpp">
+      <Filter>src\utility\ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\component-type-uid.hpp">
+      <Filter>src\utility\ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\registry.hpp">
+      <Filter>src\utility\ecs\registry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\registry-component.hpp">
+      <Filter>src\utility\ecs\registry\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\registry-entity.hpp">
+      <Filter>src\utility\ecs\registry\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\registry-system.hpp">
+      <Filter>src\utility\ecs\registry\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\entity.hpp">
+      <Filter>src\utility\ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\entity-uid.hpp">
+      <Filter>src\utility\ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\signal.hpp">
+      <Filter>src\utility\ecs\signal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\system.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\signature.hpp">
+      <Filter>src\utility\ecs\signature</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\view.hpp">
+      <Filter>src\utility\ecs\view</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\transform.hpp">
+      <Filter>src\graphics\ecs\component\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\render-system.hpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\camera-base.hpp">
+      <Filter>src\graphics\ecs\component\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\camera-orthographic.hpp">
+      <Filter>src\graphics\ecs\component\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\camera-perspective.hpp">
+      <Filter>src\graphics\ecs\component\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system-group.hpp">
+      <Filter>src\graphics\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\group.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\group-base.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\group-type-uid.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\system-base.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\system-type-uid.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\ecs\agl-system-order.cpp">
+      <Filter>src\graphics\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\agl-system-order.hpp">
+      <Filter>src\graphics\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\system-object.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ordered-list.hpp">
+      <Filter>src\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\transformable.hpp">
+      <Filter>src\graphics\ecs\component\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\type-unique-identifier.hpp">
+      <Filter>src\utility\uid</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\unique-identifier.hpp">
+      <Filter>src\utility\uid</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\unique-identifier-manager.hpp">
+      <Filter>src\utility\uid</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\static-unique-identifier.hpp">
+      <Filter>src\utility\uid</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\mesh.hpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\render\render-buffer.hpp">
+      <Filter>src\graphics\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\uniform-system.hpp">
+      <Filter>src\graphics\ecs\system\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\model.hpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\position.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\type-base.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\rotation.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\tangent.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\bitangent.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\texture-coordinates.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\normal.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\color.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\sorted-vector.hpp">
+      <Filter>src\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\render\render-type-uid.hpp">
+      <Filter>src\graphics\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\types\types.hpp">
+      <Filter>src\graphics\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\texture-material.hpp">
+      <Filter>src\graphics\ecs\component\material</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\application.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\event.hpp">
+      <Filter>src\system\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\event-types.hpp">
+      <Filter>src\system\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\window.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\misc\timestep.hpp">
+      <Filter>src\system\core\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\misc\log.hpp">
+      <Filter>src\system\core\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\misc\timer.hpp">
+      <Filter>src\system\core\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\resource.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-type.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\window-data.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\enums\gl-feature-type.hpp">
+      <Filter>src\system\core\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\enums\input-mode.hpp">
+      <Filter>src\system\core\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\enums\gl-profile-type.hpp">
+      <Filter>src\system\core\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\shader-type.hpp">
+      <Filter>src\graphics\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\ecs.hpp">
+      <Filter>src\utility\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\enums\gl-draw-type.hpp">
+      <Filter>src\system\core\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\input.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\enums\gl-clear-type.hpp">
+      <Filter>src\system\core\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-data.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-data-type-uid.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-group.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-register.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-wrapper.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp">
+      <Filter>src\graphics\ecs\component\light</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp">
+      <Filter>src\graphics\ecs\component\light</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera-uniform.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\material.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\spot-light.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\texture-material.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform-uniform.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\material.hpp">
+      <Filter>src\graphics\ecs\component\material</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\basic.fsh">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="resource\light.fsh">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="include\agl\graphics\render\vertex-layout.inl">
+      <Filter>src\graphics\render</Filter>
+    </None>
+    <None Include="include\agl\utility\inheritable-vector.inl">
+      <Filter>src\utility</Filter>
+    </None>
+    <None Include="include\agl\utility\tuple-buffer.inl">
+      <Filter>src\utility</Filter>
+    </None>
+    <None Include="include\agl\utility\tuple-buffer-base.inl">
+      <Filter>src\utility</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\component-array.inl">
+      <Filter>src\utility\ecs\component</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\registry.inl">
+      <Filter>src\utility\ecs\registry</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\registry-component.inl">
+      <Filter>src\utility\ecs\registry\component</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\registry-system.inl">
+      <Filter>src\utility\ecs\registry\system</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\entity.inl">
+      <Filter>src\utility\ecs\entity</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\signal.inl">
+      <Filter>src\utility\ecs\signal</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\signature.inl">
+      <Filter>src\utility\ecs\signature</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\view.inl">
+      <Filter>src\utility\ecs\view</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\registry-entity.inl">
+      <Filter>src\utility\ecs\registry\entity</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\group.inl">
+      <Filter>src\utility\ecs\system</Filter>
+    </None>
+    <None Include="include\agl\utility\ecs\system-object.inl">
+      <Filter>src\utility\ecs\system</Filter>
+    </None>
+    <None Include="include\agl\utility\ordered-list.inl">
+      <Filter>src\utility</Filter>
+    </None>
+    <None Include="include\agl\utility\unique-identifier.inl">
+      <Filter>src\utility\uid</Filter>
+    </None>
+    <None Include="include\agl\utility\static-unique-identifier.inl">
+      <Filter>src\utility\uid</Filter>
+    </None>
+    <None Include="include\agl\graphics\render\render-buffer.inl">
+      <Filter>src\graphics\render</Filter>
+    </None>
+    <None Include="include\agl\graphics\types\type-base.inl">
+      <Filter>src\graphics\types</Filter>
+    </None>
+    <None Include="include\agl\core\misc\log.inl">
+      <Filter>src\system\core\misc</Filter>
+    </None>
+    <None Include="include\agl\core\app\application.inl">
+      <Filter>src\system\core\app</Filter>
+    </None>
+    <None Include="include\agl\graphics\shader\uniform-array.inl">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </None>
+    <None Include="include\agl\graphics\shader\uniform-group.inl">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </None>
+    <None Include="include\agl\graphics\shader\uniform-register.inl">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </None>
+    <None Include="include\agl\graphics\shader\uniform-wrapper.inl">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\camera-uniform.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\directional-light.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\material.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\spot-light.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\texture-material.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\transform-uniform.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="resource\basic.vsh">
+      <Filter>resource</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\light.vsh">
+      <Filter>resource</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

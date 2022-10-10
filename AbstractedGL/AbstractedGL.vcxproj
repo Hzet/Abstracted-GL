@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{21cfb665-954c-4450-af3a-9bfa7bc8c542}</ProjectGuid>
+    <RootNamespace>AbstractedGL</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)</OutDir>
+    <TargetName>$(ProjectName)-d-32</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)</OutDir>
+    <TargetName>$(ProjectName)-32</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)</OutDir>
+    <TargetName>$(ProjectName)-d-64</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)</OutDir>
+    <TargetName>$(ProjectName)-64</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\vendor;C:\Compilers &amp; Libraries\opengl\glad\include;C:\Compilers &amp; Libraries\glm\include;C:\Compilers &amp; Libraries\opengl\glfw-3.3.2.bin.WIN32\include;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\include;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\Visual Leak Detector\include;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);C:\Compilers &amp; Libraries\ASSIMP\assimp-5.0.1\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;AGL_DEBUG;GLM_FORCE_SWIZZLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Compilers &amp; Libraries\opengl\glfw-3.3.2.bin.WIN32\lib-vc2017;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\lib\Win32;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\Visual Leak Detector\lib\Win32;C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)include\agl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;AGL_DEBUG;GLM_FORCE_SWIZZLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc141-mtd.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\vendor;C:\Compilers &amp; Libraries\opengl\glad\include;C:\Compilers &amp; Libraries\glm\include;C:\Compilers &amp; Libraries\opengl\glfw-3.3.2.bin.WIN32\include;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\include;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\Visual Leak Detector\include;C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);C:\Compilers &amp; Libraries\ASSIMP\assimp-5.0.1\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;GLM_FORCE_SWIZZLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Compilers &amp; Libraries\opengl\glfw-3.3.2.bin.WIN32\lib-vc2017;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\lib\Win32;C:\Users\haze\source\repos\Logic Expressions Library\Logic Expressions Library\resources\Visual Leak Detector\Visual Leak Detector\lib\Win32;C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)include\agl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;GLM_FORCE_SWIZZLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc141-mt.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="external\glad\glad.c" />
+    <ClInclude Include="include\agl\core\enums\gl-clear-type.hpp" />
+    <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp" />
+    <ClCompile Include="src\core\app\application.cpp" />
+    <ClCompile Include="src\core\app\entry-point.cpp" />
+    <ClCompile Include="src\core\app\input.cpp" />
+    <ClCompile Include="src\core\app\window.cpp" />
+    <ClCompile Include="src\core\misc\log.cpp" />
+    <ClCompile Include="src\core\misc\timer.cpp" />
+    <ClCompile Include="src\core\misc\timestep.cpp" />
+    <ClCompile Include="src\graphics\ecs\component\camera-base.cpp" />
+    <ClCompile Include="src\graphics\ecs\component\camera-orthographic.cpp" />
+    <ClCompile Include="src\graphics\ecs\component\camera-perspective.cpp" />
+    <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
+    <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
+    <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
+    <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp" />
+    <ClCompile Include="src\graphics\render\index-buffer.cpp" />
+    <ClCompile Include="src\graphics\render\render-buffer.cpp" />
+    <ClCompile Include="src\graphics\render\vertex-array.cpp" />
+    <ClCompile Include="src\graphics\render\vertex-buffer.cpp" />
+    <ClCompile Include="src\graphics\render\vertex-layout.cpp" />
+    <ClCompile Include="src\graphics\shader\shader-manager.cpp" />
+    <ClCompile Include="src\graphics\shader\shader-program.cpp" />
+    <ClCompile Include="src\graphics\shader\shader-sub-program.cpp" />
+    <ClCompile Include="src\graphics\shader\uniform-array.cpp" />
+    <ClCompile Include="src\graphics\shader\uniform-base.cpp" />
+    <ClCompile Include="src\graphics\shader\uniform-group.cpp" />
+    <ClCompile Include="src\graphics\shader\uniform-wrapper.cpp" />
+    <ClCompile Include="src\graphics\texture\texture-atlas.cpp" />
+    <ClCompile Include="src\graphics\texture\texture-base.cpp" />
+    <ClCompile Include="src\graphics\texture\texture2d.cpp" />
+    <ClCompile Include="src\graphics\types\color.cpp" />
+    <ClCompile Include="src\system\debug\exceptions.cpp" />
+    <ClCompile Include="src\system\glcore\destructive-move.cpp" />
+    <ClCompile Include="src\system\glcore\gl-core.cpp" />
+    <ClCompile Include="src\system\glcore\gl-object.cpp" />
+    <ClCompile Include="src\utility\ecs\entity.cpp" />
+    <ClCompile Include="src\utility\ecs\group-base.cpp" />
+    <ClCompile Include="src\utility\ecs\registry-component.cpp" />
+    <ClCompile Include="src\utility\ecs\registry-entity.cpp" />
+    <ClCompile Include="src\utility\ecs\registry-system.cpp" />
+    <ClCompile Include="src\utility\ecs\registry.cpp" />
+    <ClCompile Include="src\utility\ecs\signature.cpp" />
+    <ClCompile Include="src\utility\ecs\system-base.cpp" />
+    <ClCompile Include="src\utility\unique-identifier-manager.cpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera-uniform.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\material.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\spot-light.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\texture-material.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform-uniform.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-data-type-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-data.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-group.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-register.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-wrapper.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\agl\core\app\application.hpp" />
+    <ClInclude Include="include\agl\core\app\input.hpp" />
+    <ClInclude Include="include\agl\core\app\resource.hpp" />
+    <ClInclude Include="include\agl\core\app\window-data.hpp" />
+    <ClInclude Include="include\agl\core\app\window.hpp" />
+    <ClInclude Include="include\agl\core\enums\gl-draw-type.hpp" />
+    <ClInclude Include="include\agl\core\enums\gl-feature-type.hpp" />
+    <ClInclude Include="include\agl\core\enums\gl-profile-type.hpp" />
+    <ClInclude Include="include\agl\core\enums\input-mode.hpp" />
+    <ClInclude Include="include\agl\core\event-types.hpp" />
+    <ClInclude Include="include\agl\core\event.hpp" />
+    <ClInclude Include="include\agl\core\misc\log.hpp" />
+    <ClInclude Include="include\agl\core\misc\timer.hpp" />
+    <ClInclude Include="include\agl\core\misc\timestep.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\camera-base.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\camera-orthographic.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\camera-perspective.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\model.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\mesh.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\texture-material.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\transform.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\transformable.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\agl-system-order.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\system-group.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\system\render-system.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\system\uniform-system.hpp" />
+    <ClInclude Include="include\agl\graphics\render\index-buffer.hpp" />
+    <ClInclude Include="include\agl\graphics\render\render-buffer.hpp" />
+    <ClInclude Include="include\agl\graphics\render\render-type-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\render\vertex-array.hpp" />
+    <ClInclude Include="include\agl\graphics\render\vertex-buffer.hpp" />
+    <ClInclude Include="include\agl\graphics\render\vertex-layout.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\shader-manager.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\shader-program.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\shader-sub-program.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\shader-type.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\shader-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-atlas.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-base.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-type.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture2d.hpp" />
+    <ClInclude Include="include\agl\graphics\types\bitangent.hpp" />
+    <ClInclude Include="include\agl\graphics\types\color.hpp" />
+    <ClInclude Include="include\agl\graphics\types\normal.hpp" />
+    <ClInclude Include="include\agl\graphics\types\position.hpp" />
+    <ClInclude Include="include\agl\graphics\types\rotation.hpp" />
+    <ClInclude Include="include\agl\graphics\types\tangent.hpp" />
+    <ClInclude Include="include\agl\graphics\types\texture-coordinates.hpp" />
+    <ClInclude Include="include\agl\graphics\types\type-base.hpp" />
+    <ClInclude Include="include\agl\graphics\types\types.hpp" />
+    <ClInclude Include="include\agl\system\debug\assert.hpp" />
+    <ClInclude Include="include\agl\system\debug\debug.hpp" />
+    <ClInclude Include="include\agl\system\debug\error.hpp" />
+    <ClInclude Include="include\agl\system\debug\exceptions.hpp" />
+    <ClInclude Include="include\agl\system\glcore\destructive-move.hpp" />
+    <ClInclude Include="include\agl\system\glcore\gl-core.hpp" />
+    <ClInclude Include="include\agl\system\glcore\gl-object.hpp" />
+    <ClInclude Include="include\agl\utility\benchmark.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\ecs.hpp" />
+    <ClInclude Include="include\agl\utility\sorted-vector.hpp" />
+    <ClInclude Include="include\agl\utility\static-unique-identifier.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\component-array-base.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\component-array.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\component-type-uid.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\config.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\entity-uid.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\entity.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\group-base.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\group-type-uid.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\group.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\registry-component.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\registry-entity.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\registry-system.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\registry.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\signal.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\signature.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\system-base.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\system-object.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\system-type-uid.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\system.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\view.hpp" />
+    <ClInclude Include="include\agl\utility\inheritable-vector.hpp" />
+    <ClInclude Include="include\agl\utility\ordered-list.hpp" />
+    <ClInclude Include="include\agl\utility\tuple-buffer-base.hpp" />
+    <ClInclude Include="include\agl\utility\tuple-buffer.hpp" />
+    <ClInclude Include="include\agl\utility\type-unique-identifier.hpp" />
+    <ClInclude Include="include\agl\utility\unique-identifier-manager.hpp" />
+    <ClInclude Include="include\agl\utility\unique-identifier.hpp" />
+    <ClInclude Include="src\graphics\ecs\agl-system-order.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\agl\core\app\application.inl" />
+    <None Include="include\agl\core\misc\log.inl" />
+    <None Include="include\agl\graphics\ecs\component\uniform\camera-uniform.inl" />
+    <None Include="include\agl\graphics\ecs\component\uniform\directional-light.inl" />
+    <None Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.inl" />
+    <None Include="include\agl\graphics\ecs\component\uniform\material.inl" />
+    <None Include="include\agl\graphics\ecs\component\uniform\spot-light.inl" />
+    <None Include="include\agl\graphics\ecs\component\uniform\texture-material.inl" />
+    <None Include="include\agl\graphics\ecs\component\uniform\transform-uniform.inl" />
+    <None Include="include\agl\graphics\render\render-buffer.inl" />
+    <None Include="include\agl\graphics\render\vertex-layout.inl" />
+    <None Include="include\agl\graphics\shader\uniform-array.inl" />
+    <None Include="include\agl\graphics\shader\uniform-group.inl" />
+    <None Include="include\agl\graphics\shader\uniform-register.inl" />
+    <None Include="include\agl\graphics\shader\uniform-wrapper.inl" />
+    <None Include="include\agl\graphics\types\type-base.inl" />
+    <None Include="include\agl\utility\static-unique-identifier.inl" />
+    <None Include="include\agl\utility\ecs\component-array.inl" />
+    <None Include="include\agl\utility\ecs\entity.inl" />
+    <None Include="include\agl\utility\ecs\group.inl" />
+    <None Include="include\agl\utility\ecs\registry-component.inl" />
+    <None Include="include\agl\utility\ecs\registry-entity.inl" />
+    <None Include="include\agl\utility\ecs\registry-system.inl" />
+    <None Include="include\agl\utility\ecs\registry.inl" />
+    <None Include="include\agl\utility\ecs\signal.inl" />
+    <None Include="include\agl\utility\ecs\signature.inl" />
+    <None Include="include\agl\utility\ecs\system-object.inl" />
+    <None Include="include\agl\utility\ecs\view.inl" />
+    <None Include="include\agl\utility\inheritable-vector.inl" />
+    <None Include="include\agl\utility\ordered-list.inl" />
+    <None Include="include\agl\utility\tuple-buffer-base.inl" />
+    <None Include="include\agl\utility\tuple-buffer.inl" />
+    <None Include="include\agl\utility\unique-identifier.inl" />
+    <None Include="resource\basic.fsh">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="resource\light.fsh">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="resource\basic.vsh">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="resource\light.vsh">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

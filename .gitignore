@@ -1,0 +1,16 @@
+#Files
+**.*
+!*.sln
+!*.gitignore
+!*.vcxproj
+!*.vcxproj.filters
+!*.hpp
+!*.cpp
+!*.h
+!*.c
+!*.dll
+!*.lib
+!*.inl
+!*.fsh
+!*.vsh
+*main.cpp
