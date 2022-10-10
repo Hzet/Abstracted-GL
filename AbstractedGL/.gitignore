@@ -6,6 +6,10 @@
 !*.vcxproj.filters
 !*.hpp
 !*.cpp
+!*.h
+!*.c
+!*.dll
+!*.lib
 !*.inl
 !*.fsh
 !*.vsh
