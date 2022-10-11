@@ -7,6 +7,8 @@ namespace agl
 {
 	void uniform_array::send(const entity &e)
 	{
+		static const auto& sh_manager = application::get_resource<shader_manager>();
+		
 		const auto &sig = e.get_signature();
 
 		for (auto i = 0ul; i < m_uniforms.size(); i++)
@@ -14,14 +16,11 @@ namespace agl
 			if (!sig[m_uniforms[i]->get_component_type_uid()])
 				update_uniform(sig, i);
 
-			for (auto &v : m_uniforms[i]->get_shader_uids())
-			{
-				static const auto& manager = application::get_resource<shader_manager>();
-				const auto &s = manager.get_shader(v);
-				s.set_active();
 
-				m_uniforms[i]->send(s, e);
-			}
+			const auto &s = sh_manager.get_shader(m_uniforms[i]->get_shader_uid());
+			s.set_active();
+
+			m_uniforms[i]->send(s, e);
 		}
 	}
 

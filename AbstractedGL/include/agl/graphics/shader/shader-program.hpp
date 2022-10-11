@@ -110,49 +110,49 @@ namespace agl
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void set_uniform(const std::string &name, const float value) const;
+		void set_uniform(std::int32_t location, const float value) const;
 
 		/// <summary>
 		/// Assign 'value' to a std::int32_t u named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void set_uniform(const std::string &name, const std::int32_t value) const;
+		void set_uniform(std::int32_t location, const std::int32_t value) const;
 
 		/// <summary>
 		/// Assign 'value' to a std::uint32_t u named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void set_uniform(const std::string &name, const std::uint32_t value) const;
+		void set_uniform(std::int32_t location, const std::uint32_t value) const;
 
 		/// <summary>
 		/// Assign 'value' to a glm::vec2 u named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void set_uniform(const std::string &name, const glm::vec2 &value) const;
+		void set_uniform(std::int32_t location, const glm::vec2 &value) const;
 
 		/// <summary>
 		/// Assign 'value' to a glm::vec3 u named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void set_uniform(const std::string &name, const glm::vec3 &value) const;
+		void set_uniform(std::int32_t location, const glm::vec3 &value) const;
 
 		/// <summary>
 		/// Assign 'value' to a glm::vec4 u named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void set_uniform(const std::string &name, const glm::vec4 &value) const;
+		void set_uniform(std::int32_t location, const glm::vec4 &value) const;
 
 		/// <summary>
 		/// Assign 'value' to a glm::mat4 u named 'name'.
 		/// </summary>
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
-		void set_uniform(const std::string &name, const glm::mat4 &value) const;
+		void set_uniform(std::int32_t location, const glm::mat4 &value) const;
 
 		/// <summary>
 		/// </summary>
@@ -164,13 +164,7 @@ namespace agl
 		/// <param name="name">Uniform name</param>
 		/// <param name="value">New value</param>
 		/// <param name="count">Element count</param>
-		void set_uniform(const std::string &name, std::int32_t const * const value, std::uint64_t count) const;
-
-	private:
-		friend class shader_manager;
-
-	private:
-		void set_uid(shader_uid id_shader);
+		void set_uniform(std::int32_t location, std::int32_t const * const value, std::uint64_t count) const;
 		
 		/// <summary>
 		/// Returns the location in the s program of the variable 'name'.
@@ -178,6 +172,12 @@ namespace agl
 		/// <param name="name">The variable's name</param>
 		/// <returns>The location of the variable</returns>
 		std::int32_t get_location(const std::string &name) const;
+
+	private:
+		friend class shader_manager;
+
+	private:
+		void set_uid(shader_uid id_shader);
 
 		/// <summary>
 		/// Set s type 'bit'.

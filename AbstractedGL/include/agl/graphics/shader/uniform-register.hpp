@@ -11,6 +11,7 @@ namespace agl
 	public:
 		using data_uniform<TData>::data_uniform;
 
+		register_uniform(std::string const& name);
 		virtual ~register_uniform() = default;
 		
 	private:
@@ -22,6 +23,12 @@ namespace agl
 
 		virtual void register_me() const;
 	};
+
+	template <typename TData, typename... TComponents>
+	register_uniform<TData, TComponents...>::register_uniform(std::string const& name)
+		: data_uniform<TData>{ name }
+	{
+	}
 
 #include "graphics/shader/uniform-register.inl"
 }

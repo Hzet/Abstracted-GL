@@ -57,6 +57,7 @@ auto const cube_position = std::vector<agl::position>{
 	{-0.5f,  0.5f,  0.5f},
 	{-0.5f,  0.5f, -0.5f}
 };
+
 auto const cube_color = std::vector<agl::color> {
 	{1.f, 1.f, 1.f, 1.f},
 	{1.f, 1.f, 1.f, 1.f},
@@ -157,7 +158,7 @@ public:
 			if (agl::input::key_pressed(agl::ESCAPE))
 			{
 				shutdown();
-				return;
+				break;
 			}
 			if (agl::input::key_pressed(agl::A))
 			{
@@ -197,7 +198,7 @@ public:
 			m_window.display();
 		}
 
-		AGL_LOG_INFO("\nAverage FPS: {}\nFrames: {}", frames / timer.elapsed().seconds(), frames);
+		AGL_LOG_INFO("\nAverage FPS: {}\nAverage frame time: {}ms\nFrames: {}\nDuration: {}s", frames / timer.elapsed().seconds(), timer.elapsed().milliseconds() / frames, frames, timer.elapsed().seconds());
 	}
 };
 
@@ -211,7 +212,7 @@ namespace agl
 
 		auto wnd = window{};
 
-		wnd.create("Test app", { 800, 600 });
+		wnd.create("Test app", { 1920, 1080 });
 		wnd.set_clear_color({ 0.f, 1.f, 1.f, 1.f });
 		wnd.set_clear_buffers(static_cast<gl_clear_type>(CLEAR_COLOR | CLEAR_DEPTH));
 		wnd.set_clear_color({ 0.05f, 0.1f, 0.2f, 1.f });

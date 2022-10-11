@@ -217,7 +217,6 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera-uniform.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\spot-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\texture-material.hpp" />

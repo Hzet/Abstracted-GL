@@ -4,7 +4,7 @@ namespace agl
 {
 	const uniform_base& uniform_wrapper_base::get_uniform() const
 	{
-		return *uniform_;
+		return *m_uniform;
 	}
 }
 

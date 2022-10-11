@@ -1,18 +1,5 @@
-template <typename TData> 
-void uniform_array::add_uniform()
-{
-	add_uniform<TData>(std::initializer_list<shader_uid>{ });
-}
-
-
 template <typename TData>
 void uniform_array::add_uniform(shader_uid id_shader)
-{
-	add_uniform<TData>(std::initializer_list<shader_uid>{ id_shader });
-}
-
-template <typename TData>
-void uniform_array::add_uniform(std::initializer_list<shader_uid> id_shaders)
 {
 	if (!has_uniform<TData>())
 	{
@@ -24,35 +11,18 @@ void uniform_array::add_uniform(std::initializer_list<shader_uid> id_shaders)
 
 	auto &u = *get_uniform_pointer<TData>();
 
-	for (const auto &id_shader : id_shaders)
-		u.add_shader_uid(id_shader);
+	u.set_shader_uid(id_shader);
 }
 
 template <typename TData> 
 void uniform_array::remove_uniform()
-{
-	remove_uniform<data_uniform>(std::initializer_list<shader_uid>{ });
-}
-
-template <typename TData> 
-void uniform_array::remove_uniform(shader_uid id_shader)
-{
-	remove_uniform<TData>(std::initializer_list<shader_uid>{ id_shader });
-}
-
-template <typename TData>
-void uniform_array::remove_uniform(std::initializer_list<shader_uid> id_shaders)
 {
 	for (auto it = m_uniforms.cbegin(); it != m_uniforms.cend(); ++it)
 		if ((*it)->get_data_type_uid() == TUniformDataTypeUID<TData>::value())
 		{
 			auto &u = *(*it)->get();
 
-			for (const auto &id_shader : id_shaders)
-				u.remove_shader_uid(id_shader);
-
-			if (u.get_shader_uids().empty())
-				m_uniforms.erase(it);
+			it = m_uniforms.erase(it);
 
 			break;
 		}

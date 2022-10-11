@@ -566,9 +566,6 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform.hpp">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>

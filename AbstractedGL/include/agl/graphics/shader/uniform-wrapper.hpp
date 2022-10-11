@@ -12,7 +12,7 @@ namespace agl
 		const uniform_base& get_uniform() const;
 
 	protected:
-		std::unique_ptr<uniform_base> uniform_;
+		std::unique_ptr<uniform_base> m_uniform;
 	};
 
 	template <typename TData, typename TComponent>

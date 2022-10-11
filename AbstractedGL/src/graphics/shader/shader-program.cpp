@@ -186,44 +186,44 @@ namespace agl
 		return result;
 	}
 
-	void shader::set_uniform(const std::string &name, const float value) const
+	void shader::set_uniform(std::int32_t location, const float value) const
 	{
-		glUniform1f(get_location(name), value);
+		glUniform1f(location, value);
 	}
 
-	void shader::set_uniform(const std::string &name, const std::int32_t value) const
+	void shader::set_uniform(std::int32_t location, const std::int32_t value) const
 	{
-		AGL_CALL(glUniform1i(get_location(name), value));
+		AGL_CALL(glUniform1i(location, value));
 	}
 
-	void shader::set_uniform(const std::string &name, const std::uint32_t value) const
+	void shader::set_uniform(std::int32_t location, const std::uint32_t value) const
 	{
-		AGL_CALL(glUniform1ui(get_location(name), value));
+		AGL_CALL(glUniform1ui(location, value));
 	}
 
-	void shader::set_uniform(const std::string &name, const glm::vec2 &value) const
+	void shader::set_uniform(std::int32_t location, const glm::vec2 &value) const
 	{
-		AGL_CALL(glUniform2f(get_location(name), value.x, value.y));
+		AGL_CALL(glUniform2f(location, value.x, value.y));
 	}
 
-	void shader::set_uniform(const std::string &name, const glm::vec3 &value) const
+	void shader::set_uniform(std::int32_t location, const glm::vec3 &value) const
 	{
-		AGL_CALL(glUniform3f(get_location(name), value.x, value.y, value.z));
+		AGL_CALL(glUniform3f(location, value.x, value.y, value.z));
 	}
 
-	void shader::set_uniform(const std::string &name, const glm::vec4 &value) const
+	void shader::set_uniform(std::int32_t location, const glm::vec4 &value) const
 	{
-		AGL_CALL(glUniform4f(get_location(name), value.x, value.y, value.z, value.w));
+		AGL_CALL(glUniform4f(location, value.x, value.y, value.z, value.w));
 	}
 
-	void shader::set_uniform(const std::string &name, const glm::mat4 &value) const
+	void shader::set_uniform(std::int32_t location, const glm::mat4 &value) const
 	{
-		AGL_CALL(glUniformMatrix4fv(get_location(name), 1u, GL_FALSE, glm::value_ptr(value)));
+		AGL_CALL(glUniformMatrix4fv(location, 1u, GL_FALSE, glm::value_ptr(value)));
 	}
 
-	void shader::set_uniform(const std::string &name, std::int32_t const * const value, std::uint64_t count) const
+	void shader::set_uniform(std::int32_t location, std::int32_t const * const value, std::uint64_t count) const
 	{
-		AGL_CALL(glUniform1iv(get_location(name), count, value));
+		AGL_CALL(glUniform1iv(location, count, value));
 	}
 
 	void shader::set_uid(shader_uid id_shader)

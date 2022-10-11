@@ -19,6 +19,13 @@ namespace agl
 
 	private:
 		bool bindTexture(const texture_uid &id_texture_2d);
+
+		virtual void update_uniform_locations(shader const& sh) override;
+
+	private:
+		std::int32_t m_ambient;
+		std::int32_t m_diffuse;
+		std::int32_t m_specular;
 	};
 
 #include "graphics/ecs/component/uniform/texture-material.inl"

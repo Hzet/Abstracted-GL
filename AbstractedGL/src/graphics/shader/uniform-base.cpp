@@ -3,8 +3,9 @@
 namespace agl
 {
 	uniform_base::uniform_base(const std::string &name)
+		: m_name{ name }
+		, m_update_uniform_locations{ true }
 	{
-		set_name(name);
 	}
 
 	uniform_base::uniform_base(uniform_data_type_uid id_uniform_data_type, component_type_uid id_component_type)
@@ -23,9 +24,11 @@ namespace agl
 		return m_id_component_type_uid;
 	}
 
-	void uniform_base::set_name(const std::string &name)
+	void uniform_base::set_name(std::string const& name)
 	{
-		m_name = name + ".";
+		m_update_uniform_locations = true;
+
+		m_name = name;
 	}
 
 	const std::string& uniform_base::get_name() const
@@ -33,32 +36,15 @@ namespace agl
 		return m_name;
 	}
 
-	void uniform_base::add_shader_uid(shader_uid id_shader)
+	void uniform_base::set_shader_uid(shader_uid id_shader)
 	{
-		if (!has_shader_uid(id_shader))
-			m_id_shader.push_back(id_shader);
+		m_update_uniform_locations = true;
+
+		m_id_shader = id_shader;
 	}
 
-	const std::vector<shader_uid>& uniform_base::get_shader_uids() const
+	shader_uid uniform_base::get_shader_uid() const
 	{
 		return m_id_shader;
-	}
-
-	bool uniform_base::has_shader_uid(shader_uid id_shader) const
-	{
-		for (auto &v : m_id_shader)
-			if (v == id_shader)
-				return true;
-		return false;
-	}
-
-	void uniform_base::remove_shader_uid(shader_uid id_shader)
-	{
-		for (auto it = m_id_shader.cbegin(); it != m_id_shader.cend(); ++it)
-			if (*it == id_shader)
-			{
-				m_id_shader.erase(it);
-				break;
-			}
 	}
 }

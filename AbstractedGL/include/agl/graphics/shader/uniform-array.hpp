@@ -14,13 +14,9 @@ namespace agl
 	class uniform_array
 	{
 	public:
-		template <typename TData> void add_uniform();
-		template <typename TData> void add_uniform(shader_uid id_shader);
-		template <typename TData> void add_uniform(std::initializer_list<shader_uid> id_shaders);
+		template <typename TData> void add_uniform(shader_uid id_shader = shader_uid::INVALID);
 
 		template <typename TData> void remove_uniform();
-		template <typename TData> void remove_uniform(shader_uid id_shader);
-		template <typename TData> void remove_uniform(std::initializer_list<shader_uid> id_shaders);
 
 		template <typename TData> bool has_uniform();
 		template <typename TData> TData& get_uniform();
