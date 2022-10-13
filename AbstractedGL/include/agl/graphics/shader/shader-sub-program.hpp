@@ -3,7 +3,7 @@
 #include <cstdint>
 
 #include "graphics/shader/shader-type.hpp"
-#include "system/glcore/gl-object.hpp"
+#include "system/glcore/destructive-move.hpp"
 
 namespace agl
 {
@@ -12,11 +12,11 @@ namespace agl
 	/// <summary>
 	/// A partial s program.
 	/// </summary>
-	class sub_shader final
-		: protected gl_object
+	class sub_shader
+		: protected destructive_move
 	{
 	public:
-		using gl_object::gl_object;
+		using destructive_move::destructive_move;
 
 		/// <summary>
 		/// Set 'm_type' to zero.
@@ -40,6 +40,15 @@ namespace agl
 		/// <param name=""></param>
 		/// <returns></returns>
 		sub_shader& operator=(sub_shader&&) = default;
+
+		/// <summary>
+		/// Check whether this object's status is active.
+		/// </summary>
+		/// <returns>
+		/// True - object is a valid OpenGL object
+		/// False - object is not a valid OpenGL object
+		/// </returns>
+		bool is_created() const;
 
 	private:
 		friend class shader;
@@ -105,13 +114,14 @@ namespace agl
 		/// <summary>
 		/// Generate the OpenGL's id.
 		/// </summary>
-		virtual void create() override;
+		void create();
 
 		/// <summary>
 		/// Delete the id and set it to zero.
 		/// </summary>
-		virtual void destroy() override;
+		void destroy();
 
+		std::uint32_t m_id_object;
 		shader_type m_type;
 		std::string m_source;
 	};

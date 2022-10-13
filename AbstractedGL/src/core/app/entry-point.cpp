@@ -10,7 +10,6 @@
 #include "core/misc/timer.hpp"
 #include "core/app/input.hpp"
 
-
 agl::entity create_camera(agl::registry &reg);
 agl::entity create_cube(agl::registry &reg);
 
@@ -126,9 +125,9 @@ public:
 		auto camera_entity = create_camera(reg);
 		auto& camera = camera_entity.get_component<agl::camera_perspective>();
 
-		for (auto i = 0; i < 10000; ++i)
+		for (auto i = 0; i < 1000; ++i)
 			create_cube(reg);
-
+		
 		auto cube_entity = create_cube(reg);
 		auto& cube = cube_entity.get_component<agl::mesh>();
 
@@ -186,11 +185,13 @@ public:
 			}
 			if (agl::input::key_pressed(agl::P))
 			{
-				camera.look_at(cube_entity.get_component<agl::transformable>().get_position());
+				camera.look_at({0,0,0});
 			}
 
-			auto mouse_pos_offset = glm::vec2{ agl::input::get_mouse_position().x - last_mouse_pos.x, (agl::input::get_mouse_position().y - last_mouse_pos.y) * -1.f };
-			camera.rotate(glm::vec3{ mouse_pos_offset * mouse_sensitivity, 0.f });
+			auto const curr_mouse_pos = agl::input::get_mouse_position();
+			auto const mouse_pos_offset = glm::vec2{ curr_mouse_pos.x - last_mouse_pos.x, (curr_mouse_pos.y - last_mouse_pos.y) * -1.f };
+			auto const rotation = glm::vec3{ mouse_pos_offset * mouse_sensitivity, 0.f };
+			camera.rotate(rotation);
 			last_mouse_pos = agl::input::get_mouse_position();
 
 			m_window.clear();
@@ -217,6 +218,7 @@ namespace agl
 		wnd.set_clear_buffers(static_cast<gl_clear_type>(CLEAR_COLOR | CLEAR_DEPTH));
 		wnd.set_clear_color({ 0.05f, 0.1f, 0.2f, 1.f });
 		wnd.set_cursor_type(CURSOR_DISABLED);
+		wnd.set_vsync(false);
 
 		window::enable_feature(agl::FEATURE_DEPTH_TEST);
 

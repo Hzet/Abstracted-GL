@@ -53,6 +53,9 @@ namespace agl
 		bool get_input_mode(input_mode mode);
 		void set_input_mode(input_mode mode, bool status);
 
+		bool get_vsync() const;
+		void set_vsync(bool status);
+
 	private:
 		struct glfw_window_deleter
 		{

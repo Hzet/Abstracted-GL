@@ -225,9 +225,6 @@
     <ClCompile Include="src\graphics\types\color.cpp">
       <Filter>src\graphics\types</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\app\entry-point.cpp">
-      <Filter>src\system\core\app</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\app\window.cpp">
       <Filter>src\system\core\app</Filter>
     </ClCompile>
@@ -257,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="src\graphics\shader\uniform-base.cpp">
       <Filter>src\graphics\shader\uniforms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\entry-point.cpp">
+      <Filter>src\system\core\app</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -324,9 +324,6 @@
       <Filter>src\utility</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\utility\tuple-buffer-base.hpp">
-      <Filter>src\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\benchmark.hpp">
       <Filter>src\utility</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\utility\ecs\config.hpp">

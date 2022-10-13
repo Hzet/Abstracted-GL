@@ -226,6 +226,17 @@ namespace agl
 		glfwSetInputMode(m_handle.get(), mode, (status ? GLFW_TRUE : GLFW_FALSE));
 	}
 
+	bool window::get_vsync() const
+	{
+		return m_data.vsync;
+	}
+
+	void window::set_vsync(bool status)
+	{
+		m_data.vsync = status;
+		glfwSwapInterval(status ? 1 : 0);
+	}
+
 	bool window::get_input_mode(input_mode mode)
 	{
 		return glfwGetInputMode(m_handle.get(), mode);

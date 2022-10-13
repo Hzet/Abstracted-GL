@@ -4,8 +4,9 @@
 namespace agl
 {
 	vertex_array::vertex_array()
-		: m_icount(0u),
-		m_vcount(0u)
+		: m_icount(0u)
+		, m_id_object(0u)
+		, m_vcount(0u)
 	{
 	}
 
@@ -13,6 +14,11 @@ namespace agl
 	{
 		if (!is_move_constructing())
 			destroy();
+	}
+
+	bool vertex_array::is_created() const
+	{
+		return m_id_object != 0u;
 	}
 
 	void vertex_array::bind() const

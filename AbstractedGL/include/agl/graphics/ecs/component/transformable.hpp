@@ -144,28 +144,6 @@ namespace agl
 		/// </returns>
 		const transform& get_inverse_transform() const;
 
-		/// <summary>
-		/// Checks whether this object has a precedent transformation.
-		/// </summary>
-		/// <returns>
-		/// True - the object has got a parent transformation
-		/// False - the object has not got a parent transformation 
-		/// </returns>
-		bool has_parent() const;
-
-		/// <summary>
-		/// Returns the parent transformation.
-		/// Before using this method, the user is obligated to check whether, the object has a parent transformation.
-		/// </summary>
-		/// <returns>The parent transformation</returns>
-		const transformable& get_parent() const;
-
-		/// <summary>
-		/// Sets the preceding transformation to this object.
-		/// </summary>
-		/// <param name="parent">The parent transformation</param>
-		void set_parent(const transformable &parent);
-
 	private:
 		/// <summary>
 		/// Update matrices.
@@ -176,7 +154,6 @@ namespace agl
 		glm::vec3 m_origin;
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;
-		const transformable *m_parent;
 
 		mutable bool m_require_update;
 		mutable transform m_transform;

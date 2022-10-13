@@ -1,16 +1,17 @@
 #pragma once
-#include "system/glcore/gl-object.hpp"
+#include <cstdint>
+#include "system/glcore/destructive-move.hpp"
 
 namespace agl
 {
 	/// <summary>
 	/// OpenGL vertex buffer abstraction.
 	/// </summary>
-	class vertex_buffer final
-		: public gl_object
+	class vertex_buffer
+		: private destructive_move
 	{
 	public:
-		using gl_object::gl_object;
+		using destructive_move::destructive_move;
 
 		/// <summary>
 		/// Set the object's state to invalid.
@@ -36,24 +37,33 @@ namespace agl
 		vertex_buffer& operator=(vertex_buffer&&) = default;
 
 		/// <summary>
+		/// Check whether this object's status is active.
+		/// </summary>
+		/// <returns>
+		/// True - object is a valid OpenGL object
+		/// False - object is not a valid OpenGL object
+		/// </returns>
+		bool is_created() const;
+
+		/// <summary>
 		/// Bind OpenGL object to the current context.
 		/// </summary>
-		virtual void bind() const override;
+		void bind() const;
 
 		/// <summary>
 		/// Unbind OpenGL object.
 		/// </summary>
-		virtual void unbind() const override;
+		void unbind() const;
 
 		/// <summary>
 		/// Generate OpenGL object.
 		/// </summary>
-		virtual void create() override;
+		void create();
 
 		/// <summary>
 		/// Delete OpenGL object and reset it to invalid state.
 		/// </summary>
-		virtual void destroy() override;
+		void destroy();
 
 		/// <summary>
 		/// Call OpenGL to allocate 'size' bytes of memory for 'count' objects and insert 'data'.
@@ -89,8 +99,9 @@ namespace agl
 		std::uint32_t get_count() const;
 
 	private:
-		std::uint32_t m_size;
 		std::uint32_t m_count;
+		std::uint32_t m_id_object;
+		std::uint32_t m_size;
 	};
 
 }

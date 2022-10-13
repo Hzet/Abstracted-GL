@@ -8,11 +8,11 @@ namespace agl
 	/// <summary>
 	/// OpenGL vertex array abstraction.
 	/// </summary>
-	class vertex_array final
-		: public gl_object
+	class vertex_array
+		: private destructive_move
 	{
 	public:
-		using gl_object::gl_object;
+		using destructive_move::destructive_move;
 
 		/// <summary>
 		/// Set the object's state to invalid.
@@ -38,24 +38,33 @@ namespace agl
 		vertex_array& operator=(vertex_array&&) = default;
 
 		/// <summary>
+		/// Check whether this object's status is active.
+		/// </summary>
+		/// <returns>
+		/// True - object is a valid OpenGL object
+		/// False - object is not a valid OpenGL object
+		/// </returns>
+		bool is_created() const;
+
+		/// <summary>
 		/// Bind OpenGL object to the current context.
 		/// </summary>
-		virtual void bind() const override;
+		void bind() const;
 
 		/// <summary>
 		/// Unbind OpenGL object.
 		/// </summary>
-		virtual void unbind() const override;
+		void unbind() const;
 		 
 		/// <summary>
 		/// create OpenGL object.
 		/// </summary>
-		virtual void create() override;
+		void create();
 
 		/// <summary>
 		/// Delete OpenGL object and reset it to invalid state.
 		/// </summary>
-		virtual void destroy() override;
+		void destroy();
 
 		/// <summary>
 		/// Set the vertex buffer and it's vertex layout.
@@ -90,6 +99,7 @@ namespace agl
 
 	private:
 		std::uint32_t m_icount;
+		std::uint32_t m_id_object;
 		std::uint32_t m_vcount;
 	};
 }

@@ -43,7 +43,8 @@ namespace agl
 	}
 
 	shader::shader()
-		: m_shader_bits(0u)
+		: m_id_object(0u)
+		, m_shader_bits(0u)
 	{
 	}
 
@@ -130,6 +131,11 @@ namespace agl
 	void shader::set_active() const
 	{
 		bind();
+	}
+
+	bool shader::is_created() const
+	{
+		return m_id_object != 0u;
 	}
 
 	bool shader::has_shader(std::uint64_t bit) const

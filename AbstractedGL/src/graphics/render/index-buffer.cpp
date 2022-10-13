@@ -6,6 +6,7 @@ namespace agl
 
 	index_buffer::index_buffer()
 		: m_count(0u)
+		, m_id_object(0u)
 	{
 	}
 
@@ -13,6 +14,11 @@ namespace agl
 	{
 		if (!is_move_constructing())
 			destroy();
+	}
+
+	bool index_buffer::is_created() const
+	{
+		return m_id_object != 0u;
 	}
 
 	void index_buffer::bind() const

@@ -39,6 +39,8 @@ namespace agl
 		auto include = bool{};
 		auto count = max_inclusive_results(sig);
 
+		result.reserve(count);
+
 		for (const auto &e : m_entities)
 		{
 			if (count == 0)
@@ -64,6 +66,8 @@ namespace agl
 				result.push_back(e.get_entity_uid());
 			}
 		}
+
+		result.shrink_to_fit();
 
 		return result;
 	}

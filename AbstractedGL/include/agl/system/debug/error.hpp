@@ -42,7 +42,7 @@
 			throw exception((std::string("AGL exception {} raised!") + ::agl::log_instance::get_message(message, #exception, __VA_ARGS__)).c_str()); \
 		}
 
-	#define AGL_EXCEPTION(exception, message, ..) \
+	#define AGL_EXCEPTION(exception, message, ...) \
 		{ \
 			throw exception(std::string("Exception {} raised!") + ::agl::log_instance::get_message(message, #exception, __VA_ARGS__)); \
 		}

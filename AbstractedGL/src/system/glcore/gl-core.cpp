@@ -2,7 +2,6 @@
 
 namespace agl
 {
-
 	static std::uint64_t LastGLError = GL_NO_ERROR;
 
 	void gl_clear_error()

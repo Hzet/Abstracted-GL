@@ -22,7 +22,8 @@ namespace agl
 	}
 
 	sub_shader::sub_shader()
-		: m_type(SHADER_INVALID)
+		: m_id_object(0u)
+		, m_type(SHADER_INVALID)
 	{
 	}
 
@@ -30,6 +31,11 @@ namespace agl
 	{
 		if (!is_move_constructing())
 			destroy();
+	}
+
+	bool sub_shader::is_created() const
+	{
+		return m_id_object != 0u;
 	}
 
 	std::uint32_t sub_shader::get_id() const

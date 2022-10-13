@@ -18,6 +18,7 @@ namespace agl
 		bool minimized;
 		glm::vec2 resolution;
 		std::string title;
+		bool vsync;
 	};
 }
 

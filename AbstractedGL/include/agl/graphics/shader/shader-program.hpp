@@ -6,7 +6,7 @@
 #include "graphics/shader/shader-sub-program.hpp"
 #include "graphics/shader/shader-uid.hpp"
 #include "system/glcore/gl-core.hpp"
-#include "system/glcore/gl-object.hpp"
+#include "system/glcore/destructive-move.hpp"
 
 namespace agl
 {
@@ -16,10 +16,10 @@ namespace agl
 	/// The class representing s program that consists of at least 2 partial s programs: GL_VERTEX_SHADER and GL_FRAGMENT_SHADER.
 	/// </summary>
 	class shader
-		: public gl_object
+		: private destructive_move
 	{
 	public:
-		using gl_object::gl_object;
+		using destructive_move::destructive_move;
 
 		/// <summary>
 		/// Set s bits to zero.
@@ -92,6 +92,15 @@ namespace agl
 		/// Bind the program as current.
 		/// </summary>
 		void set_active() const;
+
+		/// <summary>
+		/// Check whether this object's status is active.
+		/// </summary>
+		/// <returns>
+		/// True - object is a valid OpenGL object
+		/// False - object is not a valid OpenGL object
+		/// </returns>
+		bool is_created() const;
 
 		/// <summary>
 		/// Check whether the 'bit' partial s program is a part of this s program.
@@ -188,17 +197,17 @@ namespace agl
 		/// <summary>
 		/// register_uniform OpenGL object.
 		/// </summary>
-		virtual void create() override;
+		void create();
 
 		/// <summary>
 		/// Unregister OpenGL object and clean resources.
 		/// </summary>
-		virtual void destroy() override;
+		void destroy();
 
 		/// <summary>
 		/// Bind the object to the current context.
 		/// </summary>
-		virtual void bind() const override;
+		void bind() const;
 
 		/// <summary>
 		/// Compile the partial s programs.
@@ -209,9 +218,9 @@ namespace agl
 		/// </returns>
 		bool compile_sub_shaders();
 
-		std::uint64_t m_shader_bits; // bitmap to check whether the s has already been attached
-		// TODO - it is used only in compilation, thus is temporary, so it can be removed from here in the future
-		std::vector<sub_shader> m_sub_shaders;
+		std::uint32_t m_id_object;
 		shader_uid m_id_shader;
+		std::uint64_t m_shader_bits; // bitmap to check whether the s has already been attached
+		std::vector<sub_shader> m_sub_shaders;
 	};
 }

@@ -1,16 +1,17 @@
 #pragma once
-#include "system/glcore/gl-object.hpp"
+#include <cstdint>
+#include "system/glcore/destructive-move.hpp"
 
 namespace agl
 {
 	/// <summary>
 	/// OpenGL index array abstraction.
 	/// </summary>
-	class index_buffer final
-		: public gl_object
+	class index_buffer
+		: private destructive_move
 	{
 	public:
-		using gl_object::gl_object;
+		using destructive_move::destructive_move;
 
 		/// <summary>
 		/// Set the object's state to invalid.
@@ -36,24 +37,33 @@ namespace agl
 		index_buffer& operator=(index_buffer&&) = default;
 
 		/// <summary>
+		/// Check whether this object's status is active.
+		/// </summary>
+		/// <returns>
+		/// True - object is a valid OpenGL object
+		/// False - object is not a valid OpenGL object
+		/// </returns>
+		bool is_created() const;
+
+		/// <summary>
 		/// Bind OpenGL object to the current context.
 		/// </summary>
-		virtual void bind() const override;
+		void bind() const;
 		
 		/// <summary>
 		/// Unbind OpenGL object.
 		/// </summary>
-		virtual void unbind() const override;
+		void unbind() const;
 		 
 		/// <summary>
 		/// create OpenGL object.
 		/// </summary>
-		virtual void create() override;
+		void create();
 
 		/// <summary>
 		/// Delete OpenGL object and reset it to invalid state.
 		/// </summary>
-		virtual void destroy() override;
+		void destroy();
 
 		/// <summary>
 		/// Call OpenGL to allocate 'sizeof(uint32_t) * count' bytes of memory for 'count' objects and insert 'data'.
@@ -80,5 +90,6 @@ namespace agl
 
 	private:
 		std::uint32_t m_count;
+		std::uint32_t m_id_object;
 	};
 }

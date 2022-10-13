@@ -4,8 +4,9 @@
 namespace agl
 {
 	vertex_buffer::vertex_buffer()
-		: m_size(0u),
-		m_count(0u)
+		: m_size(0u)
+		, m_id_object(0u)
+		, m_count(0u)
 	{
 	}
 
@@ -13,6 +14,11 @@ namespace agl
 	{
 		if (!is_move_constructing())
 			destroy();
+	}
+
+	bool vertex_buffer::is_created() const
+	{
+		return m_id_object != 0u;
 	}
 
 	void vertex_buffer::bind() const

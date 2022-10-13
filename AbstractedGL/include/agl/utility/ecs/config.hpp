@@ -1,4 +1,4 @@
 #pragma once
 
-#define AGL_MAX_ENTITIES 50000
-#define AGL_MAX_COMPONENTS 512
+#define AGL_MAX_ENTITIES 1500
+#define AGL_MAX_COMPONENTS 10
