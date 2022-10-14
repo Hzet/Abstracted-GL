@@ -136,6 +136,7 @@ public:
 		auto timer = agl::timer{};
 		auto frames = 0;
 
+
 		while (is_running())
 		{
 			if (timer.elapsed().seconds() >= 10.f)

@@ -3,6 +3,7 @@ template <typename... Args>
 T& component_array<T>::attach(const entity_uid &id_entity, Args&&... args)
 {
 	m_count++;
+	m_changed = true;
 
 	m_active_entities[get_index(id_entity)] = true;
 	m_components[get_index(id_entity)] = { std::forward<Args>(args)... };
@@ -14,6 +15,7 @@ template <typename T>
 T& component_array<T>::attach(const entity_uid &id_entity)
 {
 	m_count++;
+	m_changed = true;
 
 	m_active_entities[get_index(id_entity)] = { };
 	m_active_entities[get_index(id_entity)] = true;
@@ -25,6 +27,7 @@ template <typename T>
 void component_array<T>::detach(const entity_uid &id_entity)
 {
 	m_count--;
+	m_changed = true;
 
 	m_components[get_index(id_entity)].~T();
 	m_active_entities[get_index(id_entity)] = false;
@@ -57,5 +60,6 @@ std::uint64_t component_array<T>::get_index(const entity_uid &id_entity) const
 template <typename T>
 void component_array<T>::on_entity_destroy(const entity_uid &id_entity)
 {
+	m_changed = true;
 	detach(id_entity);
 }

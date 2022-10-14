@@ -1,5 +1,5 @@
 template <typename... Args>
-registry_component_base::TComponent<Args...> registry_component_base::get(const entity_uid &id_entity)
+registry_component::TComponent<Args...> registry_component::get(const entity_uid &id_entity)
 {
 	if constexpr (sizeof...(Args) == 1)
 		return get_array<std::tuple_element_t<0, std::tuple<Args...>>>().get(id_entity);
@@ -8,7 +8,7 @@ registry_component_base::TComponent<Args...> registry_component_base::get(const 
 }
 
 template <typename... Args, std::uint64_t... Sequence>
-std::tuple<Args&...> registry_component_base::get_component_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
+std::tuple<Args&...> registry_component::get_component_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
 {
 	using TTuple = std::tuple<Args...>;
 
@@ -18,13 +18,13 @@ std::tuple<Args&...> registry_component_base::get_component_impl(const entity_ui
 }
 
 template <typename T, typename... Args>
-T& registry_component_base::attach_component(const entity_uid &id_entity, Args&&... args)
+T& registry_component::attach_component(const entity_uid &id_entity, Args&&... args)
 {
 	return get_array<T>().attach(id_entity, std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-registry_component_base::TComponent<Args...> registry_component_base::attach_component(const entity_uid &id_entity)
+registry_component::TComponent<Args...> registry_component::attach_component(const entity_uid &id_entity)
 {
 	if constexpr (sizeof...(Args) == 1)
 		return get_array<Args...>().attach(id_entity);
@@ -33,7 +33,7 @@ registry_component_base::TComponent<Args...> registry_component_base::attach_com
 }
 
 template <typename... Args, std::uint64_t... Sequence>
-std::tuple<Args&...> registry_component_base::attach_component_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
+std::tuple<Args&...> registry_component::attach_component_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
 {
 	using TTuple = std::tuple<Args...>;
 
@@ -45,13 +45,13 @@ std::tuple<Args&...> registry_component_base::attach_component_impl(const entity
 }
 
 template <typename... Args>
-void registry_component_base::detach_component(const entity_uid &id_entity)
+void registry_component::detach_component(const entity_uid &id_entity)
 {
 	detach_component_impl<Args...>(id_entity, std::make_index_sequence<sizeof...(Args)>{ });
 }
 
 template <typename... Args, std::uint64_t... Sequence>
-void registry_component_base::detach_component_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
+void registry_component::detach_component_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
 {
 	using TTuple = std::tuple<Args...>;
 
@@ -59,23 +59,35 @@ void registry_component_base::detach_component_impl(const entity_uid &id_entity,
 }
 
 template <typename... Args>
-std::tuple<component_array<Args>&...> registry_component_base::get_arrays()
+std::tuple<component_array<Args>&...> registry_component::get_arrays()
 {
 	return get_arrays_impl<Args...>(std::make_index_sequence<sizeof...(Args)>{ });
 }
 
 template <typename... Args, std::uint64_t... Sequence>
-std::tuple<component_array<Args>&...> registry_component_base::get_arrays_impl(std::index_sequence<Sequence...>)
+std::tuple<component_array<Args>&...> registry_component::get_arrays_impl(std::index_sequence<Sequence...>)
 {
 	using TTuple = std::tuple<Args...>;
 
-	return {
-		(get_array<std::tuple_element_t<Sequence, TTuple>>())...
-	};
+	return { (get_array<std::tuple_element_t<Sequence, TTuple>>())... };
+}
+
+template <typename... Args>
+std::tuple<component_array<Args>*...> registry_component::get_arrays_ptr()
+{
+	return get_arrays_ptr_impl<Args...>(std::make_index_sequence<sizeof...(Args)>{ });
+}
+
+template <typename... Args, std::uint64_t... Sequence>
+std::tuple<component_array<Args>*...> registry_component::get_arrays_ptr_impl(std::index_sequence<Sequence...>)
+{
+	using TTuple = std::tuple<Args...>;
+
+	return { (&get_array<std::tuple_element_t<Sequence, TTuple>>())...};
 }
 
 template <typename T>
-component_array<T>& registry_component_base::get_array()
+component_array<T>& registry_component::get_array()
 {
 	const auto index = TComponentTypeUID<T>::value() - 1ul;
 
@@ -88,7 +100,7 @@ component_array<T>& registry_component_base::get_array()
 }
 
 template <typename T>
-component_array_base* registry_component_base::get_array_base()
+component_array_base* registry_component::get_array_base()
 {
 	return m_arrays[TComponentTypeUID<T>::value() - 1ul].get();
 }

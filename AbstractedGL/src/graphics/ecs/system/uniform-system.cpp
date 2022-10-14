@@ -11,7 +11,10 @@ namespace agl
 
 	void uniform_system::update(registry &reg)
 	{
-		auto view = reg.inclusive_view<uniform_array>();
+		static auto view = reg.inclusive_view<uniform_array>();
+
+		if(view.needs_update())
+			view = reg.inclusive_view<uniform_array>();
 
 		for (auto it = view.begin(); it != view.end(); ++it)
 		{

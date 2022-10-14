@@ -1,5 +1,5 @@
 template <typename... Args>
-registry_component_base::TComponent<Args...> entity::get_component() const
+registry_component::TComponent<Args...> entity::get_component() const
 {
 	return m_registry->get<Args...>(m_id);
 }

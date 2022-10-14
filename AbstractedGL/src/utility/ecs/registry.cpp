@@ -94,12 +94,13 @@ namespace agl
 	void registry::update()
 	{
 		registry_system::update(*this);
+		reset_array_changed_status();
 	}
 
 	registry::registry()
 		: registry_system(*this)
 		, registry_entity()
-		, registry_component_base()
+		, registry_component()
 	{
 	}
 

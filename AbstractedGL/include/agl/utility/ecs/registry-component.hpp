@@ -9,7 +9,7 @@ namespace agl
 	/// <summary>
 	/// Sub reg providing utility to manage the components.
 	/// </summary>
-	class registry_component_base
+	class registry_component
 	{
 	public:
 		template <typename... Args>
@@ -24,7 +24,7 @@ namespace agl
 		TComponent<Args...> get(const entity_uid &id_entity);
 
 	protected:
-		virtual ~registry_component_base() = default;
+		virtual ~registry_component() = default;
 
 		/// <summary>
 		/// Constructs the component 'T' with 'args' and attaches it to 'id_entity'.
@@ -57,6 +57,9 @@ namespace agl
 		template <typename... Args>	
 		std::tuple<component_array<Args>&...> get_arrays();
 
+		template <typename... Args>
+		std::tuple<component_array<Args>*...> get_arrays_ptr();
+
 		/// <summary>
 		/// Implementation of 'get_array' method.
 		/// </summary>
@@ -83,6 +86,8 @@ namespace agl
 		/// </summary>
 		/// <param name="e"></param>
 		void on_entity_destroy(const entity &e);
+
+		void reset_array_changed_status();
 
 	private:
 		/// <summary>
@@ -117,6 +122,9 @@ namespace agl
 		/// <returns></returns>
 		template <typename... Args, std::uint64_t... Sequence>
 		std::tuple<component_array<Args>&...> get_arrays_impl(std::index_sequence<Sequence...>);
+
+		template <typename... Args, std::uint64_t... Sequence>
+		std::tuple<component_array<Args>*...> get_arrays_ptr_impl(std::index_sequence<Sequence...>);
 
 		std::array<std::unique_ptr<component_array_base>, AGL_MAX_COMPONENTS> m_arrays;
 	};

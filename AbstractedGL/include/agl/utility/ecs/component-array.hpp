@@ -75,6 +75,7 @@ namespace agl
 		/// <param name="id_entity">The e's unique identifier</param>
 		virtual void on_entity_destroy(const entity_uid &id_entity) override;
 
+	private:
 		std::array<T, AGL_MAX_ENTITIES> m_components;
 		std::array<bool, AGL_MAX_ENTITIES> m_active_entities;
 	};

@@ -1,7 +1,8 @@
+#include "view.hpp"
 template <typename... Args>
 view<Args...>::iterator::iterator(view<Args...> &view, std::vector<entity_uid>::iterator it)
-	: m_view(view),
-	m_iterator(it)
+	: m_view(view)
+	, m_iterator(it)
 {
 }
 
@@ -48,6 +49,12 @@ const entity_uid& view<Args...>::iterator::get_entity_uid() const
 }
 
 template <typename... Args>
+view<Args...>::~view()
+{
+	null_arrays(std::make_index_sequence<sizeof...(Args)>{});
+}
+
+template <typename... Args>
 typename view<Args...>::iterator view<Args...>::begin()
 {
 	return view<Args...>::iterator{ *this, m_entities.begin() };
@@ -65,8 +72,21 @@ std::uint64_t view<Args...>::get_count() const
 	return m_entities.size();
 }
 
+template<typename ...Args>
+bool agl::view<Args...>::needs_update() const
+{
+	return needs_update_impl(std::make_index_sequence<sizeof...(Args)>{ });
+}
+
+template<typename ...Args>
+template<std::uint64_t ...Sequence>
+bool agl::view<Args...>::needs_update_impl(std::index_sequence<Sequence...>) const
+{
+	return (... && (std::get<Sequence>(m_arrays)->has_changed()));
+}
+
 template <typename... Args>
-view<Args...>::view(std::tuple<component_array<Args>&...> arrays)
+view<Args...>::view(std::tuple<component_array<Args>*...> arrays)
 	: m_arrays(std::move(arrays))
 {
 }
@@ -77,16 +97,22 @@ void view<Args...>::track(std::vector<entity_uid> &&entities)
 	m_entities = std::move(entities);
 }
 
-
 template <typename... Args>
-registry_component_base::TComponent<Args...> view<Args...>::get(const entity_uid &id_entity)
+registry_component::TComponent<Args...> view<Args...>::get(const entity_uid &id_entity)
 {
 	return get_impl(id_entity, std::make_index_sequence<sizeof...(Args)>{ });
 }
 
 template <typename... Args>
 template <std::uint64_t... Sequence>
-registry_component_base::TComponent<Args...> view<Args...>::get_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
+registry_component::TComponent<Args...> view<Args...>::get_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
 {
-	return { (std::get<Sequence>(m_arrays).get(id_entity))... };
+	return { (std::get<Sequence>(m_arrays)->get(id_entity))... };
+}
+
+template <typename... Args>
+template <std::uint64_t... Sequence>
+void view<Args...>::null_arrays(std::index_sequence<Sequence...>)
+{
+	((std::get<Sequence>(m_arrays) = nullptr), ...);
 }

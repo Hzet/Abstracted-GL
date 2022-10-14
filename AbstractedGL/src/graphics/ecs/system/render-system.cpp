@@ -30,8 +30,14 @@ namespace agl
 
 	void render_system::update(registry &reg)
 	{
-		auto meshView = reg.inclusive_view<mesh>();
-		auto modelView = reg.inclusive_view<model>();
+		static auto meshView = reg.inclusive_view<mesh>();
+		static auto modelView = reg.inclusive_view<model>();
+
+		if (meshView.needs_update())
+			meshView = reg.inclusive_view<mesh>();
+
+		if (modelView.needs_update())
+			modelView = reg.inclusive_view<model>();
 
 		for (auto it = meshView.begin(); it != meshView.end(); ++it)
 		{

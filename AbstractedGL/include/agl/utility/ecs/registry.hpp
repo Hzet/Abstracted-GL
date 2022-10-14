@@ -14,7 +14,7 @@ namespace agl
 		: public resource_base
 		, public registry_system
 		, public registry_entity
-		, public registry_component_base
+		, public registry_component
 	{
 	public:
 
@@ -95,7 +95,7 @@ namespace agl
 		/// <param name="id_entity">The e's unique identifier</param>
 		/// <returns>The newly created components</returns>
 		template <typename... Args> 
-		registry_component_base::TComponent<Args...> attach(const entity_uid &id_entity);
+		registry_component::TComponent<Args...> attach(const entity_uid &id_entity);
 
 	private:
 		virtual void dummy() const override {};
