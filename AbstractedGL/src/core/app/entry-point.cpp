@@ -123,13 +123,10 @@ public:
 		// END TODO
 
 		auto camera_entity = create_camera(reg);
-		auto& camera = camera_entity.get_component<agl::camera_perspective>();
+		auto& camera = camera_entity.get_component<agl::camera_orthographic>();
 
 		for (auto i = 0; i < 1000; ++i)
 			create_cube(reg);
-		
-		auto cube_entity = create_cube(reg);
-		auto& cube = cube_entity.get_component<agl::mesh>();
 
 		auto last_mouse_pos = agl::input::get_mouse_position();
 
@@ -139,8 +136,8 @@ public:
 
 		while (is_running())
 		{
-			if (timer.elapsed().seconds() >= 10.f)
-				break;
+			//if (timer.elapsed().seconds() >= 10.f)
+			//	break;
 
 			++frames;
 
@@ -232,11 +229,18 @@ namespace agl
 
 int main(int argc, char **argv)
 {
-	auto& app = agl::application::get_instance();
+	try
+	{
+		auto& app = agl::application::get_instance();
 
-	app.run();
+		app.run();
 
-	app.shutdown();
+		app.shutdown();
+	}
+	catch (std::exception& e)
+	{
+		AGL_CORE_LOG_ERROR("Exception raised: {}", e.what());
+	}
 }
 
 agl::entity create_camera(agl::registry &reg)
@@ -245,13 +249,13 @@ agl::entity create_camera(agl::registry &reg)
 
 	agl::entity result = reg.create();
 
-	auto &camera = result.attach_component<agl::camera_perspective>();
+	auto &camera = result.attach_component<agl::camera_orthographic>();
 	auto &uniforms = result.attach_component<agl::uniform_array>();
 
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
-	camera.set_position({ 100.f, 0.f, 0.f });
+	camera.set_position({ 0.f, 0.f, 0.f });
 	camera.set_planes({ 0.1f, 100000.f });
-	camera.set_fov(60.f);
+	//camera.set_fov(60.f);
 	camera.look_at({ 0.f, 0.f, 0.f });
 
 	uniforms.add_uniform<agl::camera_uniform>({ sh_manager.get_shader_uid(0) });

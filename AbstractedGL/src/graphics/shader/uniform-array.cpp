@@ -16,7 +16,6 @@ namespace agl
 			if (!sig[m_uniforms[i]->get_component_type_uid()])
 				update_uniform(sig, i);
 
-
 			const auto &s = sh_manager.get_shader(m_uniforms[i]->get_shader_uid());
 			s.set_active();
 

@@ -13,12 +13,7 @@ std::unique_ptr<uniform_base> uniform_wrapper<TData, TComponent>::clone(uniform_
 	auto result = std::make_unique<uniform<TData, TComponent>>(static_cast<uniform<TData, TComponent> const&>(*m_uniform));
 
 	if (dataSource != nullptr)
-	{
-		auto &destination = *dynamic_cast<data_uniform<TData>*>(result.get());
-		const auto &source = *dynamic_cast<data_uniform<TData> const * const>(dataSource);
-
-		destination = source;
-	}
+		*result = static_cast<uniform<TData, TComponent>const&>(*dataSource);
 
 	return result;
 }
