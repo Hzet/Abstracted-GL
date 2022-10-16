@@ -258,6 +258,9 @@
     <ClCompile Include="src\core\app\entry-point.cpp">
       <Filter>src\system\core\app</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\prism.cpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
@@ -583,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,12 @@ typename view<Args...>::iterator::reference view<Args...>::iterator::operator*()
 }
 
 template <typename... Args>
+typename view<Args...>::iterator::pointer view<Args...>::iterator::operator->()
+{
+	return &m_view.get(*m_iterator);
+}
+
+template <typename... Args>
 typename view<Args...>::iterator view<Args...>::iterator::operator++(int)
 {
 	auto result = iterator{ *this };

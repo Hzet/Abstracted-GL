@@ -7,17 +7,15 @@ namespace agl
 {
 	namespace detail
 	{
-		struct color {};
+		struct color 
+		{
+			static const glm::vec4 Black;
+			static const glm::vec4 Blue;
+			static const glm::vec4 Green;
+			static const glm::vec4 Red;
+			static const glm::vec4 White;
+		};
 	}
 
 	using color = base_type<detail::color, glm::vec4>;
-	
-	struct color_base
-	{
-		static const color Black;
-		static const color Blue;
-		static const color Green;
-		static const color Red;
-		static const color White;
-	};
 }

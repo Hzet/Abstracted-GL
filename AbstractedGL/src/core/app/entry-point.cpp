@@ -3,7 +3,7 @@
 #include "utility/ecs/ecs.hpp"
 #include "graphics/texture/texture-atlas.hpp"
 #include "graphics/shader/shader-manager.hpp"
-#include "graphics/ecs/component/mesh.hpp"
+#include "graphics/ecs/component/prism.hpp"
 #include "graphics/ecs/component/transformable.hpp"
 #include "graphics/ecs/component/uniform/transform-uniform.hpp"
 #include "graphics/ecs/component/uniform/camera-uniform.hpp"
@@ -56,7 +56,6 @@ auto const cube_position = std::vector<agl::position>{
 	{-0.5f,  0.5f,  0.5f},
 	{-0.5f,  0.5f, -0.5f}
 };
-
 auto const cube_color = std::vector<agl::color> {
 	{1.f, 1.f, 1.f, 1.f},
 	{1.f, 1.f, 1.f, 1.f},
@@ -95,7 +94,7 @@ auto const cube_color = std::vector<agl::color> {
 	{1.f, 1.f, 1.f, 1.f},
 	{1.f, 1.f, 1.f, 1.f}
 };
-auto const camera_velocity = 1.f;
+auto const camera_velocity = 0.2f;
 auto const mouse_sensitivity = 0.3f;
 
 class test_app
@@ -123,16 +122,25 @@ public:
 		// END TODO
 
 		auto camera_entity = create_camera(reg);
-		auto& camera = camera_entity.get_component<agl::camera_orthographic>();
+		auto& camera = camera_entity.get_component<agl::camera_perspective>();
 
-		for (auto i = 0; i < 1000; ++i)
-			create_cube(reg);
+		//for (auto i = 0; i < 1000; ++i)
+		//	create_cube(reg);
 
 		auto last_mouse_pos = agl::input::get_mouse_position();
 
 		auto timer = agl::timer{};
 		auto frames = 0;
 
+		auto prism_entity = reg.create();
+		auto& prism = prism_entity.attach_component<agl::prism>(sh_manager.get_shader_uid(0));
+		prism.set_radius(0.5f);
+		prism.set_side_count(5);
+		prism.set_sides(glm::vec2{ 0.2f, 0.2f });
+		prism.set_color(agl::color::White);
+
+		prism_entity.attach_component<agl::transformable>();
+		prism.get_uniforms().add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(0));
 
 		while (is_running())
 		{
@@ -249,11 +257,11 @@ agl::entity create_camera(agl::registry &reg)
 
 	agl::entity result = reg.create();
 
-	auto &camera = result.attach_component<agl::camera_orthographic>();
+	auto &camera = result.attach_component<agl::camera_perspective>();
 	auto &uniforms = result.attach_component<agl::uniform_array>();
 
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
-	camera.set_position({ 0.f, 0.f, 0.f });
+	camera.set_position({ 0.f, 5.f, 0.f });
 	camera.set_planes({ 0.1f, 100000.f });
 	//camera.set_fov(60.f);
 	camera.look_at({ 0.f, 0.f, 0.f });

@@ -22,7 +22,7 @@ namespace agl
 	private:
 		std::int32_t m_ambient;
 		std::int32_t m_color;
-		std::int32_t m_cutOff; 
+		std::int32_t m_cut_off; 
 		std::int32_t m_diffuse;
 		std::int32_t m_direction;
 		std::int32_t m_range; 

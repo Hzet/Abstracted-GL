@@ -7,7 +7,7 @@ layout(location = 2) in vec2 texture;
 struct agl_model
 {
 	mat4 transform;
-	mat4 inverseTransform;
+	mat4 inverse_transform;
 };
 
 struct agl_camera

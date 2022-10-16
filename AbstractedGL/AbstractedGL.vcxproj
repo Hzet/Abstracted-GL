@@ -107,6 +107,7 @@
     <ClCompile Include="src\graphics\ecs\component\camera-base.cpp" />
     <ClCompile Include="src\graphics\ecs\component\camera-orthographic.cpp" />
     <ClCompile Include="src\graphics\ecs\component\camera-perspective.cpp" />
+    <ClCompile Include="src\graphics\ecs\component\prism.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
     <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="src\utility\ecs\signature.cpp" />
     <ClCompile Include="src\utility\ecs\system-base.cpp" />
     <ClCompile Include="src\utility\unique-identifier-manager.cpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp" />

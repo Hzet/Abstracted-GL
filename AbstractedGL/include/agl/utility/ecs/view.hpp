@@ -22,7 +22,7 @@ namespace agl
 			using value_type = registry_component::TComponent<Args...>;
 			using iterator_category = std::input_iterator_tag;
 			using difference_type = std::uint64_t;
-			using pointer = value_type;
+			using pointer = std::conditional_t<sizeof...(Args) == 1, std::tuple_element_t<0, std::tuple<Args*...>>, std::tuple<Args*...>>;
 			using reference = value_type;
 
 			explicit iterator(view<Args...> &view, std::vector<entity_uid>::iterator it);
@@ -31,6 +31,8 @@ namespace agl
 			iterator operator++(int);
 
 			reference operator*();
+
+			pointer operator->();
 
 			bool operator==(const iterator &other) const;
 			bool operator!=(const iterator &other) const;

@@ -25,7 +25,7 @@ struct agl_spot_light
 	vec3 position;
 	vec3 direction;
 	vec3 range;
-	vec2 cutOff;
+	vec2 cut_off;
 };
 
 vec4 calculate_directional_light(agl_directional_light light, vec3 view_direction);
@@ -85,9 +85,9 @@ vec4 calculate_spot_light(spot_light light, vec3 view_direction)
 	vec4 specular = light.specular * spec * texture(texture_material.specular, vtexture);
 
 	float theta = dot(light_direction, normalize(-light.direction));
-	float epsilon = light.cutOff.x - light.cutOff.y;
+	float epsilon = light.cut_off.x - light.cut_off.y;
 
-	float intensity = clamp((theta - light.cutOff.y) / epsilon, 0.f, 1.f);
+	float intensity = clamp((theta - light.cut_off.y) / epsilon, 0.f, 1.f);
 	diffuse *= intensity;
 	specular *= intensity;
 	
