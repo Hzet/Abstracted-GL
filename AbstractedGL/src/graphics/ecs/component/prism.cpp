@@ -3,26 +3,81 @@
 
 namespace agl
 {
-	static std::vector<position> produce_base(std::uint64_t side_count, glm::vec2 const& dimensions, float radius)
+	static std::vector<position> produce_vertices(std::uint64_t side_count, float radius, float height)
 	{
 		auto alpha = 360.f / side_count;
 		auto const yaxis = glm::vec3{ 0.f, 1.f, 0.f };
-		auto const vertex = glm::rotate(glm::vec3{ radius, 0.f, 0.f }, glm::radians(alpha / 2.f), yaxis);
-
 		auto result = std::vector<position>{};
-		result.reserve(side_count + 2);
-		//result.reserve(3);
 
-		result.push_back(vertex);
-		result.push_back(glm::rotate(vertex, glm::radians(alpha), yaxis));
+		// create top base
 		result.push_back(glm::vec3{ 0.f });
-
-		for (auto i = 3; i < side_count + 2; ++i)
+		for (auto i = 0; i < side_count; ++i)
 		{
-			alpha += std::fmod((360.f / side_count), 360.f);
-			result.push_back(glm::rotate(vertex, glm::radians(alpha), yaxis));
+			auto const vertex = glm::rotate(glm::vec3{ radius, 0.f, 0.f }, glm::radians(alpha * i), yaxis);
+			result.push_back(vertex);
 		}
 
+		// create bottom base
+		for (auto i = 0; i <= side_count; ++i)
+		{
+			auto const vertex = result[i];
+			result.push_back(glm::vec3{ vertex->x, -height, vertex->z });
+		}
+		
+		return result;
+	}
+
+	static std::vector<std::uint32_t> produce_indices(std::uint64_t side_count)
+	{
+		auto result = std::vector<std::uint32_t>{};
+		result.reserve(side_count * 12);
+
+		// index top base
+		for (auto i = 0; i < side_count - 1; ++i)
+		{
+			result.push_back(0);
+			result.push_back(i + 1);
+			result.push_back(i + 2);
+		}
+		
+		result.push_back(0);
+		result.push_back(side_count);
+		result.push_back(1);
+
+		// index sides
+		for (auto i = 0; i < side_count - 1; ++i)
+		{
+			auto const offset_a = (i % 2) * (side_count + 5);
+
+			result.push_back(i + 1);
+			result.push_back(i + 2);
+			result.push_back(i + side_count + 2);
+
+			result.push_back(i + side_count + 2);
+			result.push_back(i + side_count + 3);
+			result.push_back(i + 2);
+		}
+		
+		result.push_back(side_count);
+		result.push_back(1);
+		result.push_back(side_count * 2 + 1);
+
+		result.push_back(side_count * 2 + 1);
+		result.push_back(side_count + 2);
+		result.push_back(1);
+
+		// index bottom base
+		for (auto i = 0; i < side_count - 1; ++i)
+		{
+			result.push_back(side_count + 1);
+			result.push_back(side_count + i + 2);
+			result.push_back(side_count + i + 3);
+		}
+		
+		result.push_back(side_count + 1);
+		result.push_back(side_count * 2 + 1);
+		result.push_back(side_count + 2);
+		
 		return result;
 	}
 
@@ -64,15 +119,14 @@ namespace agl
 	void prism::set_sides(glm::vec2 const& sides)
 	{
 		m_sides = sides;
-		m_mesh.draw_type = DRAW_TRIANGLE_STRIP;
+		m_mesh.draw_type = DRAW_TRIANGLES;
 
-		auto base = produce_base(m_sides_count, m_sides, m_radius);
-		m_mesh.rbuffer.set_vertex_count(m_sides_count + 2);
-		//m_mesh.rbuffer.set_vertex_count(3);
-		m_mesh.rbuffer.add_vertices<position>(base.data());
+		auto const vertices = produce_vertices(m_sides_count, m_radius, m_sides.y);
+		auto const indices = produce_indices(m_sides_count);
 
-		//for (auto& v : base)
-		//	v->y += m_sides.y;
+		m_mesh.rbuffer.set_vertex_count(m_sides_count * 2 + 2);
+		m_mesh.rbuffer.add_vertices(vertices.data());
+		m_mesh.rbuffer.add_indices(indices.data(), indices.size());
 	}
 
 	glm::vec2 const& prism::get_sides() const

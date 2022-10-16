@@ -10,11 +10,11 @@ namespace agl
 		timestep();
 		timestep(std::uint64_t nanoseconds);
 
-		double hours() const;
-		double minutes() const;
-		double seconds() const;
-		double milliseconds() const;
-		double nanoseconds() const;
+		float hours() const;
+		float minutes() const;
+		float seconds() const;
+		float milliseconds() const;
+		float nanoseconds() const;
 
 	private:
 		std::uint64_t m_nanoseconds;

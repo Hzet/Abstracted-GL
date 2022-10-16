@@ -12,27 +12,27 @@ namespace agl
 	{
 	}
 
-	double timestep::hours() const
+	float timestep::hours() const
 	{
 		return minutes() / 60.0;
 	}
 
-	double timestep::minutes() const
+	float timestep::minutes() const
 	{
 		return seconds() / 60.0;
 	}
 
-	double timestep::seconds() const
+	float timestep::seconds() const
 	{
 		return milliseconds() / 1000.0;
 	}
 
-	double timestep::milliseconds() const
+	float timestep::milliseconds() const
 	{
 		return nanoseconds() / 1000000.0;
 	}
 
-	double timestep::nanoseconds() const
+	float timestep::nanoseconds() const
 	{
 		return m_nanoseconds;
 	}

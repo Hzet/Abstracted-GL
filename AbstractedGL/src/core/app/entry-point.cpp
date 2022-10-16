@@ -94,7 +94,7 @@ auto const cube_color = std::vector<agl::color> {
 	{1.f, 1.f, 1.f, 1.f},
 	{1.f, 1.f, 1.f, 1.f}
 };
-auto const camera_velocity = 0.2f;
+auto const camera_velocity = 4.2f;
 auto const mouse_sensitivity = 0.3f;
 
 class test_app
@@ -126,24 +126,30 @@ public:
 
 		//for (auto i = 0; i < 1000; ++i)
 		//	create_cube(reg);
-
+		//
 		auto last_mouse_pos = agl::input::get_mouse_position();
 
 		auto timer = agl::timer{};
 		auto frames = 0;
 
+		auto frame_timer = agl::timer{};
+
 		auto prism_entity = reg.create();
 		auto& prism = prism_entity.attach_component<agl::prism>(sh_manager.get_shader_uid(0));
-		prism.set_radius(0.5f);
-		prism.set_side_count(5);
-		prism.set_sides(glm::vec2{ 0.2f, 0.2f });
+		prism.set_radius(1.5f);
+		prism.set_side_count(15);
+		prism.set_sides(glm::vec2{ 0.2f, 10.2f });
 		prism.set_color(agl::color::White);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		prism_entity.attach_component<agl::transformable>();
 		prism.get_uniforms().add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(0));
 
 		while (is_running())
 		{
+			auto frame_time = frame_timer.elapsed().seconds();
+			frame_timer.reset();
+
 			//if (timer.elapsed().seconds() >= 10.f)
 			//	break;
 
@@ -167,27 +173,27 @@ public:
 			}
 			if (agl::input::key_pressed(agl::A))
 			{
-				camera.move(camera.get_direction().right * -camera_velocity);
+				camera.move(camera.get_direction().right * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::D))
 			{
-				camera.move(camera.get_direction().right * camera_velocity);
+				camera.move(camera.get_direction().right * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::W))
 			{
-				camera.move(camera.get_direction().forward * camera_velocity);
+				camera.move(camera.get_direction().forward * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::S))
 			{
-				camera.move(camera.get_direction().forward * -camera_velocity);
+				camera.move(camera.get_direction().forward * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::LEFT_CONTROL))
 			{
-				camera.move(camera.get_direction().up * -camera_velocity);
+				camera.move(camera.get_direction().up * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::SPACE))
 			{
-				camera.move(camera.get_direction().up * camera_velocity);
+				camera.move(camera.get_direction().up * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::P))
 			{
@@ -263,7 +269,7 @@ agl::entity create_camera(agl::registry &reg)
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
 	camera.set_position({ 0.f, 5.f, 0.f });
 	camera.set_planes({ 0.1f, 100000.f });
-	//camera.set_fov(60.f);
+	camera.set_fov(60.f);
 	camera.look_at({ 0.f, 0.f, 0.f });
 
 	uniforms.add_uniform<agl::camera_uniform>({ sh_manager.get_shader_uid(0) });
