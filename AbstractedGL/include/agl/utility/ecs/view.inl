@@ -1,6 +1,5 @@
-#include "view.hpp"
 template <typename... Args>
-view<Args...>::iterator::iterator(view<Args...> &view, std::vector<entity_uid>::iterator it)
+view<Args...>::iterator::iterator(view<Args...> const& view, std::vector<entity_uid>::const_iterator it)
 	: m_view(view)
 	, m_iterator(it)
 {
@@ -19,15 +18,15 @@ bool view<Args...>::iterator::operator==(const iterator &other) const
 }
 
 template <typename... Args>
-typename view<Args...>::iterator::reference view<Args...>::iterator::operator*()
+entity_uid view<Args...>::iterator::operator*() const
 {
-	return m_view.get(*m_iterator);
+	return *m_iterator;
 }
 
 template <typename... Args>
-typename view<Args...>::iterator::pointer view<Args...>::iterator::operator->()
+entity_uid const* const view<Args...>::iterator::operator->() const
 {
-	return &m_view.get(*m_iterator);
+	return &(*m_iterator);
 }
 
 template <typename... Args>
@@ -47,13 +46,6 @@ typename view<Args...>::iterator& view<Args...>::iterator::operator++()
 	return *this;
 }
 
-
-template <typename... Args>
-const entity_uid& view<Args...>::iterator::get_entity_uid() const
-{
-	return *m_iterator;
-}
-
 template <typename... Args>
 view<Args...>::~view()
 {
@@ -61,19 +53,19 @@ view<Args...>::~view()
 }
 
 template <typename... Args>
-typename view<Args...>::iterator view<Args...>::begin()
+typename view<Args...>::iterator view<Args...>::cbegin() const
 {
-	return view<Args...>::iterator{ *this, m_entities.begin() };
+	return view<Args...>::iterator{ *this, m_entities.cbegin() };
 }
 
 template <typename... Args>
-typename view<Args...>::iterator view<Args...>::end()
+typename view<Args...>::iterator view<Args...>::cend() const
 {
-	return view<Args...>::iterator{ *this, m_entities.end() };
+	return view<Args...>::iterator{ *this, m_entities.cend() };
 }
 
 template <typename... Args>
-std::uint64_t view<Args...>::get_count() const 
+std::uint64_t view<Args...>::get_count() const
 {
 	return m_entities.size();
 }
@@ -92,28 +84,10 @@ bool agl::view<Args...>::needs_update_impl(std::index_sequence<Sequence...>) con
 }
 
 template <typename... Args>
-view<Args...>::view(std::tuple<component_array<Args>*...> arrays)
-	: m_arrays(std::move(arrays))
+view<Args...>::view(std::tuple<component_array<Args>*...> arrays, std::vector<entity_uid>&& entities)
+	: m_arrays{ std::move(arrays) }
+	, m_entities{ std::move(entities) }
 {
-}
-
-template <typename... Args>
-void view<Args...>::track(std::vector<entity_uid> &&entities)
-{
-	m_entities = std::move(entities);
-}
-
-template <typename... Args>
-registry_component::TComponent<Args...> view<Args...>::get(const entity_uid &id_entity)
-{
-	return get_impl(id_entity, std::make_index_sequence<sizeof...(Args)>{ });
-}
-
-template <typename... Args>
-template <std::uint64_t... Sequence>
-registry_component::TComponent<Args...> view<Args...>::get_impl(const entity_uid &id_entity, std::index_sequence<Sequence...>)
-{
-	return { (std::get<Sequence>(m_arrays)->get(id_entity))... };
 }
 
 template <typename... Args>

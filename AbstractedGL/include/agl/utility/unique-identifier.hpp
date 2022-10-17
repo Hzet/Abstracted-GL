@@ -18,7 +18,7 @@ namespace agl
 			INVALID = 0ul
 		};
 
-		static std::uint64_t GetRefCount(const TUID &uid);
+		static std::uint64_t get_reference_count(const TUID &uid);
 
 		/// <summary>
 		/// Registers the unique identifier for this instance.

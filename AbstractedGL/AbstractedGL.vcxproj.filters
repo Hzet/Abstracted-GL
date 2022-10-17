@@ -261,6 +261,9 @@
     <ClCompile Include="src\graphics\ecs\component\prism.cpp">
       <Filter>src\graphics\ecs\component\render</Filter>
     </ClCompile>
+    <ClCompile Include="src\agl\graphics\ecs\system\camera-system.cpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
@@ -589,6 +592,9 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp">
       <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

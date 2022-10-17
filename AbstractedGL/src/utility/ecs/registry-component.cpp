@@ -21,6 +21,9 @@ namespace agl
 
 	std::uint64_t registry_component::get_array_count(std::uint64_t index) const
 	{
+		if (m_arrays[index] == nullptr)
+			return 0;
+
 		return m_arrays[index]->get_count();
 	}
 }

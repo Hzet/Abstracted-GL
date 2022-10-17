@@ -24,19 +24,11 @@ void registry::detach(const entity_uid &id_entity)
 template <typename... Args>
 view<Args...> registry::strict_view()
 {
-	auto result = view<Args...>{ this->get_arrays_ptr<Args...>() };
-
-	result.track(entities_matching(signature::create<Args...>()));
-
-	return result;
+	return view<Args...>{ this->get_arrays_ptr<Args...>(), entities_matching(signature::create<Args...>()) };
 }
 
 template <typename... Args> 
 view<Args...> registry::inclusive_view()
 {
-	auto result = view<Args...>{ this->get_arrays_ptr<Args...>() };
-
-	result.track(entities_including(signature::create<Args...>()));
-
-	return result;
+	return view<Args...>{ this->get_arrays_ptr<Args...>(), entities_including(signature::create<Args...>()) };
 }

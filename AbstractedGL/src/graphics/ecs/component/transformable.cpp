@@ -120,6 +120,11 @@ namespace agl
 		return m_inverse_transform;
 	}
 
+	bool transformable::needs_update() const
+	{
+		return m_require_update;
+	}
+
 	void transformable::update() const
 	{
 		if (!m_require_update)

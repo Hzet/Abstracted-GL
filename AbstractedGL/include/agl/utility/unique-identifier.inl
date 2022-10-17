@@ -1,5 +1,5 @@
 template <typename T, std::uint64_t Size>
-std::uint64_t TUID<T, Size>::GetRefCount(const TUID &uid)
+std::uint64_t TUID<T, Size>::get_reference_count(const TUID &uid)
 {
 	return get_manager().get_references_count(uid);
 }

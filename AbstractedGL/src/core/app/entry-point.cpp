@@ -124,9 +124,9 @@ public:
 		auto camera_entity = create_camera(reg);
 		auto& camera = camera_entity.get_component<agl::camera_perspective>();
 
-		//for (auto i = 0; i < 1000; ++i)
-		//	create_cube(reg);
-		//
+		for (auto i = 0; i < 1000; ++i)
+			create_cube(reg);
+		
 		auto last_mouse_pos = agl::input::get_mouse_position();
 
 		auto timer = agl::timer{};
@@ -134,16 +134,16 @@ public:
 
 		auto frame_timer = agl::timer{};
 
-		auto prism_entity = reg.create();
-		auto& prism = prism_entity.attach_component<agl::prism>(sh_manager.get_shader_uid(0));
-		prism.set_radius(1.5f);
-		prism.set_side_count(15);
-		prism.set_sides(glm::vec2{ 0.2f, 10.2f });
-		prism.set_color(agl::color::White);
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-		prism_entity.attach_component<agl::transformable>();
-		prism.get_uniforms().add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(0));
+		//auto prism_entity = reg.create();
+		//auto& prism = prism_entity.attach_component<agl::prism>(sh_manager.get_shader_uid(0));
+		//prism.set_radius(1.5f);
+		//prism.set_side_count(15);
+		//prism.set_sides(glm::vec2{ 0.2f, 10.2f });
+		//prism.set_color(agl::color::White);
+		////glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//
+		//prism_entity.attach_component<agl::transformable>();
+		//prism.get_uniforms().add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(0));
 
 		while (is_running())
 		{

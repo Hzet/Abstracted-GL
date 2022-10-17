@@ -144,6 +144,8 @@ namespace agl
 		/// </returns>
 		const transform& get_inverse_transform() const;
 
+		bool needs_update() const;
+
 	private:
 		/// <summary>
 		/// Update matrices.

@@ -10,7 +10,7 @@ namespace agl
 
 	void registry::destroy(entity &e)
 	{
-		if (entity_uid::GetRefCount(e.get_entity_uid()) > 1ul)
+		if (entity_uid::get_reference_count(e.get_entity_uid()) > 1ul)
 			return;
 
 		const auto &sig = e.get_signature();

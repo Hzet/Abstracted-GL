@@ -16,11 +16,12 @@ namespace agl
 		if(view.needs_update())
 			view = reg.inclusive_view<uniform_array>();
 
-		for (auto it = view.begin(); it != view.end(); ++it)
+		for (auto it = view.cbegin(); it != view.cend(); ++it)
 		{
-			const auto e = reg.get_entity(it.get_entity_uid());
+			auto const e = reg.get_entity(*it);
+			auto& uniform = reg.get<uniform_array>(*it);
 
-			(*it).send(e);
+			uniform.send(e);
 		}
 	}
 }

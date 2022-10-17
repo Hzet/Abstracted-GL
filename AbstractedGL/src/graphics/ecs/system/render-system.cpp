@@ -44,31 +44,33 @@ namespace agl
 		if (prismView.needs_update())
 			prismView = reg.inclusive_view<prism>();
 
-		for (auto it = meshView.begin(); it != meshView.end(); ++it)
+		for (auto it = meshView.cbegin(); it != meshView.cend(); ++it)
 		{
-			const auto e = reg.get_entity(it.get_entity_uid());
-		
-			(*it).uniforms.send(e);
+			auto const e = reg.get_entity(*it);
+			auto& mesh = reg.get<agl::mesh>(*it);
+			mesh.uniforms.send(e);
 			
-			renderMesh(*it);
+			renderMesh(mesh);
 		}
 		
-		for (auto it = prismView.begin(); it != prismView.end(); ++it)
+		for (auto it = prismView.cbegin(); it != prismView.cend(); ++it)
 		{
-			const auto e = reg.get_entity(it.get_entity_uid());
+			auto const e = reg.get_entity(*it);
+			auto& prism = reg.get<agl::prism>(*it);
 
-			it->m_mesh.uniforms.send(e);
+			prism.m_mesh.uniforms.send(e);
 
-			renderMesh(it->m_mesh);
+			renderMesh(prism.m_mesh);
 		}
 
-		for (auto it = modelView.begin(); it != modelView.end(); ++it)
+		for (auto it = modelView.cbegin(); it != modelView.cend(); ++it)
 		{
-			const auto e = reg.get_entity(it.get_entity_uid());
-		
-			(*it).uniforms.send(e);
+			auto const e = reg.get_entity(*it);
+			auto& model = reg.get<agl::model>(*it);
 
-			for (auto &mesh : (*it).meshes)
+			model.uniforms.send(e);
+
+			for (auto &mesh : model.meshes)
 				renderMesh(mesh);
 		}
 	}
