@@ -16,6 +16,6 @@ namespace agl
 		/// <summary>
 		/// Update 'm_projection' matrix.
 		/// </summary>
-		virtual void update_projection() const override;
+		virtual void update_projection() override;
 	};
 }

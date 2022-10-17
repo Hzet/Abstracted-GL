@@ -123,6 +123,7 @@ public:
 
 		auto camera_entity = create_camera(reg);
 		auto& camera = camera_entity.get_component<agl::camera_perspective>();
+		auto& camera_transform = camera_entity.get_component<agl::transformable>();
 
 		for (auto i = 0; i < 1000; ++i)
 			create_cube(reg);
@@ -173,27 +174,27 @@ public:
 			}
 			if (agl::input::key_pressed(agl::A))
 			{
-				camera.move(camera.get_direction().right * -camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().right * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::D))
 			{
-				camera.move(camera.get_direction().right * camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().right * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::W))
 			{
-				camera.move(camera.get_direction().forward * camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().forward * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::S))
 			{
-				camera.move(camera.get_direction().forward * -camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().forward * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::LEFT_CONTROL))
 			{
-				camera.move(camera.get_direction().up * -camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().up * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::SPACE))
 			{
-				camera.move(camera.get_direction().up * camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().up * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::P))
 			{
@@ -203,7 +204,7 @@ public:
 			auto const curr_mouse_pos = agl::input::get_mouse_position();
 			auto const mouse_pos_offset = glm::vec2{ curr_mouse_pos.x - last_mouse_pos.x, (curr_mouse_pos.y - last_mouse_pos.y) * -1.f };
 			auto const rotation = glm::vec3{ mouse_pos_offset * mouse_sensitivity, 0.f };
-			camera.rotate(rotation);
+			camera_transform.rotate(rotation);
 			last_mouse_pos = agl::input::get_mouse_position();
 
 			m_window.clear();
@@ -263,14 +264,16 @@ agl::entity create_camera(agl::registry &reg)
 
 	agl::entity result = reg.create();
 
-	auto &camera = result.attach_component<agl::camera_perspective>();
-	auto &uniforms = result.attach_component<agl::uniform_array>();
+	auto& camera = result.attach_component<agl::camera_perspective>();
+	auto& camera_transform = result.attach_component<agl::transformable>();
+	auto& uniforms = result.attach_component<agl::uniform_array>();
 
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
-	camera.set_position({ 0.f, 5.f, 0.f });
 	camera.set_planes({ 0.1f, 100000.f });
 	camera.set_fov(60.f);
 	camera.look_at({ 0.f, 0.f, 0.f });
+	
+	camera_transform.set_position({ 0.f, 5.f, 0.f });
 
 	uniforms.add_uniform<agl::camera_uniform>({ sh_manager.get_shader_uid(0) });
 

@@ -74,7 +74,7 @@ namespace agl
 		/// Set the origin.
 		/// </summary>
 		/// <param name="origin">The origin</param>
-		void setOrigin(const glm::vec3 &origin);
+		void set_origin(const glm::vec3 &origin);
 
 		/// <summary>
 		/// Get the position.

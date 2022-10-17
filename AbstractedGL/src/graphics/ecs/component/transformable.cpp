@@ -53,7 +53,7 @@ namespace agl
 		return m_origin;
 	}
 
-	void transformable::setOrigin(const glm::vec3 &origin)
+	void transformable::set_origin(const glm::vec3 &origin)
 	{
 		m_require_update = true;
 

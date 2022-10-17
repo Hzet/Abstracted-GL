@@ -34,7 +34,7 @@ namespace agl
 		/// <summary>
 		/// Recalculate the projection matrix.
 		/// </summary>
-		virtual void update_projection() const override;
+		virtual void update_projection() override;
 
 	private:
 		float m_fov;
