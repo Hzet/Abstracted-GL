@@ -14,6 +14,14 @@ namespace agl
 	{
 	}
 
+	std::string uniform_base::get_index() const
+	{
+		if (m_index < 0)
+			return "";
+
+		return "[" + std::to_string(m_index) + "]";
+	}
+
 	uniform_data_type_uid uniform_base::get_data_type_uid() const
 	{
 		return m_id_uniform_data_type;
@@ -24,10 +32,10 @@ namespace agl
 		return m_id_component_type_uid;
 	}
 
-	void uniform_base::set_name(std::string const& name)
+	void uniform_base::set_name(std::string const& name, std::int64_t index)
 	{
+		m_index= index;
 		m_update_uniform_locations = true;
-
 		m_name = name;
 	}
 

@@ -9,8 +9,8 @@ namespace agl
 	public:
 		using const_iterator = typename std::vector<std::pair<TKey, TData>>::const_iterator;
 
-		const_iterator cbegin() const;
-		const_iterator cend() const;
+		const_iterator begin() const;
+		const_iterator end() const;
 
 		std::uint64_t get_count() const;
 
@@ -28,15 +28,15 @@ namespace agl
 	};
 
 	template <typename TKey, typename TData>
-	typename sorted_vector<TKey, TData>::const_iterator sorted_vector<TKey, TData>::cbegin() const
+	typename sorted_vector<TKey, TData>::const_iterator sorted_vector<TKey, TData>::begin() const
 	{
-		return m_vector.cbegin();
+		return m_vector.begin();
 	}
 
 	template <typename TKey, typename TData>
-	typename sorted_vector<TKey, TData>::const_iterator sorted_vector<TKey, TData>::cend() const
+	typename sorted_vector<TKey, TData>::const_iterator sorted_vector<TKey, TData>::end() const
 	{
-		return m_vector.cend();
+		return m_vector.end();
 	}
 
 	template <typename TKey, typename TData>
@@ -61,7 +61,7 @@ namespace agl
 		if (get_count() == 0ul)
 		{
 			m_vector.push_back(pair);
-			return m_vector.cbegin();
+			return m_vector.begin();
 		}
 
 		std::uint64_t l = 0ul;
@@ -88,14 +88,14 @@ namespace agl
 				break;
 		}
 
-		return m_vector.insert(m_vector.cbegin() + m, pair);
+		return m_vector.insert(m_vector.begin() + m, pair);
 	}
 
 	template <typename TKey, typename TData>
 	typename sorted_vector<TKey, TData>::const_iterator sorted_vector<TKey, TData>::find(TKey key) const
 	{
 		if (get_count() == 0ul)
-			return m_vector.cend();
+			return m_vector.end();
 
 		std::uint64_t l = 0ul;
 		std::uint64_t r = get_count() - 1ul;
@@ -112,10 +112,10 @@ namespace agl
 			else if (mid > key)
 				r = m - 1ul;
 			else
-				return m_vector.cbegin() + m;
+				return m_vector.begin() + m;
 		}
 
-		return m_vector.cend();
+		return m_vector.end();
 	}
 
 	template <typename TKey, typename TData>

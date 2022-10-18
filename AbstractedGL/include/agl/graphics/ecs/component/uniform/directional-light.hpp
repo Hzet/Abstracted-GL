@@ -27,6 +27,4 @@ namespace agl
 		std::int32_t m_direction;
 		std::int32_t m_specular;
 	};
-
-#include "graphics/ecs/component/uniform/directional-light.inl"
 }

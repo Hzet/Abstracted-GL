@@ -17,7 +17,7 @@ void uniform<transform_uniform, TComponent>::send(const shader &s, const entity 
 template <typename TComponent>
 void uniform<transform_uniform, TComponent>::update_uniform_locations(shader const& sh)
 {
-	m_transform = sh.get_location(get_name() + "." + "transform");
+	m_transform = sh.get_location(get_name() + get_index() + "." + "transform");
 
 	m_update_uniform_locations = false;
 }

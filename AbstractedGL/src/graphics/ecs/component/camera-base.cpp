@@ -5,7 +5,7 @@
 
 namespace agl
 {
-	const direction_matrix camera_base::s_world_direction = { glm::vec3(0.f, 0.f, -1.f), glm::vec3(0.f, 1.f, 0.f), glm::vec3(1.f, 0.f, 0.f) };
+	const direction camera_base::s_world_direction = { glm::vec3(0.f, 0.f, -1.f), glm::vec3(0.f, 1.f, 0.f), glm::vec3(1.f, 0.f, 0.f) };
 
 	camera_base::camera_base()
 		: m_planes{ 0.1f, 100.f }
@@ -13,7 +13,6 @@ namespace agl
 		, m_needs_update{ true }
 		, m_view{ glm::mat4{ 1.f } }
 		, m_projection{ glm::mat4{ 1.f } }
-		, m_direction{ s_world_direction }
 	{
 	}
 
@@ -51,11 +50,6 @@ namespace agl
 		return m_projection;
 	}
 
-	const direction_matrix& camera_base::get_direction() const
-	{
-		return m_direction;
-	}
-
 	void camera_base::look_at(const glm::vec3 &target)
 	{
 		m_look_at_update = true;
@@ -67,36 +61,36 @@ namespace agl
 		return m_needs_update || m_look_at_update;
 	}
 
-	void camera_base::update(transformable& transform)
+	void camera_base::update(transformable& transform, direction& dir)
 	{
 		if (m_look_at_update)
 		{
 			if (transform.get_position() == m_look_at)
 				return;
 
-			m_direction.forward = glm::normalize(m_look_at - transform.get_position());
-			m_direction.right = glm::normalize(glm::cross(m_direction.forward, s_world_direction.up));
-			m_direction.up = glm::normalize(glm::cross(m_direction.right, m_direction.forward));
+			dir.forward = glm::normalize(m_look_at - transform.get_position());
+			dir.right = glm::normalize(glm::cross(dir.forward, s_world_direction.up));
+			dir.up = glm::normalize(glm::cross(dir.right, dir.forward));
 
 			auto rotation = glm::vec3{0.f};
 
-			rotation.x = glm::degrees(glm::atan(m_direction.forward.z, m_direction.forward.x));
-			rotation.y = glm::degrees(glm::atan(m_direction.forward.y, glm::length(glm::vec2(m_direction.forward.x, m_direction.forward.z))));
+			rotation.x = glm::degrees(glm::atan(dir.forward.z, dir.forward.x));
+			rotation.y = glm::degrees(glm::atan(dir.forward.y, glm::length(glm::vec2(dir.forward.x, dir.forward.z))));
 			
 			transform.set_rotation(rotation);
 
 			m_look_at_update = false;
 		}
 
-		m_direction.forward.x = glm::cos(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
-		m_direction.forward.y = glm::sin(glm::radians(transform.get_rotation().y));
-		m_direction.forward.z = glm::sin(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
+		dir.forward.x = glm::cos(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
+		dir.forward.y = glm::sin(glm::radians(transform.get_rotation().y));
+		dir.forward.z = glm::sin(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
 
-		m_direction.forward = glm::normalize(m_direction.forward);
-		m_direction.right = glm::normalize(glm::cross(m_direction.forward, s_world_direction.up));
-		m_direction.up = glm::normalize(glm::cross(m_direction.right, m_direction.forward));
+		dir.forward = glm::normalize(dir.forward);
+		dir.right = glm::normalize(glm::cross(dir.forward, s_world_direction.up));
+		dir.up = glm::normalize(glm::cross(dir.right, dir.forward));
 
-		m_view = glm::lookAt(transform.get_position(), transform.get_position() + m_direction.forward, m_direction.up);
+		m_view = glm::lookAt(transform.get_position(), transform.get_position() + dir.forward, dir.up);
 		m_view.scale(transform.get_scale());
 
 		this->update_projection();

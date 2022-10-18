@@ -264,6 +264,21 @@
     <ClCompile Include="src\agl\graphics\ecs\system\camera-system.cpp">
       <Filter>src\graphics\ecs\system\render</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\ecs\system\light-uniform-system.cpp">
+      <Filter>src\graphics\ecs\system\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\uniform\spot-light.cpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\uniform\directional-light.cpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\uniform\material.cpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\uniform\texture-material.cpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
@@ -596,6 +611,12 @@
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp">
       <Filter>src\graphics\ecs\system\render</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\light-uniform-system.hpp">
+      <Filter>src\graphics\ecs\system\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\direction.hpp">
+      <Filter>src\graphics\ecs\component\transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\basic.fsh">
@@ -685,19 +706,7 @@
     <None Include="include\agl\graphics\ecs\component\uniform\camera-uniform.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
-    <None Include="include\agl\graphics\ecs\component\uniform\directional-light.inl">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </None>
     <None Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.inl">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </None>
-    <None Include="include\agl\graphics\ecs\component\uniform\material.inl">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </None>
-    <None Include="include\agl\graphics\ecs\component\uniform\spot-light.inl">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </None>
-    <None Include="include\agl\graphics\ecs\component\uniform\texture-material.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
     <None Include="include\agl\graphics\ecs\component\uniform\transform-uniform.inl">

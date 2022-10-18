@@ -21,12 +21,10 @@ namespace agl
 		virtual void update_uniform_locations(shader const& sh) override;
 
 	private:
-		std::int32_t shininess;
-		std::int32_t ambient;
-		std::int32_t diffuse;
-		std::int32_t specular;
-		std::int32_t emission;
+		std::int32_t m_shininess;
+		std::int32_t m_ambient;
+		std::int32_t m_diffuse;
+		std::int32_t m_specular;
+		std::int32_t m_emission;
 	};
-
-#include "graphics/ecs/component/uniform/material.inl"
 }

@@ -10,7 +10,7 @@ namespace agl
 	public:
 		using uniform_base::uniform_base;
 
-		data_uniform(std::string const& name = "");
+		data_uniform(std::string const& name);
 		virtual ~data_uniform() = default;
 
 		TData data;

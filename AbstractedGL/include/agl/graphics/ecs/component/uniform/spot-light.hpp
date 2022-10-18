@@ -6,6 +6,7 @@
 
 namespace agl
 {
+	template <>
 	class uniform<spot_light>
 		: public register_uniform<spot_light>
 	{
@@ -28,6 +29,4 @@ namespace agl
 		std::int32_t m_range; 
 		std::int32_t m_specular;
 	};
-
-#include "graphics/ecs/component/uniform/spot-light.inl"
 }

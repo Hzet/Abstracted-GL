@@ -46,8 +46,8 @@ namespace agl
 		view& operator=(view const& other) = delete;
 		~view();
 
-		iterator cbegin() const;
-		iterator cend() const;
+		iterator begin() const;
+		iterator end() const;
 
 		std::uint64_t get_count() const;
 

@@ -12,7 +12,7 @@ void render_buffer::add_vertices(const T * const data)
 	const auto renderTypeUID = TRenderTypeUID<T>::value();
 	auto found = m_index_map.find(renderTypeUID);
 
-	if (found != m_index_map.cend())
+	if (found != m_index_map.end())
 	{
 		for (std::uint64_t i = 0ul; i < get_vertex_count(); i++)
 			get<T>(i) = *(data + i);
@@ -29,7 +29,7 @@ void render_buffer::add_vertices(const T * const data)
 	{
 		const auto * const flat = reinterpret_cast<const std::byte *const>(data + i);
 
-		m_vertices.insert(m_vertices.cbegin() + offset, flat, flat + sizeof(T::Type));
+		m_vertices.insert(m_vertices.begin() + offset, flat, flat + sizeof(T::Type));
 
 		offset += get_stride_size();
 	}

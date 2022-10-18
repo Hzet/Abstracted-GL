@@ -1,4 +1,10 @@
-template <typename TData,typename... TComponents>
+template <typename TData, typename... TComponents>
+register_uniform<TData, TComponents...>::register_uniform(std::string const& name)
+	: data_uniform<TData>{ name }
+{
+}
+
+template <typename TData, typename... TComponents>
 bool register_uniform<TData, TComponents...>::register_type()
 {
 	if constexpr (sizeof...(TComponents) > 0)

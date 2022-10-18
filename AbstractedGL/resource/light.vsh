@@ -31,5 +31,5 @@ void main()
 	vnormal = normalize(mat3(transpose(model.inverse_transform)) * normal);
 	vtexture = texture;
 
-	gl_Position = camera.projection * camera.view * pos;
+	gl_Position = model.transform * camera.projection * camera.view * vec4(pos, 1.f);
 }

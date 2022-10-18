@@ -7,6 +7,7 @@
 
 namespace agl
 {
+	template <>
 	class uniform<texture>
 		: public register_uniform<texture>
 	{
@@ -27,6 +28,4 @@ namespace agl
 		std::int32_t m_diffuse;
 		std::int32_t m_specular;
 	};
-
-#include "graphics/ecs/component/uniform/texture-material.inl"
 }

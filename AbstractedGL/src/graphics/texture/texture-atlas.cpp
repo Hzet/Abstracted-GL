@@ -17,12 +17,12 @@ namespace agl
 
 	bool texture_atlas::has_texture_2d(const std::string &filepath)
 	{
-		return m_directory_map_2d.find(filepath) != m_directory_map_2d.cend();
+		return m_directory_map_2d.find(filepath) != m_directory_map_2d.end();
 	}
 
 	bool texture_atlas::has_texture_2d(const texture_uid &id_texture_2d)
 	{
-		return m_textures_2d.find(id_texture_2d) != m_textures_2d.cend();
+		return m_textures_2d.find(id_texture_2d) != m_textures_2d.end();
 	}
 
 	texture_uid texture_atlas::load_from_file(std::string const& filepath)
@@ -48,21 +48,21 @@ namespace agl
 
 	texture_uid texture_atlas::get_texture_uid(const std::string &filepath)
 	{
-		AGL_CORE_ASSERT(m_directory_map_2d.find(filepath) != m_directory_map_2d.cend(), "Index out of bounds!");
+		AGL_CORE_ASSERT(m_directory_map_2d.find(filepath) != m_directory_map_2d.end(), "Index out of bounds!");
 
 		return m_directory_map_2d.find(filepath)->second;
 	}
 
 	texture_2d& texture_atlas::get_texture_2d(const texture_uid &id_texture_2d)
 	{
-		AGL_CORE_ASSERT(m_textures_2d.find(id_texture_2d) != m_textures_2d.cend(), "Index out of bounds!");
+		AGL_CORE_ASSERT(m_textures_2d.find(id_texture_2d) != m_textures_2d.end(), "Index out of bounds!");
 
 		return m_textures_2d.find(id_texture_2d)->second;
 	}
 
 	texture_2d& texture_atlas::get_texture_2d(const std::string &filepath)
 	{
-		AGL_CORE_ASSERT(m_directory_map_2d.find(filepath) != m_directory_map_2d.cend(), "Index out of bounds!");
+		AGL_CORE_ASSERT(m_directory_map_2d.find(filepath) != m_directory_map_2d.end(), "Index out of bounds!");
 
 		return get_texture_2d(m_directory_map_2d.find(filepath)->second);
 	}

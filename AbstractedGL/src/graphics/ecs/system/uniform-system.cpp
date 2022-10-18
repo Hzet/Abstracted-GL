@@ -16,7 +16,7 @@ namespace agl
 		if(view.needs_update())
 			view = reg.inclusive_view<uniform_array>();
 
-		for (auto it = view.cbegin(); it != view.cend(); ++it)
+		for (auto it = view.begin(); it != view.end(); ++it)
 		{
 			auto const e = reg.get_entity(*it);
 			auto& uniform = reg.get<uniform_array>(*it);

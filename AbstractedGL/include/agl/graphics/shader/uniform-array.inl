@@ -17,7 +17,7 @@ void uniform_array::add_uniform(shader_uid id_shader)
 template <typename TData> 
 void uniform_array::remove_uniform()
 {
-	for (auto it = m_uniforms.cbegin(); it != m_uniforms.cend(); ++it)
+	for (auto it = m_uniforms.begin(); it != m_uniforms.end(); ++it)
 		if ((*it)->get_data_type_uid() == TUniformDataTypeUID<TData>::value())
 		{
 			auto &u = *(*it)->get();

@@ -18,7 +18,7 @@ void uniform<inverse_transform_uniform, TComponent>::send(const shader &s, const
 template <typename TComponent>
 void uniform<inverse_transform_uniform, TComponent>::update_uniform_locations(shader const& sh)
 {
-	m_inverse_transform = sh.get_location(get_name() + "." + "inverse_transform");
+	m_inverse_transform = sh.get_location(get_name() + get_index() + "." + "inverse_transform");
 
 	update_uniform_locations = false;
 }
