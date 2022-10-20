@@ -6,16 +6,18 @@
 
 namespace agl
 {
-	template <>
-	class uniform<directional_light>
-		: public register_uniform<directional_light>
+	struct directional_light_uniform{};
+
+	template <typename TComponent>
+	class uniform<directional_light_uniform, TComponent>
+		: public register_uniform<directional_light_uniform, directional_light>
 	{
 	public:
 		using register_uniform::register_uniform;
 
 		uniform();
 
-		virtual void send(const shader &s, const entity &e) override;
+		virtual void send_uniform(const shader &s, const entity &e) override;
 
 	private:
 		virtual void update_uniform_locations(shader const& sh) override;
@@ -27,4 +29,6 @@ namespace agl
 		std::int32_t m_direction;
 		std::int32_t m_specular;
 	};
+
+#include "graphics/ecs/component/uniform/directional-light.inl"
 }

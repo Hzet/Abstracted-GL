@@ -2,8 +2,9 @@
 
 namespace agl
 {
-	template <typename TData = void, typename TComponent = void>
+	template <typename TName = void, typename TComponent = void>
 	class uniform
 	{
+		static_assert(false, "faaaaaaaaaaaaaileeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed");
 	};
 }

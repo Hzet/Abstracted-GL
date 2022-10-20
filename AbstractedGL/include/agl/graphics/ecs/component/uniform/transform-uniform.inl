@@ -5,7 +5,7 @@ uniform<transform_uniform, TComponent>::uniform()
 }
 
 template <typename TComponent>
-void uniform<transform_uniform, TComponent>::send(const shader &s, const entity &e)
+void uniform<transform_uniform, TComponent>::send_uniform(const shader &s, const entity &e)
 {
 	if (m_update_uniform_locations)
 		update_uniform_locations(s);

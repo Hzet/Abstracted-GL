@@ -60,6 +60,12 @@ namespace agl
 		return m_signature;
 	}
 
+
+	bool entity::has_component(component_type_uid id_component) const
+	{
+		return m_signature[id_component];
+	}
+
 	entity::entity(registry *reg, const entity_uid &id_entity)
 		: m_registry(reg)
 		, m_id(id_entity)

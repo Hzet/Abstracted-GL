@@ -1,24 +1,21 @@
-template <typename TData>
+template <typename TName>
 void uniform_array::add_uniform(shader_uid id_shader)
 {
-	if (!has_uniform<TData>())
-	{
-		const auto &group = group_uniform::get_group<TData>();
-		auto u = group.get_uniform(group[0ul].get_component_type_uid());
+	if (!has_uniform<TName>())
+		m_uniforms.push_back(uniform_prototyper::get_prototype(TUniformDataTypeUID<TName>::value()));
 
-		m_uniforms.push_back(std::move(u));
-	}
-
-	auto &u = *get_uniform_pointer<TData>();
-
-	u.set_shader_uid(id_shader);
+	for (auto &v : m_uniforms)
+		if (v->get_type_uid() == TUniformDataTypeUID<TName>::value())
+			v->set_shader_uid(id_shader);
 }
 
-template <typename TData> 
+template <typename TName>
 void uniform_array::remove_uniform()
 {
+	auto const id_uniform = TUniformDataTypeUID<TName>::value();
+
 	for (auto it = m_uniforms.begin(); it != m_uniforms.end(); ++it)
-		if ((*it)->get_data_type_uid() == TUniformDataTypeUID<TData>::value())
+		if ((*it)->get_type_uid() == id_uniform)
 		{
 			auto &u = *(*it)->get();
 
@@ -28,42 +25,38 @@ void uniform_array::remove_uniform()
 		}
 }
 
-template <typename TData>
-TData& uniform_array::get_uniform()
+template <typename TName>
+uniform_base& uniform_array::get_uniform()
 {
+	auto const id_uniform = TUniformDataTypeUID<TName>::value();
+
 	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == TUniformDataTypeUID<TData>::value())
-			return *dynamic_cast<data_uniform<TData>*>(v.get());
+		if (v->get_type_uid() == id_uniform)
+			return *v;
 
 	AGL_CORE_ASSERT(false, "Failed to find u");
 }
 
-template <typename TData>
-const TData& uniform_array::get_uniform() const
+template <typename TName>
+const uniform_base& uniform_array::get_uniform() const
 {
+	auto const id_uniform = TUniformDataTypeUID<TName>::value();
+
 	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == TUniformDataTypeUID<TData>::value())
-			return *dynamic_cast<data_uniform<TData>*>(v.get());
+		if (v->get_type_uid() == id_uniform)
+			return *v;
 
 	AGL_CORE_ASSERT(false, "Failed to find u");
 }
 
-template <typename TData>
+template <typename TName>
 bool uniform_array::has_uniform()
 {
+	auto const id_uniform = TUniformDataTypeUID<TName>::value();
+
 	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == TUniformDataTypeUID<TData>::value())
+		if (v->get_type_uid() == id_uniform)
 			return true;
 
 	return false;
-}
-
-template <typename TData> 
-uniform_base* uniform_array::get_uniform_pointer()
-{
-	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == TUniformDataTypeUID<TData>::value())
-			return v.get();
-
-	return nullptr;
 }

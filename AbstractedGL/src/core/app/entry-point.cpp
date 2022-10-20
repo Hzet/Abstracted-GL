@@ -3,6 +3,7 @@
 #include "utility/ecs/ecs.hpp"
 #include "graphics/texture/texture-atlas.hpp"
 #include "graphics/shader/shader-manager.hpp"
+#include "graphics/shader/uniform-type.hpp"
 #include "graphics/ecs/component/prism.hpp"
 #include "graphics/ecs/component/transformable.hpp"
 #include "graphics/ecs/component/uniform/transform-uniform.hpp"
@@ -232,13 +233,13 @@ agl::entity create_camera(agl::registry &reg)
 
 	auto& camera = result.attach_component<agl::camera_perspective>();
 	auto& camera_transform = result.attach_component<agl::transformable>();
-	auto& camera_uniform = result.attach_component<agl::uniform<agl::camera_uniform, agl::camera_perspective>>();
+	auto& camera_uniform = result.attach_component<agl::uniform_type<agl::camera_uniform>>();
 	auto& camera_dir = result.attach_component<agl::direction>();
 	auto& spot_light = result.attach_component<agl::spot_light>();
-	auto& spot_light_uniform = result.attach_component<agl::uniform<agl::spot_light>>();
+	auto& spot_light_uniform = result.attach_component<agl::uniform_type<agl::spot_light>>();
 	
-	spot_light_uniform.set_shader_uid({ sh_manager.get_shader_uid(1) });
-	camera_uniform.set_shader_uid({ sh_manager.get_shader_uid(1) });
+	spot_light_uniform->set_shader_uid({ sh_manager.get_shader_uid(1) });
+	camera_uniform->set_shader_uid({ sh_manager.get_shader_uid(1) });
 
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
 	camera.set_planes({ 0.1f, 100000.f });

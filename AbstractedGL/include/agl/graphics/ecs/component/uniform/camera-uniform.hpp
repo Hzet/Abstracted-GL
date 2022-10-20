@@ -7,10 +7,7 @@
 
 namespace agl
 {
-	struct camera_uniform
-	{
-		shader_uid id_shader;
-	};
+	struct camera_uniform{};
 
 	template <typename TComponent>
 	class uniform<camera_uniform, TComponent>
@@ -21,7 +18,7 @@ namespace agl
 
 		uniform();
 
-		virtual void send(const shader &s, const entity &e) override;
+		virtual void send_uniform(const shader &s, const entity &e) override;
 
 	private:
 		virtual void update_uniform_locations(shader const& sh) override;

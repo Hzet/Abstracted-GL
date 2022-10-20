@@ -8,5 +8,5 @@ namespace agl
 	template <typename TData>
 	using TUniformDataTypeUID = TTypeUID<group_uniform, TData>;
 
-	using uniform_data_type_uid = TTypeUID<group_uniform>;
+	using uniform_type_uid = TTypeUID<group_uniform>;
 }

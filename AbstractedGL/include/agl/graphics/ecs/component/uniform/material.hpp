@@ -6,16 +6,18 @@
 
 namespace agl
 {
-	template <>
-	class uniform<material>
-		: public register_uniform<material>
+	struct material_uniform {};
+
+	template <typename TComponent>
+	class uniform<material_uniform, TComponent>
+		: public register_uniform<material_uniform, material>
 	{
 	public:
 		using register_uniform::register_uniform;
 
 		uniform();
 
-		virtual void send(const shader &s, const entity &e) override;
+		virtual void send_uniform(const shader &s, const entity &e) override;
 
 	private:
 		virtual void update_uniform_locations(shader const& sh) override;
@@ -27,4 +29,5 @@ namespace agl
 		std::int32_t m_specular;
 		std::int32_t m_emission;
 	};
+#include "graphics/ecs/component/uniform/material.inl"
 }

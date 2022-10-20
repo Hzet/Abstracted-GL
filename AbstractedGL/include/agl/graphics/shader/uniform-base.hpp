@@ -3,7 +3,7 @@
 #include <string>
 
 #include "graphics/shader/shader-uid.hpp"
-#include "graphics/shader/uniform-data-type-uid.hpp"
+#include "graphics/shader/uniform-type-uid.hpp"
 #include "utility/ecs/component-type-uid.hpp"
 
 namespace agl
@@ -17,7 +17,7 @@ namespace agl
 		uniform_base(const std::string &name = "");
 		virtual ~uniform_base() = default;
 
-		uniform_data_type_uid get_data_type_uid() const;
+		uniform_type_uid get_type_uid() const;
 		component_type_uid get_component_type_uid() const;
 
 		void set_name(const std::string &name, std::int64_t index = -1);
@@ -26,26 +26,27 @@ namespace agl
 		void set_shader_uid(shader_uid id_shader);
 		shader_uid get_shader_uid() const;
 
-		virtual void send(shader const& sh, entity const& e) = 0;
+		void send(shader const& sh, entity const& e);
 
 	protected:
-		uniform_base(uniform_data_type_uid id_uniform_data_type, component_type_uid id_component_type);
+		uniform_base(uniform_type_uid id_uniform_type, component_type_uid id_component_type);
 
 		std::string get_index() const;
 
+		virtual void send_uniform(shader const& sh, entity const& e) = 0;
 		virtual void update_uniform_locations(shader const& sh) = 0;
 
 	protected:
 		bool m_update_uniform_locations;
 
 	private:
-		template <typename TData, typename TComponent>
+		template <typename TName, typename TComponent>
 		friend class uniform_wrapper;
 
 		std::int64_t m_index;
 		component_type_uid m_id_component_type_uid;
 		shader_uid m_id_shader;
-		uniform_data_type_uid m_id_uniform_data_type;
+		uniform_type_uid m_id_uniform_type;
 		std::string m_name;
 	};
 }

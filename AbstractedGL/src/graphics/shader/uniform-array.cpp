@@ -9,30 +9,20 @@ namespace agl
 	{
 		static const auto& sh_manager = application::get_resource<shader_manager>();
 		
-		const auto &sig = e.get_signature();
-
-		for (auto i = 0ul; i < m_uniforms.size(); i++)
+		for (auto &uniform : m_uniforms)
 		{
-			if (!sig[m_uniforms[i]->get_component_type_uid()])
-				update_uniform(sig, i);
+			if (!e.has_component(uniform->get_component_type_uid()))
+			{
+				auto const components = uniform_prototyper::get_prototype_components(uniform->get_type_uid());
+				for (auto const index : components)
+					if (e.has_component(index))
+						uniform = uniform_prototyper::get_prototype(uniform->get_type_uid(), index, uniform.get());
+			}
 
-			const auto &s = sh_manager.get_shader(m_uniforms[i]->get_shader_uid());
+			const auto &s = sh_manager.get_shader(uniform->get_shader_uid());
 			s.set_active();
 
-			m_uniforms[i]->send(s, e);
+			uniform->send(s, e);
 		}
-	}
-
-	void uniform_array::update_uniform(const signature &sig, std::uint64_t index)
-	{
-		auto &u = m_uniforms[index];
-		const auto &group = group_uniform::get_group(u->get_data_type_uid());
-
-		for(auto i = 0ul; i < group.get_count(); i++)
-			if (sig[group[i].get_component_type_uid()])
-			{
-				u = group.get_uniform(group[i].get_component_type_uid(), u.get());
-				break;
-			}
 	}
 }
