@@ -1,4 +1,4 @@
-template <typename TComponent>
+/*template <typename TComponent>
 uniform<camera_uniform, TComponent>::uniform()
 	: register_uniform<camera_uniform, camera_perspective, camera_orthographic>{ "camera" }
 {
@@ -23,4 +23,4 @@ void uniform<camera_uniform, TComponent>::update_uniform_locations(shader const&
 	m_view = sh.get_location(get_name() + get_index() + "." + "view");
 
 	m_update_uniform_locations = false;
-}
+}*/

@@ -2,6 +2,7 @@ template <typename TName, typename TComponent>
 void uniform_prototyper::add_prototype()
 {
 	auto const id_uniform = TUniformDataTypeUID<TName>::value();
+	auto const id_component = TComponentTypeUID<TComponent>::value();
 
 	if (get_groups().size() < id_uniform)
 		get_groups().resize(get_groups().size() + 1);

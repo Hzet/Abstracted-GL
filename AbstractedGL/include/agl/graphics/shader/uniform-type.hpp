@@ -10,6 +10,10 @@ namespace agl
 	class uniform_type
 	{
 	public:
+		template <typename TComponent>
+		static uniform_type<TName> create();
+
+	public:
 		uniform_type() = default;
 		uniform_type(uniform_type&&) = default;
 		uniform_type(uniform_type const& other);
@@ -33,18 +37,31 @@ namespace agl
 	private:
 		std::unique_ptr<uniform_base> m_uniform;
 	};
+	
+	template <typename TName>
+	template <typename TComponent>
+	uniform_type<TName> uniform_type<TName>::create()
+	{
+		auto id_uniform = TUniformDataTypeUID<TName>::value();
+		auto id_component = TComponentTypeUID<TComponent>::value();
 
+		auto result = uniform_type<TName>{};
+
+		result.m_uniform = uniform_prototyper::get_prototype(id_uniform, id_component);
+
+		return result;
+	}
 
 	template <typename TName>
 	uniform_type<TName>::uniform_type(uniform_type const& other)
-		: m_uniform{ uniform_prototyper::get_prototype(other->get_type_uid(), other->get_component_type_uid(), other.m_uniform()) }
+		: m_uniform{ uniform_prototyper::get_prototype(other->get_type_uid(), other->get_component_type_uid(), other.m_uniform.get()) }
 	{
 	}
 
 	template <typename TName>
 	uniform_type<TName>& uniform_type<TName>::operator=(uniform_type const& other)
 	{
-		m_uniform = uniform_prototyper::get_prototype(other->get_type_uid(), other->get_component_type_uid(), other.m_uniform());
+		m_uniform = uniform_prototyper::get_prototype(other->get_type_uid(), other->get_component_type_uid(), other.m_uniform.get());
 	}
 
 	template <typename TName>

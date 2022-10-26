@@ -10,11 +10,13 @@ void uniform<directional_light_uniform, TComponent>::send_uniform(const shader &
 	if (m_update_uniform_locations)
 		update_uniform_locations(s);
 
-	s.set_uniform(m_ambient, this->data.ambient);
-	s.set_uniform(m_color, this->data.color);
-	s.set_uniform(m_diffuse, this->data.diffuse);
-	s.set_uniform(m_direction, this->data.direction);
-	s.set_uniform(m_specular, this->data.specular);
+	auto const& light = e.get_component<agl::directional_light>();
+
+	s.set_uniform(m_ambient, light.ambient);
+	s.set_uniform(m_color, light.color);
+	s.set_uniform(m_diffuse, light.diffuse);
+	s.set_uniform(m_direction, light.direction);
+	s.set_uniform(m_specular, light.specular);
 }
 
 template <typename TComponent>

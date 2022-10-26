@@ -605,6 +605,9 @@
     <ClInclude Include="include\agl\graphics\shader\uniform-type.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\direction.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\basic.fsh">
@@ -710,6 +713,9 @@
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
     <None Include="include\agl\graphics\ecs\component\uniform\texture-material.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\direction.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
   </ItemGroup>

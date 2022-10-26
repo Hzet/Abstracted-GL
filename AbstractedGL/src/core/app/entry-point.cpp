@@ -233,10 +233,10 @@ agl::entity create_camera(agl::registry &reg)
 
 	auto& camera = result.attach_component<agl::camera_perspective>();
 	auto& camera_transform = result.attach_component<agl::transformable>();
-	auto& camera_uniform = result.attach_component<agl::uniform_type<agl::camera_uniform>>();
+	auto& camera_uniform = result.attach_component<agl::uniform_type<agl::camera_uniform>>(agl::uniform_type<agl::camera_uniform>::create<agl::camera_perspective>());
 	auto& camera_dir = result.attach_component<agl::direction>();
 	auto& spot_light = result.attach_component<agl::spot_light>();
-	auto& spot_light_uniform = result.attach_component<agl::uniform_type<agl::spot_light>>();
+	auto& spot_light_uniform = result.attach_component<agl::uniform_type<agl::spot_light_uniform>>(agl::uniform_type<agl::spot_light_uniform>::create<agl::spot_light>());
 	
 	spot_light_uniform->set_shader_uid({ sh_manager.get_shader_uid(1) });
 	camera_uniform->set_shader_uid({ sh_manager.get_shader_uid(1) });

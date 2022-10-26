@@ -12,7 +12,7 @@ namespace agl
 		using uniform_base::uniform_base;
 
 	public:
-		register_uniform(std::string const& name = "");
+		register_uniform(std::string const& name);
 		virtual ~register_uniform() = default;
 		
 	private:

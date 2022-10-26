@@ -53,7 +53,8 @@ namespace agl
 
 	std::unique_ptr<uniform_base> uniform_prototyper::get_prototype(uniform_type_uid id_uniform_type, component_type_uid id_component, uniform_base* source /*= nullptr*/)
 	{
-		for (const auto &v : get_groups()[get_group_index(id_uniform_type)].prototypes)
+		auto const& group = get_groups()[get_group_index(id_uniform_type)].prototypes;
+		for (const auto &v : group)
 			if (v->get_uniform().get_component_type_uid() == id_component)
 				return v->clone(source);
 
@@ -79,7 +80,7 @@ namespace agl
 
 	std::vector<uniform_prototyper::group>& uniform_prototyper::get_groups()
 	{
-		auto s_groups = std::vector<group>{};
+		static auto s_groups = std::vector<group>{};
 
 		return s_groups;
 	}

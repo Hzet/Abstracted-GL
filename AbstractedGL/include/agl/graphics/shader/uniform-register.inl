@@ -7,8 +7,7 @@ register_uniform<TName, TComponents...>::register_uniform(std::string const& nam
 template <typename TName, typename... TComponents>
 bool register_uniform<TName, TComponents...>::register_type()
 {
-	if constexpr (sizeof...(TComponents) > 0)
-		register_type_impl(std::make_index_sequence<sizeof...(TComponents)>{ });
+	register_type_impl(std::make_index_sequence<sizeof...(TComponents)>{ });
 
 	return true;
 }

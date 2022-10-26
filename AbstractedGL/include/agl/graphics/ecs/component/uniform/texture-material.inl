@@ -10,15 +10,16 @@ void uniform<texture_material_uniform, TComponent>::send_uniform(const shader &s
 	if (m_update_uniform_locations)
 		update_uniform_locations(s);
 
+	auto const& texture = e.get_component<agl::texture>();
 	auto i = 0;
 
-	if (bindTexture(this->data.ambient))
+	if (bindTexture(texture.ambient))
 		s.set_uniform(m_ambient, i++);
 
-	if (bindTexture(this->data.diffuse))
+	if (bindTexture(texture.diffuse))
 		s.set_uniform(m_diffuse, i++);
 
-	if (bindTexture(this->data.specular))
+	if (bindTexture(texture.specular))
 		s.set_uniform(m_specular, i++);
 }
 
