@@ -6,7 +6,7 @@ namespace agl
 {
 
 	transformable::transformable()
-		: m_require_update(false),
+		: m_require_update(true),
 		m_scale(1.f),
 		m_origin(0.f),
 		m_position(0.f),
@@ -16,7 +16,7 @@ namespace agl
 
 
 	transformable::transformable(transformable &&other)
-		: m_require_update(false),
+		: m_require_update(true),
 		m_scale(std::move(other.m_scale)),
 		m_origin(std::move(other.m_origin)),
 		m_position(std::move(other.m_position)),
@@ -26,7 +26,7 @@ namespace agl
 
 
 	transformable::transformable(const transformable &other)
-		: m_require_update(false),
+		: m_require_update(true),
 		m_scale(other.m_scale),
 		m_origin(other.m_origin),
 		m_position(other.m_position),
@@ -48,7 +48,7 @@ namespace agl
 		m_scale = scale;
 	}
 
-	const glm::vec3& transformable::getOrigin() const
+	const glm::vec3& transformable::get_origin() const
 	{
 		return m_origin;
 	}
@@ -81,7 +81,7 @@ namespace agl
 	{
 		m_require_update = true;
 
-		m_rotation = rotation;
+		m_rotation = glm::mod(rotation, 360.f);
 	}
 
 	void transformable::move(const glm::vec3 &offset)

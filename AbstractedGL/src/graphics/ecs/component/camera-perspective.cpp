@@ -20,7 +20,7 @@ namespace agl
 	
 		if (fov < 0.f)
 			fov = 0.f;
-		else if (fov >= 179.f)
+		else if (fov > 179.f)
 			fov = 179.f;
 
 		m_fov = fov;

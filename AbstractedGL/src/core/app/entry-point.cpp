@@ -58,8 +58,50 @@ auto const cube_position = std::vector<agl::position>{
 	{-0.5f,  0.5f,  0.5f},
 	{-0.5f,  0.5f, -0.5f}
 };
+<<<<<<< HEAD
 auto const cube_color = std::vector<agl::color>{ 36, glm::vec4{0.f, 1.f, 0.2f, 1.f} };
 auto const camera_velocity = 4.2f;
+=======
+auto const cube_color = std::vector<agl::color> {
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f}
+};
+auto const camera_velocity = 10.2f;
+>>>>>>> prev
 auto const mouse_sensitivity = 0.3f;
 
 class test_app
@@ -87,7 +129,7 @@ public:
 		// END TODO
 
 		auto camera_entity = create_camera(reg);
-		auto& camera = camera_entity.get_component<agl::camera_perspective>();
+		auto& camera = static_cast<agl::camera_base&>(camera_entity.get_component<agl::camera_perspective>());
 		auto& camera_transform = camera_entity.get_component<agl::transformable>();
 		auto& camera_dir = camera_entity.get_component<agl::direction>();
 
@@ -242,11 +284,11 @@ agl::entity create_camera(agl::registry &reg)
 	camera_uniform->set_shader_uid({ sh_manager.get_shader_uid(1) });
 
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
-	camera.set_planes({ 0.1f, 100000.f });
-	camera.set_fov(60.f);
+	camera.set_planes({ 0.1f, 100.f });
+	//camera.set_fov(60.f);
 	camera.look_at({ 0.f, 0.f, 0.f });
 	
-	camera_transform.set_position({ 0.f, 5.f, 0.f });
+	camera_transform.set_position({ 0.f, 0.f, 0.f });
 
 	spot_light.ambient = glm::vec4{ 0.5f, 0.5f, 0.5, 1.f };
 	spot_light.color = glm::vec4{ 1.f };
