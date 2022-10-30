@@ -68,7 +68,7 @@ namespace agl
 		/// <returns>
 		/// The origin
 		/// </returns>
-		const glm::vec3& getOrigin() const;
+		const glm::vec3& get_origin() const;
 
 		/// <summary>
 		/// Set the origin.

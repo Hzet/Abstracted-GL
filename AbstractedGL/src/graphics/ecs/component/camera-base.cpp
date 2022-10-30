@@ -71,10 +71,10 @@ namespace agl
 	{
 		if (m_look_at_update)
 		{
-			if (transform.getOrigin() + transform.get_position() == m_look_at)
+			if (transform.get_origin() + transform.get_position() == m_look_at)
 			{
 
-				m_direction.forward = glm::normalize(m_look_at - transform.getOrigin() - transform.get_position());
+				m_direction.forward = glm::normalize(m_look_at - transform.get_origin() - transform.get_position());
 				m_direction.right = glm::normalize(glm::cross(m_direction.forward, s_world_direction.up));
 				m_direction.up = glm::normalize(glm::cross(m_direction.right, m_direction.forward));
 
@@ -97,7 +97,7 @@ namespace agl
 		m_direction.right = glm::normalize(glm::cross(m_direction.forward, s_world_direction.up));
 		m_direction.up = glm::normalize(glm::cross(m_direction.right, m_direction.forward));
 
-		m_view = glm::lookAt(transform.getOrigin() + transform.get_position(), transform.getOrigin() + transform.get_position() + m_direction.forward, m_direction.up);
+		m_view = glm::lookAt(transform.get_origin() + transform.get_position(), transform.get_origin() + transform.get_position() + m_direction.forward, m_direction.up);
 		m_view.scale(transform.get_scale());
 
 		this->update_projection();
