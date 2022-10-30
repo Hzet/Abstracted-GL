@@ -2,10 +2,19 @@
 #include <glm/glm.hpp>
 
 #include "graphics/ecs/component/transformable.hpp"
-#include "graphics/ecs/component/direction.hpp"
 
 namespace agl
 {
+	/// <summary>
+	/// Aggregation struct to store direction vectors.
+	/// </summary>
+	struct direction_matrix
+	{
+		glm::vec3 forward;
+		glm::vec3 up;
+		glm::vec3 right;
+	};
+
 	/// <summary>
 	/// A base class for the cameras.
 	/// Virtual update_projection method will be called from get_projection method when the matrix will require update.
@@ -13,7 +22,7 @@ namespace agl
 	class camera_base
 	{
 	public:
-		static const direction s_world_direction;
+		static const direction_matrix s_world_direction;
 
 		/// <summary>
 		/// Set transform properties to 0 or 1 for scale and planes to {0, 100}.
@@ -66,6 +75,14 @@ namespace agl
 		const transform& get_projection() const;
 
 		/// <summary>
+		/// Get the directions of the camera.
+		/// </summary>
+		/// <returns>
+		/// The direction
+		/// </returns>
+		const direction_matrix& get_direction() const;
+
+		/// <summary>
 		/// Directs the camera forward direction towards given 'position'.
 		/// </summary>
 		/// <param name="position"></param>
@@ -74,7 +91,7 @@ namespace agl
 		bool needs_update() const;
 
 	protected:
-		void update(transformable& transform, direction& dir);
+		void update(transformable& transform);
 
 		/// <summary>
 		/// Recalculate the 'm_projection' matrix.
@@ -95,5 +112,6 @@ namespace agl
 
 		bool m_look_at_update;
 		transform m_view;
+		direction_matrix m_direction;
 	};
 }

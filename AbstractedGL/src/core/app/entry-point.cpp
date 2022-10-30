@@ -3,12 +3,10 @@
 #include "utility/ecs/ecs.hpp"
 #include "graphics/texture/texture-atlas.hpp"
 #include "graphics/shader/shader-manager.hpp"
-#include "graphics/shader/uniform-type.hpp"
 #include "graphics/ecs/component/prism.hpp"
 #include "graphics/ecs/component/transformable.hpp"
 #include "graphics/ecs/component/uniform/transform-uniform.hpp"
 #include "graphics/ecs/component/uniform/camera-uniform.hpp"
-#include "graphics/ecs/component/uniform/spot-light.hpp"
 #include "core/misc/timer.hpp"
 #include "core/app/input.hpp"
 
@@ -58,8 +56,45 @@ auto const cube_position = std::vector<agl::position>{
 	{-0.5f,  0.5f,  0.5f},
 	{-0.5f,  0.5f, -0.5f}
 };
-auto const cube_color = std::vector<agl::color>{ 36, glm::vec4{0.f, 1.f, 0.2f, 1.f} };
-auto const camera_velocity = 4.2f;
+auto const cube_color = std::vector<agl::color>{
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f},
+	{1.f, 1.f, 1.f, 1.f}
+};
+auto const camera_velocity = 10.2f;
 auto const mouse_sensitivity = 0.3f;
 
 class test_app
@@ -77,7 +112,7 @@ public:
 		// TODO: wypierdolic to stad 
 		auto& sh_manager = get_resource<agl::shader_manager>();
 		sh_manager.load_from_file("resource/basic.vsh", "resource/basic.fsh");
-		sh_manager.load_from_file("resource/light.vsh", "resource/light.fsh");
+		//sh_manager.load_from_file("resource/light.vsh", "resource/light.fsh");
 
 		auto& manager = application::get_resource<agl::shader_manager>();
 		manager.link_all_shaders();
@@ -87,13 +122,12 @@ public:
 		// END TODO
 
 		auto camera_entity = create_camera(reg);
-		auto& camera = camera_entity.get_component<agl::camera_perspective>();
+		auto& camera = static_cast<agl::camera_base&>(camera_entity.get_component<agl::camera_perspective>());
 		auto& camera_transform = camera_entity.get_component<agl::transformable>();
-		auto& camera_dir = camera_entity.get_component<agl::direction>();
 
 		for (auto i = 0; i < 1000; ++i)
 			create_cube(reg);
-		
+
 		auto last_mouse_pos = agl::input::get_mouse_position();
 
 		auto timer = agl::timer{};
@@ -140,31 +174,31 @@ public:
 			}
 			if (agl::input::key_pressed(agl::A))
 			{
-				camera_transform.move(camera_dir.right * -camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().right * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::D))
 			{
-				camera_transform.move(camera_dir.right * camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().right * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::W))
 			{
-				camera_transform.move(camera_dir.forward * camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().forward * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::S))
 			{
-				camera_transform.move(camera_dir.forward * -camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().forward * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::LEFT_CONTROL))
 			{
-				camera_transform.move(camera_dir.up * -camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().up * -camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::SPACE))
 			{
-				camera_transform.move(camera_dir.up * camera_velocity * frame_time);
+				camera_transform.move(camera.get_direction().up * camera_velocity * frame_time);
 			}
 			if (agl::input::key_pressed(agl::P))
 			{
-				camera.look_at({0,0,0});
+				camera.look_at({ 0,0,0 });
 			}
 
 			auto const curr_mouse_pos = agl::input::get_mouse_position();
@@ -172,7 +206,6 @@ public:
 			auto const rotation = glm::vec3{ mouse_pos_offset * mouse_sensitivity, 0.f };
 			camera_transform.rotate(rotation);
 			last_mouse_pos = agl::input::get_mouse_position();
-			camera_entity.get_component<agl::spot_light>().direction = camera_dir.forward;
 
 			m_window.clear();
 			reg.update();
@@ -233,28 +266,16 @@ agl::entity create_camera(agl::registry &reg)
 
 	auto& camera = result.attach_component<agl::camera_perspective>();
 	auto& camera_transform = result.attach_component<agl::transformable>();
-	auto& camera_uniform = result.attach_component<agl::uniform_type<agl::camera_uniform>>(agl::uniform_type<agl::camera_uniform>::create<agl::camera_perspective>());
-	auto& camera_dir = result.attach_component<agl::direction>();
-	auto& spot_light = result.attach_component<agl::spot_light>();
-	auto& spot_light_uniform = result.attach_component<agl::uniform_type<agl::spot_light_uniform>>(agl::uniform_type<agl::spot_light_uniform>::create<agl::spot_light>());
-	
-	spot_light_uniform->set_shader_uid({ sh_manager.get_shader_uid(1) });
-	camera_uniform->set_shader_uid({ sh_manager.get_shader_uid(1) });
+	auto& uniforms = result.attach_component<agl::uniform_array>();
 
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
-	camera.set_planes({ 0.1f, 100000.f });
-	camera.set_fov(60.f);
+	camera.set_planes({ 0.1f, 100.f });
+	//camera.set_fov(60.f);
 	camera.look_at({ 0.f, 0.f, 0.f });
-	
-	camera_transform.set_position({ 0.f, 5.f, 0.f });
 
-	spot_light.ambient = glm::vec4{ 0.5f, 0.5f, 0.5, 1.f };
-	spot_light.color = glm::vec4{ 1.f };
-	//spot_light.cut_off
-	spot_light.diffuse = glm::vec4{ 1.f };
-	spot_light.direction = camera_dir.forward;
-	spot_light.range = glm::vec3{ 0.1f, 0.1f, 0.1f };
-	spot_light.specular = glm::vec4{ 1.f };
+	camera_transform.set_position({ 0.f, 0.f, 0.f });
+
+	uniforms.add_uniform<agl::camera_uniform>({ sh_manager.get_shader_uid(0) });
 
 	return result;
 }
@@ -269,11 +290,11 @@ agl::entity create_cube(agl::registry &reg)
 	auto &transform = result.attach_component<agl::transformable>();
 
 	mesh.draw_type = agl::DRAW_TRIANGLES;
-	mesh.id_shader = sh_manager.get_shader_uid(1);
+	mesh.id_shader = sh_manager.get_shader_uid(0);
 	mesh.rbuffer.set_vertex_count(cube_position.size());
 	mesh.rbuffer.add_vertices<agl::position>(cube_position.data());
 	mesh.rbuffer.add_vertices<agl::color>(cube_color.data());
-	mesh.uniforms.add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(1));
+	mesh.uniforms.add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(0));
 
 	transform.set_position({ glm::sphericalRand(50.f) });
 
