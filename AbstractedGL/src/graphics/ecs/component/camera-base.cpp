@@ -71,42 +71,34 @@ namespace agl
 	{
 		if (m_look_at_update)
 		{
-			if (transform.get_position() != m_look_at)
-			{
-				m_direction.forward = glm::normalize(m_look_at - transform.get_origin() + transform.get_position());
-				m_direction.right = glm::normalize(glm::cross(m_direction.forward, s_world_direction.up));
-				m_direction.up = glm::normalize(glm::cross(m_direction.right, m_direction.forward));
+			if (transform.get_position() == m_look_at)
+				return;
 
-				auto rotation = glm::vec3{ 0.f };
+			m_direction.forward = glm::normalize(m_look_at - transform.get_position());
+			m_direction.right = glm::normalize(glm::cross(m_direction.forward, s_world_direction.up));
+			m_direction.up = glm::normalize(glm::cross(m_direction.right, m_direction.forward));
 
-				rotation.x = glm::degrees(glm::atan(m_direction.forward.z, m_direction.forward.x));
-				rotation.y = glm::degrees(glm::atan(m_direction.forward.y, glm::length(glm::vec2(m_direction.forward.x, m_direction.forward.z))));
+			auto rotation = glm::vec3{0.f};
 
-				transform.set_rotation(rotation);
-
-			}
+			rotation.x = glm::degrees(glm::atan(m_direction.forward.z, m_direction.forward.x));
+			rotation.y = glm::degrees(glm::atan(m_direction.forward.y, glm::length(glm::vec2(m_direction.forward.x, m_direction.forward.z))));
+			
+			transform.set_rotation(rotation);
 
 			m_look_at_update = false;
 		}
 
-		if (transform.get_rotation().y > 89.f)
-			transform.set_rotation(glm::vec3{ transform.get_rotation().x, 89.f, transform.get_rotation().z });
-		else if (transform.get_rotation().y < -89.f)
-			transform.set_rotation(glm::vec3{ transform.get_rotation().x, -89.f, transform.get_rotation().z });
-
 		m_direction.forward.x = glm::cos(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
 		m_direction.forward.y = glm::sin(glm::radians(transform.get_rotation().y));
 		m_direction.forward.z = glm::sin(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
-		m_direction.forward = glm::normalize(m_direction.forward);
 
+		m_direction.forward = glm::normalize(m_direction.forward);
 		m_direction.right = glm::normalize(glm::cross(m_direction.forward, s_world_direction.up));
 		m_direction.up = glm::normalize(glm::cross(m_direction.right, m_direction.forward));
 
-		m_view = glm::lookAt(transform.get_origin() + transform.get_position(), transform.get_origin() + transform.get_position() + m_direction.forward, m_direction.up);
+		m_view = glm::lookAt(transform.get_position(), transform.get_position() + m_direction.forward, m_direction.up);
 		m_view.scale(transform.get_scale());
 
 		this->update_projection();
-
-		m_needs_update = false;
 	}
 }

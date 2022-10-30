@@ -82,8 +82,6 @@ namespace agl
 		template <typename... Args>
 		bool has_component() const;
 
-		bool has_component(component_type_uid id_component) const;
-
 		/// <summary>
 		/// Detaches the queried components from an e.
 		/// If the queried component was not attached to an e, 

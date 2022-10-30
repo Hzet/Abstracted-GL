@@ -142,13 +142,13 @@ namespace agl
 		/// Returns the const iterator pointing to the first element in the vector. 
 		/// </summary>
 		/// <returns>The const iterator to the first element or CShaderEntryVector::end() if the vector is empty</returns>
-		const_iterator begin() const;
+		const_iterator cbegin() const;
 
 		/// <summary>
 		/// Returns the const iterator pointing to the element behind the last element in the vector.
 		/// </summary>
 		/// <returns>The const iterator to the element behind the last element</returns>
-		const_iterator end() const;
+		const_iterator cend() const;
 
 		/// <summary>
 		/// Checks whether the vector is empty.

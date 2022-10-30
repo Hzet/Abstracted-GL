@@ -44,7 +44,7 @@ namespace agl
 		if (prismView.needs_update())
 			prismView = reg.inclusive_view<prism>();
 
-		for (auto it = meshView.begin(); it != meshView.end(); ++it)
+		for (auto it = meshView.cbegin(); it != meshView.cend(); ++it)
 		{
 			auto const e = reg.get_entity(*it);
 			auto& mesh = reg.get<agl::mesh>(*it);
@@ -53,7 +53,7 @@ namespace agl
 			renderMesh(mesh);
 		}
 		
-		for (auto it = prismView.begin(); it != prismView.end(); ++it)
+		for (auto it = prismView.cbegin(); it != prismView.cend(); ++it)
 		{
 			auto const e = reg.get_entity(*it);
 			auto& prism = reg.get<agl::prism>(*it);
@@ -63,7 +63,7 @@ namespace agl
 			renderMesh(prism.m_mesh);
 		}
 
-		for (auto it = modelView.begin(); it != modelView.end(); ++it)
+		for (auto it = modelView.cbegin(); it != modelView.cend(); ++it)
 		{
 			auto const e = reg.get_entity(*it);
 			auto& model = reg.get<agl::model>(*it);

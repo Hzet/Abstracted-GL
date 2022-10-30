@@ -7,18 +7,15 @@
 
 namespace agl
 {
-	struct texture_material_uniform{};
-
-	template <typename TComponent>
-	class uniform<texture_material_uniform, TComponent>
-		: public register_uniform<texture_material_uniform, texture_material>
+	class uniform<texture>
+		: public register_uniform<texture>
 	{
 	public:
 		using register_uniform::register_uniform;
 
 		uniform();
 
-		virtual void send_uniform(const shader &s, const entity &e) override;
+		virtual void send(const shader &s, const entity &e) override;
 
 	private:
 		bool bindTexture(const texture_uid &id_texture_2d);

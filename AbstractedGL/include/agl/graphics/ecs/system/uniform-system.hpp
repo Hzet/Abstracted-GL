@@ -1,7 +1,6 @@
 #pragma once
-#include "graphics/ecs/system-group.hpp"
-#include "graphics/ecs/component/directional-light.hpp"
 #include "utility/ecs/system.hpp"
+#include "graphics/ecs/system-group.hpp"
 
 namespace agl
 {

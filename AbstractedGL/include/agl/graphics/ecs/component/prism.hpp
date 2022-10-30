@@ -20,7 +20,7 @@ namespace agl
 		glm::vec2 const& get_sides() const;
 
 		void set_side_count(float count);
-		std::uint64_t get_side_count() const;
+		float get_side_count() const;
 
 		void set_color(agl::color const& color);
 

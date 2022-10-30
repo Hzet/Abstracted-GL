@@ -19,7 +19,7 @@ namespace agl
 
 		uniform();
 
-		virtual void send_uniform(const shader &s, const entity &e) override;
+		virtual void send(const shader &s, const entity &e) override;
 
 	private:
 		virtual void update_uniform_locations(shader const& sh) override;

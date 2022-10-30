@@ -48,7 +48,7 @@ namespace agl
 		m_scale = scale;
 	}
 
-	const glm::vec3& transformable::get_origin() const
+	const glm::vec3& transformable::getOrigin() const
 	{
 		return m_origin;
 	}

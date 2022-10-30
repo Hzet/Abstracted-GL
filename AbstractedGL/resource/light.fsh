@@ -33,7 +33,7 @@ vec4 calculate_spot_light(agl_spot_light light, vec3 view_direction);
 
 in vec3 vpos;
 in vec3 vnormal;
-in vec2 vtexture;
+in vec2 vtexure;
 
 out vec4 vcolor;
 
@@ -47,17 +47,17 @@ uniform agl_texture_material texture_material;
 
 void main()
 {
-	vec3 view_direction = normalize(light_consumer_position - vpos);
+	vec3 view_direction = normalize(light_consumer.position - vpos);
 
 	vec4 result = calculate_directional_light(directional_light, view_direction);
 
 	for(int i = 0; i < spot_light_active_count; i++)
 		result += calculate_spot_light(spot_light[i], view_direction);
 
-	vcolor = result;
+	fColor = result;
 }
 
-vec4 calculate_directional_light(agl_directional_light light, vec3 view_direction)
+vec4 calculate_directional_light(SDirLight light, vec3 view_direction)
 {
 	vec3 light_direction = normalize(-light.direction);
 	vec3 reflect_direction = reflect(-light_direction, vnormal);
@@ -72,7 +72,7 @@ vec4 calculate_directional_light(agl_directional_light light, vec3 view_directio
 	return (ambient + diffuse + specular) * light.color;
 }
 
-vec4 calculate_spot_light(agl_spot_light light, vec3 view_direction)
+vec4 calculate_spot_light(spot_light light, vec3 view_direction)
 {
 	vec3 light_direction = normalize(light.position - vpos);
 	vec3 reflect_direction = reflect(-light_direction, vnormal);

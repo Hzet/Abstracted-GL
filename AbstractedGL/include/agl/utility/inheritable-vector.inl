@@ -78,15 +78,15 @@ typename vector_base<T>::iterator vector_base<T>::end()
 }
 
 template <typename T>
-typename vector_base<T>::const_iterator vector_base<T>::begin() const
+typename vector_base<T>::const_iterator vector_base<T>::cbegin() const
 {
-	return m_vector.begin();
+	return m_vector.cbegin();
 }
 
 template <typename T>
-typename vector_base<T>::const_iterator vector_base<T>::end() const
+typename vector_base<T>::const_iterator vector_base<T>::cend() const
 {
-	return m_vector.end();
+	return m_vector.cend();
 }
 
 template <typename T>

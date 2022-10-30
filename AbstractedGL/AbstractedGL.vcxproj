@@ -111,7 +111,6 @@
     <ClCompile Include="src\graphics\ecs\component\prism.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
-    <ClCompile Include="src\graphics\ecs\system\light-uniform-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp" />
     <ClCompile Include="src\graphics\render\index-buffer.cpp" />
@@ -143,29 +142,24 @@
     <ClCompile Include="src\utility\ecs\signature.cpp" />
     <ClCompile Include="src\utility\ecs\system-base.cpp" />
     <ClCompile Include="src\utility\unique-identifier-manager.cpp" />
-    <ClInclude Include="include\agl\graphics\ecs\component\direction.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera-uniform.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\component\uniform\direction.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\spot-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\texture-material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform-uniform.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\system\light-uniform-system.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
-    <ClInclude Include="include\agl\graphics\shader\uniform-type-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-data-type-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-data.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-group.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-register.hpp" />
-    <ClInclude Include="include\agl\graphics\shader\uniform-type.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-wrapper.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform.hpp" />
   </ItemGroup>
@@ -264,7 +258,6 @@
     <None Include="include\agl\core\app\application.inl" />
     <None Include="include\agl\core\misc\log.inl" />
     <None Include="include\agl\graphics\ecs\component\uniform\camera-uniform.inl" />
-    <None Include="include\agl\graphics\ecs\component\uniform\direction.inl" />
     <None Include="include\agl\graphics\ecs\component\uniform\directional-light.inl" />
     <None Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.inl" />
     <None Include="include\agl\graphics\ecs\component\uniform\material.inl" />

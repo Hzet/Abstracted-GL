@@ -53,15 +53,15 @@ view<Args...>::~view()
 }
 
 template <typename... Args>
-typename view<Args...>::iterator view<Args...>::begin() const
+typename view<Args...>::iterator view<Args...>::cbegin() const
 {
-	return view<Args...>::iterator{ *this, m_entities.begin() };
+	return view<Args...>::iterator{ *this, m_entities.cbegin() };
 }
 
 template <typename... Args>
-typename view<Args...>::iterator view<Args...>::end() const
+typename view<Args...>::iterator view<Args...>::cend() const
 {
-	return view<Args...>::iterator{ *this, m_entities.end() };
+	return view<Args...>::iterator{ *this, m_entities.cend() };
 }
 
 template <typename... Args>

@@ -56,7 +56,7 @@ auto const cube_position = std::vector<agl::position>{
 	{-0.5f,  0.5f,  0.5f},
 	{-0.5f,  0.5f, -0.5f}
 };
-auto const cube_color = std::vector<agl::color>{
+auto const cube_color = std::vector<agl::color> {
 	{1.f, 1.f, 1.f, 1.f},
 	{1.f, 1.f, 1.f, 1.f},
 	{1.f, 1.f, 1.f, 1.f},
@@ -94,7 +94,7 @@ auto const cube_color = std::vector<agl::color>{
 	{1.f, 1.f, 1.f, 1.f},
 	{1.f, 1.f, 1.f, 1.f}
 };
-auto const camera_velocity = 10.2f;
+auto const camera_velocity = 4.2f;
 auto const mouse_sensitivity = 0.3f;
 
 class test_app
@@ -122,12 +122,12 @@ public:
 		// END TODO
 
 		auto camera_entity = create_camera(reg);
-		auto& camera = static_cast<agl::camera_base&>(camera_entity.get_component<agl::camera_perspective>());
+		auto& camera = camera_entity.get_component<agl::camera_perspective>();
 		auto& camera_transform = camera_entity.get_component<agl::transformable>();
 
 		for (auto i = 0; i < 1000; ++i)
 			create_cube(reg);
-
+		
 		auto last_mouse_pos = agl::input::get_mouse_position();
 
 		auto timer = agl::timer{};
@@ -198,7 +198,7 @@ public:
 			}
 			if (agl::input::key_pressed(agl::P))
 			{
-				camera.look_at({ 0,0,0 });
+				camera.look_at({0,0,0});
 			}
 
 			auto const curr_mouse_pos = agl::input::get_mouse_position();
@@ -269,11 +269,11 @@ agl::entity create_camera(agl::registry &reg)
 	auto& uniforms = result.attach_component<agl::uniform_array>();
 
 	camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
-	camera.set_planes({ 0.1f, 100.f });
-	//camera.set_fov(60.f);
+	camera.set_planes({ 0.1f, 100000.f });
+	camera.set_fov(60.f);
 	camera.look_at({ 0.f, 0.f, 0.f });
-
-	camera_transform.set_position({ 0.f, 0.f, 0.f });
+	
+	camera_transform.set_position({ 0.f, 5.f, 0.f });
 
 	uniforms.add_uniform<agl::camera_uniform>({ sh_manager.get_shader_uid(0) });
 

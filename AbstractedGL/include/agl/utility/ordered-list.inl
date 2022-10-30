@@ -116,7 +116,7 @@ void ordered_list<T>::clear()
 template <typename T>
 void ordered_list<T>::order()
 {
-	for (auto it = m_disconnected.begin(); it != m_disconnected.end();)
+	for (auto it = m_disconnected.cbegin(); it != m_disconnected.cend();)
 	{
 		if (!m_list.insert_after(it->first, it->second))
 			if (!m_list.insert_before(it->first, it->second))
@@ -126,7 +126,7 @@ void ordered_list<T>::order()
 			}
 
 		m_disconnected.erase(it);
-		it = m_disconnected.begin();
+		it = m_disconnected.cbegin();
 	}
 }
 

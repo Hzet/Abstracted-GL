@@ -23,7 +23,7 @@ namespace agl
 	std::vector<std::smatch> parse_string(const std::string &str, const std::string &pattern)
 	{
 		const auto rpattern = std::regex{ pattern };
-		const auto begin = std::sregex_iterator(str.begin(), str.end(), rpattern);
+		const auto begin = std::sregex_iterator(str.cbegin(), str.cend(), rpattern);
 		const auto end = std::sregex_iterator();
 
 		auto result = std::vector<std::smatch>(std::distance(begin, end));
@@ -47,7 +47,7 @@ namespace agl
 			const auto offset = (v.position() + insertOffset == result.size() ? result.size() - 1u : v.position() + insertOffset);
 			const auto insertAt = result.begin() + offset;
 
-			result.insert(insertAt, param.begin(), param.end());
+			result.insert(insertAt, param.cbegin(), param.cend());
 			insertOffset += param.size();
 
 			result.erase(result.begin() + v.position() + insertOffset, result.begin() + v.position() + insertOffset + v.str().size());
@@ -72,7 +72,7 @@ namespace agl
 			const std::string &param = args[get_param(v.str())];
 			const auto insertAt = result.begin() + (v.position() + insertOffset == result.size() ? result.size() - 1u : v.position() + insertOffset);
 
-			result.insert(insertAt, param.begin(), param.end());
+			result.insert(insertAt, param.cbegin(), param.cend());
 			insertOffset += param.size();
 
 			result.erase(result.begin() + v.position() + insertOffset, result.begin() + v.position() + insertOffset + v.str().size());

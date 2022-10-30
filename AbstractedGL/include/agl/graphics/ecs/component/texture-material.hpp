@@ -3,7 +3,7 @@
 
 namespace agl
 {
-	struct texture_material
+	struct texture
 	{
 		texture_uid ambient;
 		texture_uid diffuse;

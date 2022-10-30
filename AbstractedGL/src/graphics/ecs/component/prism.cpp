@@ -139,11 +139,10 @@ namespace agl
 		m_sides_count = count;
 	}
 
-	std::uint64_t prism::get_side_count() const
-{
+	float prism::get_side_count() const
+	{
 		return m_sides_count;
 	}
-
 	void prism::set_color(agl::color const& color)
 	{
 		auto vcolor = std::vector<agl::color>{};
