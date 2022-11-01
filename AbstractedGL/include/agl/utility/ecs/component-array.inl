@@ -36,7 +36,7 @@ void component_array<T>::detach(const entity_uid &id_entity)
 template <typename T>
 T& component_array<T>::get(const entity_uid &id_entity)
 {
-	AGL_CORE_ASSERT(m_active_entities[get_index(id_entity)] == true, "Component [{}] is not attached to this entity [{}]", TComponentTypeUID<T>::value(), id_entity);
+	AGL_CORE_ASSERT(m_active_entities[get_index(id_entity)] == true, "Component [{}] is not attached to this entity [{}]", component_type_uid::get_name(TComponentTypeUID<T>::value()), id_entity);
 
 	return m_components[get_index(id_entity)];
 }
@@ -44,7 +44,7 @@ T& component_array<T>::get(const entity_uid &id_entity)
 template <typename T>
 const T& component_array<T>::get(const entity_uid &id_entity) const
 {
-	AGL_CORE_ASSERT(m_active_entities[get_index(id_entity)] == true, "Component [{}] is not attached to this e [{}]", TComponentTypeUID<T>::value(), id_entity);
+	AGL_CORE_ASSERT(m_active_entities[get_index(id_entity)] == true, "Component [{}] is not attached to this e [{}]", component_type_uid::get_name(TComponentTypeUID<T>::value()), id_entity);
 
 	return m_components[get_index(id_entity)];
 }
