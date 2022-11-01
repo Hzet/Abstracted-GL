@@ -246,9 +246,6 @@
     <ClCompile Include="src\graphics\shader\uniform-array.cpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\shader\uniform-group.cpp">
-      <Filter>src\graphics\shader\uniforms</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\shader\uniform-wrapper.cpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClCompile>
@@ -266,6 +263,9 @@
     </ClCompile>
     <ClCompile Include="src\utility\type-unique-identifier.cpp">
       <Filter>src\utility\uid</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shader\uniform-prototyper.cpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -545,9 +545,6 @@
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\shader\uniform-group.hpp">
-      <Filter>src\graphics\shader\uniforms</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\shader\uniform-register.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClInclude>
@@ -594,6 +591,9 @@
       <Filter>src\graphics\ecs\system\render</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\shader\uniform-type-uid.hpp">
+      <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shader\uniform-prototyper.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClInclude>
   </ItemGroup>
@@ -673,9 +673,6 @@
     <None Include="include\agl\graphics\shader\uniform-array.inl">
       <Filter>src\graphics\shader\uniforms</Filter>
     </None>
-    <None Include="include\agl\graphics\shader\uniform-group.inl">
-      <Filter>src\graphics\shader\uniforms</Filter>
-    </None>
     <None Include="include\agl\graphics\shader\uniform-register.inl">
       <Filter>src\graphics\shader\uniforms</Filter>
     </None>
@@ -702,6 +699,12 @@
     </None>
     <None Include="include\agl\graphics\ecs\component\uniform\transform-uniform.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\utility\type-unique-identifier.inl">
+      <Filter>src\utility\uid</Filter>
+    </None>
+    <None Include="include\agl\graphics\shader\uniform-prototyper.inl">
+      <Filter>src\graphics\shader\uniforms</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 #include <cstdarg>
 #include <vector>
 
-#include "graphics/shader/uniform-group.hpp"
+#include "graphics/shader/uniform-prototyper.hpp"
 #include "system/debug/assert.hpp"
 
 namespace agl

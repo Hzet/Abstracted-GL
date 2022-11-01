@@ -7,10 +7,10 @@ namespace agl
 	class entity;
 
 	class entity_uid final
-		: public TUID<entity, AGL_MAX_ENTITIES>
+		: public unique_id<entity, AGL_MAX_ENTITIES>
 	{
 	public:
-		using TUID<entity, AGL_MAX_ENTITIES>::TUID;
+		using unique_id<entity, AGL_MAX_ENTITIES>::unique_id;
 	};
 }
 

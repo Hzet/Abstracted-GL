@@ -1,7 +1,7 @@
 template <typename TComponent>
 std::uint64_t signature::get_index()
 {
-	return TComponentTypeUID<TComponent>::value() - 1ul;
+	return component_type_uid::get_id<TComponent>() - 1ul;
 }
 
 template<typename... Args>

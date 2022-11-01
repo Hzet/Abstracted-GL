@@ -8,7 +8,7 @@ namespace agl
 	class CUIDManager
 	{
 		template <typename T, std::uint64_t Size>
-		friend class TUID;
+		friend class unique_id;
 		
 		/// <summary>
 		/// Returns an index corresponding to the 'uid'.

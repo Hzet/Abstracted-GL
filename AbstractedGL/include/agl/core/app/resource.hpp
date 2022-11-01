@@ -17,10 +17,7 @@ namespace agl
 		virtual void dummy() const = 0;
 	};
 	
-	template <typename T>
-	using TResourceTypeUID = TTypeUID<resource_base, T>;
-
-	using resource_type_uid = TTypeUID<resource_base>;
+	using resource_type_uid = unique_type_id<resource_base>;
 	
 }
 

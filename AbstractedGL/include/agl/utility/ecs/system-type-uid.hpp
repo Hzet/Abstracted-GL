@@ -5,8 +5,5 @@ namespace agl
 {
 	class system_base;
 
-	template <typename T> 
-	using TSystemTypeUID = TTypeUID<system_base, T>;
-
-	using system_type_uid = TTypeUID<system_base>;
+	using system_type_uid = unique_type_id<system_base>;
 }

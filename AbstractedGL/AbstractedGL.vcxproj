@@ -123,7 +123,7 @@
     <ClCompile Include="src\graphics\shader\shader-sub-program.cpp" />
     <ClCompile Include="src\graphics\shader\uniform-array.cpp" />
     <ClCompile Include="src\graphics\shader\uniform-base.cpp" />
-    <ClCompile Include="src\graphics\shader\uniform-group.cpp" />
+    <ClCompile Include="src\graphics\shader\uniform-prototyper.cpp" />
     <ClCompile Include="src\graphics\shader\uniform-wrapper.cpp" />
     <ClCompile Include="src\graphics\texture\texture-atlas.cpp" />
     <ClCompile Include="src\graphics\texture\texture-base.cpp" />
@@ -157,7 +157,7 @@
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
-    <ClInclude Include="include\agl\graphics\shader\uniform-group.hpp" />
+    <ClInclude Include="include\agl\graphics\shader\uniform-prototyper.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-register.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-type-uid.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-wrapper.hpp" />
@@ -267,7 +267,7 @@
     <None Include="include\agl\graphics\render\render-buffer.inl" />
     <None Include="include\agl\graphics\render\vertex-layout.inl" />
     <None Include="include\agl\graphics\shader\uniform-array.inl" />
-    <None Include="include\agl\graphics\shader\uniform-group.inl" />
+    <None Include="include\agl\graphics\shader\uniform-prototyper.inl" />
     <None Include="include\agl\graphics\shader\uniform-register.inl" />
     <None Include="include\agl\graphics\shader\uniform-wrapper.inl" />
     <None Include="include\agl\graphics\types\type-base.inl" />
@@ -287,6 +287,7 @@
     <None Include="include\agl\utility\ordered-list.inl" />
     <None Include="include\agl\utility\tuple-buffer-base.inl" />
     <None Include="include\agl\utility\tuple-buffer.inl" />
+    <None Include="include\agl\utility\type-unique-identifier.inl" />
     <None Include="include\agl\utility\unique-identifier.inl" />
     <None Include="resource\basic.fsh">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

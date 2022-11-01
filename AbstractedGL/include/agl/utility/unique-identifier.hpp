@@ -7,59 +7,59 @@ namespace agl
 	/// Helper template class to create a register of unique identifiers for a dummy template typename T.
 	/// </summary>
 	template <typename T, std::uint64_t Size = 1024ul>
-	class TUID
+	class unique_id
 	{
 	public:
 		/// <summary>
 		/// A struct to inform that the unique identifier shall not be created during construction.
 		/// </summary>
-		enum EInvalid
+		enum invalid_type
 		{
 			INVALID = 0ul
 		};
 
-		static std::uint64_t get_reference_count(const TUID &uid);
+		static std::uint64_t get_reference_count(const unique_id &uid);
 
 		/// <summary>
 		/// Registers the unique identifier for this instance.
 		/// </summary>
-		TUID();
+		unique_id();
 
 		/// <summary>
 		/// Creates the instance but postpones the registration of the unique identifier.
 		/// </summary>
 		/// <param name="">The invalid type</param>
-		TUID(EInvalid);
+		unique_id(invalid_type);
 
 		/// <summary>
 		/// Move constructor.
 		/// </summary>
 		/// <param name="other">the other object</param>
-		TUID(TUID &&other);
+		unique_id(unique_id &&other);
 
 		/// <summary>
 		/// Increases the unique identifier's references count.
 		/// </summary>
 		/// <param name="other">the other object</param>
-		TUID(const TUID &other);
+		unique_id(const unique_id &other);
 
 		/// <summary>
 		/// Unregister the unique identifier.
 		/// </summary>
-		virtual ~TUID();
+		virtual ~unique_id();
 
 		/// <summary>
 		/// Swap the identifiers.
 		/// </summary>
 		/// <param name="other">the other object</param>
 		/// <returns>reference to *this</returns>
-		TUID& operator=(TUID &&other);
+		unique_id& operator=(unique_id &&other);
 
 		/// <summary>
 		/// Increases the unique identifier's references count.
 		/// </summary>
 		/// <param name="other">the other object</param>
-		TUID& operator=(const TUID &other);
+		unique_id& operator=(const unique_id &other);
 
 		/// <summary>
 		/// Implicit cast operator.

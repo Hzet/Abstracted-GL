@@ -5,8 +5,5 @@ namespace agl
 {
 	class uniform_prototyper;
 
-	template <typename TData>
-	using TUniformDataTypeUID = TTypeUID<uniform_prototyper, TData>;
-
-	using uniform_type_uid = TTypeUID<uniform_prototyper>;
+	using uniform_type_uid = unique_type_id<uniform_prototyper>;
 }

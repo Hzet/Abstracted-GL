@@ -9,7 +9,7 @@ namespace agl
 {
 	/// <summary>
 	/// A class to uniquely identify a set of different types.
-	/// The sig consists of a bitset where the indices represents the agl::TTypeUID
+	/// The sig consists of a bitset where the indices represents the agl::unique_type_id
 	/// and the value represents presence of the type.
 	/// </summary>
 	class signature final

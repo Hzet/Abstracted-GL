@@ -7,7 +7,7 @@ namespace agl
 	class TStaticUID
 	{
 	public:
-		enum EInvalid
+		enum invalid_type
 		{
 			INVALID = 0ul
 		};

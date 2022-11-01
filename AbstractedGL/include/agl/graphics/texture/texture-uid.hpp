@@ -9,10 +9,10 @@ namespace agl
 	/// The unique identifier for shaders.
 	/// </summary>
 	class texture_uid
-		: public TUID<texture_base>
+		: public unique_id<texture_base>
 	{
 	public:
-		using TUID<texture_base>::TUID;
+		using unique_id<texture_base>::unique_id;
 	};
 }
 

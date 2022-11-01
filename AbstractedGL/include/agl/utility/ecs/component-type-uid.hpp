@@ -6,8 +6,5 @@ namespace agl
 	class component_base
 	{};
 
-	template <typename T>
-	using TComponentTypeUID = TTypeUID<component_base, T>;
-	
-	using component_type_uid = TTypeUID<component_base>;
+	using component_type_uid = unique_type_id<component_base>;
 }

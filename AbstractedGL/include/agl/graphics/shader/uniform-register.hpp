@@ -1,6 +1,6 @@
 #pragma once
 #include "graphics/shader/uniform-base.hpp"
-#include "graphics/shader/uniform-group.hpp"
+#include "graphics/shader/uniform-prototyper.hpp"
 
 namespace agl
 {

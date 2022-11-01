@@ -89,7 +89,7 @@ std::tuple<component_array<Args>*...> registry_component::get_arrays_ptr_impl(st
 template <typename T>
 component_array<T>& registry_component::get_array()
 {
-	const auto index = TComponentTypeUID<T>::value() - 1ul;
+	const auto index = component_type_uid::get_id<T>() - 1ul;
 
 	auto &componentArray = m_arrays[index];
 
@@ -102,5 +102,5 @@ component_array<T>& registry_component::get_array()
 template <typename T>
 component_array_base* registry_component::get_array_base()
 {
-	return m_arrays[TComponentTypeUID<T>::value() - 1ul].get();
+	return m_arrays[component_type_uid::get_id<T>() - 1ul].get();
 }

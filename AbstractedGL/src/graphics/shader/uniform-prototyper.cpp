@@ -1,4 +1,4 @@
-#include "graphics/shader/uniform-group.hpp"
+#include "graphics/shader/uniform-prototyper.hpp"
 #include "graphics/shader/uniform-base.hpp"
 #include "system/debug/assert.hpp"
 

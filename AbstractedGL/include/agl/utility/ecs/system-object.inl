@@ -1,6 +1,6 @@
 template <typename TGroupName, typename TDerived>
 system_object<TGroupName, TDerived>::system_object()
-	: system_base(TSystemTypeUID<TDerived>::value())
+	: system_base(system_type_uid::get_id<TDerived>())
 {
 }
 

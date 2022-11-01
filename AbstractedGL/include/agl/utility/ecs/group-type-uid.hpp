@@ -5,8 +5,5 @@ namespace agl
 {
 	class group_base;
 
-	template <typename T>
-	using TGroupTypeUID = TTypeUID<group_base, T>;
-
-	using group_type_uid = TTypeUID<group_base>;
+	using group_type_uid = unique_type_id<group_base>;
 }

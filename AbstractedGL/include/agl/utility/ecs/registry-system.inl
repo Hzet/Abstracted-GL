@@ -3,7 +3,7 @@ bool registry_system::system()
 {
 	auto &Groups = get_groups_tmp();
 
-	const auto id_group = TGroupTypeUID<TGroupName>::value( );
+	const auto id_group = group_type_uid::get_id<TGroupName>();
 
 	auto found = Groups.find(id_group);
 
@@ -24,7 +24,7 @@ template <typename TPrev, typename TNext>
 bool registry_system::order_after()
 {
 	auto &order = get_order_tmp();
-	order.insert_after(TGroupTypeUID<TPrev>::value(), TGroupTypeUID<TNext>::value());
+	order.insert_after(group_type_uid::get_id<TPrev>(), group_type_uid::get_id<TNext>());
 
 	return true;
 }
@@ -33,7 +33,7 @@ template <typename TPrev, typename TNext>
 bool registry_system::order_before()
 {
 	auto &order = get_order_tmp();
-	order.insert_before(TGroupTypeUID<TPrev>::value(), TGroupTypeUID<TNext>::value());
+	order.insert_before(group_type_uid::get_id<TPrev>(), group_type_uid::get_id<TNext>());
 
 	return true;
 }

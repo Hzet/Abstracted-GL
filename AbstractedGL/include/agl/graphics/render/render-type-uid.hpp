@@ -5,9 +5,6 @@ namespace agl
 {
 	struct render {};
 
-	template <typename T>
-	using TRenderTypeUID = TTypeUID<render, T>;
-
-	using render_type_uid = TTypeUID<render>;
+	using render_type_uid = unique_type_id<render>;
 }
 

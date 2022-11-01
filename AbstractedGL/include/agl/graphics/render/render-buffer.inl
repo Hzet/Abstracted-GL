@@ -9,8 +9,8 @@ void render_buffer::add_vertices(const T * const data)
 {
 	m_require_update = true;
 
-	const auto renderTypeUID = TRenderTypeUID<T>::value();
-	auto found = m_index_map.find(renderTypeUID);
+	const auto id_render = render_type_uid::get_id<T>();
+	auto found = m_index_map.find(id_render);
 
 	if (found != m_index_map.cend())
 	{
@@ -20,7 +20,7 @@ void render_buffer::add_vertices(const T * const data)
 		return;
 	}
 
-	found = m_index_map.insert(renderTypeUID, m_vlayout.get_count());
+	found = m_index_map.insert(id_render, m_vlayout.get_count());
 	m_vlayout.add_element<T::Type>();
 	m_vertices.reserve(m_vertices.size() + (m_vcount * sizeof(T::Type)));
 
@@ -52,6 +52,6 @@ const T& render_buffer::get(std::uint64_t index) const
 template <typename T>
 std::uint64_t render_buffer::get_offset(std::uint64_t index) const
 {
-	const auto typeIndex = m_index_map.find(TRenderTypeUID<T>::value())->second;
+	const auto typeIndex = m_index_map.find(render_type_uid::get_id<T>())->second;
 	return m_vlayout[typeIndex].offset + (m_vlayout.get_size() * index);
 }

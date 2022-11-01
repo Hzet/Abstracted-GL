@@ -25,6 +25,6 @@ namespace agl
 		static std::vector<std::vector<std::unique_ptr<uniform_wrapper_base>>>& get_groups();
 	};
 
-#include "graphics/shader/uniform-group.inl"
+#include "graphics/shader/uniform-prototyper.inl"
 }
 
