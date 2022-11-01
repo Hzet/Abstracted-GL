@@ -264,6 +264,9 @@
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp">
       <Filter>src\graphics\ecs\system\render</Filter>
     </ClCompile>
+    <ClCompile Include="src\utility\type-unique-identifier.cpp">
+      <Filter>src\utility\uid</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">

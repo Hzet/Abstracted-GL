@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <unordered_map>
 #include <string>
 
 namespace agl
@@ -14,7 +15,22 @@ namespace agl
 		{
 			static TTypeUID<TName> Result(++TTypeUID<TName>::incrementor());
 
+#ifdef AGL_DEBUG
+			static auto& names = TTypeUID_debug::get_names_ref();
+			static auto names_bool = (names[typeid(TName).name()][Result] = typeid(T).name());
+#endif 
+
 			return Result;
+		}
+
+		constexpr static std::unordered_map<std::uint64_t, std::string> const& get_names()
+		{
+#ifdef AGL_DEBUG
+			auto& names = TTypeUID_debug::get_names_ref();
+			return names[typeid(TName).name()];
+#else
+			return "name not available in non debug mode";
+#endif
 		}
 	};
 
@@ -27,6 +43,19 @@ namespace agl
 			INVALID = 0ul
 		};
 
+	public:
+		static std::string const& get_name(std::uint64_t id)
+		{
+#ifdef AGL_DEBUG
+			auto const& names = TTypeUID_debug::get_names();
+
+			return names.at(typeid(TName).name()).at(id);
+#else
+			return "name not available in non debug mode";
+#endif
+		}
+
+	public:
 		TTypeUID();
 
 		operator std::uint64_t() const;
@@ -35,6 +64,7 @@ namespace agl
 		template <typename TName, typename T>
 		friend class TTypeUID;
 
+	private:
 		constexpr static std::uint64_t& incrementor()
 		{
 			static std::uint64_t Result = 0ul;
@@ -42,9 +72,24 @@ namespace agl
 			return Result;
 		}
 
+	private:
 		TTypeUID(std::uint64_t uid);
 
 		std::uint64_t m_id;
+	};
+
+	class TTypeUID_debug
+	{
+	public:
+		static const std::unordered_map<std::string, std::unordered_map<std::uint64_t, std::string>>& get_names();
+
+	private:
+		template <typename TName, typename T>
+		friend class TTypeUID;
+
+	private:
+		static std::unordered_map<std::string, std::unordered_map<std::uint64_t, std::string>>& get_names_ref();
+
 	};
 
 	template <typename TName>

@@ -141,6 +141,7 @@
     <ClCompile Include="src\utility\ecs\registry.cpp" />
     <ClCompile Include="src\utility\ecs\signature.cpp" />
     <ClCompile Include="src\utility\ecs\system-base.cpp" />
+    <ClCompile Include="src\utility\type-unique-identifier.cpp" />
     <ClCompile Include="src\utility\unique-identifier-manager.cpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
