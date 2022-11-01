@@ -1,18 +1,18 @@
 #pragma once
-#include "graphics/shader/uniform-data.hpp"
+#include "graphics/shader/uniform-base.hpp"
 #include "graphics/shader/uniform-group.hpp"
 
 namespace agl
 {
-	template <typename TData, typename... TComponents>
-	class register_uniform
-		: public data_uniform<TData>
+	template <typename TName, typename... TComponents>
+	class uniform_register
+		: public uniform_base
 	{
 	public:
-		using data_uniform<TData>::data_uniform;
+		using uniform_base::uniform_base;
 
-		register_uniform(std::string const& name);
-		virtual ~register_uniform() = default;
+		uniform_register(std::string const& name);
+		virtual ~uniform_register() = default;
 		
 	private:
 		static bool register_type();
@@ -23,12 +23,6 @@ namespace agl
 
 		virtual void register_me() const;
 	};
-
-	template <typename TData, typename... TComponents>
-	register_uniform<TData, TComponents...>::register_uniform(std::string const& name)
-		: data_uniform<TData>{ name }
-	{
-	}
 
 #include "graphics/shader/uniform-register.inl"
 }

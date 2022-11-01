@@ -3,10 +3,10 @@
 
 namespace agl
 {
-	class group_uniform;
+	class uniform_prototyper;
 
 	template <typename TData>
-	using TUniformDataTypeUID = TTypeUID<group_uniform, TData>;
+	using TUniformDataTypeUID = TTypeUID<uniform_prototyper, TData>;
 
-	using uniform_type_uid = TTypeUID<group_uniform>;
+	using uniform_type_uid = TTypeUID<uniform_prototyper>;
 }

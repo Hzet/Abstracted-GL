@@ -1,9 +1,11 @@
-uniform<spot_light>::uniform()
-	: register_uniform<spot_light>{ "spot_light" }
+template <typename TComponent>
+uniform<spot_light_uniform, TComponent>::uniform()
+	: uniform_register<spot_light_uniform, spot_light>{ "spot_light" }
 {
 }
 
-void uniform<spot_light>::send(const shader &s, const entity &e)
+template <typename TComponent>
+void uniform<spot_light_uniform, TComponent>::send(const shader &s, const entity &e)
 {
 	if (m_update_uniform_locations)
 		update_uniform_locations(s);
@@ -17,11 +19,12 @@ void uniform<spot_light>::send(const shader &s, const entity &e)
 	s.set_uniform(m_specular, this->data.specular);
 }
 
-void uniform<spot_light>::update_uniform_locations(shader const& sh)
+template <typename TComponent>
+void uniform<spot_light_uniform, TComponent>::update_uniform_locations(shader const& sh)
 {
 	m_ambient = sh.get_location(get_name() + "." + "ambient");
 	m_color = sh.get_location(get_name() + "." + "color");
-	m_cutOff = sh.get_location(get_name() + "." + "cut_off");
+	m_cut_off = sh.get_location(get_name() + "." + "cut_off");
 	m_diffuse = sh.get_location(get_name() + "." + "diffuse");
 	m_direction = sh.get_location(get_name() + "." + "direction");
 	m_range = sh.get_location(get_name() + "." + "range");

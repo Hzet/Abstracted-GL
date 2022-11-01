@@ -14,18 +14,18 @@ namespace agl
 	class uniform_array
 	{
 	public:
-		template <typename TData, typename TComponent> void add_uniform(shader_uid id_shader = shader_uid::INVALID);
+		template <typename TName, typename TComponent> void add_uniform(shader_uid id_shader = shader_uid::INVALID);
 
-		template <typename TData> void remove_uniform();
+		template <typename TName> void remove_uniform();
 
-		template <typename TData> bool has_uniform();
-		template <typename TData> TData& get_uniform();
-		template <typename TData> const TData& get_uniform() const;
+		template <typename TName> bool has_uniform();
+		template <typename TName> uniform_base& get_uniform();
+		template <typename TName> const uniform_base& get_uniform() const;
 
 		void send(const entity &e);
 
 	private:
-		template <typename TData> uniform_base* get_uniform_pointer();
+		template <typename TName> uniform_base* get_uniform_pointer();
 
 		std::vector<std::unique_ptr<uniform_base>> m_uniforms;
 	};

@@ -18,7 +18,7 @@ namespace agl
 		static std::uint64_t get_index(std::uint64_t uid);
 
 		/// <summary>
-		/// register_uniform the unique identifier.
+		/// uniform_register the unique identifier.
 		/// </summary>
 		/// <returns>The unique identifier's value</returns>
 		std::uint64_t create();

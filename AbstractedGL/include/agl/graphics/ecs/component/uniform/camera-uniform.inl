@@ -1,6 +1,6 @@
 template <typename TComponent>
 uniform<camera_uniform, TComponent>::uniform()
-	: register_uniform<camera_uniform, camera_perspective, camera_orthographic>{ "camera" }
+	: uniform_register<camera_uniform, camera_perspective, camera_orthographic>{ "camera" }
 {
 }
 

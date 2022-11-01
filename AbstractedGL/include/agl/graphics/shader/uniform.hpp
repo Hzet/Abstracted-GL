@@ -2,7 +2,7 @@
 
 namespace agl
 {
-	template <typename TData = void, typename TComponent = void>
+	template <typename TName = void, typename TComponent = void>
 	class uniform
 	{
 	};

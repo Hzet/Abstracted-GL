@@ -1,6 +1,6 @@
 template <typename TComponent>
 uniform<inverse_transform_uniform, TComponent>::uniform()
-	: register_uniform<inverse_transform_uniform, transformable>{ "model" }
+	: uniform_register<inverse_transform_uniform, transformable>{ "model" }
 {
 }
 

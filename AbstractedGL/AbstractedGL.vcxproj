@@ -157,7 +157,6 @@
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
-    <ClInclude Include="include\agl\graphics\shader\uniform-data.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-group.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-register.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-type-uid.hpp" />

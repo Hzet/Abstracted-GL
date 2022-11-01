@@ -33,7 +33,7 @@ namespace agl
 		void set_parameter(const std::uint64_t setting, const std::uint64_t value) const;
 
 		/// <summary>
-		/// register_uniform OpenGL object.
+		/// uniform_register OpenGL object.
 		/// </summary>
 		virtual void create() override;
 			

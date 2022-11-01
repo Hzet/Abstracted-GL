@@ -12,10 +12,10 @@ namespace agl
 
 	template <typename TComponent>
 	class uniform<inverse_transform_uniform, TComponent>
-		: public register_uniform<inverse_transform_uniform, transformable>
+		: public uniform_register<inverse_transform_uniform, transformable>
 	{
 	public:
-		using register_uniform::register_uniform;
+		using uniform_register::uniform_register;
 
 		uniform();
 

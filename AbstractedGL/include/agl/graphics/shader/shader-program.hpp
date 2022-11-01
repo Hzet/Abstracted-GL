@@ -195,7 +195,7 @@ namespace agl
 		void set_bit(std::uint64_t bit);
 
 		/// <summary>
-		/// register_uniform OpenGL object.
+		/// uniform_register OpenGL object.
 		/// </summary>
 		void create();
 

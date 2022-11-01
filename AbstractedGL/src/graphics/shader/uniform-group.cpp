@@ -4,7 +4,7 @@
 
 namespace agl
 {
-	std::unique_ptr<uniform_base> group_uniform::get_uniform(uniform_type_uid id_uniform, component_type_uid id_component_type, uniform_base *dataSource /*= nullptr*/)
+	std::unique_ptr<uniform_base> uniform_prototyper::get_prototype(uniform_type_uid id_uniform, component_type_uid id_component_type, uniform_base *dataSource /*= nullptr*/)
 	{
 		auto const& groups = get_groups();
 
@@ -16,12 +16,12 @@ namespace agl
 		return nullptr;
 	}
 
-	std::uint64_t group_uniform::get_index(uniform_type_uid id_uniform_type)
+	std::uint64_t uniform_prototyper::get_index(uniform_type_uid id_uniform_type)
 	{
 		return id_uniform_type - 1ul;
 	}
 
-	std::vector<std::vector<std::unique_ptr<uniform_wrapper_base>>>& group_uniform::get_groups()
+	std::vector<std::vector<std::unique_ptr<uniform_wrapper_base>>>& uniform_prototyper::get_groups()
 	{
 		static auto result = std::vector<std::vector<std::unique_ptr<uniform_wrapper_base>>>{};
 

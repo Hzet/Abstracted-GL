@@ -6,12 +6,14 @@
 
 namespace agl
 {
-	template <>
-	class uniform<material>
-		: public register_uniform<material>
+	struct material_uniform { };
+
+	template <typename TComponent>
+	class uniform<material_uniform, TComponent>
+		: public uniform_register<material_uniform, material>
 	{
 	public:
-		using register_uniform::register_uniform;
+		using uniform_register::uniform_register;
 
 		uniform();
 
@@ -21,11 +23,11 @@ namespace agl
 		virtual void update_uniform_locations(shader const& sh) override;
 
 	private:
-		std::int32_t shininess;
-		std::int32_t ambient;
-		std::int32_t diffuse;
-		std::int32_t specular;
-		std::int32_t emission;
+		std::int32_t m_shininess;
+		std::int32_t m_ambient;
+		std::int32_t m_diffuse;
+		std::int32_t m_specular;
+		std::int32_t m_emission;
 	};
 
 #include "graphics/ecs/component/uniform/material.inl"

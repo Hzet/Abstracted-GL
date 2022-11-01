@@ -1,28 +1,30 @@
-template <typename TData,typename... TComponents>
-bool register_uniform<TData, TComponents...>::register_type()
+template <typename TName, typename... TComponents>
+uniform_register<TName, TComponents...>::uniform_register(std::string const& name)
+	: uniform_base{ name }
 {
-	if constexpr (sizeof...(TComponents) > 0)
-		register_type_impl(std::make_index_sequence<sizeof...(TComponents)>{ });
-	else
-		group_uniform::add_uniform<TData, void>();
+}
 
+template <typename TName,typename... TComponents>
+bool uniform_register<TName, TComponents...>::register_type()
+{
+	register_type_impl(std::make_index_sequence<sizeof...(TComponents)>{ });
 	return true;
 }
 
-template <typename TData, typename... TComponents>
+template <typename TName, typename... TComponents>
 template <std::uint64_t... Sequence>
-void register_uniform<TData, TComponents...>::register_type_impl(std::index_sequence<Sequence...>)
+void uniform_register<TName, TComponents...>::register_type_impl(std::index_sequence<Sequence...>)
 {
 	using TTuple = std::tuple<TComponents...>;
 	
-	((group_uniform::add_uniform<TData, std::tuple_element_t<Sequence, TTuple>>()), ...);
+	((uniform_prototyper::add_prototype<TName, std::tuple_element_t<Sequence, TTuple>>()), ...);
 }
 
-template <typename TData, typename... TComponents>
-void register_uniform<TData, TComponents...>::register_me() const
+template <typename TName, typename... TComponents>
+void uniform_register<TName, TComponents...>::register_me() const
 {
-	register_uniform::s_registered;
+	uniform_register::s_registered;
 }
 
-template <typename TData, typename... TComponents>
-bool register_uniform<TData, TComponents...>::s_registered = register_type();
+template <typename TName, typename... TComponents>
+bool uniform_register<TName, TComponents...>::s_registered = register_type();

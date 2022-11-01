@@ -6,12 +6,14 @@
 
 namespace agl
 {
-	template <>
-	class uniform<directional_light>
-		: public register_uniform<directional_light>
+	struct directional_light_uniform {};
+
+	template <typename TComponent>
+	class uniform<directional_light_uniform, TComponent>
+		: public uniform_register<directional_light_uniform, directional_light>
 	{
 	public:
-		using register_uniform::register_uniform;
+		using uniform_register::uniform_register;
 
 		uniform();
 

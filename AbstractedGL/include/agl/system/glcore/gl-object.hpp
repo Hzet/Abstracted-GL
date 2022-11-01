@@ -31,7 +31,7 @@ namespace agl
 		bool is_created() const;
 
 		/// <summary>
-		/// register_uniform the object as an OpenGL object.
+		/// uniform_register the object as an OpenGL object.
 		/// </summary>
 		virtual void create() = 0;
 

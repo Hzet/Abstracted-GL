@@ -7,11 +7,14 @@
 
 namespace agl
 {
-	class uniform<texture>
-		: public register_uniform<texture>
+	struct texture_uniform {};
+
+	template <typename TComponent>
+	class uniform<texture_uniform, TComponent>
+		: public uniform_register<texture_uniform, texture>
 	{
 	public:
-		using register_uniform::register_uniform;
+		using uniform_register::uniform_register;
 
 		uniform();
 

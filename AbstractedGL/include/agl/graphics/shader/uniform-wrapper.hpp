@@ -1,6 +1,6 @@
 #pragma once
-#include "graphics/shader/uniform-data.hpp"
 #include "graphics/shader/uniform.hpp"
+#include "graphics/shader/uniform-base.hpp"
 
 namespace agl
 {
@@ -15,7 +15,7 @@ namespace agl
 		std::unique_ptr<uniform_base> m_uniform;
 	};
 
-	template <typename TData, typename TComponent>
+	template <typename TName, typename TComponent>
 	class uniform_wrapper final
 		: public uniform_wrapper_base
 	{

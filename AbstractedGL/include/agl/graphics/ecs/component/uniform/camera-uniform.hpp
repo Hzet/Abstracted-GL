@@ -14,10 +14,10 @@ namespace agl
 
 	template <typename TComponent>
 	class uniform<camera_uniform, TComponent>
-		: public register_uniform<camera_uniform, camera_perspective, camera_orthographic>
+		: public uniform_register<camera_uniform, camera_perspective, camera_orthographic>
 	{
 	public:
-		using register_uniform::register_uniform;
+		using uniform_register::uniform_register;
 
 		uniform();
 

@@ -6,11 +6,14 @@
 
 namespace agl
 {
-	class uniform<spot_light>
-		: public register_uniform<spot_light>
+	struct spot_light_uniform {};
+
+	template <typename TComponent>
+	class uniform<spot_light_uniform, TComponent>
+		: public uniform_register<spot_light_uniform, spot_light>
 	{
 	public:
-		using register_uniform::register_uniform;
+		using uniform_register::uniform_register;
 
 		uniform();
 

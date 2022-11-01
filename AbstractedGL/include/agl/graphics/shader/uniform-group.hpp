@@ -7,17 +7,17 @@
 
 namespace agl
 {
-	class group_uniform
+	class uniform_prototyper
 	{
 	public:
-		static std::unique_ptr<uniform_base> get_uniform(uniform_type_uid id_uniform, component_type_uid id_component_type, uniform_base *dataSource = nullptr);
+		static std::unique_ptr<uniform_base> get_prototype(uniform_type_uid id_uniform, component_type_uid id_component_type, uniform_base *dataSource = nullptr);
 
 	private:
-		template <typename TData, typename... TComponents>
-		friend class register_uniform;
+		template <typename TName, typename... TComponents>
+		friend class uniform_register;
 
 	private:
-		template <typename TData, typename TComponent> static void add_uniform();
+		template <typename TName, typename TComponent> static void add_prototype();
 
 		static std::uint64_t get_index(uniform_type_uid id_uniform);
 
