@@ -8,13 +8,13 @@ namespace agl
 	{
 	}
 
-	uniform_base::uniform_base(uniform_data_type_uid id_uniform_data_type, component_type_uid id_component_type)
+	uniform_base::uniform_base(uniform_type_uid id_uniform_type, component_type_uid id_component_type)
 		: m_id_component_type_uid(id_component_type)
-		, m_id_uniform_data_type(id_uniform_data_type)
+		, m_id_uniform_data_type(id_uniform_type)
 	{
 	}
 
-	uniform_data_type_uid uniform_base::get_data_type_uid() const
+	uniform_type_uid uniform_base::get_data_type_uid() const
 	{
 		return m_id_uniform_data_type;
 	}

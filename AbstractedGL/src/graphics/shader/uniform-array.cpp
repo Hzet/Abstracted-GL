@@ -13,26 +13,12 @@ namespace agl
 
 		for (auto i = 0ul; i < m_uniforms.size(); i++)
 		{
-			if (!sig[m_uniforms[i]->get_component_type_uid()])
-				update_uniform(sig, i);
+			AGL_CORE_ASSERT(sig[m_uniforms[i]->get_component_type_uid()], "Entity is missing component {} for uniform {}", component_type_uid::get_name(m_uniforms[i]->get_component_type_uid()), uniform_type_uid::get_name(m_uniforms[i]->get_data_type_uid()));
 
 			const auto &s = sh_manager.get_shader(m_uniforms[i]->get_shader_uid());
 			s.set_active();
 
 			m_uniforms[i]->send(s, e);
 		}
-	}
-
-	void uniform_array::update_uniform(const signature &sig, std::uint64_t index)
-	{
-		auto &u = m_uniforms[index];
-		const auto &group = group_uniform::get_group(u->get_data_type_uid());
-
-		for(auto i = 0ul; i < group.get_count(); i++)
-			if (sig[group[i].get_component_type_uid()])
-			{
-				u = group.get_uniform(group[i].get_component_type_uid(), u.get());
-				break;
-			}
 	}
 }

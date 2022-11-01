@@ -1,10 +1,9 @@
-template <typename TData>
+template <typename TData, typename TComponent>
 void uniform_array::add_uniform(shader_uid id_shader)
 {
 	if (!has_uniform<TData>())
 	{
-		const auto &group = group_uniform::get_group<TData>();
-		auto u = group.get_uniform(group[0ul].get_component_type_uid());
+		auto u = group_uniform::get_uniform(TUniformDataTypeUID<TData>::value(), TComponentTypeUID<TComponent>::value());
 
 		m_uniforms.push_back(std::move(u));
 	}

@@ -14,7 +14,7 @@ namespace agl
 	class uniform_array
 	{
 	public:
-		template <typename TData> void add_uniform(shader_uid id_shader = shader_uid::INVALID);
+		template <typename TData, typename TComponent> void add_uniform(shader_uid id_shader = shader_uid::INVALID);
 
 		template <typename TData> void remove_uniform();
 
@@ -26,8 +26,6 @@ namespace agl
 
 	private:
 		template <typename TData> uniform_base* get_uniform_pointer();
-
-		void update_uniform(const signature &sig, std::uint64_t index);
 
 		std::vector<std::unique_ptr<uniform_base>> m_uniforms;
 	};

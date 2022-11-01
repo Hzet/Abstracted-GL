@@ -275,7 +275,7 @@ agl::entity create_camera(agl::registry &reg)
 	
 	camera_transform.set_position({ 0.f, 5.f, 0.f });
 
-	uniforms.add_uniform<agl::camera_uniform>({ sh_manager.get_shader_uid(0) });
+	uniforms.add_uniform<agl::camera_uniform, agl::camera_perspective>({ sh_manager.get_shader_uid(0) });
 
 	return result;
 }
@@ -294,7 +294,7 @@ agl::entity create_cube(agl::registry &reg)
 	mesh.rbuffer.set_vertex_count(cube_position.size());
 	mesh.rbuffer.add_vertices<agl::position>(cube_position.data());
 	mesh.rbuffer.add_vertices<agl::color>(cube_color.data());
-	mesh.uniforms.add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(0));
+	mesh.uniforms.add_uniform<agl::transform_uniform, agl::transformable>(sh_manager.get_shader_uid(0));
 
 	transform.set_position({ glm::sphericalRand(50.f) });
 

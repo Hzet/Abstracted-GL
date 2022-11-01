@@ -3,7 +3,7 @@
 #include <string>
 
 #include "graphics/shader/shader-uid.hpp"
-#include "graphics/shader/uniform-data-type-uid.hpp"
+#include "graphics/shader/uniform-type-uid.hpp"
 #include "utility/ecs/component-type-uid.hpp"
 
 namespace agl
@@ -17,7 +17,7 @@ namespace agl
 		uniform_base(const std::string &name = "");
 		virtual ~uniform_base() = default;
 
-		uniform_data_type_uid get_data_type_uid() const;
+		uniform_type_uid get_data_type_uid() const;
 		component_type_uid get_component_type_uid() const;
 
 		void set_name(const std::string &name);
@@ -29,7 +29,7 @@ namespace agl
 		virtual void send(shader const& sh, entity const& e) = 0;
 
 	protected:
-		uniform_base(uniform_data_type_uid id_uniform_data_type, component_type_uid id_component_type);
+		uniform_base(uniform_type_uid id_uniform_type, component_type_uid id_component_type);
 
 	protected:
 		virtual void update_uniform_locations(shader const& sh) = 0;
@@ -43,7 +43,7 @@ namespace agl
 
 		component_type_uid m_id_component_type_uid;
 		shader_uid m_id_shader;
-		uniform_data_type_uid m_id_uniform_data_type;
+		uniform_type_uid m_id_uniform_data_type;
 		std::string m_name;
 	};
 }

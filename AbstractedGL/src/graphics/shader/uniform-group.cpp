@@ -1,46 +1,30 @@
 #include "graphics/shader/uniform-group.hpp"
 #include "graphics/shader/uniform-base.hpp"
+#include "system/debug/assert.hpp"
 
 namespace agl
 {
-	const group_uniform& group_uniform::get_group(uniform_data_type_uid id_uniform_data_type)
+	std::unique_ptr<uniform_base> group_uniform::get_uniform(uniform_type_uid id_uniform, component_type_uid id_component_type, uniform_base *dataSource /*= nullptr*/)
 	{
-		return get_manager().get_group(id_uniform_data_type);
-	}
+		auto const& groups = get_groups();
 
-	std::uint64_t group_uniform::get_count() const
-	{
-		return m_prototypes.size();
-	}
-
-	const uniform_base& group_uniform::operator[](std::uint64_t index) const
-	{
-		return m_prototypes[index]->get_uniform();
-	}
-
-	std::unique_ptr<uniform_base> group_uniform::get_uniform(component_type_uid id_component_type, uniform_base *dataSource /*= nullptr*/) const
-	{
-		for (const auto &v : m_prototypes)
+		for (const auto &v : groups[get_index(id_uniform)])
 			if (v->get_uniform().get_component_type_uid() == id_component_type)
 				return v->clone(dataSource);
 
+		AGL_CORE_ASSERT(false, "Uniform {} is not capable of handling component {}", uniform_type_uid::get_name(id_uniform), component_type_uid::get_name(id_component_type));
 		return nullptr;
 	}
 
-	group_uniform::manager& group_uniform::get_manager()
+	std::uint64_t group_uniform::get_index(uniform_type_uid id_uniform_type)
 	{
-		static auto result = manager{};
+		return id_uniform_type - 1ul;
+	}
+
+	std::vector<std::vector<std::unique_ptr<uniform_wrapper_base>>>& group_uniform::get_groups()
+	{
+		static auto result = std::vector<std::vector<std::unique_ptr<uniform_wrapper_base>>>{};
 
 		return result;
-	}
-
-	group_uniform& group_uniform::manager::get_group(uniform_data_type_uid id_uniform_data_type)
-	{
-		return m_groups[get_index(id_uniform_data_type)];
-	}
-
-	std::uint64_t group_uniform::manager::get_index(uniform_data_type_uid id_uniform_data_type)
-	{
-		return id_uniform_data_type - 1ul;
 	}
 }
