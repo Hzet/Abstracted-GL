@@ -97,7 +97,6 @@
     <ClCompile Include="external\glad\glad.c" />
     <ClInclude Include="include\agl\core\enums\gl-clear-type.hpp" />
     <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp" />
-    <ClCompile Include="src\agl\graphics\ecs\system\camera-system.cpp" />
     <ClCompile Include="src\core\app\application.cpp" />
     <ClCompile Include="src\core\app\entry-point.cpp" />
     <ClCompile Include="src\core\app\input.cpp" />
@@ -111,6 +110,7 @@
     <ClCompile Include="src\graphics\ecs\component\prism.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
+    <ClCompile Include="src\graphics\ecs\system\camera-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp" />
     <ClCompile Include="src\graphics\render\index-buffer.cpp" />

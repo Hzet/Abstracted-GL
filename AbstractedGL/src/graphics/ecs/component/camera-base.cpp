@@ -89,6 +89,11 @@ namespace agl
 			m_look_at_update = false;
 		}
 
+		if (transform.get_rotation().y > 89.f)
+			transform.set_rotation(glm::vec3{ transform.get_rotation().x, 89.f, transform.get_rotation().z });
+		else if (transform.get_rotation().y < -89.f)
+			transform.set_rotation(glm::vec3{ transform.get_rotation().x, -89.f, transform.get_rotation().z });
+
 		m_direction.forward.x = glm::cos(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
 		m_direction.forward.y = glm::sin(glm::radians(transform.get_rotation().y));
 		m_direction.forward.z = glm::sin(glm::radians(transform.get_rotation().x)) * glm::cos(glm::radians(transform.get_rotation().y));
