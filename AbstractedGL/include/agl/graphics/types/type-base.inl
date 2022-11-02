@@ -11,16 +11,9 @@ base_type<TInherited, TData>::base_type(const base_type &other)
 }
 
 template <typename TInherited, typename TData>
-template <typename T>
-base_type<TInherited, TData>::base_type(T data)
-	: m_data(data)
-{
-}
-
-template <typename TInherited, typename TData>
 template <typename... Args>
 base_type<TInherited, TData>::base_type(Args&&... args)
-	: m_data{ std::forward<Args>(args)... }
+	: m_data{ TData{ std::forward<Args>(args)... } }
 {
 }
 
@@ -41,17 +34,10 @@ base_type<TInherited, TData>& base_type<TInherited, TData>::operator=(const base
 }
 
 template <typename TInherited, typename TData>
-base_type<TInherited, TData>& base_type<TInherited, TData>::operator=(TData data)
-{
-	m_data = data;
-
-	return *this;
-}
-template <typename TInherited, typename TData>
 template <typename... Args>
 base_type<TInherited, TData>& base_type<TInherited, TData>::operator=(Args&&... args)
 {
-	m_data = { std::forward<Args>(args)... };
+	m_data = TData{ std::forward<Args>(args)... };
 
 	return *this;
 }

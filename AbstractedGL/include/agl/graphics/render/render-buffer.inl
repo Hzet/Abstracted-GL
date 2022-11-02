@@ -22,7 +22,8 @@ void render_buffer::add_vertices(const T * const data)
 
 	found = m_index_map.insert(id_render, m_vlayout.get_count());
 	m_vlayout.add_element<T::Type>();
-	m_vertices.reserve(m_vertices.size() + (m_vcount * sizeof(T::Type)));
+	auto const data_size = m_vcount * sizeof(T::Type);
+	m_vertices.reserve(m_vertices.size() + data_size);
 
 	std::uint64_t offset = get_offset<T>(0ul);
 	for (std::uint64_t i = 0ul; i < get_vertex_count(); i++)

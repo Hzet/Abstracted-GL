@@ -128,7 +128,6 @@
     <ClCompile Include="src\graphics\texture\texture-atlas.cpp" />
     <ClCompile Include="src\graphics\texture\texture-base.cpp" />
     <ClCompile Include="src\graphics\texture\texture2d.cpp" />
-    <ClCompile Include="src\graphics\types\color.cpp" />
     <ClCompile Include="src\system\debug\exceptions.cpp" />
     <ClCompile Include="src\system\glcore\destructive-move.cpp" />
     <ClCompile Include="src\system\glcore\gl-core.cpp" />

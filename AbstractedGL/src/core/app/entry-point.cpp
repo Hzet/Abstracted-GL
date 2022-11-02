@@ -56,44 +56,7 @@ auto const cube_position = std::vector<agl::position>{
 	{-0.5f,  0.5f,  0.5f},
 	{-0.5f,  0.5f, -0.5f}
 };
-auto const cube_color = std::vector<agl::color> {
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f},
-	{1.f, 1.f, 1.f, 1.f}
-};
+auto const cube_color = std::vector<agl::color>(cube_position.size(), agl::color{0.f, 1.f, 0.f, 1.f});
 auto const camera_velocity = 4.2f;
 auto const mouse_sensitivity = 0.3f;
 
@@ -135,16 +98,16 @@ public:
 
 		auto frame_timer = agl::timer{};
 
-		//auto prism_entity = reg.create();
-		//auto& prism = prism_entity.attach_component<agl::prism>(sh_manager.get_shader_uid(0));
-		//prism.set_radius(1.5f);
-		//prism.set_side_count(15);
-		//prism.set_sides(glm::vec2{ 0.2f, 10.2f });
-		//prism.set_color(agl::color::White);
-		////glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		//
-		//prism_entity.attach_component<agl::transformable>();
-		//prism.get_uniforms().add_uniform<agl::transform_uniform>(sh_manager.get_shader_uid(0));
+		auto prism_entity = reg.create();
+		auto& prism = prism_entity.attach_component<agl::prism>(sh_manager.get_shader_uid(0));
+		prism.set_radius(1.5f);
+		prism.set_side_count(15);
+		prism.set_sides(glm::vec2{ 0.2f, 10.2f });
+		prism.set_color(agl::color{ 1.f, 0.f, 1.f, 1.f });
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		
+		prism_entity.attach_component<agl::transformable>();
+		prism.get_uniforms().add_uniform<agl::transform_uniform, agl::transformable>(sh_manager.get_shader_uid(0));
 
 		while (is_running())
 		{

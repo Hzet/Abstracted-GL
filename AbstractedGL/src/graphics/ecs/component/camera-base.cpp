@@ -71,7 +71,7 @@ namespace agl
 	{
 		if (m_look_at_update)
 		{
-			if (transform.get_origin() + transform.get_position() == m_look_at)
+			if (transform.get_origin() + transform.get_position() != m_look_at)
 			{
 
 				m_direction.forward = glm::normalize(m_look_at - transform.get_origin() - transform.get_position());

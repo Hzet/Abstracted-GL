@@ -222,9 +222,6 @@
     <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp">
       <Filter>src\graphics\ecs\system\uniform</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\types\color.cpp">
-      <Filter>src\graphics\types</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\app\window.cpp">
       <Filter>src\system\core\app</Filter>
     </ClCompile>
