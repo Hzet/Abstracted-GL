@@ -163,9 +163,4 @@ namespace agl
 	{
 		m_mesh.id_shader = id_shader;
 	}
-
-	uniform_array & prism::get_uniforms()
-	{
-		return m_mesh.uniforms;
-	}
 }

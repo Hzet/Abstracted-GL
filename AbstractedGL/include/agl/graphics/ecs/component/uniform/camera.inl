@@ -19,8 +19,8 @@ void uniform<camera_uniform, TComponent>::send(const shader &s, const entity &e)
 template <typename TComponent>
 void uniform<camera_uniform, TComponent>::update_uniform_locations(shader const& sh)
 {
-	m_projection = sh.get_location(get_name() + "." + "projection");
-	m_view = sh.get_location(get_name() + "." + "view");
+	m_projection = sh.get_location(get_full_name() + "." + "projection");
+	m_view = sh.get_location(get_full_name() + "." + "view");
 
 	m_update_uniform_locations = false;
 }

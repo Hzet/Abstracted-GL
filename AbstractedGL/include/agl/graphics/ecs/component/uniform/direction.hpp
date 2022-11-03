@@ -10,21 +10,23 @@ namespace agl
 
 	template <typename TComponent>
 	class uniform<direction_uniform, TComponent>
-		: public register_uniform<direction_uniform, direction>
+		: public uniform_register<direction_uniform, direction>
 	{
 	public:
-		using register_uniform::register_uniform;
+		using uniform_register::uniform_register;
 
 		uniform();
 
-		virtual void send_uniform(const shader &s, const entity &e) override;
+		virtual void send(const shader &s, const entity &e) override;
 
 	private:
 		virtual void update_uniform_locations(shader const& sh) override;
 
 	private:
-		std::int32_t m_direction;
+		std::int32_t m_forward;
+		std::int32_t m_right;
+		std::int32_t m_up;
 	};
 
-#include "graphics/ecs/component/uniform/directional-light.inl"
+#include "graphics/ecs/component/uniform/direction.inl"
 }

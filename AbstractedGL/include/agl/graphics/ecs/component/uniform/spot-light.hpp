@@ -27,7 +27,6 @@ namespace agl
 		std::int32_t m_color;
 		std::int32_t m_cut_off; 
 		std::int32_t m_diffuse;
-		std::int32_t m_direction;
 		std::int32_t m_range; 
 		std::int32_t m_specular;
 	};

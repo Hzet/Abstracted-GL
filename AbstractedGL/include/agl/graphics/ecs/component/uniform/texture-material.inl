@@ -37,9 +37,9 @@ bool uniform<texture_uniform, TComponent>::bindTexture(const texture_uid &id_tex
 template <typename TComponent>
 void uniform<texture_uniform, TComponent>::update_uniform_locations(shader const& sh)
 {
-	m_ambient = sh.get_location(get_name() + "." + "ambient");
-	m_diffuse = sh.get_location(get_name() + "." + "diffuse");
-	m_specular = sh.get_location(get_name() + "." + "specular");
+	m_ambient = sh.get_location(get_full_name() + "." + "ambient");
+	m_diffuse = sh.get_location(get_full_name() + "." + "diffuse");
+	m_specular = sh.get_location(get_full_name() + "." + "specular");
 
 	m_update_uniform_locations = false;
 }

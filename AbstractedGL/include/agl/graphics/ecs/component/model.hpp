@@ -3,11 +3,9 @@
 
 namespace agl
 {
-	class model
+	struct model
 	{
-	public:
 		std::vector<mesh> meshes;
-		uniform_array uniforms;
 	};
 }
 

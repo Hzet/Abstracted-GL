@@ -8,7 +8,6 @@ namespace agl
 		glm::vec4 ambient;
 		glm::vec4 color;
 		glm::vec4 diffuse;
-		glm::vec3 direction;
 		glm::vec4 specular;
 	};
 }

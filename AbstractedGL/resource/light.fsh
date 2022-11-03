@@ -1,19 +1,22 @@
 #version 420 core
 
-struct agl_texture_material
-{
-	sampler2D ambient;
-	sampler2D diffuse;
-	sampler2D specular;
-};
+#define LIGHT_COUNT 30
 
-struct agl_directional_light
+in vec3 vpos;
+in vec4 vcolor;
+in vec3 vnormal;
+in vec2 vtexure;
+in vec3 camera_position;
+
+out vec4 out_vcolor;
+
+struct agl_material
 {
-	vec3 direction;
+	float shininess;
 	vec4 ambient;
 	vec4 diffuse;
 	vec4 specular;
-	vec4 color;
+	vec4 emission;
 };
 
 struct agl_spot_light
@@ -23,76 +26,47 @@ struct agl_spot_light
 	vec4 specular;
 	vec4 color;
 	vec3 position;
-	vec3 direction;
+	vec3 forward;
+	vec3 right;
+	vec3 up;
 	vec3 range;
 	vec2 cut_off;
 };
 
-vec4 calculate_directional_light(agl_directional_light light, vec3 view_direction);
-vec4 calculate_spot_light(agl_spot_light light, vec3 view_direction);
-
-in vec3 vpos;
-in vec3 vnormal;
-in vec2 vtexure;
-
-out vec4 vcolor;
-
-#define LIGHT_COUNT 30
-
-uniform agl_directional_light directional_light;
 uniform agl_spot_light spot_light[LIGHT_COUNT];
 uniform int	spot_light_active_count;
-uniform vec3 light_consumer_position;
-uniform agl_texture_material texture_material;
+uniform agl_material material;
+
+vec4 calculate_spot_light(agl_spot_light light, vec3 view_direction);
 
 void main()
 {
-	vec3 view_direction = normalize(light_consumer.position - vpos);
+	vec3 view_direction = normalize(camera_position - vpos);
 
-	vec4 result = calculate_directional_light(directional_light, view_direction);
+	out_vcolor = vec4(0.0);
 
 	for(int i = 0; i < spot_light_active_count; i++)
-		result += calculate_spot_light(spot_light[i], view_direction);
-
-	fColor = result;
+		out_vcolor += calculate_spot_light(spot_light[i], view_direction);
 }
 
-vec4 calculate_directional_light(SDirLight light, vec3 view_direction)
+vec4 calculate_spot_light(agl_spot_light light, vec3 view_direction)
 {
-	vec3 light_direction = normalize(-light.direction);
-	vec3 reflect_direction = reflect(-light_direction, vnormal);
-
-	float diff = max(dot(vnormal, light_direction), 0.f);
-	float spec = max(dot(view_direction, reflect_direction), 0.f);
-
-	vec4 ambient = light.ambient * texture(texture_material.ambient, vtexture);
-	vec4 diffuse = light.diffuse * diff * texture(texture_material.diffuse, vtexture);
-	vec4 specular = light.specular * spec * texture(texture_material.specular, vtexture);
-
-	return (ambient + diffuse + specular) * light.color;
-}
-
-vec4 calculate_spot_light(spot_light light, vec3 view_direction)
-{
+	// common
 	vec3 light_direction = normalize(light.position - vpos);
 	vec3 reflect_direction = reflect(-light_direction, vnormal);
 
-	float diff = max(dot(vnormal, light_direction), 0.f);
-	float spec = max(dot(view_direction, reflect_direction), 0.f);
+	// ambient
+	vec4 ambient = light.color * material.ambient;
 
-	vec4 ambient = light.ambient * texture(texture_material.ambient, vtexture);
-	vec4 diffuse = light.diffuse * diff * texture(texture_material.diffuse, vtexture);
-	vec4 specular = light.specular * spec * texture(texture_material.specular, vtexture);
+	// diffuse
+	float diff = max(dot(vnormal, light_direction), 0.0);
+	vec4 diffuse = light.color * (diff * material.diffuse);
 
-	float theta = dot(light_direction, normalize(-light.direction));
-	float epsilon = light.cut_off.x - light.cut_off.y;
+	// specular
+	float spec = pow(max(dot(view_direction, reflect_direction), 0.0), material.shininess);
+	vec4 specular = light.color * (spec * material.specular);
 
-	float intensity = clamp((theta - light.cut_off.y) / epsilon, 0.f, 1.f);
-	diffuse *= intensity;
-	specular *= intensity;
-	
-	float distance = length(light.position - vpos);
-	float attenuation = 1.f / (light.range.x + light.range.y * distance + light.range.z * distance * distance);
-
-	return (ambient + diffuse + specular) * attenuation * light.color;
+	// final color
+	vec4 result = ambient + diffuse + specular;
+	return result;
 }

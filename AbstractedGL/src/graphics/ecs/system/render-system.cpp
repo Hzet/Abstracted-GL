@@ -48,7 +48,9 @@ namespace agl
 		{
 			auto const e = reg.get_entity(*it);
 			auto& mesh = reg.get<agl::mesh>(*it);
-			mesh.uniforms.send(e);
+			auto& uniforms = reg.get<uniform_array>(*it);
+
+			uniforms.send(e);
 			
 			renderMesh(mesh);
 		}
@@ -57,8 +59,9 @@ namespace agl
 		{
 			auto const e = reg.get_entity(*it);
 			auto& prism = reg.get<agl::prism>(*it);
+			auto& uniforms = reg.get<uniform_array>(*it);
 
-			prism.m_mesh.uniforms.send(e);
+			uniforms.send(e);
 
 			renderMesh(prism.m_mesh);
 		}
@@ -67,8 +70,9 @@ namespace agl
 		{
 			auto const e = reg.get_entity(*it);
 			auto& model = reg.get<agl::model>(*it);
+			auto& uniforms = reg.get<uniform_array>(*it);
 
-			model.uniforms.send(e);
+			uniforms.send(e);
 
 			for (auto &mesh : model.meshes)
 				renderMesh(mesh);

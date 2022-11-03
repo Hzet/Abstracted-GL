@@ -3,7 +3,7 @@ uniform_wrapper<TName, TComponent>::uniform_wrapper()
 {
 	m_uniform = std::make_unique<uniform<TName, TComponent>>();
 
-	m_uniform->m_id_uniform_data_type = uniform_type_uid::get_id<TName>();
+	m_uniform->m_id_uniform_type = uniform_type_uid::get_id<TName>();
 	m_uniform->m_id_component_type_uid = component_type_uid::get_id<TComponent>();
 }
 

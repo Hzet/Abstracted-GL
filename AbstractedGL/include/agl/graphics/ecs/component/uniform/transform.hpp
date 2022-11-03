@@ -6,13 +6,13 @@
 
 namespace agl
 {
-	struct inverse_transform_uniform
+	struct transform_uniform
 	{
 	};
 
 	template <typename TComponent>
-	class uniform<inverse_transform_uniform, TComponent>
-		: public uniform_register<inverse_transform_uniform, transformable>
+	class uniform<transform_uniform, TComponent>
+		: public uniform_register<transform_uniform, transformable>
 	{
 	public:
 		using uniform_register::uniform_register;
@@ -25,8 +25,8 @@ namespace agl
 		virtual void update_uniform_locations(shader const& sh) override;
 
 	private:
-		std::int32_t m_inverse_transform;
+		std::int32_t m_transform;
 	};
 
-#include "graphics/ecs/component/uniform/inverse-transform-uniform.inl"
+#include "graphics/ecs/component/uniform/transform.inl"
 }

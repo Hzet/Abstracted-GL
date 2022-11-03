@@ -27,8 +27,6 @@ namespace agl
 		shader_uid get_shader_uid() const;
 		void set_shader_uid(shader_uid id_shader);
 
-		uniform_array& get_uniforms();
-
 	private:
 		mesh m_mesh;
 		float m_radius;

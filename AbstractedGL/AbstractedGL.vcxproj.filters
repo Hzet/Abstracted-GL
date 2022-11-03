@@ -264,6 +264,9 @@
     <ClCompile Include="src\graphics\shader\uniform-prototyper.cpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\ecs\system\light-system.cpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
@@ -554,13 +557,7 @@
     <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp">
       <Filter>src\graphics\ecs\component\light</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera-uniform.hpp">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\material.hpp">
@@ -570,9 +567,6 @@
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\texture-material.hpp">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform-uniform.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp">
@@ -592,6 +586,27 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\shader\uniform-prototyper.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\light-system.hpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\inverse-transform.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\direction.hpp">
+      <Filter>src\graphics\ecs\component\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\direction.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\position.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -676,13 +691,7 @@
     <None Include="include\agl\graphics\shader\uniform-wrapper.inl">
       <Filter>src\graphics\shader\uniforms</Filter>
     </None>
-    <None Include="include\agl\graphics\ecs\component\uniform\camera-uniform.inl">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </None>
     <None Include="include\agl\graphics\ecs\component\uniform\directional-light.inl">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </None>
-    <None Include="include\agl\graphics\ecs\component\uniform\inverse-transform-uniform.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
     <None Include="include\agl\graphics\ecs\component\uniform\material.inl">
@@ -694,14 +703,26 @@
     <None Include="include\agl\graphics\ecs\component\uniform\texture-material.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
-    <None Include="include\agl\graphics\ecs\component\uniform\transform-uniform.inl">
-      <Filter>src\graphics\ecs\component\uniform</Filter>
-    </None>
     <None Include="include\agl\utility\type-unique-identifier.inl">
       <Filter>src\utility\uid</Filter>
     </None>
     <None Include="include\agl\graphics\shader\uniform-prototyper.inl">
       <Filter>src\graphics\shader\uniforms</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\camera.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\inverse-transform.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\transform.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\direction.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\graphics\ecs\component\uniform\position.inl">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

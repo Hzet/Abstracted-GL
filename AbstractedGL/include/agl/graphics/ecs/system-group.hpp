@@ -2,15 +2,9 @@
 
 namespace agl
 {
-	struct simulation_group
-	{
-	};
+	struct simulation_group	{};
 
-	struct render_group
-	{
-	};
+	struct render_group	{};
 
-	struct window_group
-	{
-	};
+	struct window_group	{};
 }

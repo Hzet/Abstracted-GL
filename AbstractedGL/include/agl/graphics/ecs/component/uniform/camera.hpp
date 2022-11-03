@@ -1,18 +1,20 @@
 #pragma once
 #include "graphics/shader/shader-manager.hpp"
 #include "graphics/shader/uniform-register.hpp"
-#include "graphics/ecs/component/transformable.hpp"
+#include "graphics/ecs/component/camera-orthographic.hpp"
+#include "graphics/ecs/component/camera-perspective.hpp"
 #include "utility/ecs/entity.hpp"
 
 namespace agl
 {
-	struct transform_uniform
+	struct camera_uniform
 	{
+		shader_uid id_shader;
 	};
 
 	template <typename TComponent>
-	class uniform<transform_uniform, TComponent>
-		: public uniform_register<transform_uniform, transformable>
+	class uniform<camera_uniform, TComponent>
+		: public uniform_register<camera_uniform, camera_perspective, camera_orthographic>
 	{
 	public:
 		using uniform_register::uniform_register;
@@ -25,8 +27,9 @@ namespace agl
 		virtual void update_uniform_locations(shader const& sh) override;
 
 	private:
-		std::int32_t m_transform;
+		std::int32_t m_projection;
+		std::int32_t m_view;
 	};
 
-#include "graphics/ecs/component/uniform/transform-uniform.inl"
+#include "graphics/ecs/component/uniform/camera.inl"
 }

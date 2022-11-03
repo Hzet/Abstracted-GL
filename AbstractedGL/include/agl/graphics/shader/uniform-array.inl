@@ -17,7 +17,7 @@ template <typename TName>
 void uniform_array::remove_uniform()
 {
 	for (auto it = m_uniforms.cbegin(); it != m_uniforms.cend(); ++it)
-		if ((*it)->get_data_type_uid() == uniform_type_uid::get_id<TName>())
+		if ((*it)->get_uniform_type_uid() == uniform_type_uid::get_id<TName>())
 		{
 			auto &u = *(*it)->get();
 
@@ -31,7 +31,7 @@ template <typename TName>
 uniform_base& uniform_array::get_uniform()
 {
 	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == uniform_type_uid::get_id<TName>())
+		if (v->get_uniform_type_uid() == uniform_type_uid::get_id<TName>())
 			return *v;
 
 	AGL_CORE_ASSERT(false, "Failed to find u");
@@ -41,7 +41,7 @@ template <typename TName>
 const uniform_base& uniform_array::get_uniform() const
 {
 	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == uniform_type_uid::get_id<TName>())
+		if (v->get_uniform_type_uid() == uniform_type_uid::get_id<TName>())
 			return *v;
 
 	AGL_CORE_ASSERT(false, "Failed to find u");
@@ -51,7 +51,7 @@ template <typename TName>
 bool uniform_array::has_uniform()
 {
 	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == uniform_type_uid::get_id<TName>())
+		if (v->get_uniform_type_uid() == uniform_type_uid::get_id<TName>())
 			return true;
 
 	return false;
@@ -61,7 +61,7 @@ template <typename TName>
 uniform_base* uniform_array::get_uniform_pointer()
 {
 	for (auto &v : m_uniforms)
-		if (v->get_data_type_uid() == uniform_type_uid::get_id<TName>())
+		if (v->get_uniform_type_uid() == uniform_type_uid::get_id<TName>())
 			return v.get();
 
 	return nullptr;
