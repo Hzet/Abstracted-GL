@@ -56,17 +56,17 @@ vec4 calculate_spot_light(agl_spot_light light, vec3 view_direction)
 	vec3 reflect_direction = reflect(-light_direction, vnormal);
 
 	// ambient
-	vec4 ambient = light.color * material.ambient;
+	vec4 ambient = light.ambient * material.ambient;
 
 	// diffuse
 	float diff = max(dot(vnormal, light_direction), 0.0);
-	vec4 diffuse = light.color * (diff * material.diffuse);
+	vec4 diffuse = diff * light.diffuse * material.diffuse;
 
 	// specular
 	float spec = pow(max(dot(view_direction, reflect_direction), 0.0), material.shininess);
-	vec4 specular = light.color * (spec * material.specular);
+	vec4 specular = spec * light.specular * material.specular;
 
 	// final color
-	vec4 result = ambient + diffuse + specular;
+	vec4 result = (ambient + diffuse + specular) * light.color * vcolor;
 	return result;
 }

@@ -32,6 +32,7 @@ void main()
 	vec4 position = model.transform * vec4(pos, 1.f);
 
 	vpos = vec3(pos);
+	vcolor = color;
 	vnormal = normalize(mat3(transpose(model.inverse_transform)) * normal);
 	vtexture = texture;
 	camera_position = camera.position;

@@ -61,7 +61,7 @@ auto const cube_position = std::vector<agl::position>{
 	{-0.5f,  0.5f,  0.5f},
 	{-0.5f,  0.5f, -0.5f}
 };
-auto const cube_color = std::vector<agl::color>(cube_position.size(), agl::color{0.f, 1.f, 0.f, 1.f});
+auto const cube_color = std::vector<agl::color>(cube_position.size(), agl::color{1.f});
 auto const cube_normal = std::vector<agl::normal> {
 	{ 0.0f,  0.0f, -1.0f },
 	{ 0.0f,  0.0f, -1.0f },
@@ -331,9 +331,9 @@ agl::entity create_cube(agl::registry &reg)
 	uniforms.add_uniform<agl::transform_uniform, agl::transformable>(sh_manager.get_shader_uid(0));
 	uniforms.add_uniform<agl::material_uniform, agl::material>(sh_manager.get_shader_uid(0));
 
-	material.ambient = glm::vec4{ 1.0f, 0.5f, 0.31f, 1.f };
-	material.diffuse = glm::vec4{ 1.0f, 0.5f, 0.31f, 1.f };
-	material.specular = glm::vec4{ 0.5f, 0.5f, 0.5f, 1.f };
+	material.ambient = glm::vec4{ 0.f };
+	material.diffuse = glm::vec4{ 1.0f, 1.0f, 0.31f, 1.f };
+	material.specular = glm::vec4{ 1.f };
 	material.shininess = 32.f;
 
 	return result;
@@ -351,14 +351,15 @@ agl::entity create_spot_light(agl::registry &reg)
 	auto& uniforms = result.attach_component<agl::uniform_array>();
 
 	light.ambient = glm::vec4{ 0.2f, 0.2f, 0.2f, 1.f };
-	light.diffuse = glm::vec4{ 0.5f, 0.5f, 0.5f, 1.f };
+	light.diffuse = glm::vec4{ 0.78, 0.9f, 0.5f, 1.f };
 	light.specular = glm::vec4{ 1.f, 1.f, 1.f, 1.f };
-	light.color = glm::vec4{ 0.f };
+	light.color = glm::vec4{ 1.f };
 
 	uniforms.add_uniform<agl::position_uniform, agl::transformable>({ sh_manager.get_shader_uid(0) });
 	uniforms.add_uniform<agl::spot_light_uniform, agl::spot_light>({ sh_manager.get_shader_uid(0) });
 	uniforms.add_uniform<agl::direction_uniform, agl::direction>({ sh_manager.get_shader_uid(0) });
 
+	dir = agl::camera_base::s_world_direction;
 	//auto& direction_uniform = uniforms.get_uniform<agl::direction_uniform>();
 	//auto& spot_light_uniform = uniforms.get_uniform<agl::spot_light_uniform>();
 	//auto& position_uniform = uniforms.get_uniform<agl::position_uniform>();
