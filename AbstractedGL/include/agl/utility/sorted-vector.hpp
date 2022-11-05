@@ -121,13 +121,13 @@ namespace agl
 	template <typename TKey, typename TData>
 	TData& sorted_vector<TKey, TData>::get(std::uint64_t index)
 	{
-		return m_vector[index];
+		return m_vector[index].second;
 	}
 
 	template <typename TKey, typename TData>
 	const TData& sorted_vector<TKey, TData>::get(std::uint64_t index) const
 	{
-		return m_vector[index];
+		return m_vector[index].second;
 	}
 }
 

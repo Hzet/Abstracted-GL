@@ -127,6 +127,12 @@
     <Filter Include="external\imgui">
       <UniqueIdentifier>{e247d8ae-d01d-4f66-a8b3-d076c847bf29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\system\core\app\layer">
+      <UniqueIdentifier>{d5ac51bb-6793-4be7-a122-a6875e3ee4df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\system\core\app\window">
+      <UniqueIdentifier>{42778fd8-1304-48b3-a6bc-43da61e29618}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\render\index-buffer.cpp">
@@ -228,9 +234,6 @@
     <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp">
       <Filter>src\graphics\ecs\system\uniform</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\app\window.cpp">
-      <Filter>src\system\core\app</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\misc\timestep.cpp">
       <Filter>src\system\core\misc</Filter>
     </ClCompile>
@@ -293,6 +296,18 @@
     </ClCompile>
     <ClCompile Include="external\imgui\imgui_widgets.cpp">
       <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\agl\core\app\layer-base.hpp">
+      <Filter>src\system\core\app\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\window.cpp">
+      <Filter>src\system\core\app\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\agl\core\app\layer-base.cpp">
+      <Filter>src\system\core\app\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\agl\core\app\layer-manager.cpp">
+      <Filter>src\system\core\app\layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -521,9 +536,6 @@
     <ClInclude Include="include\agl\core\event-types.hpp">
       <Filter>src\system\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\core\app\window.hpp">
-      <Filter>src\system\core\app</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\core\misc\timestep.hpp">
       <Filter>src\system\core\misc</Filter>
     </ClInclude>
@@ -538,9 +550,6 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\texture\texture-type.hpp">
       <Filter>src\graphics\texture</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\core\app\window-data.hpp">
-      <Filter>src\system\core\app</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\core\enums\gl-feature-type.hpp">
       <Filter>src\system\core\enums</Filter>
@@ -662,6 +671,18 @@
     <ClInclude Include="external\imgui\imstb_truetype.h">
       <Filter>external\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\core\app\layer-type-uid.hpp">
+      <Filter>src\system\core\app\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\window.hpp">
+      <Filter>src\system\core\app\window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\window-data.hpp">
+      <Filter>src\system\core\app\window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\layer-manager.hpp">
+      <Filter>src\system\core\app\layer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\basic.fsh">
@@ -777,6 +798,9 @@
     </None>
     <None Include="include\agl\graphics\ecs\component\uniform\position.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
+    </None>
+    <None Include="include\agl\core\app\layer-manager.inl">
+      <Filter>src\system\core\app\layer</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
