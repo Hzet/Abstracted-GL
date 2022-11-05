@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 
-#include "graphics/shader/uniform-wrapper.hpp"
-#include "graphics/shader/uniform-type-uid.hpp"
-#include "utility/ecs/component-type-uid.hpp"
+#include "agl/graphics/shader/uniform-wrapper.hpp"
+#include "agl/graphics/shader/uniform-type-uid.hpp"
+#include "agl/utility/ecs/component-type-uid.hpp"
 
 namespace agl
 {
@@ -25,6 +25,6 @@ namespace agl
 		static std::vector<std::vector<std::unique_ptr<uniform_wrapper_base>>>& get_groups();
 	};
 
-#include "graphics/shader/uniform-prototyper.inl"
+#include "agl/graphics/shader/uniform-prototyper.inl"
 }
 

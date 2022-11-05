@@ -1,8 +1,8 @@
 #pragma once
 #include <unordered_map>
 
-#include "core/app/resource.hpp"
-#include "graphics/texture/texture2d.hpp"
+#include "agl/core/app/resource.hpp"
+#include "agl/graphics/texture/texture2d.hpp"
 
 namespace agl
 {

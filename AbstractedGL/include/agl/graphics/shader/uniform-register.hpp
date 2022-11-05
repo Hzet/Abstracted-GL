@@ -1,6 +1,6 @@
 #pragma once
-#include "graphics/shader/uniform-base.hpp"
-#include "graphics/shader/uniform-prototyper.hpp"
+#include "agl/graphics/shader/uniform-base.hpp"
+#include "agl/graphics/shader/uniform-prototyper.hpp"
 
 namespace agl
 {
@@ -24,5 +24,5 @@ namespace agl
 		virtual void register_me() const;
 	};
 
-#include "graphics/shader/uniform-register.inl"
+#include "agl/graphics/shader/uniform-register.inl"
 }

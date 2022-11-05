@@ -2,8 +2,8 @@
 #include <vector>
 #include <memory>
 
-#include "utility/ecs/system-base.hpp"
-#include "utility/ecs/group-type-uid.hpp"
+#include "agl/utility/ecs/system-base.hpp"
+#include "agl/utility/ecs/group-type-uid.hpp"
 
 namespace agl
 {

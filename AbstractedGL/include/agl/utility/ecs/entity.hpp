@@ -1,6 +1,6 @@
 #pragma once
-#include "utility/ecs/signature.hpp"
-#include "utility/ecs/registry.hpp"
+#include "agl/utility/ecs/signature.hpp"
+#include "agl/utility/ecs/registry.hpp"
 
 namespace agl
 {
@@ -119,5 +119,5 @@ namespace agl
 		entity_uid m_id;
 	};
 
-#include "utility/ecs/entity.inl"
+#include "agl/utility/ecs/entity.inl"
 }

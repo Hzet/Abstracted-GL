@@ -2,9 +2,9 @@
 #include <memory>
 #include <string>
 
-#include "graphics/shader/shader-uid.hpp"
-#include "graphics/shader/uniform-type-uid.hpp"
-#include "utility/ecs/component-type-uid.hpp"
+#include "agl/graphics/shader/shader-uid.hpp"
+#include "agl/graphics/shader/uniform-type-uid.hpp"
+#include "agl/utility/ecs/component-type-uid.hpp"
 
 namespace agl
 {

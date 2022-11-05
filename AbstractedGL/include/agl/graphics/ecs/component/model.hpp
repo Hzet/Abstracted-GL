@@ -1,5 +1,5 @@
 #pragma once
-#include "graphics/ecs/component/mesh.hpp"
+#include "agl/graphics/ecs/component/mesh.hpp"
 
 namespace agl
 {

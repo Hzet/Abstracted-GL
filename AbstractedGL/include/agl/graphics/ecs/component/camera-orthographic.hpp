@@ -1,5 +1,5 @@
 #pragma once
-#include "graphics/ecs/component/camera-base.hpp"
+#include "agl/graphics/ecs/component/camera-base.hpp"
 
 namespace agl
 {

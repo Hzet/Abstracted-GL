@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 
-#include "graphics/shader/shader-program.hpp"
-#include "graphics/shader/shader-uid.hpp"
-#include "core/app/resource.hpp"
+#include "agl/graphics/shader/shader-program.hpp"
+#include "agl/graphics/shader/shader-uid.hpp"
+#include "agl/core/app/resource.hpp"
 
 namespace agl
 {

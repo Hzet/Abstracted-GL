@@ -92,5 +92,5 @@ namespace agl
 		T m_data;
 	};
 
-#include "utility/ecs/signal.inl"
+#include "agl/utility/ecs/signal.inl"
 }

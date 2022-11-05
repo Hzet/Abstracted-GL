@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utility/ecs/registry.hpp"
-#include "utility/ecs/entity.hpp"
-#include "utility/ecs/signal.hpp"
-#include "utility/ecs/system.hpp"
+#include "agl/utility/ecs/registry.hpp"
+#include "agl/utility/ecs/entity.hpp"
+#include "agl/utility/ecs/signal.hpp"
+#include "agl/utility/ecs/system.hpp"

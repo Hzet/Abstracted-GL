@@ -31,5 +31,5 @@ namespace agl
 		TData m_data;
 	};
 
-#include "graphics/types/type-base.inl"
+#include "agl/graphics/types/type-base.inl"
 }

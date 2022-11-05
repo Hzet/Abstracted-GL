@@ -1,7 +1,7 @@
 #pragma once 
-#include "system/debug/assert.hpp"
-#include "system/debug/exceptions.hpp"
-#include "core/misc/log.hpp"
+#include "agl/system/debug/assert.hpp"
+#include "agl/system/debug/exceptions.hpp"
+#include "agl/core/misc/log.hpp"
 
 #ifdef AGL_DEBUG
 	#define AGL_CORE_EXCEPTION(exception, message, ...) \

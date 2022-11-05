@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
-#include "graphics/texture/texture-base.hpp"
-#include "graphics/texture/texture-uid.hpp"
+#include "agl/graphics/texture/texture-base.hpp"
+#include "agl/graphics/texture/texture-uid.hpp"
 
 namespace agl
 {

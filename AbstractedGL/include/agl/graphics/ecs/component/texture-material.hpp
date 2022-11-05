@@ -1,5 +1,5 @@
 #pragma once
-#include "graphics/texture/texture-uid.hpp"
+#include "agl/graphics/texture/texture-uid.hpp"
 
 namespace agl
 {

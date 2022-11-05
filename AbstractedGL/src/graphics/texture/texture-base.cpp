@@ -1,5 +1,5 @@
-#include "graphics/texture/texture-base.hpp"
-#include "system/glcore/gl-core.hpp"
+#include "agl/graphics/texture/texture-base.hpp"
+#include "agl/system/glcore/gl-core.hpp"
 
 namespace agl
 {

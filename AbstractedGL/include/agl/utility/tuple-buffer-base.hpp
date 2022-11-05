@@ -131,5 +131,5 @@ namespace agl
 		static constexpr std::size_t m_stride_size = get_element_offset<sizeof...(Args)>();
 	};
 
-#include "utility/tuple-buffer-base.inl"
+#include "agl/utility/tuple-buffer-base.inl"
 }

@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include "core/misc/timer.hpp"
-#include "core/app/resource.hpp"
-#include "core/app/window.hpp"
+#include "agl/core/misc/timer.hpp"
+#include "agl/core/app/resource.hpp"
+#include "agl/core/app/window.hpp"
 
 namespace agl
 {
@@ -28,7 +28,7 @@ namespace agl
 
 		window& get_window();
 
-		virtual void init() = 0;
+		virtual void init();
 		virtual void run() = 0;
 
 	protected:
@@ -42,5 +42,5 @@ namespace agl
 		std::vector<std::unique_ptr<resource_base>> m_resources;
 	};
 
-#include "core/app/application.inl"
+#include "agl/core/app/application.inl"
 }

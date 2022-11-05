@@ -37,5 +37,5 @@ namespace agl
 		std::uint64_t m_id;
 	};
 
-#include "utility/static-unique-identifier.inl"
+#include "agl/utility/static-unique-identifier.inl"
 }

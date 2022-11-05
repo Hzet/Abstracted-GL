@@ -1,4 +1,4 @@
-#include "graphics/ecs/component/camera-perspective.hpp"
+#include "agl/graphics/ecs/component/camera-perspective.hpp"
 
 #include <glm/ext.hpp>
 

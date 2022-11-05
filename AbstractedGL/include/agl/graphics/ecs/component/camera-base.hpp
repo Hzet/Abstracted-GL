@@ -1,8 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
 
-#include "graphics/ecs/component/transformable.hpp"
-#include "graphics/ecs/component/direction.hpp"
+#include "agl/graphics/ecs/component/transformable.hpp"
+#include "agl/graphics/ecs/component/direction.hpp"
 
 namespace agl
 {

@@ -1,8 +1,8 @@
 #pragma once
-#include "graphics/ecs/component/material.hpp"
-#include "graphics/shader/shader-manager.hpp"
-#include "graphics/shader/uniform-register.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/graphics/ecs/component/material.hpp"
+#include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/graphics/shader/uniform-register.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {
@@ -30,5 +30,5 @@ namespace agl
 		std::int32_t m_emission;
 	};
 
-#include "graphics/ecs/component/uniform/material.inl"
+#include "agl/graphics/ecs/component/uniform/material.inl"
 }

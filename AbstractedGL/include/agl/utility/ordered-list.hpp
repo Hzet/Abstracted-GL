@@ -44,5 +44,5 @@ namespace agl
 		element m_list;
 	};
 
-#include "utility/ordered-list.inl"
+#include "agl/utility/ordered-list.inl"
 }

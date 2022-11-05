@@ -1,4 +1,4 @@
-#include "graphics/ecs/component/camera-base.hpp"
+#include "agl/graphics/ecs/component/camera-base.hpp"
 
 #include <glm/ext.hpp>
 #include <glm/gtx/vector_angle.hpp>

@@ -1,5 +1,5 @@
-#include "utility/ecs/registry.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/utility/ecs/registry.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {

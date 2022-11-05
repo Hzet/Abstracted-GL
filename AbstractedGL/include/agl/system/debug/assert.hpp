@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/misc/log.hpp"
+#include "agl/core/misc/log.hpp"
 
 #ifdef AGL_DEBUG
 	#define AGL_CORE_ASSERT(condition, message, ...) \

@@ -1,6 +1,6 @@
 #pragma once
-#include "graphics/shader/uniform.hpp"
-#include "graphics/shader/uniform-base.hpp"
+#include "agl/graphics/shader/uniform.hpp"
+#include "agl/graphics/shader/uniform-base.hpp"
 
 namespace agl
 {
@@ -25,5 +25,5 @@ namespace agl
 		virtual std::unique_ptr<uniform_base> clone(uniform_base const * const dataSource = nullptr) const override;
 	};
 
-#include "graphics/shader/uniform-wrapper.inl"
+#include "agl/graphics/shader/uniform-wrapper.inl"
 }

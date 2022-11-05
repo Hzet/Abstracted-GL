@@ -1,5 +1,5 @@
-#include "graphics/render/vertex-buffer.hpp"
-#include "system/glcore/gl-core.hpp"
+#include "agl/graphics/render/vertex-buffer.hpp"
+#include "agl/system/glcore/gl-core.hpp"
 
 namespace agl
 {

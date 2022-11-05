@@ -1,8 +1,8 @@
 #pragma once
-#include "graphics/ecs/component/transformable.hpp"
-#include "graphics/shader/shader-manager.hpp"
-#include "graphics/shader/uniform-register.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/graphics/ecs/component/transformable.hpp"
+#include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/graphics/shader/uniform-register.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {
@@ -26,5 +26,5 @@ namespace agl
 		std::int32_t m_position;
 	};
 
-#include "graphics/ecs/component/uniform/position.inl"
+#include "agl/graphics/ecs/component/uniform/position.inl"
 }

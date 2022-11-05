@@ -1,8 +1,8 @@
 #pragma once
-#include "graphics/shader/shader-manager.hpp"
-#include "graphics/shader/uniform-register.hpp"
-#include "graphics/ecs/component/transformable.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/graphics/shader/uniform-register.hpp"
+#include "agl/graphics/ecs/component/transformable.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {
@@ -28,5 +28,5 @@ namespace agl
 		std::int32_t m_transform;
 	};
 
-#include "graphics/ecs/component/uniform/transform.inl"
+#include "agl/graphics/ecs/component/uniform/transform.inl"
 }

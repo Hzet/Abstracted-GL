@@ -1,9 +1,9 @@
-#include "graphics/ecs/system/camera-system.hpp"
-#include "graphics/ecs/component/camera-perspective.hpp"
-#include "graphics/ecs/component/camera-orthographic.hpp"
-#include "graphics/ecs/component/transformable.hpp"
-#include "graphics/shader/uniform-array.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/graphics/ecs/system/camera-system.hpp"
+#include "agl/graphics/ecs/component/camera-perspective.hpp"
+#include "agl/graphics/ecs/component/camera-orthographic.hpp"
+#include "agl/graphics/ecs/component/transformable.hpp"
+#include "agl/graphics/shader/uniform-array.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {

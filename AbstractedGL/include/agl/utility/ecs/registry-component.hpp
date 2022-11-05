@@ -2,7 +2,7 @@
 #include <array>
 #include <memory>
 
-#include "utility/ecs/component-array.hpp"
+#include "agl/utility/ecs/component-array.hpp"
 
 namespace agl
 {
@@ -129,5 +129,5 @@ namespace agl
 		std::array<std::unique_ptr<component_array_base>, AGL_MAX_COMPONENTS> m_arrays;
 	};
 
-#include "utility/ecs/registry-component.inl"
+#include "agl/utility/ecs/registry-component.inl"
 }

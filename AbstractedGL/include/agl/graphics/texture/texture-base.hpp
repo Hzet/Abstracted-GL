@@ -2,8 +2,8 @@
 #include <cstdint>
 #include <string>
 
-#include "graphics/texture/texture-type.hpp"
-#include "system/glcore/gl-object.hpp"
+#include "agl/graphics/texture/texture-type.hpp"
+#include "agl/system/glcore/gl-object.hpp"
 
 namespace agl
 {

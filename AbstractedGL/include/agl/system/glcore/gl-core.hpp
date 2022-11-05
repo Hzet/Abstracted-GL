@@ -1,7 +1,7 @@
 #pragma once 
 #include <glad/glad.h>
 
-#include "system/debug/assert.hpp"
+#include "agl/system/debug/assert.hpp"
 
 #ifdef AGL_DEBUG
 	namespace agl

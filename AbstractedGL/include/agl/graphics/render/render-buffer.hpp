@@ -1,8 +1,8 @@
 #pragma once
-#include "graphics/render/vertex-array.hpp"
-#include "graphics/render/render-type-uid.hpp"
-#include "graphics/types/types.hpp"
-#include "utility/sorted-vector.hpp"
+#include "agl/graphics/render/vertex-array.hpp"
+#include "agl/graphics/render/render-type-uid.hpp"
+#include "agl/graphics/types/types.hpp"
+#include "agl/utility/sorted-vector.hpp"
 
 namespace agl
 {
@@ -50,6 +50,6 @@ namespace agl
 		mutable vertex_layout m_vlayout;
 	};
 
-#include "graphics/render/render-buffer.inl"
+#include "agl/graphics/render/render-buffer.inl"
 }
 

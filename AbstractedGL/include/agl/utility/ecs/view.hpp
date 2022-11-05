@@ -1,8 +1,8 @@
 #pragma once
-#include "utility/ecs/component-array.hpp"
-#include "utility/ecs/entity-uid.hpp"
-#include "utility/ecs/signature.hpp"
-#include "utility/ecs/registry-component.hpp"
+#include "agl/utility/ecs/component-array.hpp"
+#include "agl/utility/ecs/entity-uid.hpp"
+#include "agl/utility/ecs/signature.hpp"
+#include "agl/utility/ecs/registry-component.hpp"
 
 namespace agl
 {
@@ -70,5 +70,5 @@ namespace agl
 		std::vector<entity_uid> m_entities;
 	};
 
-#include "utility/ecs/view.inl"
+#include "agl/utility/ecs/view.inl"
 }

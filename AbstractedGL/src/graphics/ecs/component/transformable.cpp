@@ -1,4 +1,4 @@
-#include "graphics/ecs/component/transformable.hpp"
+#include "agl/graphics/ecs/component/transformable.hpp"
 
 #include <glm/ext.hpp>
 

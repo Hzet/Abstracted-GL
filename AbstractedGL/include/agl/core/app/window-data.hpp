@@ -3,7 +3,7 @@
 #include <string>
 #include <queue>
 
-#include "core/event.hpp"
+#include "agl/core/event.hpp"
 
 namespace agl
 {

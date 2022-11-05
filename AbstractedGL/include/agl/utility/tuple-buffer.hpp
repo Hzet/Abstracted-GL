@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "utility/tuple-buffer-base.hpp"
+#include "agl/utility/tuple-buffer-base.hpp"
 
 namespace agl
 {
@@ -171,5 +171,5 @@ namespace agl
 		std::vector<std::byte> m_data;
 	};
 
-#include "utility/tuple-buffer.inl"
+#include "agl/utility/tuple-buffer.inl"
 }	

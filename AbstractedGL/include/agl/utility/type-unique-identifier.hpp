@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <string>
 
-#include "system/debug/assert.hpp"
+#include "agl/system/debug/assert.hpp"
 
 namespace agl
 {
@@ -51,5 +51,5 @@ namespace agl
 		static std::unordered_map<std::string, std::unordered_map<std::uint64_t, std::string>>& get_names_ref();
 	};
 
-#include "utility/type-unique-identifier.inl"
+#include "agl/utility/type-unique-identifier.inl"
 }

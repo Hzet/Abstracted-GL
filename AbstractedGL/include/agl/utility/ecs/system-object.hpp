@@ -1,6 +1,6 @@
 #pragma once
-#include "utility/ecs/system-base.hpp"
-#include "utility/ecs/registry.hpp"
+#include "agl/utility/ecs/system-base.hpp"
+#include "agl/utility/ecs/registry.hpp"
 
 namespace agl
 {
@@ -22,5 +22,5 @@ namespace agl
 		virtual std::unique_ptr<system_base> clone() const;
 	};
 
-#include "utility/ecs/system-object.inl"
+#include "agl/utility/ecs/system-object.inl"
 }

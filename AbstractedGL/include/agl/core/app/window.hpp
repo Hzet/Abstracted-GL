@@ -1,13 +1,13 @@
 #pragma once
 #include <unordered_map>
 
-#include "system/glcore/gl-core.hpp"
-#include "core/enums/input-mode.hpp"
-#include "core/enums/gl-clear-type.hpp"
-#include "core/enums/gl-feature-type.hpp"
-#include "core/enums/gl-profile-type.hpp"
-#include "core/app/window-data.hpp"
-#include "system/glcore/destructive-move.hpp"
+#include "agl/system/glcore/gl-core.hpp"
+#include "agl/core/enums/input-mode.hpp"
+#include "agl/core/enums/gl-clear-type.hpp"
+#include "agl/core/enums/gl-feature-type.hpp"
+#include "agl/core/enums/gl-profile-type.hpp"
+#include "agl/core/app/window-data.hpp"
+#include "agl/system/glcore/destructive-move.hpp"
 
 #include <GLFW/glfw3.h>
 

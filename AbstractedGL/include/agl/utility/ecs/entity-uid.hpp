@@ -1,6 +1,6 @@
 #pragma once
-#include "utility/ecs/config.hpp"
-#include "utility/unique-identifier.hpp"
+#include "agl/utility/ecs/config.hpp"
+#include "agl/utility/unique-identifier.hpp"
 
 namespace agl
 {

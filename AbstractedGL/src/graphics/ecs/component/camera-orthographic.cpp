@@ -1,4 +1,4 @@
-#include "graphics/ecs/component/camera-orthographic.hpp"
+#include "agl/graphics/ecs/component/camera-orthographic.hpp"
 
 #include <glm/ext.hpp>
 

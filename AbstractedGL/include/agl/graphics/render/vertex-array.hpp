@@ -1,7 +1,7 @@
 #pragma once
-#include "graphics/render/index-buffer.hpp"
-#include "graphics/render/vertex-buffer.hpp"
-#include "graphics/render/vertex-layout.hpp"
+#include "agl/graphics/render/index-buffer.hpp"
+#include "agl/graphics/render/vertex-buffer.hpp"
+#include "agl/graphics/render/vertex-layout.hpp"
 
 namespace agl
 {

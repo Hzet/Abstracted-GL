@@ -2,8 +2,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "utility/ecs/group.hpp"
-#include "utility/ordered-list.hpp"
+#include "agl/utility/ecs/group.hpp"
+#include "agl/utility/ordered-list.hpp"
 
 namespace agl
 {
@@ -36,5 +36,5 @@ namespace agl
 		std::vector<group_base> m_groups;
 	};
 
-#include "utility/ecs/registry-system.inl"
+#include "agl/utility/ecs/registry-system.inl"
 }

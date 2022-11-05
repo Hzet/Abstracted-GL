@@ -1,12 +1,12 @@
-#include "core/app/application.hpp"
-#include "graphics/ecs/component/transformable.hpp"
-#include "graphics/ecs/component/model.hpp"
-#include "graphics/ecs/component/prism.hpp"
-#include "graphics/ecs/system/render-system.hpp"
-#include "graphics/shader/uniform-array.hpp"
-#include "graphics/shader/shader-manager.hpp"
-#include "system/glcore/gl-core.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/core/app/application.hpp"
+#include "agl/graphics/ecs/component/transformable.hpp"
+#include "agl/graphics/ecs/component/model.hpp"
+#include "agl/graphics/ecs/component/prism.hpp"
+#include "agl/graphics/ecs/system/render-system.hpp"
+#include "agl/graphics/shader/uniform-array.hpp"
+#include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/system/glcore/gl-core.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {

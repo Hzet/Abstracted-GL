@@ -1,4 +1,4 @@
-#include "graphics/ecs/component/prism.hpp"
+#include "agl/graphics/ecs/component/prism.hpp"
 #include <glm/gtx/rotate_vector.hpp>
 
 namespace agl

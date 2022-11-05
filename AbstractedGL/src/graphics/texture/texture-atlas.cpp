@@ -1,5 +1,5 @@
-#include "graphics/texture/texture-atlas.hpp"
-#include "system/debug/error.hpp"
+#include "agl/graphics/texture/texture-atlas.hpp"
+#include "agl/system/debug/error.hpp"
 
 namespace agl
 {

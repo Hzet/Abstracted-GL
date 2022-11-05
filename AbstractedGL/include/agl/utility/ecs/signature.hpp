@@ -1,9 +1,9 @@
 #pragma once
 #include <bitset>
 
-#include "utility/ecs/config.hpp"
-#include "utility/ecs/component-type-uid.hpp"
-#include "utility/type-unique-identifier.hpp"
+#include "agl/utility/ecs/config.hpp"
+#include "agl/utility/ecs/component-type-uid.hpp"
+#include "agl/utility/type-unique-identifier.hpp"
 
 namespace agl
 {
@@ -122,7 +122,7 @@ namespace agl
 	bool operator==(const signature &l, const signature &r);
 	bool operator!=(const signature &l, const signature &r);
 
-#include "utility/ecs/signature.inl"
+#include "agl/utility/ecs/signature.inl"
 }
 
 namespace std

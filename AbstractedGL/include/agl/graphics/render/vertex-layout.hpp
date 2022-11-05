@@ -2,7 +2,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-#include "system/glcore/gl-core.hpp"
+#include "agl/system/glcore/gl-core.hpp"
 
 namespace agl
 {
@@ -80,5 +80,5 @@ namespace agl
 		std::vector<element> m_elements;
 	};
 
-#include "graphics/render/vertex-layout.inl"
+#include "agl/graphics/render/vertex-layout.inl"
 }

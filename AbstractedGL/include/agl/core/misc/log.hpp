@@ -9,7 +9,7 @@
 #include <chrono> 
 #include <ctime>
 
-#include "system/debug/debug.hpp"
+#include "agl/system/debug/debug.hpp"
 
 namespace agl
 {
@@ -215,7 +215,7 @@ namespace agl
 		static std::unique_ptr<log> m_client_log;
 	};
 
-#include "core/misc/log.inl"
+#include "agl/core/misc/log.inl"
 }
 	/*
 	* TRACE - function enter / end

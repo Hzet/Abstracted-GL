@@ -1,5 +1,5 @@
 #pragma once
-#include "utility/unique-identifier-manager.hpp"
+#include "agl/utility/unique-identifier-manager.hpp"
 
 namespace agl
 {
@@ -73,5 +73,5 @@ namespace agl
 		std::uint64_t m_id;
 	};
 
-#include "utility/unique-identifier.inl"
+#include "agl/utility/unique-identifier.inl"
 }

@@ -1,6 +1,6 @@
-#include "graphics/shader/shader-program.hpp"
-#include "system/debug/error.hpp"
-#include "system/glcore/gl-core.hpp"
+#include "agl/graphics/shader/shader-program.hpp"
+#include "agl/system/debug/error.hpp"
+#include "agl/system/glcore/gl-core.hpp"
 
 #include <glm/gtc/type_ptr.hpp>
 

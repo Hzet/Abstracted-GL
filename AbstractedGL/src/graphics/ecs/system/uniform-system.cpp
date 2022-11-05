@@ -1,6 +1,6 @@
-#include "graphics/ecs/system/uniform-system.hpp"
-#include "graphics/shader/uniform-array.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/graphics/ecs/system/uniform-system.hpp"
+#include "agl/graphics/shader/uniform-array.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {

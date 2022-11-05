@@ -1,11 +1,11 @@
 #pragma once
 #include <array>
 
-#include "system/debug/assert.hpp"
-#include "utility/ecs/config.hpp"
-#include "utility/ecs/component-array-base.hpp"
-#include "utility/ecs/component-type-uid.hpp"
-#include "utility/ecs/entity-uid.hpp"
+#include "agl/system/debug/assert.hpp"
+#include "agl/utility/ecs/config.hpp"
+#include "agl/utility/ecs/component-array-base.hpp"
+#include "agl/utility/ecs/component-type-uid.hpp"
+#include "agl/utility/ecs/entity-uid.hpp"
 
 namespace agl
 {
@@ -80,5 +80,5 @@ namespace agl
 		std::array<bool, AGL_MAX_ENTITIES> m_active_entities;
 	};
 
-#include "utility/ecs/component-array.inl"
+#include "agl/utility/ecs/component-array.inl"
 }

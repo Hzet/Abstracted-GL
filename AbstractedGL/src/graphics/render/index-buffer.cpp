@@ -1,5 +1,5 @@
-#include "graphics/render/index-buffer.hpp"
-#include "system/glcore/gl-core.hpp"
+#include "agl/graphics/render/index-buffer.hpp"
+#include "agl/system/glcore/gl-core.hpp"
 
 namespace agl
 {

@@ -1,7 +1,7 @@
-#include "graphics/texture/texture2d.hpp"
-#include "graphics/texture/texture-atlas.hpp"
-#include "system/debug/error.hpp"
-#include "system/glcore/gl-core.hpp"
+#include "agl/graphics/texture/texture2d.hpp"
+#include "agl/graphics/texture/texture-atlas.hpp"
+#include "agl/system/debug/error.hpp"
+#include "agl/system/glcore/gl-core.hpp"
 
 #include <stb_image.hpp>
 

@@ -1,12 +1,12 @@
-#include "graphics/ecs/system/light-system.hpp"
-#include "graphics/ecs/component/direction.hpp"
-#include "graphics/ecs/component/directional-light.hpp"
-#include "graphics/ecs/component/spot-light.hpp"
-#include "graphics/ecs/component/transformable.hpp"
-#include "graphics/ecs/component/uniform/spot-light.hpp"
-#include "graphics/shader/uniform-array.hpp"	
+#include "agl/graphics/ecs/system/light-system.hpp"
+#include "agl/graphics/ecs/component/direction.hpp"
+#include "agl/graphics/ecs/component/directional-light.hpp"
+#include "agl/graphics/ecs/component/spot-light.hpp"
+#include "agl/graphics/ecs/component/transformable.hpp"
+#include "agl/graphics/ecs/component/uniform/spot-light.hpp"
+#include "agl/graphics/shader/uniform-array.hpp"	
 
-#include "core/app/application.hpp"
+#include "agl/core/app/application.hpp"
 
 namespace agl
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 
-#include "graphics/types/type-base.hpp"
+#include "agl/graphics/types/type-base.hpp"
 
 namespace agl
 {

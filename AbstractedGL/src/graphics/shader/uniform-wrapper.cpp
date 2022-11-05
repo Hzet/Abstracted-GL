@@ -1,4 +1,4 @@
-#include "graphics/shader/uniform-wrapper.hpp"
+#include "agl/graphics/shader/uniform-wrapper.hpp"
 
 namespace agl
 {

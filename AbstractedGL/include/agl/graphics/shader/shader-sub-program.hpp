@@ -2,8 +2,8 @@
 #include <string>
 #include <cstdint>
 
-#include "graphics/shader/shader-type.hpp"
-#include "system/glcore/destructive-move.hpp"
+#include "agl/graphics/shader/shader-type.hpp"
+#include "agl/system/glcore/destructive-move.hpp"
 
 namespace agl
 {

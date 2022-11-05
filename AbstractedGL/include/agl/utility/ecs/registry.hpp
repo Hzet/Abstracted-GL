@@ -1,9 +1,9 @@
 #pragma once
-#include "utility/ecs/view.hpp"
-#include "utility/ecs/registry-entity.hpp"
-#include "utility/ecs/registry-component.hpp"
-#include "utility/ecs/registry-system.hpp"
-#include "core/app/resource.hpp"
+#include "agl/utility/ecs/view.hpp"
+#include "agl/utility/ecs/registry-entity.hpp"
+#include "agl/utility/ecs/registry-component.hpp"
+#include "agl/utility/ecs/registry-system.hpp"
+#include "agl/core/app/resource.hpp"
 
 namespace agl
 {
@@ -101,5 +101,5 @@ namespace agl
 		virtual void dummy() const override {};
 	};
 
-#include "utility/ecs/registry.inl"
+#include "agl/utility/ecs/registry.inl"
 }

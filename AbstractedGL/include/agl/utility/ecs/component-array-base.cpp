@@ -1,4 +1,4 @@
-#include "utility/ecs/component-array-base.hpp"
+#include "agl/utility/ecs/component-array-base.hpp"
 
 namespace agl
 {

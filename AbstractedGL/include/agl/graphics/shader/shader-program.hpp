@@ -3,10 +3,10 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
-#include "graphics/shader/shader-sub-program.hpp"
-#include "graphics/shader/shader-uid.hpp"
-#include "system/glcore/gl-core.hpp"
-#include "system/glcore/destructive-move.hpp"
+#include "agl/graphics/shader/shader-sub-program.hpp"
+#include "agl/graphics/shader/shader-uid.hpp"
+#include "agl/system/glcore/gl-core.hpp"
+#include "agl/system/glcore/destructive-move.hpp"
 
 namespace agl
 {

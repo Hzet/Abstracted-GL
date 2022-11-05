@@ -1,6 +1,6 @@
-#include "utility/ecs/registry-entity.hpp"
-#include "utility/ecs/registry.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/utility/ecs/registry-entity.hpp"
+#include "agl/utility/ecs/registry.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {

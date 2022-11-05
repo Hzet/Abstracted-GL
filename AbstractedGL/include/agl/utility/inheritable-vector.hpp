@@ -283,5 +283,5 @@ namespace agl
 		std::vector<T> m_vector;
 	};
 
-#include "utility/inheritable-vector.inl"
+#include "agl/utility/inheritable-vector.inl"
 }

@@ -1,6 +1,6 @@
-#include "core/app/application.hpp"
-#include "graphics/shader/shader-manager.hpp"
-#include "system/debug/error.hpp"
+#include "agl/core/app/application.hpp"
+#include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/system/debug/error.hpp"
 
 namespace agl
 {

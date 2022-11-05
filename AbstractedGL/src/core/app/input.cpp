@@ -1,5 +1,5 @@
-#include "core/app/input.hpp"
-#include "core/app/application.hpp"
+#include "agl/core/app/input.hpp"
+#include "agl/core/app/application.hpp"
 
 namespace agl
 {

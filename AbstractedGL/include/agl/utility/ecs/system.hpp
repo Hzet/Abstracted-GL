@@ -1,5 +1,5 @@
 #pragma once
-#include "utility/ecs/system-object.hpp"
+#include "agl/utility/ecs/system-object.hpp"
 
 namespace agl
 {

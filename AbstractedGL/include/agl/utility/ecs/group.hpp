@@ -1,5 +1,5 @@
 #pragma once
-#include "utility/ecs/group-base.hpp"
+#include "agl/utility/ecs/group-base.hpp"
 
 namespace agl
 {
@@ -13,5 +13,5 @@ namespace agl
 		group();
 	};
 
-#include "utility/ecs/group.inl"
+#include "agl/utility/ecs/group.inl"
 }

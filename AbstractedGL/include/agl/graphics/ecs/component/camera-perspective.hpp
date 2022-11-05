@@ -1,7 +1,7 @@
 #pragma once 
 #include <glm/glm.hpp>
 
-#include "graphics/ecs/component/camera-base.hpp"
+#include "agl/graphics/ecs/component/camera-base.hpp"
 
 namespace agl
 {

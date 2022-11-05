@@ -1,8 +1,8 @@
 #pragma once
-#include "graphics/ecs/component/spot-light.hpp"
-#include "graphics/shader/shader-manager.hpp"
-#include "graphics/shader/uniform-register.hpp"
-#include "utility/ecs/entity.hpp"
+#include "agl/graphics/ecs/component/spot-light.hpp"
+#include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/graphics/shader/uniform-register.hpp"
+#include "agl/utility/ecs/entity.hpp"
 
 namespace agl
 {
@@ -31,5 +31,5 @@ namespace agl
 		std::int32_t m_specular;
 	};
 
-#include "graphics/ecs/component/uniform/spot-light.inl"
+#include "agl/graphics/ecs/component/uniform/spot-light.inl"
 }

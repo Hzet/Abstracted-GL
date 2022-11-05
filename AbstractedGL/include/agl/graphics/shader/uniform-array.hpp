@@ -2,8 +2,8 @@
 #include <cstdarg>
 #include <vector>
 
-#include "graphics/shader/uniform-prototyper.hpp"
-#include "system/debug/assert.hpp"
+#include "agl/graphics/shader/uniform-prototyper.hpp"
+#include "agl/system/debug/assert.hpp"
 
 namespace agl
 {
@@ -35,5 +35,5 @@ namespace agl
 		std::vector<std::unique_ptr<uniform_base>> m_uniforms;
 	};
 
-#include "graphics/shader/uniform-array.inl"
+#include "agl/graphics/shader/uniform-array.inl"
 }

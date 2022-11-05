@@ -1,7 +1,7 @@
 #pragma once
-#include "graphics/render/render-buffer.hpp"
-#include "graphics/shader/shader-uid.hpp"
-#include "core/enums/gl-draw-type.hpp"
+#include "agl/graphics/render/render-buffer.hpp"
+#include "agl/graphics/shader/shader-uid.hpp"
+#include "agl/core/enums/gl-draw-type.hpp"
 
 #include <glm/glm.hpp>
 

@@ -1,5 +1,5 @@
-#include "graphics/render/vertex-layout.hpp"
-#include "system/debug/assert.hpp"
+#include "agl/graphics/render/vertex-layout.hpp"
+#include "agl/system/debug/assert.hpp"
 
 namespace agl
 {

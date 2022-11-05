@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 
-#include "utility/ecs./system-type-uid.hpp"
+#include "agl/utility/ecs./system-type-uid.hpp"
 
 namespace agl
 {
