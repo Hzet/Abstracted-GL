@@ -1,11 +1,11 @@
 template <typename T>
-void render_buffer::add_vertices(const std::vector<T> &data)
+void render_buffer::set_vertices(const std::vector<T> &data)
 {
-	add_vertices(data.data());
+	set_vertices(data.data());
 }
 
 template <typename T>
-void render_buffer::add_vertices(const T * const data)
+void render_buffer::set_vertices(const T * const data)
 {
 	m_require_update = true;
 

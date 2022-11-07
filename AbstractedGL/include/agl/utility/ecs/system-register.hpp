@@ -5,22 +5,26 @@
 namespace agl
 {
 	template <typename TGroupName, typename TDerived>
-	class system_object
+	class system_register
 		: public system_base
 	{
 	public:
 		using system_base::system_base;
 
-		system_object();
-		virtual ~system_object() = default;
+		system_register();
+		virtual ~system_register() = default;
 
 	private:
-		static bool Register_;
+		static bool register_type();
 
+	private:
+		static bool s_registered;
+
+	private:
 		virtual void register_me() const;
 
 		virtual std::unique_ptr<system_base> clone() const;
 	};
 
-#include "agl/utility/ecs/system-object.inl"
+#include "agl/utility/ecs/system-register.inl"
 }

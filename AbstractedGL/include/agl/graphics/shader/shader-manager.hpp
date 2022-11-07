@@ -15,7 +15,7 @@ namespace agl
 		: public resource_base
 	{
 	public:
-		void load_from_file(const std::string &vertex, const std::string &fragment, const std::string &geometry = "", const std::string &tessControl = "", const std::string &tessEvaluation = "", const std::string &compute = "");
+		shader_uid load_from_file(const std::string &vertex, const std::string &fragment, const std::string &geometry = "", const std::string &tessControl = "", const std::string &tessEvaluation = "", const std::string &compute = "");
 
 		/// <summary>
 		/// Return the s with given 'key'.
@@ -32,7 +32,7 @@ namespace agl
 		/// </summary>
 		/// <param name="id_shader">the unique identifier of the 's'</param>
 		/// <param name="s">ready to use s object</param>
-		void add_shader(shader_uid id_shader, shader &&s);
+		shader_uid add_shader(shader &&s);
 		
 		void link_all_shaders();
 

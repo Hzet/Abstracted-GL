@@ -20,5 +20,5 @@ void uniform<inverse_transform_uniform, TComponent>::update_uniform_locations(sh
 {
 	m_inverse_transform = sh.get_location(get_full_name() + "." + "inverse_transform");
 
-	update_uniform_locations = false;
+	m_update_uniform_locations = false;
 }

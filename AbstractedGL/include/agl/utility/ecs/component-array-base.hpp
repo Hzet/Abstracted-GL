@@ -1,10 +1,8 @@
 #pragma once
 #include <vector>
-
+#include "agl/utility/ecs/entity-uid.hpp"
 namespace agl
 {
-	class entity_uid;
-
 	/// <summary>
 	/// A base polymorphic base class for component_array class.
 	/// </summary>

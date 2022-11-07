@@ -24,6 +24,8 @@ namespace agl
 		template <typename T>
 		layer_base const& get_layer() const;
 
+		std::uint64_t get_count() const;
+
 		layer_base& operator[](std::uint64_t index);
 		layer_base const& operator[](std::uint64_t index) const;
 

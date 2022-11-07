@@ -27,4 +27,4 @@ void uniform_register<TName, TComponents...>::register_me() const
 }
 
 template <typename TName, typename... TComponents>
-bool uniform_register<TName, TComponents...>::s_registered = register_type();
+bool uniform_register<TName, TComponents...>::s_registered = uniform_register<TName, TComponents...>::register_type();

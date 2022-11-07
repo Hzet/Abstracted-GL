@@ -28,8 +28,8 @@ namespace agl
 		void add_indices(const std::vector<std::uint32_t> &data);
 		void add_indices(std::uint32_t const * const data, std::uint64_t count);
 
-		template <typename T> void add_vertices(const std::vector<T> &data);
-		template <typename T> void add_vertices(const T * const data);
+		template <typename T> void set_vertices(const std::vector<T> &data);
+		template <typename T> void set_vertices(const T * const data);
 
 		template <typename T> T& get(std::uint64_t index);
 		template <typename T> const T& get(std::uint64_t index) const;

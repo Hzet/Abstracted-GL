@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="resource">
-      <UniqueIdentifier>{bb71c470-f3b3-4829-9a26-93140371a731}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{05af622e-aae6-484f-9343-8b3cbd99330d}</UniqueIdentifier>
     </Filter>
@@ -96,9 +93,6 @@
     </Filter>
     <Filter Include="src\utility\uid">
       <UniqueIdentifier>{0e19f87d-d1e3-49c3-8477-a41f65a3353e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\graphics\ecs\system\uniform">
-      <UniqueIdentifier>{adbe0090-e4ac-458a-9092-095887c0df0b}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\graphics\types">
       <UniqueIdentifier>{35387ca7-89fc-4e0b-a6b0-b4de0e819f53}</UniqueIdentifier>
@@ -231,9 +225,6 @@
     <ClCompile Include="src\graphics\render\render-buffer.cpp">
       <Filter>src\graphics\render</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp">
-      <Filter>src\graphics\ecs\system\uniform</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\misc\timestep.cpp">
       <Filter>src\system\core\misc</Filter>
     </ClCompile>
@@ -260,9 +251,6 @@
     </ClCompile>
     <ClCompile Include="src\core\app\entry-point.cpp">
       <Filter>src\system\core\app</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\ecs\component\prism.cpp">
-      <Filter>src\graphics\ecs\component\render</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp">
       <Filter>src\graphics\ecs\system\render</Filter>
@@ -303,11 +291,20 @@
     <ClCompile Include="src\core\app\window.cpp">
       <Filter>src\system\core\app\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\agl\core\app\layer-base.cpp">
+    <ClCompile Include="src\graphics\ecs\system\gui-system.cpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\layer-base.cpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClCompile>
-    <ClCompile Include="src\agl\core\app\layer-manager.cpp">
+    <ClCompile Include="src\core\app\layer-manager.cpp">
       <Filter>src\system\core\app\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\prism.cpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\component\rectangle.cpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -410,9 +407,6 @@
     <ClInclude Include="include\agl\utility\ecs\signal.hpp">
       <Filter>src\utility\ecs\signal</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\system.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\utility\ecs\signature.hpp">
       <Filter>src\utility\ecs\signature</Filter>
     </ClInclude>
@@ -458,9 +452,6 @@
     <ClInclude Include="include\agl\graphics\ecs\agl-system-order.hpp">
       <Filter>src\graphics\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\system-object.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\utility\ordered-list.hpp">
       <Filter>src\utility</Filter>
     </ClInclude>
@@ -484,9 +475,6 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\render\render-buffer.hpp">
       <Filter>src\graphics\render</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\system\uniform-system.hpp">
-      <Filter>src\graphics\ecs\system\uniform</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\model.hpp">
       <Filter>src\graphics\ecs\component\render</Filter>
@@ -683,14 +671,26 @@
     <ClInclude Include="include\agl\core\app\layer-manager.hpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\rectangle.hpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\gui-system.hpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\utility\ecs\system-register.hpp">
+      <Filter>src\utility\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\uniform-build.hpp">
+      <Filter>src\graphics\ecs\component\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\renderable.hpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\basic.fsh">
-      <Filter>resource</Filter>
-    </None>
-    <None Include="resource\light.fsh">
-      <Filter>resource</Filter>
-    </None>
     <None Include="include\agl\graphics\render\vertex-layout.inl">
       <Filter>src\graphics\render</Filter>
     </None>
@@ -731,9 +731,6 @@
       <Filter>src\utility\ecs\registry\entity</Filter>
     </None>
     <None Include="include\agl\utility\ecs\group.inl">
-      <Filter>src\utility\ecs\system</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\system-object.inl">
       <Filter>src\utility\ecs\system</Filter>
     </None>
     <None Include="include\agl\utility\ordered-list.inl">
@@ -802,13 +799,8 @@
     <None Include="include\agl\core\app\layer-manager.inl">
       <Filter>src\system\core\app\layer</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="resource\basic.vsh">
-      <Filter>resource</Filter>
-    </FxCompile>
-    <FxCompile Include="resource\light.vsh">
-      <Filter>resource</Filter>
-    </FxCompile>
+    <None Include="include\agl\utility\ecs\system-register.inl">
+      <Filter>src\utility\ecs\system</Filter>
+    </None>
   </ItemGroup>
 </Project>

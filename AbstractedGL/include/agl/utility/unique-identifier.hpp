@@ -18,8 +18,12 @@ namespace agl
 			INVALID = 0ul
 		};
 
+	public:
+		static unique_id create();
+
 		static std::uint64_t get_reference_count(const unique_id &uid);
 
+	public:
 		/// <summary>
 		/// Registers the unique identifier for this instance.
 		/// </summary>
@@ -70,6 +74,10 @@ namespace agl
 	private:
 		static CUIDManager& get_manager();
 
+	private:
+		unique_id(std::uint64_t id);
+
+	private:
 		std::uint64_t m_id;
 	};
 

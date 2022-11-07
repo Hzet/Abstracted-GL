@@ -199,6 +199,7 @@ namespace agl
 
 	void window::close()
 	{
+		m_data.closed = true;
 		glfwSetWindowShouldClose(m_handle.get(), GLFW_TRUE);
 	}
 
@@ -472,7 +473,7 @@ namespace agl
 	{
 		switch (severity)
 		{
-		case GL_DEBUG_SEVERITY_HIGH:         AGL_CORE_EXCEPTION(ExOpenGL, "Message: {}", message); return;
+		case GL_DEBUG_SEVERITY_HIGH:         AGL_CORE_EXCEPTION(ExOpenGL, message); return;
 		case GL_DEBUG_SEVERITY_MEDIUM:       AGL_CORE_LOG_ERROR(message); return;
 		case GL_DEBUG_SEVERITY_LOW:          AGL_CORE_LOG_WARNING(message); return;
 		case GL_DEBUG_SEVERITY_NOTIFICATION: AGL_CORE_LOG_TRACE(message); return;

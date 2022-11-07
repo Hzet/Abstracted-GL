@@ -8,7 +8,7 @@ namespace agl
 		if (has_texture_2d(identifier))
 			return get_texture_uid(identifier);
 
-		auto result = texture_uid{};
+		auto result = texture_uid::create();
 		m_textures_2d.emplace(result, texture);
 		m_directory_map_2d.emplace(identifier, result);
 

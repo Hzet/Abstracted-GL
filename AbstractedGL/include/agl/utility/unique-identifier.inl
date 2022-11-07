@@ -1,4 +1,10 @@
 template <typename T, std::uint64_t Size>
+unique_id<T, Size> unique_id<T, Size>::create()
+{
+	return unique_id{ get_manager().create() };
+}
+
+template <typename T, std::uint64_t Size>
 std::uint64_t unique_id<T, Size>::get_reference_count(const unique_id &uid)
 {
 	return get_manager().get_references_count(uid);
@@ -6,7 +12,7 @@ std::uint64_t unique_id<T, Size>::get_reference_count(const unique_id &uid)
 
 template <typename T, std::uint64_t Size>
 unique_id<T, Size>::unique_id()
-	: m_id(get_manager().create())
+	: m_id(INVALID)
 {
 }
 
@@ -66,4 +72,10 @@ CUIDManager& unique_id<T, Size>::get_manager()
 	static auto result = CUIDManager{ Size };
 
 	return result;
+}
+
+template <typename T, std::uint64_t Size>
+unique_id<T, Size>::unique_id(std::uint64_t id)
+	: m_id{ id }
+{
 }

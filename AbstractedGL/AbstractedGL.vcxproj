@@ -18,13 +18,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -116,11 +116,11 @@
     <ClCompile Include="external\imgui\imgui_widgets.cpp" />
     <ClCompile Include="include\agl\core\app\layer-base.hpp" />
     <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp" />
-    <ClCompile Include="src\agl\core\app\layer-base.cpp" />
-    <ClCompile Include="src\agl\core\app\layer-manager.cpp" />
     <ClCompile Include="src\core\app\application.cpp" />
     <ClCompile Include="src\core\app\entry-point.cpp" />
     <ClCompile Include="src\core\app\input.cpp" />
+    <ClCompile Include="src\core\app\layer-base.cpp" />
+    <ClCompile Include="src\core\app\layer-manager.cpp" />
     <ClCompile Include="src\core\app\window.cpp" />
     <ClCompile Include="src\core\misc\log.cpp" />
     <ClCompile Include="src\core\misc\timer.cpp" />
@@ -129,12 +129,13 @@
     <ClCompile Include="src\graphics\ecs\component\camera-orthographic.cpp" />
     <ClCompile Include="src\graphics\ecs\component\camera-perspective.cpp" />
     <ClCompile Include="src\graphics\ecs\component\prism.cpp" />
+    <ClCompile Include="src\graphics\ecs\component\rectangle.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp" />
+    <ClCompile Include="src\graphics\ecs\system\gui-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\light-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
-    <ClCompile Include="src\graphics\ecs\system\uniform-system.cpp" />
     <ClCompile Include="src\graphics\render\index-buffer.cpp" />
     <ClCompile Include="src\graphics\render\render-buffer.cpp" />
     <ClCompile Include="src\graphics\render\vertex-array.cpp" />
@@ -168,6 +169,8 @@
     <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\rectangle.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\renderable.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\direction.hpp" />
@@ -178,8 +181,11 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\spot-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\texture-material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\uniform\uniform-build.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\system\gui-system.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\light-system.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-prototyper.hpp" />
@@ -214,7 +220,6 @@
     <ClInclude Include="include\agl\graphics\ecs\agl-system-order.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system-group.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\render-system.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\system\uniform-system.hpp" />
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp" />
     <ClInclude Include="include\agl\graphics\render\render-buffer.hpp" />
     <ClInclude Include="include\agl\graphics\render\render-type-uid.hpp" />
@@ -266,9 +271,8 @@
     <ClInclude Include="include\agl\utility\ecs\signal.hpp" />
     <ClInclude Include="include\agl\utility\ecs\signature.hpp" />
     <ClInclude Include="include\agl\utility\ecs\system-base.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\system-object.hpp" />
+    <ClInclude Include="include\agl\utility\ecs\system-register.hpp" />
     <ClInclude Include="include\agl\utility\ecs\system-type-uid.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\system.hpp" />
     <ClInclude Include="include\agl\utility\ecs\view.hpp" />
     <ClInclude Include="include\agl\utility\inheritable-vector.hpp" />
     <ClInclude Include="include\agl\utility\ordered-list.hpp" />
@@ -309,7 +313,7 @@
     <None Include="include\agl\utility\ecs\registry.inl" />
     <None Include="include\agl\utility\ecs\signal.inl" />
     <None Include="include\agl\utility\ecs\signature.inl" />
-    <None Include="include\agl\utility\ecs\system-object.inl" />
+    <None Include="include\agl\utility\ecs\system-register.inl" />
     <None Include="include\agl\utility\ecs\view.inl" />
     <None Include="include\agl\utility\inheritable-vector.inl" />
     <None Include="include\agl\utility\ordered-list.inl" />
@@ -317,24 +321,6 @@
     <None Include="include\agl\utility\tuple-buffer.inl" />
     <None Include="include\agl\utility\type-unique-identifier.inl" />
     <None Include="include\agl\utility\unique-identifier.inl" />
-    <None Include="resource\basic.fsh">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="resource\light.fsh">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="resource\basic.vsh">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="resource\light.vsh">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

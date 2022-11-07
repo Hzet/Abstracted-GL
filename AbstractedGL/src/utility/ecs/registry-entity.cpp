@@ -18,7 +18,7 @@ namespace agl
 	{
 		//AGL_CORE_ASSERT(occupied_ < AGL_MAX_ENTITIES, "Maximum capacity reached!");
 
-		auto result = entity{ reg, entity_uid{ } };
+		auto result = entity{ reg, entity_uid::create() };
 
 		m_entities[get_index(result)] = result;
 

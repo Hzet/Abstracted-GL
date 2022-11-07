@@ -4,7 +4,6 @@ namespace agl
 {
 	entity::entity()
 		: m_registry(nullptr)
-		, m_id(entity_uid::INVALID)
 	{
 	}
 

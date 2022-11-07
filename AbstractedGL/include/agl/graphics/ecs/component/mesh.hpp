@@ -10,7 +10,6 @@ namespace agl
 	struct mesh
 	{
 		gl_draw_type draw_type;
-		shader_uid id_shader;
 		render_buffer rbuffer;
 	};
 }

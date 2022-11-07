@@ -1,5 +1,5 @@
 template <typename TGroupName, typename T>
-bool registry_system::system()
+bool registry_system::register_system()
 {
 	auto &Groups = get_groups_tmp();
 

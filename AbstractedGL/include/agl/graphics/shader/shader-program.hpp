@@ -205,11 +205,6 @@ namespace agl
 		void destroy();
 
 		/// <summary>
-		/// Bind the object to the current context.
-		/// </summary>
-		void bind() const;
-
-		/// <summary>
 		/// Compile the partial s programs.
 		/// </summary>
 		/// <returns>

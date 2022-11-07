@@ -2,20 +2,11 @@
 #include "agl/utility/unique-identifier.hpp"
 
 namespace agl
-{	
+{
 	class texture_base;
 
-	/// <summary>
-	/// The unique identifier for shaders.
-	/// </summary>
-	class texture_uid
-		: public unique_id<texture_base>
-	{
-	public:
-		using unique_id<texture_base>::unique_id;
-	};
+	using texture_uid = unique_id<texture_base>;
 }
-
 namespace std
 {
 	/// <summary>

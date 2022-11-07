@@ -9,15 +9,13 @@ namespace agl
 	}
 
 
-	void shader_manager::load_from_file(const std::string &vertex, const std::string &fragment, const std::string &geometry, const std::string &tessControl, const std::string &tessEvaluation, const std::string &compute)
+	shader_uid shader_manager::load_from_file(const std::string &vertex, const std::string &fragment, const std::string &geometry, const std::string &tessControl, const std::string &tessEvaluation, const std::string &compute)
 	{
 		auto sh = shader{};
 
 		sh.load_from_file(vertex, fragment, geometry, tessControl, tessEvaluation, compute);
 
-		sh.set_uid(shader_uid::create());
-
-		add_shader(sh.get_shader_uid(), std::move(sh));
+		return add_shader(std::move(sh));
 	}
 
 	shader_uid shader_manager::get_shader_uid(std::uint64_t index) const
@@ -30,12 +28,16 @@ namespace agl
 		return m_shaders[get_index(id_shader)];
 	}
 
-	void shader_manager::add_shader(shader_uid id_shader, shader &&s)
+	shader_uid shader_manager::add_shader(shader &&s)
 	{
-		if (get_index(id_shader) >= m_shaders.size())
-			m_shaders.resize(id_shader);
+		m_shaders.resize(m_shaders.size() + 1);
 
-		m_shaders[get_index(id_shader)] = std::move(s);
+		s.set_uid(shader_uid::create());
+
+		auto index = get_index(s.get_shader_uid());
+
+		m_shaders[index] = std::move(s);
+		return m_shaders[index].get_shader_uid();
 	}
 
 	void shader_manager::link_all_shaders()

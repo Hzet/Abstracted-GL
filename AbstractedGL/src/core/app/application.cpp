@@ -3,6 +3,7 @@
 #include "agl/graphics/texture/texture-atlas.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
 #include "agl/utility/ecs/ecs.hpp"
+#include "agl/core/misc/log.hpp"
 
 namespace agl
 {
@@ -15,6 +16,7 @@ namespace agl
 	}
 
 	application::application()
+		: m_is_open{ false }
 	{
 
 	}
@@ -27,15 +29,20 @@ namespace agl
 
 	void application::create(window&& wnd)
 	{
-		init();
-
+		m_is_open = true;
 		m_window = std::move(wnd);
 	}
 
 	void application::shutdown()
 	{
+		m_is_open = false;
 		m_window.close();
 		m_resources.clear();
+	}
+
+	bool application::is_open() const
+	{
+		return m_is_open;
 	}
 
 	bool application::is_running() const
@@ -43,6 +50,36 @@ namespace agl
 		return m_window.is_open();
 	}
 
+	void application::run()
+	{
+		auto& reg = get_resource<agl::registry>();
+		auto& layers = get_resource<agl::layer_manager>();
+
+		auto frames = 0;
+		auto frame_timer = agl::timer{};
+		auto timer = agl::timer{};
+
+		while (is_running())
+		{
+			auto frame_time = frame_timer.elapsed().seconds();
+			frame_timer.reset();
+
+			++frames;
+
+			for (auto i = 0; i < layers.get_count(); ++i)
+				layers[i].on_update();
+
+			if (m_window.is_closed())
+				break;
+
+			m_window.clear();
+			reg.update();
+			m_window.display();
+		}
+
+		AGL_LOG_INFO("\nAverage FPS: {}\nAverage frame time: {}ms\nFrames: {}\nDuration: {}s", frames / timer.elapsed().seconds(), timer.elapsed().milliseconds() / frames, frames, timer.elapsed().seconds());
+	}
+	
 	agl::window& application::get_window()
 	{
 		return m_window;

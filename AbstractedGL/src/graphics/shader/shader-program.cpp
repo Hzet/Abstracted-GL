@@ -120,7 +120,7 @@ namespace agl
 			message.resize(length);
 
 			AGL_CALL(glGetProgramInfoLog(m_id_object, length, NULL, &message[0u]));
-			AGL_CORE_WARNING("Failed to link a s program! \nDescription: {}", message);
+			AGL_CORE_WARNING("Failed to link a shader program! \nDescription: {}", message);
 
 			return false;
 		}
@@ -130,7 +130,7 @@ namespace agl
 
 	void shader::set_active() const
 	{
-		bind();
+		AGL_CALL(glUseProgram(m_id_object));
 	}
 
 	bool shader::is_created() const
@@ -155,12 +155,7 @@ namespace agl
 
 		AGL_CALL(m_id_object = glCreateProgram());
 	}
-
-	void shader::bind() const
-	{
-		AGL_CALL(glUseProgram(m_id_object));
-	}
-
+	
 	void shader::set_bit(std::uint64_t bit)
 	{
 		m_shader_bits |= bit;

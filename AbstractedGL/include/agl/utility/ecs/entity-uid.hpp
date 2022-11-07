@@ -6,12 +6,7 @@ namespace agl
 {
 	class entity;
 
-	class entity_uid final
-		: public unique_id<entity, AGL_MAX_ENTITIES>
-	{
-	public:
-		using unique_id<entity, AGL_MAX_ENTITIES>::unique_id;
-	};
+	using entity_uid = unique_id<entity, AGL_MAX_ENTITIES>;
 }
 
 namespace std

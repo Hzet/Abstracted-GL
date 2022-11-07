@@ -56,11 +56,11 @@ namespace agl
 	{
 		std::pair<TKey, TData> pair;// = std::make_pair(key, data);
 		pair.first = key;
-		pair.second = data;
+		pair.second = std::move(data);
 
 		if (get_count() == 0ul)
 		{
-			m_vector.push_back(pair);
+			m_vector.push_back(std::move(pair));
 			return m_vector.cbegin();
 		}
 
@@ -88,7 +88,7 @@ namespace agl
 				break;
 		}
 
-		return m_vector.insert(m_vector.cbegin() + m, pair);
+		return m_vector.insert(m_vector.cbegin() + m, std::move(pair));
 	}
 
 	template <typename TKey, typename TData>

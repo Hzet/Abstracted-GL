@@ -26,5 +26,5 @@ void uniform<directional_light_uniform, TComponent>::update_uniform_locations(sh
 	m_diffuse = sh.get_location(get_full_name() + "." + "diffuse");
 	m_specular = sh.get_location(get_full_name() + "." + "specular");
 
-	update_uniform_locations = false;
+	m_update_uniform_locations = false;
 }

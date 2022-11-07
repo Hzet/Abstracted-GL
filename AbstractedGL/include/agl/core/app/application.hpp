@@ -24,14 +24,16 @@ namespace agl
 
 		void create(window&& wnd = window{});
 		void shutdown();
+		bool is_open() const;
 		bool is_running() const;
+		void run();
 
 		window& get_window();
 
 		virtual void init();
-		virtual void run() = 0;
 
 	protected:
+		bool m_is_open;
 		window m_window;
 
 	protected:

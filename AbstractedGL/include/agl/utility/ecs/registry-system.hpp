@@ -24,8 +24,12 @@ namespace agl
 		void update(registry &reg);
 
 	private:
-		template <typename TGroupName, typename TDerived> friend class system_object;
-		template <typename TGroupName, typename T> static bool system();
+		template <typename TGroupName, typename TDerived>
+		friend class system_register;
+
+	private:
+
+		template <typename TGroupName, typename T> static bool register_system();
 		template <typename... TGroups, std::uint64_t... Sequence> static void order_impl(std::index_sequence<Sequence...>);
 		static std::unordered_map<std::uint64_t, group_base>& get_groups_tmp();
 		static ordered_list<std::uint64_t>& get_order_tmp();
@@ -33,6 +37,7 @@ namespace agl
 	private:
 		void order_groups();
 
+	private:
 		std::vector<group_base> m_groups;
 	};
 
