@@ -38,6 +38,9 @@ namespace agl
 			const auto &s = manager.get_shader(renderable.id_shader);
 			s.set_active();
 
+			if (mesh.rbuffer.require_update())
+				mesh.rbuffer.update_buffers();
+
 			mesh.rbuffer.bind();
 
 			if (mesh.rbuffer.get_index_count() == 0u)

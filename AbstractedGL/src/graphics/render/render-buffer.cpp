@@ -4,15 +4,17 @@ namespace agl
 {
 	void render_buffer::bind() const
 	{
-		if (m_require_update)
-			update_buffers();
-
 		m_varray.bind();
 	}
 
 	void render_buffer::unbind() const
 	{
 		m_varray.unbind();
+	}
+
+	bool render_buffer::require_update() const
+	{
+		return m_require_update;
 	}
 
 	std::uint64_t render_buffer::get_vertex_count() const
@@ -35,13 +37,6 @@ namespace agl
 		return m_indices.size() * sizeof(std::uint32_t);
 	}
 
-	void render_buffer::set_vertex_count(std::uint64_t count)
-	{
-		m_require_update = true;
-
-		m_vcount = count;
-	}
-
 	std::uint64_t render_buffer::get_stride_count() const
 	{
 		return m_vlayout.get_count();
@@ -62,14 +57,34 @@ namespace agl
 		return m_indices.data();
 	}
 
-	void render_buffer::add_indices(const std::vector<std::uint32_t> &data)
+	void render_buffer::reserve(std::uint64_t vertex_count)
 	{
 		m_require_update = true;
 
-		m_indices = data;
+		m_vcount = vertex_count;
+
+		auto const new_count = get_vertex_count() * get_stride_size();
+		m_vertices.reserve(new_count);
 	}
 
-	void render_buffer::update_buffers() const
+	void render_buffer::push_index(std::uint32_t index)
+	{
+		m_require_update = true;
+
+		m_indices.push_back(index);
+	}
+
+	std::uint32_t& render_buffer::get_index(std::uint64_t index)
+	{
+		return m_indices[index];
+	}
+
+	std::uint32_t const& render_buffer::get_index(std::uint64_t index) const
+	{
+		return m_indices[index];
+	}
+
+	void render_buffer::update_buffers()
 	{
 		if (!m_indices.empty())
 			m_ibuffer.allocate(m_indices.data(), static_cast<std::uint32_t>(m_indices.size()));

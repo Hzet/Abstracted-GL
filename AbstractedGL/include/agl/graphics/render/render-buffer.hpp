@@ -9,13 +9,9 @@ namespace agl
 	class render_buffer
 	{
 	public:
-		void bind() const;
-		void unbind() const;
-
 		std::uint64_t get_index_count() const;
 		std::uint64_t get_index_size() const;
 
-		void set_vertex_count(std::uint64_t count);
 		std::uint64_t get_vertex_count() const;
 		std::uint64_t get_vertex_size() const;
 
@@ -25,46 +21,56 @@ namespace agl
 		std::byte const * const get_vertices() const;
 		std::uint32_t const * const get_indices() const;
 
-		void add_indices(const std::vector<std::uint32_t> &data);
-		template <typename TForwardIterator>
-		void add_indices(TForwardIterator begin, TForwardIterator end);
+		void bind() const;
+		void unbind() const;
 
-		template <typename T> void set_vertices(const std::vector<T> &data);
-		template <typename T> void set_vertices(const T * const data);
+		bool require_update() const;
+		void update_buffers();
+
+		template <typename T>
+		bool has_vertex_type() const;
+
+		template <typename TForwardIterator>
+		void push_indices(TForwardIterator begin, TForwardIterator end);
+		void push_index(std::uint32_t index);
+
+		template <typename T> void push_vertex(T vertex);
+		template <typename T, typename TForwardIterator> 
+		void push_vertices(TForwardIterator begin, TForwardIterator end);
+
+		std::uint32_t& get_index(std::uint64_t index);
+		std::uint32_t const& get_index(std::uint64_t index) const;
 
 		template <typename T> T& get(std::uint64_t index);
 		template <typename T> const T& get(std::uint64_t index) const;
 
 	private:
-		template <typename T> std::uint64_t get_offset(std::uint64_t index) const;
-		void update_buffers() const;
+		struct array_info
+		{
+			std::uint64_t type_index;
+			std::uint64_t count;
+		};
 
+	private:
+		template <typename T>
+		render_buffer::array_info const& add_vertex_type();
+
+		void reserve(std::uint64_t new_count);
+
+		template <typename T> std::uint64_t get_offset(std::uint64_t index) const;
+
+	private:
 		std::uint64_t m_vcount;
 		std::vector<std::uint32_t> m_indices;
 		std::vector<std::byte> m_vertices;
-		sorted_vector<render_type_uid, std::uint64_t> m_index_map;
+		sorted_vector<render_type_uid, array_info> m_index_map;
 
-		mutable bool m_require_update;
-		mutable index_buffer m_ibuffer;
-		mutable vertex_array m_varray;
-		mutable vertex_buffer m_vbuffer;
-		mutable vertex_layout m_vlayout;
+		bool m_require_update;
+		index_buffer m_ibuffer;
+		vertex_array m_varray;
+		vertex_buffer m_vbuffer;
+		vertex_layout m_vlayout;
 	};
-
-	template <typename TForwardIterator>
-	void render_buffer::add_indices(TForwardIterator begin, TForwardIterator end)
-	{
-		m_require_update = true;
-
-		auto const count = std::distance(begin, end);
-		
-		m_indices.clear();
-		m_indices.reserve(count);
-
-		for (auto it = begin; it != end; ++it)
-			m_indices.push_back(*it);
-	}
-
 
 #include "agl/graphics/render/render-buffer.inl"
 }

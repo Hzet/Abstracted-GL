@@ -12,6 +12,8 @@
 #include "agl/graphics/shape/rectangle.hpp"
 #include "agl/graphics/shape/prism.hpp"
 
+
+
 class scene_layer
 	: public agl::layer_base
 {
@@ -58,10 +60,9 @@ public:
 		
 		auto& prism_mesh = prism_entity.attach_component<agl::mesh>();
 		prism_mesh.draw_type = prism_builder.get_draw_type();
-		prism_mesh.rbuffer.add_indices(prism_indices);
-		prism_mesh.rbuffer.set_vertex_count(prism_builder.get_vertex_count());
-		prism_mesh.rbuffer.set_vertices(prism_positions);
-		prism_mesh.rbuffer.set_vertices(prism_colors);
+		prism_mesh.rbuffer.push_indices(prism_indices.cbegin(), prism_indices.cend());
+		prism_mesh.rbuffer.push_vertices<agl::position>(prism_positions.cbegin(), prism_positions.cend());
+		prism_mesh.rbuffer.push_vertices<agl::color>(prism_colors.cbegin(), prism_colors.cend());
 
 		for (auto i = 0; i < 1000; ++i)
 		{
@@ -98,10 +99,9 @@ public:
 		auto const rect_positions = rect_builder.get_positions();
 		auto const rect_colors = rect_builder.get_colors();
 		rect_mesh.draw_type = rect_builder.get_draw_type();
-		rect_mesh.rbuffer.add_indices(rect_indices);
-		rect_mesh.rbuffer.set_vertex_count(rect_builder.get_vertex_count());
-		rect_mesh.rbuffer.set_vertices(rect_positions);
-		rect_mesh.rbuffer.set_vertices(rect_colors);
+		rect_mesh.rbuffer.push_indices(rect_indices.cbegin(), rect_indices.cend());
+		rect_mesh.rbuffer.push_vertices<agl::position>(rect_positions.cbegin(), rect_positions.cend());
+		rect_mesh.rbuffer.push_vertices<agl::color>(rect_colors.cbegin(), rect_colors.cend());
 
 		rect_uniforms.add_uniform<agl::transform_uniform, agl::transformable>(basic_shader);
 	}
