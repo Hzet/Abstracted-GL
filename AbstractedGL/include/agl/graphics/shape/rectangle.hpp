@@ -17,7 +17,8 @@ namespace agl
 
 		virtual gl_draw_type get_draw_type() const override;
 		virtual std::uint64_t get_vertex_count() const override;
-		virtual std::vector<std::int32_t> get_indices() const override;
+		virtual std::uint64_t get_index_count() const override;
+		virtual std::vector<std::uint32_t> get_indices() const override;
 		virtual std::vector<position> get_positions() const override;
 		virtual std::vector<color> get_colors() const override;
 

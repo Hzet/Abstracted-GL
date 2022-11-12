@@ -44,6 +44,8 @@ namespace agl
 				AGL_CALL(glDrawArrays(mesh.draw_type, 0u, mesh.rbuffer.get_vertex_count()));
 			else
 				AGL_CALL(glDrawElements(mesh.draw_type, mesh.rbuffer.get_index_count(), GL_UNSIGNED_INT, 0u));
+
+			mesh.rbuffer.unbind();
 		}
 	}
 }

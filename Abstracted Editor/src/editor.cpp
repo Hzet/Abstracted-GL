@@ -10,94 +10,7 @@
 #include "agl/graphics/ecs/component/renderable.hpp"
 #include "agl/graphics/ecs/component/mesh.hpp"
 #include "agl/graphics/shape/rectangle.hpp"
-
-auto const cube_color = std::vector<agl::color>(36, agl::color{ 1.f });
-auto const cube_normal = std::vector<agl::normal>{
-	{ 0.0f,  0.0f, -1.0f },
-	{ 0.0f,  0.0f, -1.0f },
-	{ 0.0f,  0.0f, -1.0f },
-	{ 0.0f,  0.0f, -1.0f },
-	{ 0.0f,  0.0f, -1.0f },
-	{ 0.0f,  0.0f, -1.0f },
-
-	{ 0.0f,  0.0f, 1.0f, },
-	{ 0.0f,  0.0f, 1.0f, },
-	{ 0.0f,  0.0f, 1.0f, },
-	{ 0.0f,  0.0f, 1.0f, },
-	{ 0.0f,  0.0f, 1.0f, },
-	{ 0.0f,  0.0f, 1.0f, },
-
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-	{ 1.0f,  0.0f,  0.0f },
-
-	{ 0.0f, -1.0f,  0.0f },
-	{ 0.0f, -1.0f,  0.0f },
-	{ 0.0f, -1.0f,  0.0f },
-	{ 0.0f, -1.0f,  0.0f },
-	{ 0.0f, -1.0f,  0.0f },
-	{ 0.0f, -1.0f,  0.0f },
-
-	{ 0.0f,  1.0f,  0.0f },
-	{ 0.0f,  1.0f,  0.0f },
-	{ 0.0f,  1.0f,  0.0f },
-	{ 0.0f,  1.0f,  0.0f },
-	{ 0.0f,  1.0f,  0.0f },
-	{ 0.0f,  1.0f,  0.0f },
-};
-auto const cube_position = std::vector<agl::position>{
-	{-0.5f, -0.5f, -0.5f},
-	{ 0.5f, -0.5f, -0.5f},
-	{ 0.5f,  0.5f, -0.5f},
-	{ 0.5f,  0.5f, -0.5f},
-	{-0.5f,  0.5f, -0.5f},
-	{-0.5f, -0.5f, -0.5f},
-
-	{-0.5f, -0.5f,  0.5f},
-	{ 0.5f, -0.5f,  0.5f},
-	{ 0.5f,  0.5f,  0.5f},
-	{ 0.5f,  0.5f,  0.5f},
-	{-0.5f,  0.5f,  0.5f},
-	{-0.5f, -0.5f,  0.5f},
-
-	{-0.5f,  0.5f,  0.5f},
-	{-0.5f,  0.5f, -0.5f},
-	{-0.5f, -0.5f, -0.5f},
-	{-0.5f, -0.5f, -0.5f},
-	{-0.5f, -0.5f,  0.5f},
-	{-0.5f,  0.5f,  0.5f},
-
-	{ 0.5f,  0.5f,  0.5f},
-	{ 0.5f,  0.5f, -0.5f},
-	{ 0.5f, -0.5f, -0.5f},
-	{ 0.5f, -0.5f, -0.5f},
-	{ 0.5f, -0.5f,  0.5f},
-	{ 0.5f,  0.5f,  0.5f},
-
-	{-0.5f, -0.5f, -0.5f},
-	{ 0.5f, -0.5f, -0.5f},
-	{ 0.5f, -0.5f,  0.5f},
-	{ 0.5f, -0.5f,  0.5f},
-	{-0.5f, -0.5f,  0.5f},
-	{-0.5f, -0.5f, -0.5f},
-
-	{-0.5f,  0.5f, -0.5f},
-	{ 0.5f,  0.5f, -0.5f},
-	{ 0.5f,  0.5f,  0.5f},
-	{ 0.5f,  0.5f,  0.5f},
-	{-0.5f,  0.5f,  0.5f},
-	{-0.5f,  0.5f, -0.5f}
-};
+#include "agl/graphics/shape/prism.hpp"
 
 class scene_layer
 	: public agl::layer_base
@@ -134,23 +47,30 @@ public:
 		uniforms.add_uniform<agl::camera_uniform, agl::camera_perspective>(basic_shader);
 
 		// mesh 
-		auto mesh_entity = reg.create();
+		auto prism_entity = reg.create();
+		auto prism_builder = agl::prism_builder{4, glm::sqrt(2.f) / 2.f, 1.f};
 
-		auto& mesh = mesh_entity.attach_component<agl::mesh>();
-		mesh.draw_type = agl::DRAW_TRIANGLES;
-		mesh.rbuffer.set_vertex_count(cube_position.size());
-		mesh.rbuffer.set_vertices<agl::position>(cube_position);
-		mesh.rbuffer.set_vertices<agl::color>(cube_color);
-		mesh.rbuffer.set_vertices<agl::normal>(cube_normal);
+		prism_builder.set_color(agl::color{ 0.f, 1.f, 0.f, 1.f });
+
+		auto const prism_positions = prism_builder.get_positions();
+		auto const prism_colors = prism_builder.get_colors();
+		auto const prism_indices = prism_builder.get_indices();
+		
+		auto& prism_mesh = prism_entity.attach_component<agl::mesh>();
+		prism_mesh.draw_type = prism_builder.get_draw_type();
+		prism_mesh.rbuffer.add_indices(prism_indices);
+		prism_mesh.rbuffer.set_vertex_count(prism_builder.get_vertex_count());
+		prism_mesh.rbuffer.set_vertices(prism_positions);
+		prism_mesh.rbuffer.set_vertices(prism_colors);
 
 		for (auto i = 0; i < 1000; ++i)
 		{
-			auto renderable = agl::renderable{ mesh_entity.get_entity_uid(), basic_shader };
+			auto renderable = agl::renderable{ prism_entity.get_entity_uid(), basic_shader };
 
 			auto e = reg.create();
 			auto& transform = e.attach_component<agl::transformable>();
 			auto& material = e.attach_component<agl::material>();
-			//e.attach_component<agl::renderable>(renderable);
+			e.attach_component<agl::renderable>(renderable);
 
 			auto& uniforms = e.attach_component<agl::uniform_array>();
 			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(basic_shader);
@@ -174,9 +94,11 @@ public:
 		auto& rect_transform = rect_entity.attach_component<agl::transformable>();
 		auto& rect_uniforms = rect_entity.attach_component<agl::uniform_array>();
 
+		auto const rect_indices = rect_builder.get_indices();
 		auto const rect_positions = rect_builder.get_positions();
 		auto const rect_colors = rect_builder.get_colors();
 		rect_mesh.draw_type = rect_builder.get_draw_type();
+		rect_mesh.rbuffer.add_indices(rect_indices);
 		rect_mesh.rbuffer.set_vertex_count(rect_builder.get_vertex_count());
 		rect_mesh.rbuffer.set_vertices(rect_positions);
 		rect_mesh.rbuffer.set_vertices(rect_colors);
