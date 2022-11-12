@@ -9,6 +9,7 @@
 #include "agl/graphics/ecs/component/uniform/material.hpp"
 #include "agl/graphics/ecs/component/renderable.hpp"
 #include "agl/graphics/ecs/component/mesh.hpp"
+#include "agl/graphics/shape/rectangle.hpp"
 
 auto const cube_color = std::vector<agl::color>(36, agl::color{ 1.f });
 auto const cube_normal = std::vector<agl::normal>{
@@ -115,7 +116,7 @@ public:
 		// camera
 		m_camera_velocity = 40.f;
 		m_camera_sensitivity = 0.3f;
-		
+
 		m_camera = reg.create();
 
 		auto& camera = m_camera.attach_component<agl::camera_perspective>();
@@ -149,7 +150,7 @@ public:
 			auto e = reg.create();
 			auto& transform = e.attach_component<agl::transformable>();
 			auto& material = e.attach_component<agl::material>();
-			e.attach_component<agl::renderable>(renderable);
+			//e.attach_component<agl::renderable>(renderable);
 
 			auto& uniforms = e.attach_component<agl::uniform_array>();
 			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(basic_shader);
@@ -163,6 +164,24 @@ public:
 			transform.set_position({ glm::sphericalRand(50.f) });
 		}
 
+		// rectangle 
+		auto rect_builder = agl::rectangle_builder{ agl::rectangle{{10.f, 20.f}} };
+		rect_builder.set_color(agl::color{ 1.f, 0.f, 0.f, 1.f });
+
+		auto rect_entity = reg.create();
+		rect_entity.attach_component<agl::renderable>(rect_entity, basic_shader);
+		auto& rect_mesh = rect_entity.attach_component<agl::mesh>();
+		auto& rect_transform = rect_entity.attach_component<agl::transformable>();
+		auto& rect_uniforms = rect_entity.attach_component<agl::uniform_array>();
+
+		auto const rect_positions = rect_builder.get_positions();
+		auto const rect_colors = rect_builder.get_colors();
+		rect_mesh.draw_type = rect_builder.get_draw_type();
+		rect_mesh.rbuffer.set_vertex_count(rect_builder.get_vertex_count());
+		rect_mesh.rbuffer.set_vertices(rect_positions);
+		rect_mesh.rbuffer.set_vertices(rect_colors);
+
+		rect_uniforms.add_uniform<agl::transform_uniform, agl::transformable>(basic_shader);
 	}
 
 	virtual void on_update() override

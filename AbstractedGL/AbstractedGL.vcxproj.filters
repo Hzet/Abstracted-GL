@@ -127,6 +127,9 @@
     <Filter Include="src\system\core\app\window">
       <UniqueIdentifier>{42778fd8-1304-48b3-a6bc-43da61e29618}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\graphics\shape">
+      <UniqueIdentifier>{5d6762d9-f0b4-4cd3-9125-c5c4817f546f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\render\index-buffer.cpp">
@@ -300,11 +303,14 @@
     <ClCompile Include="src\core\app\layer-manager.cpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ecs\component\prism.cpp">
-      <Filter>src\graphics\ecs\component\render</Filter>
+    <ClCompile Include="src\graphics\shape\prism.cpp">
+      <Filter>src\graphics\shape</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ecs\component\rectangle.cpp">
-      <Filter>src\graphics\ecs\component\render</Filter>
+    <ClCompile Include="src\graphics\shape\rectangle.cpp">
+      <Filter>src\graphics\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shape\shape-builder.cpp">
+      <Filter>src\graphics\shape</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -599,9 +605,6 @@
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp">
-      <Filter>src\graphics\ecs\component\render</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp">
       <Filter>src\graphics\ecs\system\render</Filter>
     </ClInclude>
@@ -671,9 +674,6 @@
     <ClInclude Include="include\agl\core\app\layer-manager.hpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\component\rectangle.hpp">
-      <Filter>src\graphics\ecs\component\render</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\system\gui-system.hpp">
       <Filter>src\graphics\ecs\system\render</Filter>
     </ClInclude>
@@ -688,6 +688,15 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\renderable.hpp">
       <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shape\shape-builder.hpp">
+      <Filter>src\graphics\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shape\rectangle.hpp">
+      <Filter>src\graphics\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\shape\prism.hpp">
+      <Filter>src\graphics\shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

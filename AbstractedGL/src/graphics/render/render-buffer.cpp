@@ -69,16 +69,6 @@ namespace agl
 		m_indices = data;
 	}
 
-	void render_buffer::add_indices(std::uint32_t const * const data, std::uint64_t count)
-	{
-		m_require_update = true;
-
-		m_indices.resize(count);
-
-		for (auto i = 0ul; i < m_indices.size(); i++)
-			m_indices[i] = *(data + i);
-	}
-
 	void render_buffer::update_buffers() const
 	{
 		if (!m_indices.empty())

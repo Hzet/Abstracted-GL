@@ -128,8 +128,6 @@
     <ClCompile Include="src\graphics\ecs\component\camera-base.cpp" />
     <ClCompile Include="src\graphics\ecs\component\camera-orthographic.cpp" />
     <ClCompile Include="src\graphics\ecs\component\camera-perspective.cpp" />
-    <ClCompile Include="src\graphics\ecs\component\prism.cpp" />
-    <ClCompile Include="src\graphics\ecs\component\rectangle.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp" />
@@ -148,6 +146,9 @@
     <ClCompile Include="src\graphics\shader\uniform-base.cpp" />
     <ClCompile Include="src\graphics\shader\uniform-prototyper.cpp" />
     <ClCompile Include="src\graphics\shader\uniform-wrapper.cpp" />
+    <ClCompile Include="src\graphics\shape\prism.cpp" />
+    <ClCompile Include="src\graphics\shape\rectangle.cpp" />
+    <ClCompile Include="src\graphics\shape\shape-builder.cpp" />
     <ClCompile Include="src\graphics\texture\texture-atlas.cpp" />
     <ClCompile Include="src\graphics\texture\texture-base.cpp" />
     <ClCompile Include="src\graphics\texture\texture2d.cpp" />
@@ -166,10 +167,8 @@
     <ClCompile Include="src\utility\type-unique-identifier.cpp" />
     <ClCompile Include="src\utility\unique-identifier-manager.cpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\direction.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\component\prism.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\component\rectangle.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\renderable.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera.hpp" />
@@ -231,6 +230,9 @@
     <ClInclude Include="include\agl\graphics\shader\shader-sub-program.hpp" />
     <ClInclude Include="include\agl\graphics\shader\shader-type.hpp" />
     <ClInclude Include="include\agl\graphics\shader\shader-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\shape\prism.hpp" />
+    <ClInclude Include="include\agl\graphics\shape\rectangle.hpp" />
+    <ClInclude Include="include\agl\graphics\shape\shape-builder.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-atlas.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-base.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-type.hpp" />

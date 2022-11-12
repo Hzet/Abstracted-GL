@@ -28,9 +28,12 @@ namespace agl
 			auto const& renderable = reg.get<agl::renderable>(*it);
 			auto const e = reg.get_entity(*it);
 			auto& mesh = reg.get<agl::mesh>(renderable.id_renderable);
-			auto& uniforms = reg.get<uniform_array>(*it);
-			
-			uniforms.send(e);
+
+			if (e.has_component<agl::uniform_array>())
+			{
+				auto& uniforms = reg.get<uniform_array>(*it);
+				uniforms.send(e);
+			}
 
 			const auto &s = manager.get_shader(renderable.id_shader);
 			s.set_active();

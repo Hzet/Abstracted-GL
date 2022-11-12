@@ -14,22 +14,22 @@ namespace agl
 
 	float timestep::hours() const
 	{
-		return minutes() / 60.0;
+		return minutes() / 60.f;
 	}
 
 	float timestep::minutes() const
 	{
-		return seconds() / 60.0;
+		return seconds() / 60.f;
 	}
 
 	float timestep::seconds() const
 	{
-		return milliseconds() / 1000.0;
+		return milliseconds() / 1000.f;
 	}
 
 	float timestep::milliseconds() const
 	{
-		return nanoseconds() / 1000000.0;
+		return nanoseconds() / 1000000.f;
 	}
 
 	float timestep::nanoseconds() const

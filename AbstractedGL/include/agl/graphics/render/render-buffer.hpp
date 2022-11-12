@@ -26,7 +26,8 @@ namespace agl
 		std::uint32_t const * const get_indices() const;
 
 		void add_indices(const std::vector<std::uint32_t> &data);
-		void add_indices(std::uint32_t const * const data, std::uint64_t count);
+		template <typename TForwardIterator>
+		void add_indices(TForwardIterator begin, TForwardIterator end);
 
 		template <typename T> void set_vertices(const std::vector<T> &data);
 		template <typename T> void set_vertices(const T * const data);
@@ -49,6 +50,21 @@ namespace agl
 		mutable vertex_buffer m_vbuffer;
 		mutable vertex_layout m_vlayout;
 	};
+
+	template <typename TForwardIterator>
+	void render_buffer::add_indices(TForwardIterator begin, TForwardIterator end)
+	{
+		m_require_update = true;
+
+		auto const count = std::distance(begin, end);
+		
+		m_indices.clear();
+		m_indices.reserve(count);
+
+		for (auto it = begin; it != end; ++it)
+			m_indices.push_back(*it);
+	}
+
 
 #include "agl/graphics/render/render-buffer.inl"
 }

@@ -13,7 +13,7 @@ base_type<TInherited, TData>::base_type(const base_type &other)
 template <typename TInherited, typename TData>
 template <typename... Args>
 base_type<TInherited, TData>::base_type(Args&&... args)
-	: m_data{ TData{ std::forward<Args>(args)... } }
+	: m_data{  std::forward<Args>(args)...  }
 {
 }
 
