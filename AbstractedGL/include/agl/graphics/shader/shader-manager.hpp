@@ -24,7 +24,11 @@ namespace agl
 		/// <returns>the s</returns>
 		const shader& get_shader(shader_uid id_shader) const;
 
-		shader_uid get_shader_uid(std::uint64_t index) const;
+		shader_uid const& get_shader_uid(std::uint64_t index) const;
+
+		void set_active_shader(shader_uid id_shader);
+
+		shader const& get_active_shader() const;
 
 		/// <summary>
 		/// Adds the 's' with unique identifier 'key'.
@@ -43,6 +47,7 @@ namespace agl
 		virtual void dummy() const override {}
 
 	private:
+		shader_uid m_active_shader;
 		std::vector<shader> m_shaders;
 	};
 }

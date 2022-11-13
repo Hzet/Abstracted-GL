@@ -18,9 +18,23 @@ namespace agl
 		return add_shader(std::move(sh));
 	}
 
-	shader_uid shader_manager::get_shader_uid(std::uint64_t index) const
+	shader_uid const& shader_manager::get_shader_uid(std::uint64_t index) const
 	{
 		return m_shaders[index].get_shader_uid();
+	}
+
+	void shader_manager::set_active_shader(shader_uid id_shader)
+	{
+		if (m_active_shader == id_shader)
+			return;
+
+		m_active_shader = id_shader;
+		get_shader(id_shader).set_active();
+	}
+
+	shader const& shader_manager::get_active_shader() const
+	{
+		return get_shader(m_active_shader);
 	}
 
 	const shader& shader_manager::get_shader(shader_uid id_shader) const

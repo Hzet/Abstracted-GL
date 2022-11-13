@@ -35,9 +35,6 @@ namespace agl
 		uniform_base(uniform_type_uid id_uniform_type, component_type_uid id_component_type);
 
 	protected:
-		virtual void update_uniform_locations(shader const& sh) = 0;
-
-	protected:
 		bool m_update_uniform_locations;
 
 	private:

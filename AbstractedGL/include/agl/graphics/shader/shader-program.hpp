@@ -89,11 +89,6 @@ namespace agl
 		bool link();
 
 		/// <summary>
-		/// Bind the program as current.
-		/// </summary>
-		void set_active() const;
-
-		/// <summary>
 		/// Check whether this object's status is active.
 		/// </summary>
 		/// <returns>
@@ -186,6 +181,11 @@ namespace agl
 		friend class shader_manager;
 
 	private:
+		/// <summary>
+		/// Bind the program as current.
+		/// </summary>
+		void set_active() const;
+
 		void set_uid(shader_uid id_shader);
 
 		/// <summary>

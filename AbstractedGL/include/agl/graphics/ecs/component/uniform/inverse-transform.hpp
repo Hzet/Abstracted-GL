@@ -22,9 +22,6 @@ namespace agl
 		virtual void send(const shader &s, const entity &e) override;
 
 	private:
-		virtual void update_uniform_locations(shader const& sh) override;
-
-	private:
 		std::int32_t m_inverse_transform;
 	};
 

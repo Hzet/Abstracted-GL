@@ -7,7 +7,7 @@ namespace agl
 {
 	void uniform_array::send(const entity &e)
 	{
-		static const auto& sh_manager = application::get_resource<shader_manager>();
+		static auto& sh_manager = application::get_resource<shader_manager>();
 		
 		const auto &sig = e.get_signature();
 
@@ -15,8 +15,9 @@ namespace agl
 		{
 			AGL_CORE_ASSERT(sig[m_uniforms[i]->get_component_type_uid()], "Entity is missing component {} for uniform {}", component_type_uid::get_name(m_uniforms[i]->get_component_type_uid()), uniform_type_uid::get_name(m_uniforms[i]->get_uniform_type_uid()));
 
-			const auto &s = sh_manager.get_shader(m_uniforms[i]->get_shader_uid());
-			s.set_active();
+			sh_manager.set_active_shader(m_uniforms[i]->get_shader_uid());
+
+			auto const& s = sh_manager.get_active_shader();
 
 			m_uniforms[i]->send(s, e);
 		}

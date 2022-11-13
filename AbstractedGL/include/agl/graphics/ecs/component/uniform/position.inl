@@ -5,20 +5,16 @@ uniform<position_uniform, TComponent>::uniform()
 }
 
 template <typename TComponent>
-void uniform<position_uniform, TComponent>::send(const shader &s, const entity &e)
+void uniform<position_uniform, TComponent>::send(const shader &sh, const entity &e)
 {
 	if (m_update_uniform_locations)
-		update_uniform_locations(s);
+	{
+		m_position = sh.get_location(get_full_name() + "." + "position");
+
+		m_update_uniform_locations = false;
+	}
 
 	auto const& transform = e.get_component<TComponent>();
 
-	s.set_uniform(m_position, transform.get_position());
-}
-
-template <typename TComponent>
-void uniform<position_uniform, TComponent>::update_uniform_locations(shader const& sh)
-{
-	m_position = sh.get_location(get_full_name() + "." + "position");
-
-	m_update_uniform_locations = false;
+	sh.set_uniform(m_position, transform.get_position());
 }

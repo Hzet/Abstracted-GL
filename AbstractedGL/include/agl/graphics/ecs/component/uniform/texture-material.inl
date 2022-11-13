@@ -5,23 +5,30 @@ uniform<texture_uniform, TComponent>::uniform()
 }
 
 template <typename TComponent>
-void uniform<texture_uniform, TComponent>::send(const shader &s, const entity &e)
+void uniform<texture_uniform, TComponent>::send(const shader &sh, const entity &e)
 {
 	if (m_update_uniform_locations)
-		update_uniform_locations(s);
+	{
+		m_ambient = sh.get_location(get_full_name() + "." + "ambient");
+		m_diffuse = sh.get_location(get_full_name() + "." + "diffuse");
+		m_specular = sh.get_location(get_full_name() + "." + "specular");
+
+		m_update_uniform_locations = false;
+	}
+
 	
 	auto const& texture = e.get_component<TComponent>();
 
 	auto i = 0;
 
 	if (bindTexture(texture.ambient))
-		s.set_uniform(m_ambient, i++);
+		sh.set_uniform(m_ambient, i++);
 
 	if (bindTexture(texture.diffuse))
-		s.set_uniform(m_diffuse, i++);
+		sh.set_uniform(m_diffuse, i++);
 
 	if (bindTexture(texture.specular))
-		s.set_uniform(m_specular, i++);
+		sh.set_uniform(m_specular, i++);
 }
 
 template <typename TComponent>
@@ -32,14 +39,4 @@ bool uniform<texture_uniform, TComponent>::bindTexture(const texture_uid &id_tex
 
 	texture_atlas::get_texture(id_texture_2d).bind();
 	return true;
-}
-
-template <typename TComponent>
-void uniform<texture_uniform, TComponent>::update_uniform_locations(shader const& sh)
-{
-	m_ambient = sh.get_location(get_full_name() + "." + "ambient");
-	m_diffuse = sh.get_location(get_full_name() + "." + "diffuse");
-	m_specular = sh.get_location(get_full_name() + "." + "specular");
-
-	m_update_uniform_locations = false;
 }
