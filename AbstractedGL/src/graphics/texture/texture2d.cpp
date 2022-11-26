@@ -1,5 +1,5 @@
 #include "agl/graphics/texture/texture2d.hpp"
-#include "agl/graphics/texture/texture-atlas.hpp"
+#include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/system/debug/error.hpp"
 #include "agl/system/glcore/gl-core.hpp"
 
@@ -8,15 +8,11 @@
 namespace agl
 {
 	texture_2d::texture_2d()
+		: texture_base{ TEXTURE_2D }
 	{
 	}
 
-	const glm::uvec2& texture_2d::get_dimensions() const
-	{
-		return m_dimensions;
-	}
-
-	bool texture_2d::load_from_file(const std::string &filename)
+	bool texture_2d::load_from_file(const std::string &filepath)
 	{
 		auto w = std::int32_t{};
 		auto h = std::int32_t{};
@@ -24,7 +20,7 @@ namespace agl
 
 		stbi_set_flip_vertically_on_load(true);
 
-		auto *data = static_cast<unsigned char*>(stbi_load(filename.c_str(), &w, &h, &channels, 0));
+		auto *data = static_cast<unsigned char*>(stbi_load(filepath.c_str(), &w, &h, &channels, 0));
 
 		if (data == nullptr)
 		{
@@ -33,8 +29,10 @@ namespace agl
 			return false;
 		}
 
-		m_dimensions.x = w;
-		m_dimensions.y = h;
+		m_size.x = w;
+		m_size.y = h;
+		m_size.z = 0.f;
+		m_filepath = filepath;
 
 		auto format = std::uint32_t{};
 		if (channels == 1)
@@ -47,15 +45,10 @@ namespace agl
 		create();
 		bind();
 
-		AGL_CALL(glTexImage2D(get_target(), 0u, format, w, h, 0, format, GL_UNSIGNED_BYTE, data));
-		AGL_CALL(glGenerateMipmap(get_target()));
+		AGL_CALL(glTexImage2D(get_type(), 0u, format, w, h, 0, format, GL_UNSIGNED_BYTE, data));
+		AGL_CALL(glGenerateMipmap(get_type()));
 
 		stbi_image_free(data);
 		return true;
-	}
-
-	texture_type texture_2d::get_target() const
-	{
-		return TEXTURE_2D;
 	}
 }

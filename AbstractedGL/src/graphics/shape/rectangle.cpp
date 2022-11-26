@@ -39,10 +39,4 @@ namespace agl
 			{ m_specification.size.x, 0.f, 0.f }					 // right bottom
 		};
 	}
-
-	std::vector<color> rectangle_builder::get_colors() const
-	{
-		return std::vector<color>(get_vertex_count(), get_color());
-	}
-
 }

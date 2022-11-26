@@ -107,9 +107,4 @@ namespace agl
 
 		return result;
 	}
-
-	std::vector<color> prism_builder::get_colors() const
-	{
-		return std::vector<color>(get_vertex_count(), get_color());
-	}
 }

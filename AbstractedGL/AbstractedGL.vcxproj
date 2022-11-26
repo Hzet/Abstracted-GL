@@ -131,8 +131,6 @@
     <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp" />
-    <ClCompile Include="src\graphics\ecs\system\gui-system.cpp" />
-    <ClCompile Include="src\graphics\ecs\system\light-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
     <ClCompile Include="src\graphics\render\index-buffer.cpp" />
     <ClCompile Include="src\graphics\render\render-buffer.cpp" />
@@ -149,13 +147,12 @@
     <ClCompile Include="src\graphics\shape\prism.cpp" />
     <ClCompile Include="src\graphics\shape\rectangle.cpp" />
     <ClCompile Include="src\graphics\shape\shape-builder.cpp" />
-    <ClCompile Include="src\graphics\texture\texture-atlas.cpp" />
+    <ClCompile Include="src\graphics\texture\texture-manager.cpp" />
     <ClCompile Include="src\graphics\texture\texture-base.cpp" />
     <ClCompile Include="src\graphics\texture\texture2d.cpp" />
     <ClCompile Include="src\system\debug\exceptions.cpp" />
     <ClCompile Include="src\system\glcore\destructive-move.cpp" />
     <ClCompile Include="src\system\glcore\gl-core.cpp" />
-    <ClCompile Include="src\system\glcore\gl-object.cpp" />
     <ClCompile Include="src\utility\ecs\entity.cpp" />
     <ClCompile Include="src\utility\ecs\group-base.cpp" />
     <ClCompile Include="src\utility\ecs\registry-component.cpp" />
@@ -182,8 +179,6 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\uniform-build.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\system\gui-system.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\system\light-system.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
@@ -233,7 +228,7 @@
     <ClInclude Include="include\agl\graphics\shape\prism.hpp" />
     <ClInclude Include="include\agl\graphics\shape\rectangle.hpp" />
     <ClInclude Include="include\agl\graphics\shape\shape-builder.hpp" />
-    <ClInclude Include="include\agl\graphics\texture\texture-atlas.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-manager.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-base.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-type.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-uid.hpp" />
@@ -253,7 +248,6 @@
     <ClInclude Include="include\agl\system\debug\exceptions.hpp" />
     <ClInclude Include="include\agl\system\glcore\destructive-move.hpp" />
     <ClInclude Include="include\agl\system\glcore\gl-core.hpp" />
-    <ClInclude Include="include\agl\system\glcore\gl-object.hpp" />
     <ClInclude Include="include\agl\utility\ecs\ecs.hpp" />
     <ClInclude Include="include\agl\utility\sorted-vector.hpp" />
     <ClInclude Include="include\agl\utility\static-unique-identifier.hpp" />

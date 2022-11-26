@@ -34,9 +34,9 @@ void uniform<texture_uniform, TComponent>::send(const shader &sh, const entity &
 template <typename TComponent>
 bool uniform<texture_uniform, TComponent>::bindTexture(const texture_uid &id_texture_2d)
 {
-	if (!texture_atlas::has_texture_2d(id_texture_2d))
+	if (!texture_manager::has_texture_2d(id_texture_2d))
 		return false;
 
-	texture_atlas::get_texture(id_texture_2d).bind();
+	texture_manager::get_texture(id_texture_2d).bind();
 	return true;
 }

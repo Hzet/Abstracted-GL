@@ -2,7 +2,7 @@
 #include "agl/graphics/ecs/component/texture-material.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
 #include "agl/graphics/shader/uniform-register.hpp"
-#include "agl/graphics/texture/texture-atlas.hpp"
+#include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/utility/ecs/entity.hpp"
 
 namespace agl

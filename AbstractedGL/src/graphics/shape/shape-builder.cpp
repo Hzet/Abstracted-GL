@@ -2,13 +2,9 @@
 
 namespace agl
 {
-	void shape_builder::set_color(color const& c)
+	std::vector<color> shape_builder::get_colors(color const& c) const
 	{
-		m_color = c;
+		return std::vector<color>(get_vertex_count(), c);
 	}
 
-	color const& shape_builder::get_color() const
-	{
-		return m_color;
-	}
 }

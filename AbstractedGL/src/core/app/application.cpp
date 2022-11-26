@@ -1,6 +1,6 @@
 #include "agl/core/app/application.hpp"
 #include "agl/core/app/layer-manager.hpp"
-#include "agl/graphics/texture/texture-atlas.hpp"
+#include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
 #include "agl/utility/ecs/ecs.hpp"
 #include "agl/core/misc/log.hpp"
@@ -87,7 +87,7 @@ namespace agl
 
 	void application::init()
 	{
-		add_resource<agl::texture_atlas>();
+		add_resource<agl::texture_manager>();
 		add_resource<agl::shader_manager>();
 		add_resource<agl::registry>();
 		add_resource<agl::layer_manager>();

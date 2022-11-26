@@ -156,9 +156,6 @@
     <ClCompile Include="src\graphics\texture\texture2d.cpp">
       <Filter>src\graphics\texture</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\texture\texture-atlas.cpp">
-      <Filter>src\graphics\texture</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\texture\texture-base.cpp">
       <Filter>src\graphics\texture</Filter>
     </ClCompile>
@@ -169,9 +166,6 @@
       <Filter>src\system\glcore</Filter>
     </ClCompile>
     <ClCompile Include="src\system\glcore\gl-core.cpp">
-      <Filter>src\system\glcore</Filter>
-    </ClCompile>
-    <ClCompile Include="src\system\glcore\gl-object.cpp">
       <Filter>src\system\glcore</Filter>
     </ClCompile>
     <ClCompile Include="external\glad\glad.c">
@@ -264,9 +258,6 @@
     <ClCompile Include="src\graphics\shader\uniform-prototyper.cpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ecs\system\light-system.cpp">
-      <Filter>src\graphics\ecs\system\render</Filter>
-    </ClCompile>
     <ClCompile Include="external\imgui\imgui.cpp">
       <Filter>external\imgui</Filter>
     </ClCompile>
@@ -294,9 +285,6 @@
     <ClCompile Include="src\core\app\window.cpp">
       <Filter>src\system\core\app\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ecs\system\gui-system.cpp">
-      <Filter>src\graphics\ecs\system\render</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\app\layer-base.cpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClCompile>
@@ -311,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="src\graphics\shape\shape-builder.cpp">
       <Filter>src\graphics\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\texture\texture-manager.cpp">
+      <Filter>src\graphics\texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,9 +332,6 @@
     <ClInclude Include="include\agl\graphics\texture\texture2d.hpp">
       <Filter>src\graphics\texture</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\texture\texture-atlas.hpp">
-      <Filter>src\graphics\texture</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\texture\texture-base.hpp">
       <Filter>src\graphics\texture</Filter>
     </ClInclude>
@@ -366,9 +354,6 @@
       <Filter>src\system\glcore</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\system\glcore\gl-core.hpp">
-      <Filter>src\system\glcore</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\system\glcore\gl-object.hpp">
       <Filter>src\system\glcore</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\utility\inheritable-vector.hpp">
@@ -614,9 +599,6 @@
     <ClInclude Include="include\agl\graphics\shader\uniform-prototyper.hpp">
       <Filter>src\graphics\shader\uniforms</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\system\light-system.hpp">
-      <Filter>src\graphics\ecs\system\render</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
@@ -674,9 +656,6 @@
     <ClInclude Include="include\agl\core\app\layer-manager.hpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\system\gui-system.hpp">
-      <Filter>src\graphics\ecs\system\render</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\utility\ecs\system-register.hpp">
       <Filter>src\utility\ecs\system</Filter>
     </ClInclude>
@@ -697,6 +676,9 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\shape\prism.hpp">
       <Filter>src\graphics\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-manager.hpp">
+      <Filter>src\graphics\texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

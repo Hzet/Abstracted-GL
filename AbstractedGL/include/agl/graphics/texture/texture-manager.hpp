@@ -9,7 +9,7 @@ namespace agl
 	/// <summary>
 	/// A static / global container that stores textures.
 	/// </summary>
-	class texture_atlas
+	class texture_manager
 		: public resource_base
 	{
 	public:
@@ -36,7 +36,7 @@ namespace agl
 		/// <param name="texture">The texture</param>
 		/// <param name="identifier">The identifier</param>
 		/// <returns>The unique identifier</returns>
-		texture_uid add_texture_2d(texture_2d texture, const std::string &identifier);
+		texture_uid add_texture_2d(texture_2d texture);
 
 		/// <summary>
 		/// Returns a 2D texture that 'filepath' is assigned to.

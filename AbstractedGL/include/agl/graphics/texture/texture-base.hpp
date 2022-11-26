@@ -1,9 +1,10 @@
 #pragma once
 #include <cstdint>
 #include <string>
+#include <glm/glm.hpp>
 
 #include "agl/graphics/texture/texture-type.hpp"
-#include "agl/system/glcore/gl-object.hpp"
+#include "agl/system/glcore/destructive-move.hpp"
 
 namespace agl
 {
@@ -12,11 +13,9 @@ namespace agl
 	/// and general texture specific methods.
 	/// </summary>
 	class texture_base
-		: public gl_object
+		: public destructive_move
 	{
 	public:
-		using gl_object::gl_object;
-
 		texture_base() = default;
 
 		/// <summary>
@@ -32,25 +31,11 @@ namespace agl
 		/// <param name="value">value related to the 'setting'</param>
 		void set_parameter(const std::uint64_t setting, const std::uint64_t value) const;
 
-		/// <summary>
-		/// uniform_register OpenGL object.
-		/// </summary>
-		virtual void create() override;
-			
-		/// <summary>
-		/// Unregister the OpenGL object and clear resources.
-		/// </summary>
-		virtual void destroy() override;
+		bool is_created() const;
 
-		/// <summary>
-		/// Bind OpenGL object.
-		/// </summary>
-		virtual void bind() const override;
+		std::string const& get_filepath() const;
 
-		/// <summary>
-		/// Unbind OpenGL object.
-		/// </summary>
-		virtual void unbind() const override;
+		glm::vec3 get_size() const;
 
 		/// <summary>
 		/// Pure virtual method to get the texture's target.
@@ -58,6 +43,40 @@ namespace agl
 		/// <returns>
 		/// OpenGL texture target enum
 		/// </returns>
-		virtual texture_type get_target() const = 0;
+		texture_type get_type() const;
+
+	protected:
+		texture_base(texture_type type);
+
+		/// <summary>
+		/// uniform_register OpenGL object.
+		/// </summary>
+		void create();
+
+		/// <summary>
+		/// Unregister the OpenGL object and clear resources.
+		/// </summary>
+		void destroy();
+
+		/// <summary>
+		/// Bind OpenGL object.
+		/// </summary>
+		void bind() const;
+
+		/// <summary>
+		/// Unbind OpenGL object.
+		/// </summary>
+		void unbind() const;
+
+	protected:
+		std::string m_filepath;
+		glm::vec3 m_size;
+		texture_type m_type;
+
+	private:
+		std::uint32_t m_id_object;
+
+	private:
+		friend class texture_manager;
 	};
 }

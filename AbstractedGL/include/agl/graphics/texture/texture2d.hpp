@@ -20,14 +20,6 @@ namespace agl
 		texture_2d();
 
 		/// <summary>
-		/// Get dimensions
-		/// </summary>
-		/// <returns>
-		/// The dimensions
-		/// </returns>
-		const glm::uvec2& get_dimensions() const;
-
-		/// <summary>
 		/// Loads the texture from a file.
 		/// </summary>
 		/// <param name="filename">The filepath</param>
@@ -35,11 +27,6 @@ namespace agl
 		/// True - texture loaded successfully
 		/// False - failed to load the texture
 		/// </returns>
-		bool load_from_file(const std::string &filename);
-
-		virtual texture_type get_target() const override;
-
-	private:
-		glm::uvec2 m_dimensions;
+		bool load_from_file(const std::string &filepath);
 	};
 }

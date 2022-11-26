@@ -10,16 +10,14 @@ namespace agl
 	{
 	public:
 		virtual ~shape_builder() = default;
-
-		void set_color(color const& c);
-		color const& get_color() const;
+		
+		std::vector<color> get_colors(color const& c) const;
 
 		virtual gl_draw_type get_draw_type() const = 0;
 		virtual std::uint64_t get_vertex_count() const = 0;
 		virtual std::uint64_t get_index_count() const = 0;
 		virtual std::vector<position> get_positions() const = 0;
 		virtual std::vector<std::uint32_t> get_indices() const = 0;
-		virtual std::vector<color> get_colors() const = 0;
 
 	private:
 		color m_color;
