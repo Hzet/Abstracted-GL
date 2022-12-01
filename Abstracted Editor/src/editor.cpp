@@ -1,6 +1,5 @@
 #include "agl/core/app/application.hpp"
 #include "agl/core/app/input.hpp"
-#include "agl/core/app/layer-base.hpp"
 #include "agl/core/app/layer-manager.hpp"
 #include "agl/graphics/shader/uniform-array.hpp"
 #include "agl/graphics/ecs/component/uniform/camera.hpp"

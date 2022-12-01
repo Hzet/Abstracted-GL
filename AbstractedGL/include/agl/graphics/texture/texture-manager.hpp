@@ -3,7 +3,7 @@
 
 #include "agl/core/app/resource.hpp"
 #include "agl/graphics/texture/texture2d.hpp"
-#include "agl/utility/sorted-vector.hpp"
+
 
 namespace agl
 {

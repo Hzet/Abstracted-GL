@@ -95,25 +95,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\glad.c" />
-    <ClInclude Include="external\imgui\imconfig.h" />
-    <ClInclude Include="external\imgui\imgui.h" />
-    <ClInclude Include="external\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="external\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="external\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="external\imgui\imgui_internal.h" />
-    <ClInclude Include="external\imgui\imstb_rectpack.h" />
-    <ClInclude Include="external\imgui\imstb_textedit.h" />
-    <ClInclude Include="external\imgui\imstb_truetype.h" />
     <ClInclude Include="include\agl\core\app\layer-manager.hpp" />
     <ClInclude Include="include\agl\core\app\layer-type-uid.hpp" />
     <ClInclude Include="include\agl\core\enums\gl-clear-type.hpp" />
-    <ClCompile Include="external\imgui\imgui.cpp" />
-    <ClCompile Include="external\imgui\imgui_demo.cpp" />
-    <ClCompile Include="external\imgui\imgui_draw.cpp" />
-    <ClCompile Include="external\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="external\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="external\imgui\imgui_tables.cpp" />
-    <ClCompile Include="external\imgui\imgui_widgets.cpp" />
     <ClCompile Include="include\agl\core\app\layer-base.hpp" />
     <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp" />
     <ClCompile Include="src\core\app\application.cpp" />
@@ -249,7 +233,6 @@
     <ClInclude Include="include\agl\system\glcore\destructive-move.hpp" />
     <ClInclude Include="include\agl\system\glcore\gl-core.hpp" />
     <ClInclude Include="include\agl\utility\ecs\ecs.hpp" />
-    <ClInclude Include="include\agl\utility\sorted-vector.hpp" />
     <ClInclude Include="include\agl\utility\static-unique-identifier.hpp" />
     <ClInclude Include="include\agl\utility\ecs\component-array-base.hpp" />
     <ClInclude Include="include\agl\utility\ecs\component-array.hpp" />
@@ -299,7 +282,6 @@
     <None Include="include\agl\graphics\shader\uniform-register.inl" />
     <None Include="include\agl\graphics\shader\uniform-wrapper.inl" />
     <None Include="include\agl\graphics\types\type-base.inl" />
-    <None Include="include\agl\utility\sorted-vector.inl" />
     <None Include="include\agl\utility\static-unique-identifier.inl" />
     <None Include="include\agl\utility\ecs\component-array.inl" />
     <None Include="include\agl\utility\ecs\entity.inl" />

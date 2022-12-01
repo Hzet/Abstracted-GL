@@ -118,9 +118,6 @@
     <Filter Include="external\GLAD">
       <UniqueIdentifier>{54cf95ad-750f-4a3d-b40c-ad0339c2c844}</UniqueIdentifier>
     </Filter>
-    <Filter Include="external\imgui">
-      <UniqueIdentifier>{e247d8ae-d01d-4f66-a8b3-d076c847bf29}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\system\core\app\layer">
       <UniqueIdentifier>{d5ac51bb-6793-4be7-a122-a6875e3ee4df}</UniqueIdentifier>
     </Filter>
@@ -257,27 +254,6 @@
     </ClCompile>
     <ClCompile Include="src\graphics\shader\uniform-prototyper.cpp">
       <Filter>src\graphics\shader\uniforms</Filter>
-    </ClCompile>
-    <ClCompile Include="external\imgui\imgui.cpp">
-      <Filter>external\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="external\imgui\imgui_demo.cpp">
-      <Filter>external\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="external\imgui\imgui_draw.cpp">
-      <Filter>external\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="external\imgui\imgui_impl_glfw.cpp">
-      <Filter>external\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="external\imgui\imgui_impl_opengl3.cpp">
-      <Filter>external\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="external\imgui\imgui_tables.cpp">
-      <Filter>external\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="external\imgui\imgui_widgets.cpp">
-      <Filter>external\imgui</Filter>
     </ClCompile>
     <ClCompile Include="include\agl\core\app\layer-base.hpp">
       <Filter>src\system\core\app\layer</Filter>
@@ -614,33 +590,6 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\position.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
-    <ClInclude Include="external\imgui\imconfig.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imgui.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imgui_impl_glfw.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imgui_impl_opengl3.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imgui_impl_opengl3_loader.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imgui_internal.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imstb_rectpack.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imstb_textedit.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="external\imgui\imstb_truetype.h">
-      <Filter>external\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\core\app\layer-type-uid.hpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClInclude>
@@ -676,9 +625,6 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\texture\texture-manager.hpp">
       <Filter>src\graphics\texture</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\sorted-vector.hpp">
-      <Filter>src\utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -792,9 +738,6 @@
     </None>
     <None Include="include\agl\utility\ecs\system-register.inl">
       <Filter>src\utility\ecs\system</Filter>
-    </None>
-    <None Include="include\agl\utility\sorted-vector.inl">
-      <Filter>src\utility</Filter>
     </None>
   </ItemGroup>
 </Project>

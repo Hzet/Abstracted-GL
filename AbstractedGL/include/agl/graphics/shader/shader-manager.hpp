@@ -4,7 +4,7 @@
 #include "agl/graphics/shader/shader-program.hpp"
 #include "agl/graphics/shader/shader-uid.hpp"
 #include "agl/core/app/resource.hpp"
-#include "agl/utility/sorted-vector.hpp"
+
 
 namespace agl
 {

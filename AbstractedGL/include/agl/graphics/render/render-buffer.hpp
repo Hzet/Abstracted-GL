@@ -3,7 +3,6 @@
 #include "agl/graphics/render/vertex-array.hpp"
 #include "agl/graphics/render/render-type-uid.hpp"
 #include "agl/graphics/types/types.hpp"
-#include "agl/utility/sorted-vector.hpp"
 
 namespace agl
 {
