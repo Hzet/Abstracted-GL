@@ -45,10 +45,17 @@ namespace agl
 		create();
 		bind();
 
+		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
+		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+
 		AGL_CALL(glTexImage2D(get_type(), 0u, format, w, h, 0, format, GL_UNSIGNED_BYTE, data));
 		AGL_CALL(glGenerateMipmap(get_type()));
 
+		unbind();
 		stbi_image_free(data);
+
 		return true;
 	}
 }

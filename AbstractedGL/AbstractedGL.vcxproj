@@ -299,6 +299,7 @@
     <None Include="include\agl\graphics\shader\uniform-register.inl" />
     <None Include="include\agl\graphics\shader\uniform-wrapper.inl" />
     <None Include="include\agl\graphics\types\type-base.inl" />
+    <None Include="include\agl\utility\sorted-vector.inl" />
     <None Include="include\agl\utility\static-unique-identifier.inl" />
     <None Include="include\agl\utility\ecs\component-array.inl" />
     <None Include="include\agl\utility\ecs\entity.inl" />

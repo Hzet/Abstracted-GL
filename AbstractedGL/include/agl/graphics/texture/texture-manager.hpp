@@ -3,6 +3,7 @@
 
 #include "agl/core/app/resource.hpp"
 #include "agl/graphics/texture/texture2d.hpp"
+#include "agl/utility/sorted-vector.hpp"
 
 namespace agl
 {
@@ -13,6 +14,10 @@ namespace agl
 		: public resource_base
 	{
 	public:
+		void bind_texture(texture_uid const& id_texture);
+
+		void unbind_textures();
+
 		texture_uid	load_from_file(std::string const& filepath);
 
 		/// <summary>
@@ -76,7 +81,8 @@ namespace agl
 		virtual void dummy() const override {}
 
 	private:
-		std::unordered_map<texture_uid, texture_2d> m_textures_2d;
+		std::vector<texture_uid> m_bound_textures;
 		std::unordered_map<std::string, texture_uid> m_directory_map_2d;
+		std::vector<texture_2d> m_textures_2d;
 	};
 }

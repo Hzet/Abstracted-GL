@@ -494,9 +494,6 @@
     <ClInclude Include="include\agl\graphics\types\color.hpp">
       <Filter>src\graphics\types</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\utility\sorted-vector.hpp">
-      <Filter>src\utility</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\render\render-type-uid.hpp">
       <Filter>src\graphics\render</Filter>
     </ClInclude>
@@ -680,6 +677,9 @@
     <ClInclude Include="include\agl\graphics\texture\texture-manager.hpp">
       <Filter>src\graphics\texture</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\utility\sorted-vector.hpp">
+      <Filter>src\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\agl\graphics\render\vertex-layout.inl">
@@ -792,6 +792,9 @@
     </None>
     <None Include="include\agl\utility\ecs\system-register.inl">
       <Filter>src\utility\ecs\system</Filter>
+    </None>
+    <None Include="include\agl\utility\sorted-vector.inl">
+      <Filter>src\utility</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 
 #include "agl/graphics/texture/texture-type.hpp"
+#include "agl/graphics/texture/texture-uid.hpp"
 #include "agl/system/glcore/destructive-move.hpp"
 
 namespace agl
@@ -45,6 +46,7 @@ namespace agl
 		/// </returns>
 		texture_type get_type() const;
 
+
 	protected:
 		texture_base(texture_type type);
 
@@ -75,6 +77,7 @@ namespace agl
 
 	private:
 		std::uint32_t m_id_object;
+		texture_uid m_id_texture;
 
 	private:
 		friend class texture_manager;

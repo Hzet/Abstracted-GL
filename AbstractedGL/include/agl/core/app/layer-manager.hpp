@@ -33,7 +33,7 @@ namespace agl
 		virtual void dummy() const override {};
 
 	private:
-		sorted_vector<layer_type_uid, std::unique_ptr<layer_base>> m_layers;
+		std::vector<std::unique_ptr<layer_base>> m_layers;
 	};
 
 #include "agl/core/app/layer-manager.inl"

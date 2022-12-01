@@ -4,21 +4,37 @@ void layer_manager::add_layer()
 	if (has_layer<T>())
 		return;
 
-	auto pair = m_layers.insert(layer_type_uid::get_id<T>(), std::make_unique<T>());
-	pair->second->on_attach();
+	auto layer = std::make_unique<T>();
+	layer->m_id_layer = layer_type_uid::get_id<T>();
+
+	m_layers.push_back(std::move(layer));
+	m_layers.back()->on_attach();
 }
 
 template <typename T>
 bool layer_manager::has_layer() const
 {
-	return m_layers.find(layer_type_uid::get_id<T>()) != m_layers.cend();
+	auto const id_layer = layer_type_uid::get_id<T>();
+
+	for (auto const& layer : m_layers)
+		if (layer->get_layer_uid() == id_layer)
+			return true;
+
+	return false;
 }
 
 template <typename T>
 void layer_manager::remove_layer()
 {
-	auto found = m_layers.find(layer_type_uid::get_id<T>());
-	found->second->on_detach();
+	auto const id_layer = layer_type_uid::get_id<T>();
+
+	auto found = m_layers.cbegin();
+
+	for (; found != m_layers.cend(); ++found)
+		if ((*found)->get_layer_uid() == id_layer)
+			break;
+
+	(*found)->on_detach();
 
 	m_layers.erase(found);
 }
@@ -26,11 +42,25 @@ void layer_manager::remove_layer()
 template <typename T>
 layer_base& layer_manager::get_layer()
 {
-	return m_layers.find(layer_type_uid::get_id<T>())->second;
+	auto const id_layer = layer_type_uid::get_id<T>();
+
+	for (auto& layer : m_layers)
+		if (layer->get_layer_uid() == id_layer)
+			return *layer;
+
+	AGL_CORE_ASSERT(false, "Index out of bounds! Layer not present");
+	return nullptr;
 }
 
 template <typename T>
 layer_base const& layer_manager::get_layer() const
 {
-	return m_layers.find(layer_type_uid::get_id<T>())->second;
+	auto const id_layer = layer_type_uid::get_id<T>();
+
+	for (auto& layer : m_layers)
+		if (layer->get_layer_uid() == id_layer)
+			return *layer;
+
+	AGL_ASSERT(false, "Index out of bounds! Layer not present");
+	return nullptr;
 }

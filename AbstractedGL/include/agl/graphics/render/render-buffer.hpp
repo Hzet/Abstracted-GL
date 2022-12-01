@@ -1,4 +1,5 @@
 #pragma once
+#include "agl/system/debug/assert.hpp"
 #include "agl/graphics/render/vertex-array.hpp"
 #include "agl/graphics/render/render-type-uid.hpp"
 #include "agl/graphics/types/types.hpp"
@@ -47,24 +48,28 @@ namespace agl
 	private:
 		struct array_info
 		{
-			std::uint64_t type_index;
-			std::uint64_t count;
+			render_type_uid id_render;
+			std::uint64_t array_index;
+			std::uint64_t array_size;
 		};
 
 	private:
 		template <typename T>
-		render_buffer::array_info const& add_vertex_type();
+		array_info const& add_vertex_type();
+
+		template <typename T>
+		array_info const& get_array_info() const;
 
 		void reserve(std::uint64_t new_count);
 
 		template <typename T> std::uint64_t get_offset(std::uint64_t index) const;
 
 	private:
-		std::uint64_t m_vcount;
+		std::vector<array_info> m_array_indexes;
 		std::vector<std::uint32_t> m_indices;
 		std::vector<std::byte> m_vertices;
-		sorted_vector<render_type_uid, array_info> m_index_map;
 
+		std::uint64_t m_vcount;
 		bool m_require_update;
 		index_buffer m_ibuffer;
 		vertex_array m_varray;

@@ -1,11 +1,11 @@
 #pragma once
-#include "agl/utility/unique-identifier.hpp"
+#include "agl/utility/static-unique-identifier.hpp"
 
 namespace agl
 {
 	class texture_base;
 
-	using texture_uid = unique_id<texture_base>;
+	using texture_uid = TStaticUID<texture_base>;
 }
 namespace std
 {

@@ -25,6 +25,7 @@ namespace agl
 
 	private:
 		std::int32_t m_ambient;
+		std::int32_t m_ambient_active;
 		std::int32_t m_diffuse;
 		std::int32_t m_specular;
 	};

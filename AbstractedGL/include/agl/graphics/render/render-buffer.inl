@@ -4,20 +4,38 @@ render_buffer::array_info const& render_buffer::add_vertex_type()
 	auto const id_render = render_type_uid::get_id<T>();
 
 	if (has_vertex_type<T>())
-		return m_index_map.find(id_render)->second;
+		return get_array_info<T>();
 
-	auto it = m_index_map.insert(id_render, array_info{ m_vlayout.get_count(), 0 });
+	m_array_indexes.push_back(array_info{ id_render, m_vlayout.get_count(), 0 });
 	m_vlayout.add_element<T::Type>();
 
 	m_require_update = true;
 
-	return it->second;
+	return m_array_indexes.back();
+}
+
+template <typename T>
+render_buffer::array_info const& render_buffer::get_array_info() const
+{
+	auto const id_render = render_type_uid::get_id<T>();
+
+	for (auto const& info : m_array_indexes)
+		if (info.id_render == id_render)
+			return info;
+
+	AGL_CORE_ASSERT(false, "Index out of bounds! Type {} not present", render_type_uid::get_name<T>(id_render));
 }
 
 template <typename T>
 bool render_buffer::has_vertex_type() const
 {
-	return m_index_map.find(render_type_uid::get_id<T>()) != m_index_map.cend();
+	auto const id_render = render_type_uid::get_id<T>();
+
+	for (auto const& info : m_array_indexes)
+		if (info.id_render == id_render)
+			return true;
+
+	return false;
 }
 
 template <typename TForwardIterator>
@@ -39,7 +57,7 @@ void render_buffer::push_vertex(T vertex)
 {
 	auto ainfo = add_vertex_type<T>();
 
-	if (ainfo.count >= get_vertex_count())
+	if (ainfo.array_size >= get_vertex_count())
 		reserve(get_vertex_count() + 1);
 	else
 		reserve(get_vertex_count());
@@ -61,12 +79,12 @@ void render_buffer::push_vertices(TForwardIterator begin, TForwardIterator end)
 
 	auto ainfo = add_vertex_type<T>();
 
-	if (ainfo.count + data_count > get_vertex_count())
-		reserve(get_vertex_count() - ainfo.count + data_count);
+	if (ainfo.array_size+ data_count > get_vertex_count())
+		reserve(get_vertex_count() - ainfo.array_size + data_count);
 	else
 		reserve(get_vertex_count());
 
-	auto i = ainfo.count == 0 ? 0 : ainfo.count - 1;
+	auto i = ainfo.array_size == 0 ? 0 : ainfo.array_size - 1;
 	for (auto it = begin; it != end; ++it, ++i)
 	{
 		auto const* const flat_begin = reinterpret_cast<std::byte const * const>(&(*it));
@@ -94,6 +112,6 @@ const T& render_buffer::get(std::uint64_t index) const
 template <typename T>
 std::uint64_t render_buffer::get_offset(std::uint64_t index) const
 {
-	const auto data = m_index_map.find(render_type_uid::get_id<T>())->second;
-	return m_vlayout[data.type_index].offset + (m_vlayout.get_size() * index);
+	const auto data = get_array_info<T>();
+	return m_vlayout[data.array_index].offset + (m_vlayout.get_size() * index);
 }

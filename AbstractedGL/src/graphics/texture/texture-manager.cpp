@@ -1,5 +1,6 @@
 #include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/system/debug/error.hpp"
+#include "agl/system/glcore/gl-core.hpp"
 
 namespace agl
 {
@@ -8,8 +9,10 @@ namespace agl
 		if (has_texture_2d(texture.get_filepath()))
 			return get_texture_uid(texture.get_filepath());
 
-		auto result = texture_uid::create();
-		m_textures_2d.emplace(result, texture);
+		auto const result = texture_uid::create();
+
+		texture.m_id_texture = result;
+		m_textures_2d.push_back(texture);
 		m_directory_map_2d.emplace(texture.get_filepath(), result);
 
 		return result;
@@ -22,7 +25,29 @@ namespace agl
 
 	bool texture_manager::has_texture_2d(const texture_uid &id_texture_2d)
 	{
-		return m_textures_2d.find(id_texture_2d) != m_textures_2d.cend();
+		return m_textures_2d.size() >= id_texture_2d;
+	}
+
+	void texture_manager::bind_texture(texture_uid const& id_texture)
+	{
+		for (auto const& id : m_bound_textures)
+			if (id == id_texture)
+				return;
+
+		m_bound_textures.push_back(id_texture);
+
+		auto const& texture = m_textures_2d[id_texture - 1];
+
+		//AGL_CALL(glActiveTexture(GL_TEXTURE0 + m_bound_textures.get_count() - 1));
+		texture.bind();
+	}
+
+	void texture_manager::unbind_textures()
+	{
+		for (auto& id_texture : m_bound_textures)
+			m_textures_2d[id_texture - 1].unbind();
+
+		m_bound_textures.clear();
 	}
 
 	texture_uid texture_manager::load_from_file(std::string const& filepath)
@@ -35,7 +60,7 @@ namespace agl
 		if (!result.load_from_file(filepath))
 		{
 			AGL_CORE_WARNING("Failed to load texture! {}", filepath);
-			return texture_uid::INVALID;
+			return texture_uid{};
 		}
 
 		return add_texture_2d(result);
@@ -55,9 +80,9 @@ namespace agl
 
 	texture_2d& texture_manager::get_texture_2d(const texture_uid &id_texture_2d)
 	{
-		AGL_CORE_ASSERT(m_textures_2d.find(id_texture_2d) != m_textures_2d.cend(), "Index out of bounds!");
+		AGL_CORE_ASSERT(has_texture_2d(id_texture_2d), "Index out of bounds!");
 
-		return m_textures_2d.find(id_texture_2d)->second;
+		return m_textures_2d[id_texture_2d];
 	}
 
 	texture_2d& texture_manager::get_texture_2d(const std::string &filepath)

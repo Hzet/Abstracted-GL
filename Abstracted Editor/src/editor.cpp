@@ -7,10 +7,12 @@
 #include "agl/graphics/ecs/component/uniform/position.hpp"
 #include "agl/graphics/ecs/component/uniform/transform.hpp"
 #include "agl/graphics/ecs/component/uniform/material.hpp"
+#include "agl/graphics/ecs/component/uniform/texture-material.hpp"
 #include "agl/graphics/ecs/component/renderable.hpp"
 #include "agl/graphics/ecs/component/mesh.hpp"
 #include "agl/graphics/shape/rectangle.hpp"
 #include "agl/graphics/shape/prism.hpp"
+#include "agl/graphics/texture/texture-manager.hpp"
 
 
 
@@ -22,9 +24,10 @@ public:
 	{
 		auto& reg = agl::application::get_resource<agl::registry>();
 		auto& sh_manager = agl::application::get_resource<agl::shader_manager>();
+		auto& texture_manager = agl::application::get_resource<agl::texture_manager>();
 
 		// load shaders
-		auto const basic_shader = sh_manager.load_from_file("resource/basic.vsh", "resource/basic.fsh");
+		auto const basic_shader = sh_manager.load_from_file("resource/basic-vertex.glsl", "resource/basic-fragment.glsl");
 		auto const light_shader = sh_manager.load_from_file("resource/light.vsh", "resource/light.fsh");
 		sh_manager.link_all_shaders();
 
@@ -49,6 +52,8 @@ public:
 		uniforms.add_uniform<agl::camera_uniform, agl::camera_perspective>(basic_shader);
 
 		// mesh 
+		auto empty_texture_uid = texture_manager.load_from_file("resource/empty-texture.png");
+
 		auto prism_entity = reg.create();
 		auto prism_builder = agl::prism_builder{4, glm::sqrt(2.f) / 2.f, 1.f};
 
@@ -70,9 +75,11 @@ public:
 			auto& transform = e.attach_component<agl::transformable>();
 			auto& material = e.attach_component<agl::material>();
 			e.attach_component<agl::renderable>(renderable);
+			e.attach_component<agl::texture>(empty_texture_uid);
 
 			auto& uniforms = e.attach_component<agl::uniform_array>();
 			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(basic_shader);
+			uniforms.add_uniform<agl::texture_uniform, agl::texture>(basic_shader);
 			//uniforms.add_uniform<agl::material_uniform, agl::material>(basic_shader);
 
 			material.ambient = glm::vec4{ 0.f };
@@ -80,13 +87,15 @@ public:
 			material.specular = glm::vec4{ 1.f };
 			material.shininess = 32.f;
 
-			transform.set_position({ glm::sphericalRand(50.f) });
+			transform.set_position(glm::sphericalRand(50.f));
 		}
 
 		// rectangle 
+		auto rect_texture_uid = texture_manager.load_from_file("resource/container.jpg");
+
 		auto rect_entity = reg.create();
-		
 		rect_entity.attach_component<agl::renderable>(rect_entity, basic_shader);
+		rect_entity.attach_component<agl::texture>(rect_texture_uid);
 		auto& rect_mesh = rect_entity.attach_component<agl::mesh>();
 		auto& rect_transform = rect_entity.attach_component<agl::transformable>();
 		auto& rect_uniforms = rect_entity.attach_component<agl::uniform_array>();
@@ -94,14 +103,21 @@ public:
 		auto rect_builder = agl::rectangle_builder{ agl::rectangle{{10.f, 20.f}} };
 		auto const rect_indices = rect_builder.get_indices();
 		auto const rect_positions = rect_builder.get_positions();
-		auto const rect_colors = rect_builder.get_colors(agl::color{ 1.f, 0.f, 0.f, 1.f });
-
+		auto const rect_colors = rect_builder.get_colors(agl::color{ 1.f, 1.f, 1.f, 1.f });
+		auto const rect_texture = std::vector<agl::texture_position>{
+			{0.f, 0.f}, // bottom left,
+			{0.f, 1.f}, // top left,
+			{1.f, 1.f}, // top right,
+			{1.f, 0.f}  // bottom right
+		};
 		rect_mesh.draw_type = rect_builder.get_draw_type();
 		rect_mesh.rbuffer.push_indices(rect_indices.cbegin(), rect_indices.cend());
 		rect_mesh.rbuffer.push_vertices<agl::position>(rect_positions.cbegin(), rect_positions.cend());
 		rect_mesh.rbuffer.push_vertices<agl::color>(rect_colors.cbegin(), rect_colors.cend());
+		rect_mesh.rbuffer.push_vertices<agl::texture_position>(rect_texture.cbegin(), rect_texture.cend());
 
 		rect_uniforms.add_uniform<agl::transform_uniform, agl::transformable>(basic_shader);
+		rect_uniforms.add_uniform<agl::texture_uniform, agl::texture>(basic_shader);
 	}
 
 	virtual void on_update() override

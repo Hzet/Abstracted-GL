@@ -16,18 +16,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resource\basic.fsh">
+    <None Include="resource\light.fsh">
       <Filter>resource</Filter>
     </None>
-    <None Include="resource\light.fsh">
+    <None Include="resource\basic-fragment.glsl">
       <Filter>resource</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="resource\basic.vsh">
+    <FxCompile Include="resource\light.vsh">
       <Filter>resource</Filter>
     </FxCompile>
-    <FxCompile Include="resource\light.vsh">
+    <FxCompile Include="resource\basic-vertex.glsl">
       <Filter>resource</Filter>
     </FxCompile>
   </ItemGroup>

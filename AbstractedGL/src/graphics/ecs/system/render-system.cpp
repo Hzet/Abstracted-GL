@@ -4,6 +4,7 @@
 #include "agl/graphics/ecs/system/render-system.hpp"
 #include "agl/graphics/shader/uniform-array.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/system/glcore/gl-core.hpp"
 #include "agl/utility/ecs/entity.hpp"
 
@@ -17,6 +18,7 @@ namespace agl
 	void render_system::update(registry &reg)
 	{
 		static auto& manager = application::get_resource<shader_manager>();
+		static auto& texture_manager = application::get_resource<agl::texture_manager>();
 		static auto renderable_view = reg.inclusive_view<renderable>();
 
 		if (renderable_view.needs_update())
@@ -49,6 +51,8 @@ namespace agl
 				AGL_CALL(glDrawElements(mesh.draw_type, mesh.rbuffer.get_index_count(), GL_UNSIGNED_INT, 0u));
 			
 			mesh.rbuffer.unbind();
+
+			texture_manager.unbind_textures();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
-#include "agl/graphics/texture/texture-uid.hpp"
+#include "agl/core/app/application.hpp"
+#include "agl/graphics/texture/texture-manager.hpp"
 
 namespace agl
 {
