@@ -17,10 +17,4 @@ void system_register<TGroupName, TDerived>::register_me() const
 }
 
 template <typename TGroupName, typename TDerived>
-std::unique_ptr<system_base> system_register<TGroupName, TDerived>::clone() const
-{
-	return std::make_unique<TDerived>(static_cast<TDerived const&>(*this));
-}
-
-template <typename TGroupName, typename TDerived>
 bool system_register<TGroupName, TDerived>::s_registered = system_register<TGroupName, TDerived>::register_type();

@@ -12,6 +12,24 @@ namespace agl
 	{
 	}
 
+
+	void texture_2d::load_from_memory(glm::vec2 const& size, std::byte const * const buffer)
+	{
+		m_size = glm::vec3{ size, 0.f };
+		
+		create();
+		bind();
+
+		set_parameters();
+
+		AGL_CALL(glTexImage2D(get_type(), 0, GL_RED, size.x, size.y, 0, GL_RED, GL_UNSIGNED_BYTE, buffer));
+
+		if (get_parameters().create_mipmaps)
+			AGL_CALL(glGenerateMipmap(get_type()));
+
+		unbind();
+	}
+
 	bool texture_2d::load_from_file(const std::string &filepath)
 	{
 		auto w = std::int32_t{};
@@ -36,22 +54,26 @@ namespace agl
 
 		auto format = std::uint32_t{};
 		if (channels == 1)
-			format = GL_RED;
+			set_format_type(TEXTURE_FORMAT_RED);
 		else if (channels == 3)
-			format = GL_RGB;
+			set_format_type(TEXTURE_FORMAT_RGB);
 		else if (channels == 4)
-			format = GL_RGBA;
+			set_format_type(TEXTURE_FORMAT_RGBA);
 
 		create();
 		bind();
 
-		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+		set_parameters();
+
+		/*AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
 		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
 		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
-		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+		AGL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));*/
 
-		AGL_CALL(glTexImage2D(get_type(), 0u, format, w, h, 0, format, GL_UNSIGNED_BYTE, data));
-		AGL_CALL(glGenerateMipmap(get_type()));
+		AGL_CALL(glTexImage2D(get_type(), 0u, get_format_type(), m_size.x, m_size.y, 0, get_format_type(), GL_UNSIGNED_BYTE, data));
+
+		if(get_parameters().create_mipmaps)
+			AGL_CALL(glGenerateMipmap(get_type()));
 
 		unbind();
 		stbi_image_free(data);

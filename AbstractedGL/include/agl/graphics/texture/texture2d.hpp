@@ -19,6 +19,8 @@ namespace agl
 		/// </summary>
 		texture_2d();
 
+		void load_from_memory(glm::vec2 const& size, std::byte const * const buffer);
+
 		/// <summary>
 		/// Loads the texture from a file.
 		/// </summary>

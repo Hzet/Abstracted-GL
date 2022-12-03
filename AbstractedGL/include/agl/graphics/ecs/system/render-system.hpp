@@ -10,5 +10,8 @@ namespace agl
 	public:
 		virtual void init(registry &reg) override;
 		virtual void update(registry &reg) override;
+
+	private:
+		void render_mesh(entity_uid const& id_entity, registry &reg);
 	};
 }

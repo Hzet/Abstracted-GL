@@ -1,0 +1,86 @@
+#include "agl/core/app/application.hpp"
+#include "agl/graphics/ecs/component/text.hpp"
+#include "agl/graphics/ecs/system/text-system.hpp"
+#include "agl/graphics/shader/shader-manager.hpp"
+#include "agl/graphics/shader/uniform-array.hpp"
+#include "agl/graphics/text/font-manager.hpp"
+
+namespace agl
+{
+	void text_system::init(registry &reg)
+	{
+		m_character_mesh.draw_type = DRAW_TRIANGLES;
+
+		auto positions = std::vector<position>(6);
+		auto texture_positions = std::vector<texture_position>{
+			{ 0.f, 0.f }, // bottom left
+			{ 0.f, 1.f }, // top left
+			{ 1.f, 0.f }, // bottom right
+
+			{ 0.f, 1.f }, // top left
+			{ 1.f, 1.f }, // top right
+			{ 1.f, 0.f } // bottom right
+		};
+
+		m_character_mesh.rbuffer.push_vertices<position>(positions.cbegin(), positions.cend());
+		m_character_mesh.rbuffer.push_vertices<texture_position>(texture_positions.cbegin(), texture_positions.cend());
+	}
+
+	void text_system::update(registry &reg)
+	{
+		static auto text_view = reg.inclusive_view<agl::text>();
+
+		if (text_view.needs_update())
+			text_view = reg.inclusive_view<agl::text>();
+
+		for (auto it = text_view.cbegin(); it != text_view.cend(); ++it)
+			render_text(*it, reg);
+	}
+
+	void text_system::render_text(entity_uid const& id_entity, registry &reg)
+	{
+		static auto& shader_manager = application::get_resource<agl::shader_manager>();
+		static auto const& font_manager = application::get_resource<agl::font_manager>();
+
+		auto const& text = reg.get<agl::text>(id_entity);
+		auto const& font = font_manager.get_font(text.id_font);
+
+		shader_manager.set_active_shader(text.id_shader);
+
+		auto w = float{};
+		auto h = float{};
+		auto x = float{};
+		auto y = float{};
+		auto offset = float{};
+
+		for (auto const ch : text.text)
+		{
+			auto const& glyph = font.get_glyph(ch);
+
+			w = glyph.texture.get_size().x;
+			h = glyph.texture.get_size().y;
+			x = offset + glyph.bearing.x;
+			y = glyph.texture.get_size().y - glyph.bearing.y;
+
+			m_character_mesh.rbuffer.get<position>(0) = { x, y + h, 0.f };     // bottom left
+			m_character_mesh.rbuffer.get<position>(1) = { x, y, 0.f };         // top left
+			m_character_mesh.rbuffer.get<position>(2) = { x + w, y + h, 0.f }; // bottom right
+			
+			m_character_mesh.rbuffer.get<position>(3) = { x, y, 0.f };         // top left
+			m_character_mesh.rbuffer.get<position>(4) = { x + w, y, 0.f };     // top right
+			m_character_mesh.rbuffer.get<position>(5) = { x + w, y + h, 0.f }; // bottom right
+			
+			m_character_mesh.rbuffer.update_buffers();
+			
+			m_character_mesh.rbuffer.bind();
+			glyph.texture.bind();
+
+			AGL_CALL(glDrawArrays(m_character_mesh.draw_type, 0u, m_character_mesh.rbuffer.get_vertex_count()));
+
+			m_character_mesh.rbuffer.unbind();
+
+			offset += glyph.advance >> 6;
+		}
+	}
+
+}

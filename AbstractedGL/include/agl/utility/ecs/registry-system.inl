@@ -8,11 +8,11 @@ bool registry_system::register_system()
 	auto found = Groups.find(id_group);
 
 	if (found != Groups.end())
-		found->second.add_system(T{ });
+		found->second.add_system<T>();
 	else
 	{
 		group<TGroupName> group;
-		group.add_system(T{ });
+		group.add_system<T>();
 
 		Groups.emplace(std::make_pair(group.getGroupUID(), std::move(group)));
 	}

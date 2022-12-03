@@ -25,126 +25,143 @@ namespace agl
 	};
 
 
-		// File
-		struct ExFileOpen : exception {
-			using exception::exception;
+	// File
+	struct ExFileOpen : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override { 
-				return "Failed to open a file"; 
-			}
-		};
+		virtual std::string defaultMessage() const override { 
+			return "Failed to open a file"; 
+		}
+	};
 
-		struct ExFileRead : exception {
-			using exception::exception;
+	struct ExFileRead : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "Failed to read from a file";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "Failed to read from a file";
+		}
+	};
 
-		struct ExFileWrite : exception {
-			using exception::exception;
+	struct ExFileWrite : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "Failed to write to a file";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "Failed to write to a file";
+		}
+	};
 
-		// API
-		// GLFW
-		struct ExGLFW : exception {
-			using exception::exception;
+	// API
+	// GLFW
+	struct ExGLFW : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "GLFW has failed to execute call";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "GLFW has failed to execute call";
+		}
+	};
 
-		struct ExGLFWNotInitialized : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWNotInitialized : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWNoCurrentContext : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWNoCurrentContext : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWInvalidEnum : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWInvalidEnum : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWInvalidValue : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWInvalidValue : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWOutOfMemory : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWOutOfMemory : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWUnavailable : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWUnavailable : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWPlatform : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWPlatform : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWFormatUnavailable : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWFormatUnavailable : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLFWNoWindowContext : ExGLFW {
-			using ExGLFW::ExGLFW;
-		};
+	struct ExGLFWNoWindowContext : ExGLFW {
+		using ExGLFW::ExGLFW;
+	};
 
-		struct ExGLAD : exception {
-			using exception::exception;
+	struct ExGLAD : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "GLAD has failed to execute call";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "GLAD has failed to execute call";
+		}
+	};
 
-		// OpenGL
-		struct ExOpenGL : exception {
-			using exception::exception;
+	// OpenGL
+	struct ExOpenGL : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "OpenGL has failed to execute call";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "OpenGL has failed to execute call";
+		}
+	};
 
-		// Shaders
-		struct ExShaderCompilation : exception {
-			using exception::exception;
+	// Shaders
+	struct ExShaderCompilation : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "Shader program has failed to compile";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "Shader program has failed to compile";
+		}
+	};
 
-		struct ExShaderLinking : exception {
-			using exception::exception;
+	struct ExShaderLinking : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "Shader program has failed to link";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "Shader program has failed to link";
+		}
+	};
 
-		// Importer
-		struct ExImport : exception {
-			using exception::exception;
+	// FreeType
+	struct ExFreeTypeInit : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "Failed to import the data";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "Failed to initialize FreeType Library";
+		}
+	};
 
-		struct ExExport : exception {
-			using exception::exception;
+	struct ExFreeTypeFont : exception {
+		using exception::exception;
 
-			virtual std::string defaultMessage() const override {
-				return "Failed to export the data";
-			}
-		};
+		virtual std::string defaultMessage() const override {
+			return "Failed to load FreeType font";
+		}
+	};
+
+	// Importer
+	struct ExImport : exception {
+		using exception::exception;
+
+		virtual std::string defaultMessage() const override {
+			return "Failed to import the data";
+		}
+	};
+
+	struct ExExport : exception {
+		using exception::exception;
+
+		virtual std::string defaultMessage() const override {
+			return "Failed to export the data";
+		}
+	};
 	
 }

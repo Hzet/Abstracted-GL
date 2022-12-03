@@ -15,7 +15,7 @@ namespace std
 	template <>
 	struct hash<agl::texture_uid>
 	{
-		size_t operator()(const agl::texture_uid &uid) const noexcept
+		size_t operator()(agl::texture_uid& const uid) const noexcept
 		{
 			return hash<uint64_t>{}(static_cast<const uint64_t>(uid));
 		}

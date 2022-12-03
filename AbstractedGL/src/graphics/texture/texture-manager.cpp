@@ -55,15 +55,19 @@ namespace agl
 		if (has_texture_2d(filepath))
 			return get_texture_uid(filepath);
 
-		auto result = texture_2d{};
+		auto texture = texture_2d{};
 
-		if (!result.load_from_file(filepath))
+		texture.enable_mipmaps(true);
+		texture.set_size_filters(TEXTURE_PIXEL_LINEAR_MIPMAP_LINEAR, TEXTURE_PIXEL_LINEAR);
+		texture.set_texture_wrap(TEXTURE_WRAP_REPEAT, TEXTURE_WRAP_REPEAT, TEXTURE_WRAP_NONE);
+
+		if (!texture.load_from_file(filepath))
 		{
 			AGL_CORE_WARNING("Failed to load texture! {}", filepath);
 			return texture_uid{};
 		}
 
-		return add_texture_2d(result);
+		return add_texture_2d(texture);
 	}
 
 	texture_base& texture_manager::get_texture(const texture_uid &id_texture_2d)

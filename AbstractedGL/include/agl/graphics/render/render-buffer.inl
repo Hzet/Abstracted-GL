@@ -23,7 +23,7 @@ render_buffer::array_info const& render_buffer::get_array_info() const
 		if (info.id_render == id_render)
 			return info;
 
-	AGL_CORE_ASSERT(false, "Index out of bounds! Type {} not present", render_type_uid::get_name<T>(id_render));
+	AGL_CORE_ASSERT(false, "Index out of bounds! Type {} not present", render_type_uid::get_name(id_render));
 }
 
 template <typename T>

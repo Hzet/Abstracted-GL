@@ -22,8 +22,6 @@ namespace agl
 
 	private:
 		virtual void register_me() const;
-
-		virtual std::unique_ptr<system_base> clone() const;
 	};
 
 #include "agl/utility/ecs/system-register.inl"

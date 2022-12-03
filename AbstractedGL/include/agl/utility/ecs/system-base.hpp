@@ -22,7 +22,6 @@ namespace agl
 		friend class group_base;
 
 		system_base(system_type_uid systemUID);
-		virtual std::unique_ptr<system_base> clone() const = 0;
 
 	private:
 		system_type_uid m_id_system;

@@ -17,7 +17,8 @@ namespace agl
 		group_base& operator=(const group_base&) = delete;
 		virtual ~group_base() = default;
 
-		void add_system(const system_base &sys);
+		template <typename T>
+		void add_system();
 
 		void init(registry &reg);
 		void update(registry &reg);
@@ -31,4 +32,10 @@ namespace agl
 		group_type_uid m_id_group;
 		std::vector<std::unique_ptr<system_base>> m_systems;
 	};
+
+	template <typename T>
+	void group_base::add_system()
+	{
+		m_systems.push_back(std::make_unique<T>());
+	}
 }

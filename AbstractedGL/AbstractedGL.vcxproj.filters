@@ -127,6 +127,9 @@
     <Filter Include="src\graphics\shape">
       <UniqueIdentifier>{5d6762d9-f0b4-4cd3-9125-c5c4817f546f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\graphics\text">
+      <UniqueIdentifier>{df11fe69-e4b8-4d62-8b18-9109c6ecd6cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\render\index-buffer.cpp">
@@ -261,9 +264,6 @@
     <ClCompile Include="src\core\app\window.cpp">
       <Filter>src\system\core\app\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\app\layer-base.cpp">
-      <Filter>src\system\core\app\layer</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\app\layer-manager.cpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClCompile>
@@ -278,6 +278,15 @@
     </ClCompile>
     <ClCompile Include="src\graphics\texture\texture-manager.cpp">
       <Filter>src\graphics\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\text\font.cpp">
+      <Filter>src\graphics\text</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\text\font-manager.cpp">
+      <Filter>src\graphics\text</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\system\text-system.cpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -333,12 +342,6 @@
       <Filter>src\system\glcore</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\utility\inheritable-vector.hpp">
-      <Filter>src\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\tuple-buffer.hpp">
-      <Filter>src\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\tuple-buffer-base.hpp">
       <Filter>src\utility</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\utility\ecs\config.hpp">
@@ -608,9 +611,6 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\uniform-build.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp">
-      <Filter>src\graphics\ecs\system\render</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\renderable.hpp">
       <Filter>src\graphics\ecs\component\render</Filter>
     </ClInclude>
@@ -626,18 +626,42 @@
     <ClInclude Include="include\agl\graphics\texture\texture-manager.hpp">
       <Filter>src\graphics\texture</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\graphics\text\font.hpp">
+      <Filter>src\graphics\text</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-format-type.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-pixel-match-type.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\text\font-manager.hpp">
+      <Filter>src\graphics\text</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\text\glyph.hpp">
+      <Filter>src\graphics\text</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\texture\texture-wrap-type.hpp">
+      <Filter>src\graphics\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\text\font-uid.hpp">
+      <Filter>src\graphics\text</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\text-system.hpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp">
+      <Filter>src\graphics\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\text.hpp">
+      <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\agl\graphics\render\vertex-layout.inl">
       <Filter>src\graphics\render</Filter>
     </None>
     <None Include="include\agl\utility\inheritable-vector.inl">
-      <Filter>src\utility</Filter>
-    </None>
-    <None Include="include\agl\utility\tuple-buffer.inl">
-      <Filter>src\utility</Filter>
-    </None>
-    <None Include="include\agl\utility\tuple-buffer-base.inl">
       <Filter>src\utility</Filter>
     </None>
     <None Include="include\agl\utility\ecs\component-array.inl">

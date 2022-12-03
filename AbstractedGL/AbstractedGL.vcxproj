@@ -103,7 +103,6 @@
     <ClCompile Include="src\core\app\application.cpp" />
     <ClCompile Include="src\core\app\entry-point.cpp" />
     <ClCompile Include="src\core\app\input.cpp" />
-    <ClCompile Include="src\core\app\layer-base.cpp" />
     <ClCompile Include="src\core\app\layer-manager.cpp" />
     <ClCompile Include="src\core\app\window.cpp" />
     <ClCompile Include="src\core\misc\log.cpp" />
@@ -116,6 +115,7 @@
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
+    <ClCompile Include="src\graphics\ecs\system\text-system.cpp" />
     <ClCompile Include="src\graphics\render\index-buffer.cpp" />
     <ClCompile Include="src\graphics\render\render-buffer.cpp" />
     <ClCompile Include="src\graphics\render\vertex-array.cpp" />
@@ -134,6 +134,8 @@
     <ClCompile Include="src\graphics\texture\texture-manager.cpp" />
     <ClCompile Include="src\graphics\texture\texture-base.cpp" />
     <ClCompile Include="src\graphics\texture\texture2d.cpp" />
+    <ClCompile Include="src\graphics\text\font-manager.cpp" />
+    <ClCompile Include="src\graphics\text\font.cpp" />
     <ClCompile Include="src\system\debug\exceptions.cpp" />
     <ClCompile Include="src\system\glcore\destructive-move.cpp" />
     <ClCompile Include="src\system\glcore\gl-core.cpp" />
@@ -152,6 +154,7 @@
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\renderable.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\text.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\camera.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\direction.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\directional-light.hpp" />
@@ -164,6 +167,7 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\uniform-build.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\system\text-system.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-prototyper.hpp" />
@@ -212,11 +216,18 @@
     <ClInclude Include="include\agl\graphics\shape\prism.hpp" />
     <ClInclude Include="include\agl\graphics\shape\rectangle.hpp" />
     <ClInclude Include="include\agl\graphics\shape\shape-builder.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-format-type.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-manager.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-base.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-pixel-match-type.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-type.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\texture\texture-wrap-type.hpp" />
     <ClInclude Include="include\agl\graphics\texture\texture2d.hpp" />
+    <ClInclude Include="include\agl\graphics\text\font-manager.hpp" />
+    <ClInclude Include="include\agl\graphics\text\font-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\text\font.hpp" />
+    <ClInclude Include="include\agl\graphics\text\glyph.hpp" />
     <ClInclude Include="include\agl\graphics\types\bitangent.hpp" />
     <ClInclude Include="include\agl\graphics\types\color.hpp" />
     <ClInclude Include="include\agl\graphics\types\normal.hpp" />
@@ -255,8 +266,6 @@
     <ClInclude Include="include\agl\utility\ecs\view.hpp" />
     <ClInclude Include="include\agl\utility\inheritable-vector.hpp" />
     <ClInclude Include="include\agl\utility\ordered-list.hpp" />
-    <ClInclude Include="include\agl\utility\tuple-buffer-base.hpp" />
-    <ClInclude Include="include\agl\utility\tuple-buffer.hpp" />
     <ClInclude Include="include\agl\utility\type-unique-identifier.hpp" />
     <ClInclude Include="include\agl\utility\unique-identifier-manager.hpp" />
     <ClInclude Include="include\agl\utility\unique-identifier.hpp" />
@@ -296,8 +305,6 @@
     <None Include="include\agl\utility\ecs\view.inl" />
     <None Include="include\agl\utility\inheritable-vector.inl" />
     <None Include="include\agl\utility\ordered-list.inl" />
-    <None Include="include\agl\utility\tuple-buffer-base.inl" />
-    <None Include="include\agl\utility\tuple-buffer.inl" />
     <None Include="include\agl\utility\type-unique-identifier.inl" />
     <None Include="include\agl\utility\unique-identifier.inl" />
   </ItemGroup>

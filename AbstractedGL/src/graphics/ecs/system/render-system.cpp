@@ -1,6 +1,6 @@
 #include "agl/core/app/application.hpp"
 #include "agl/graphics/ecs/component/renderable.hpp"
-#include "agl/graphics/ecs/component/model.hpp"
+#include "agl/graphics/ecs/component/mesh.hpp"
 #include "agl/graphics/ecs/system/render-system.hpp"
 #include "agl/graphics/shader/uniform-array.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
@@ -10,9 +10,31 @@
 
 namespace agl
 {
+	void render_system::render_mesh(entity_uid const& id_entity, registry &reg)
+	{
+		static auto& shader_manager = application::get_resource<agl::shader_manager>();
+
+		auto const& renderable = reg.get<agl::renderable>(id_entity);
+		auto& mesh = reg.get<agl::mesh>(renderable.id_renderable);
+
+		shader_manager.set_active_shader(renderable.id_shader);
+
+		if (mesh.rbuffer.require_update())
+			mesh.rbuffer.update_buffers();
+
+		mesh.rbuffer.bind();
+
+		if (mesh.rbuffer.get_index_count() == 0u)
+			AGL_CALL(glDrawArrays(mesh.draw_type, 0u, mesh.rbuffer.get_vertex_count()));
+		else
+			AGL_CALL(glDrawElements(mesh.draw_type, mesh.rbuffer.get_index_count(), GL_UNSIGNED_INT, 0u));
+
+		mesh.rbuffer.unbind();
+	}
+
+
 	void render_system::init(registry &reg)
 	{
-
 	}
 
 	void render_system::update(registry &reg)
@@ -24,34 +46,17 @@ namespace agl
 		if (renderable_view.needs_update())
 			renderable_view = reg.inclusive_view<renderable>();
 
-		auto last_shader = shader_uid{};
-
 		for (auto it = renderable_view.cbegin(); it != renderable_view.cend(); ++it)
 		{
 			auto const& e = reg.get_entity(*it);
-			auto const& renderable = reg.get<agl::renderable>(*it);
-			auto& mesh = reg.get<agl::mesh>(renderable.id_renderable);
-
+			
 			if (e.has_component<agl::uniform_array>())
 			{
 				auto& uniforms = reg.get<uniform_array>(*it);
 				uniforms.send(e);
 			}
 
-			manager.set_active_shader(renderable.id_shader);
-			
-			if (mesh.rbuffer.require_update())
-				mesh.rbuffer.update_buffers();
-			
-			mesh.rbuffer.bind();
-			
-			if (mesh.rbuffer.get_index_count() == 0u)
-				AGL_CALL(glDrawArrays(mesh.draw_type, 0u, mesh.rbuffer.get_vertex_count()));
-			else
-				AGL_CALL(glDrawElements(mesh.draw_type, mesh.rbuffer.get_index_count(), GL_UNSIGNED_INT, 0u));
-			
-			mesh.rbuffer.unbind();
-
+			render_mesh(*it, reg);
 			texture_manager.unbind_textures();
 		}
 	}

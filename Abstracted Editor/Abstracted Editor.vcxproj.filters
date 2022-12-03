@@ -22,6 +22,12 @@
     <None Include="resource\basic-fragment.glsl">
       <Filter>resource</Filter>
     </None>
+    <None Include="resource\text-vertex.glsl">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="resource\text-fragment.glsl">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resource\light.vsh">
