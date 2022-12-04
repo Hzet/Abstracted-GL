@@ -248,6 +248,11 @@ namespace agl
 		glfwWindowHint(GLFW_OPENGL_PROFILE, type);
 	}
 
+	void window::set_blend_function(gl_blend_function sfactor, gl_blend_function dfactor)
+	{
+		AGL_CALL(glBlendFunc(sfactor, dfactor));
+	}
+
 	void glfw_error_callback(int error, const char *description)
 	{
 		switch (error)

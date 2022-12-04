@@ -40,9 +40,9 @@ namespace editor
 			auto& camera_transform = m_camera_orthographic.attach_component<agl::transformable>();
 			auto& camera_direction = m_camera_orthographic.attach_component<agl::direction>(agl::camera_base::s_world_direction);
 			auto& uniforms = m_camera_orthographic.attach_component<agl::uniform_array>();
-			
+
 			camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
-			camera.set_planes({ 0.1f, 100000.f });
+			camera.set_planes({ -1.f, 1.f });
 
 			uniforms.add_uniform<agl::camera_uniform, agl::camera_orthographic>(id_text_shader);
 		}
@@ -114,7 +114,7 @@ namespace editor
 		{
 			auto rect_texture_uid = texture_manager.load_from_file("resource/container.jpg");
 			auto rect_entity = reg.create();
-			rect_entity.attach_component<agl::renderable>(rect_entity, id_basic_shader);
+		//	rect_entity.attach_component<agl::renderable>(rect_entity, id_basic_shader);
 			rect_entity.attach_component<agl::texture>(rect_texture_uid);
 			auto& rect_mesh = rect_entity.attach_component<agl::mesh>();
 			auto& rect_transform = rect_entity.attach_component<agl::transformable>();
@@ -145,6 +145,12 @@ namespace editor
 
 		{
 			auto& text = m_fps_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
+			auto& transform = m_fps_text.attach_component<agl::transformable>();
+			auto& uniforms = m_fps_text.attach_component<agl::uniform_array>();
+
+			transform.set_position({-800.f, 0.f, 0.f});
+
+			//uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
 		}
 	}
 
@@ -212,6 +218,6 @@ namespace editor
 		m_camera_perspective.get_component<agl::transformable>().rotate(rotation);
 		m_last_mouse_position = agl::input::get_mouse_position();
 
-		m_fps_text.get_component<agl::text>().text = std::to_string(m_last_mouse_position.x);
+		m_fps_text.get_component<agl::text>().text = std::to_string(frame_time * 1000.f) + "ms";
 	}
 }

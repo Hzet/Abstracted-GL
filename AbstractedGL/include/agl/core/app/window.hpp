@@ -6,6 +6,7 @@
 #include "agl/core/enums/gl-clear-type.hpp"
 #include "agl/core/enums/gl-feature-type.hpp"
 #include "agl/core/enums/gl-profile-type.hpp"
+#include "agl/core/enums/gl-blend-function.hpp"
 #include "agl/core/app/window-data.hpp"
 #include "agl/system/glcore/destructive-move.hpp"
 
@@ -22,6 +23,7 @@ namespace agl
 		static void disable_feature(gl_feature_type type);
 		static void set_opengl_api_version(std::uint32_t major, std::uint32_t minor);
 		static void set_opengl_api_profile(gl_profile_type type);
+		static void set_blend_function(gl_blend_function sfactor, gl_blend_function dfactor);
 
 	public:
 		window();

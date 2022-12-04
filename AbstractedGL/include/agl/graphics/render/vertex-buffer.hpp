@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "agl/system/glcore/destructive-move.hpp"
+#include "agl/core/enums/gl-buffer-usage-type.hpp"
 
 namespace agl
 {
@@ -82,6 +83,9 @@ namespace agl
 		/// <param name="size">The size</param>
 		void buffer(void const * const data, const std::uint32_t offset, const std::uint32_t size);
 
+		gl_buffer_usage get_usage() const;
+		void set_usage(gl_buffer_usage usage);
+
 		/// <summary>
 		/// Get the size of the memory allocated for this buffer in bytes.
 		/// </summary>
@@ -102,6 +106,7 @@ namespace agl
 		std::uint32_t m_count;
 		std::uint32_t m_id_object;
 		std::uint32_t m_size;
+		gl_buffer_usage m_usage;
 	};
 
 }

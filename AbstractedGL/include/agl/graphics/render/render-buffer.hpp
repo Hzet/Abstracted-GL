@@ -18,6 +18,9 @@ namespace agl
 		std::uint64_t get_stride_count() const;
 		std::uint64_t get_stride_size() const;
 
+		gl_buffer_usage get_usage() const;
+		void set_usage(gl_buffer_usage usage);
+
 		std::byte const * const get_vertices() const;
 		std::uint32_t const * const get_indices() const;
 

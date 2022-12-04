@@ -288,6 +288,9 @@
     <ClCompile Include="src\graphics\ecs\system\text-system.cpp">
       <Filter>src\graphics\ecs\system\render</Filter>
     </ClCompile>
+    <ClCompile Include="include\agl\core\enums\gl-buffer-usage-type.hpp">
+      <Filter>src\system\core\enums</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
@@ -655,6 +658,9 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\text.hpp">
       <Filter>src\graphics\ecs\component\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\enums\gl-blend-function.hpp">
+      <Filter>src\system\core\enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

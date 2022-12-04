@@ -4,6 +4,7 @@
 #include "agl/graphics/shader/shader-manager.hpp"
 #include "agl/graphics/shader/uniform-array.hpp"
 #include "agl/graphics/text/font-manager.hpp"
+#include "agl/graphics/texture/texture-manager.hpp"
 
 namespace agl
 {
@@ -22,6 +23,7 @@ namespace agl
 			{ 1.f, 0.f } // bottom right
 		};
 
+		m_character_mesh.rbuffer.set_usage(BUFFER_DYNAMIC_DRAW);
 		m_character_mesh.rbuffer.push_vertices<position>(positions.cbegin(), positions.cend());
 		m_character_mesh.rbuffer.push_vertices<texture_position>(texture_positions.cbegin(), texture_positions.cend());
 	}
@@ -40,18 +42,20 @@ namespace agl
 	void text_system::render_text(entity_uid const& id_entity, registry &reg)
 	{
 		static auto& shader_manager = application::get_resource<agl::shader_manager>();
+		static auto& texture_manager = application::get_resource<agl::texture_manager>();
 		static auto const& font_manager = application::get_resource<agl::font_manager>();
 
 		auto const& text = reg.get<agl::text>(id_entity);
 		auto const& font = font_manager.get_font(text.id_font);
 
 		shader_manager.set_active_shader(text.id_shader);
-
+		
 		auto w = float{};
 		auto h = float{};
 		auto x = float{};
 		auto y = float{};
 		auto offset = float{};
+
 
 		for (auto const ch : text.text)
 		{
@@ -72,8 +76,10 @@ namespace agl
 			
 			m_character_mesh.rbuffer.update_buffers();
 			
-			m_character_mesh.rbuffer.bind();
 			glyph.texture.bind();
+			shader_manager.get_shader(text.id_shader).set_uniform(shader_manager.get_shader(text.id_shader).get_location("id_texture"), 0);
+
+			m_character_mesh.rbuffer.bind();
 
 			AGL_CALL(glDrawArrays(m_character_mesh.draw_type, 0u, m_character_mesh.rbuffer.get_vertex_count()));
 

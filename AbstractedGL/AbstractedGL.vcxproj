@@ -97,8 +97,10 @@
     <ClCompile Include="external\glad\glad.c" />
     <ClInclude Include="include\agl\core\app\layer-manager.hpp" />
     <ClInclude Include="include\agl\core\app\layer-type-uid.hpp" />
+    <ClInclude Include="include\agl\core\enums\gl-blend-function.hpp" />
     <ClInclude Include="include\agl\core\enums\gl-clear-type.hpp" />
     <ClCompile Include="include\agl\core\app\layer-base.hpp" />
+    <ClCompile Include="include\agl\core\enums\gl-buffer-usage-type.hpp" />
     <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp" />
     <ClCompile Include="src\core\app\application.cpp" />
     <ClCompile Include="src\core\app\entry-point.cpp" />

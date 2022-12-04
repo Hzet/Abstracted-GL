@@ -47,6 +47,16 @@ namespace agl
 		return m_vlayout.get_size();
 	}
 
+	gl_buffer_usage render_buffer::get_usage() const
+	{
+		return m_vbuffer.get_usage();
+	}
+
+	void render_buffer::set_usage(gl_buffer_usage usage)
+	{
+		m_vbuffer.set_usage(usage);
+	}
+
 	std::byte const * const render_buffer::get_vertices() const
 	{
 		return m_vertices.data();

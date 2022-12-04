@@ -7,6 +7,7 @@ namespace agl
 		: m_size(0u)
 		, m_id_object(0u)
 		, m_count(0u)
+		, m_usage{ BUFFER_STATIC_DRAW }
 	{
 	}
 
@@ -59,7 +60,7 @@ namespace agl
 		m_size = size;
 		m_count = count;
 
-		AGL_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
+		AGL_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, m_usage));
 	}
 
 	void vertex_buffer::buffer(void const * const data, const std::uint32_t offset, const std::uint32_t size)
@@ -70,6 +71,17 @@ namespace agl
 		bind();
 
 		AGL_CALL(glBufferSubData(GL_ARRAY_BUFFER, offset, size, data));
+	}
+
+
+	gl_buffer_usage vertex_buffer::get_usage() const
+	{
+		return m_usage;
+	}
+
+	void vertex_buffer::set_usage(gl_buffer_usage usage)
+	{
+		m_usage = usage;
 	}
 
 	std::uint32_t vertex_buffer::get_size() const
