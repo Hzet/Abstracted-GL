@@ -18,13 +18,14 @@ namespace agl
 		}
 
 		font.m_id_font = font_uid::create();
+		m_fonts.push_back(font);
 
 		return font.get_id();
 	}
 
 	font const& font_manager::get_font(font_uid id_font) const
 	{
-		AGL_CORE_ASSERT(id_font <= m_fonts.size(), "Index out of bounds: font \"{}\" not present", id_font);
+		AGL_CORE_ASSERT(id_font != 0 && id_font <= m_fonts.size(), "Index out of bounds: font \"{}\" not present", id_font);
 
 		return m_fonts[id_font - 1];
 	}

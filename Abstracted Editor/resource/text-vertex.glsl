@@ -11,9 +11,11 @@ struct agl_camera
 	mat4 view;
 };
 
+uniform agl_camera camera;
+
 void main()
 {
 	vtexture = texture;
 
-	gl_Position = projection * view * vec4(vertex, 1.0);
+	gl_Position = camera.projection * camera.view * vec4(position, 1.0);
 }

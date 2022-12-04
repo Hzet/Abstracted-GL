@@ -48,6 +48,9 @@ namespace agl
 	registry_system::registry_system(registry &reg)
 	{
 		order_groups();
+
+		for (auto& v : m_groups)
+			v.init(reg);
 	}
 
 	void registry_system::update(registry &reg)

@@ -27,7 +27,7 @@ namespace agl
 
 		AGL_CALL(glPixelStorei(GL_UNPACK_ALIGNMENT, 1)); // disable byte-alignment restriction
 
-		for (auto ch = char(0); ch < 256; ++ch)
+		for (auto ch = 0; ch < 256; ++ch)
 		{
 			if (FT_Load_Char(face, ch, FT_LOAD_RENDER))
 			{
@@ -45,14 +45,14 @@ namespace agl
 			auto g = glyph{
 				static_cast<std::uint64_t>(face->glyph->advance.x),
 				glm::ivec2{face->glyph->bitmap_left, face->glyph->bitmap_top},
-				ch,
+				static_cast<char>(ch),
 				std::move(texture)
 			};
 
 			m_glyphs.push_back(g);
 		}
 
-		AGL_CALL(glPixelStorei(GL_UNPACK_ALIGNMENT, 0));
+		//AGL_CALL(glPixelStorei(GL_UNPACK_ALIGNMENT, 0));
 
 		FT_Done_Face(face);
 		FT_Done_FreeType(ft);

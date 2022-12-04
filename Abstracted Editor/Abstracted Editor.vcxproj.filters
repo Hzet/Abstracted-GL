@@ -11,11 +11,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\editor.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="resource\light.fsh">
       <Filter>resource</Filter>
     </None>
@@ -36,5 +31,19 @@
     <FxCompile Include="resource\basic-vertex.glsl">
       <Filter>resource</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\editor.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scene-layer.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\editor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene-layer.cpp" />
   </ItemGroup>
 </Project>

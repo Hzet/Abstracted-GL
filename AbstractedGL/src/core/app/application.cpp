@@ -1,5 +1,6 @@
 #include "agl/core/app/application.hpp"
 #include "agl/core/app/layer-manager.hpp"
+#include "agl/graphics/text/font-manager.hpp"
 #include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
 #include "agl/utility/ecs/ecs.hpp"
@@ -91,5 +92,6 @@ namespace agl
 		add_resource<agl::shader_manager>();
 		add_resource<agl::registry>();
 		add_resource<agl::layer_manager>();
+		add_resource<agl::font_manager>();
 	}
 }
