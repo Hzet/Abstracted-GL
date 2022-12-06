@@ -16,7 +16,8 @@ namespace editor
 	private:
 		agl::entity m_camera_perspective;
 		agl::entity m_camera_orthographic;
-		agl::entity m_fps_text;
+		agl::entity m_frametime_text;
+		agl::entity m_avg_fps_text;
 		float m_camera_velocity;
 		float m_camera_sensitivity;
 		agl::timer m_timer;

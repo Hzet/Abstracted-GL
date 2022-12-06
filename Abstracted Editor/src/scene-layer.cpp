@@ -33,7 +33,7 @@ namespace editor
 		sh_manager.link_all_shaders();
 
 		// load fonts 
-		auto const id_bahnschrift_font = font_manager.load_from_file("resource/bahnschrift.ttf", 48);
+		auto const id_bahnschrift_font = font_manager.load_from_file("resource/arial.ttf", 48);
 
 		// camera orthographic
 		m_camera_orthographic = reg.create();
@@ -145,15 +145,28 @@ namespace editor
 			rect_uniforms.add_uniform<agl::texture_uniform, agl::texture>(id_basic_shader);
 		}
 
-		// fps text
-		m_fps_text = reg.create();
+		// frame time text
+		m_frametime_text = reg.create();
 
 		{
-			auto& text = m_fps_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
-			auto& transform = m_fps_text.attach_component<agl::transformable>();
-			auto& uniforms = m_fps_text.attach_component<agl::uniform_array>();
+			auto& text = m_frametime_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
+			auto& transform = m_frametime_text.attach_component<agl::transformable>();
+			auto& uniforms = m_frametime_text.attach_component<agl::uniform_array>();
 
 			transform.set_position({-0.98f, 0.95f, 0.f});
+
+			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
+		}
+
+		// avg fps text
+		m_avg_fps_text = reg.create();
+
+		{
+			auto& text = m_avg_fps_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
+			auto& transform = m_avg_fps_text.attach_component<agl::transformable>();
+			auto& uniforms = m_avg_fps_text.attach_component<agl::uniform_array>();
+
+			transform.set_position({ -0.98f, 0.90f, 0.f });
 
 			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
 		}
@@ -224,8 +237,12 @@ namespace editor
 		m_camera_perspective.get_component<agl::transformable>().rotate(rotation);
 		m_last_mouse_position = agl::input::get_mouse_position();
 
-		if(m_frame_count % 5 == 0)
-			m_fps_text.get_component<agl::text>().text = std::to_string(frame_time * 1000.f) + "ms";
+		if (m_frame_count % 5 == 0)
+		{
+			m_frametime_text.get_component<agl::text>().text = "frame time: " +std::to_string(frame_time * 1000.f);
+			m_avg_fps_text.get_component<agl::text>().text = "fps: " + std::to_string(1.f / frame_time);
 
+		}
 	}
+
 }

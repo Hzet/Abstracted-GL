@@ -44,7 +44,7 @@ namespace agl
 
 			auto g = glyph{
 				static_cast<std::uint64_t>(face->glyph->advance.x),
-				glm::ivec2{face->glyph->bitmap_left, face->glyph->bitmap_top},
+				glm::vec2{face->glyph->bitmap_left, face->glyph->bitmap_top},
 				static_cast<char>(ch),
 				std::move(texture)
 			};

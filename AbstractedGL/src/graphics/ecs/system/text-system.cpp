@@ -7,10 +7,6 @@
 #include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/utility/ecs/ecs.hpp"
 
-#include "agl/graphics/ecs/component/camera-orthographic.hpp"
-#include "agl/graphics/ecs/component/transform.hpp"
-#include "agl/core/app/window.hpp"
-
 namespace agl
 {
 	void text_system::init(registry &reg)
@@ -74,7 +70,7 @@ namespace agl
 			w = glyph.texture.get_size().x;
 			h = glyph.texture.get_size().y;
 			x = offset + glyph.bearing.x;
-			y = glyph.texture.get_size().y - glyph.bearing.y;
+			y = glyph.bearing.y - glyph.texture.get_size().y;
 
 			m_character_mesh.rbuffer.get<position>(0) = { x, y + h, 0.f };     // bottom left
 			m_character_mesh.rbuffer.get<position>(1) = { x, y, 0.f };         // top left
@@ -87,7 +83,7 @@ namespace agl
 			m_character_mesh.rbuffer.update_buffers();
 			
 			glyph.texture.bind();
-			shader_manager.get_shader(text.id_shader).set_uniform(shader_manager.get_shader(text.id_shader).get_location("id_texture"), 0);
+			shader_manager.get_shader(text.id_shader).set_uniform(shader_manager.get_shader(text.id_shader).ask_location("id_texture"), 0);
 
 			m_character_mesh.rbuffer.bind();
 
@@ -98,5 +94,4 @@ namespace agl
 			offset += glyph.advance >> 6;
 		}
 	}
-
 }
