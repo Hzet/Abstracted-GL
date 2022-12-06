@@ -37,11 +37,6 @@ namespace agl
 		return *this;
 	}
 
-	transform transform::operator*(const transform &other) const
-	{
-		return m_matrix * other.m_matrix;
-	}
-
 	transform::operator const glm::mat4&() const
 	{
 		return m_matrix;

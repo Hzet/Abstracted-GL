@@ -4,14 +4,14 @@
 
 namespace agl
 {
-	font_uid font_manager::load_from_file(std::string const& filepath)
+	font_uid font_manager::load_from_file(std::string const& filepath, std::uint64_t size)
 	{
 		if (m_filepath_to_id.find(filepath) != m_filepath_to_id.cend())
 			return m_filepath_to_id.at(filepath);
 
 		auto font = agl::font{};
 
-		if (!font.load_from_file(filepath))
+		if (!font.load_from_file(filepath, size))
 		{
 			AGL_CORE_LOG_WARNING(false, "Failed to load font \"{}\"", filepath);
 			return font_uid{};

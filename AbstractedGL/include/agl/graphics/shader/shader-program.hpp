@@ -177,6 +177,8 @@ namespace agl
 		/// <returns>The location of the variable</returns>
 		std::int32_t get_location(const std::string &name) const;
 
+		std::int32_t ask_location(const std::string &name) const;
+
 	private:
 		friend class shader_manager;
 

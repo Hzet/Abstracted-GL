@@ -11,7 +11,7 @@ namespace agl
 		: public resource_base
 	{
 	public:
-		font_uid load_from_file(std::string const& filepath);
+		font_uid load_from_file(std::string const& filepath, std::uint64_t size);
 
 		font const& get_font(font_uid id_font) const;
 

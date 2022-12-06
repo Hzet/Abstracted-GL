@@ -21,5 +21,6 @@ namespace editor
 		float m_camera_sensitivity;
 		agl::timer m_timer;
 		glm::vec2 m_last_mouse_position;
+		std::uint64_t m_frame_count;
 	};
 }

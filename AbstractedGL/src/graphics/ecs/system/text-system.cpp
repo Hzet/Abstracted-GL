@@ -5,6 +5,11 @@
 #include "agl/graphics/shader/uniform-array.hpp"
 #include "agl/graphics/text/font-manager.hpp"
 #include "agl/graphics/texture/texture-manager.hpp"
+#include "agl/utility/ecs/ecs.hpp"
+
+#include "agl/graphics/ecs/component/camera-orthographic.hpp"
+#include "agl/graphics/ecs/component/transform.hpp"
+#include "agl/core/app/window.hpp"
 
 namespace agl
 {
@@ -31,7 +36,6 @@ namespace agl
 	void text_system::update(registry &reg)
 	{
 		static auto text_view = reg.inclusive_view<agl::text>();
-
 		if (text_view.needs_update())
 			text_view = reg.inclusive_view<agl::text>();
 
@@ -45,17 +49,23 @@ namespace agl
 		static auto& texture_manager = application::get_resource<agl::texture_manager>();
 		static auto const& font_manager = application::get_resource<agl::font_manager>();
 
+		auto const& text_entity = reg.get_entity(id_entity);
 		auto const& text = reg.get<agl::text>(id_entity);
 		auto const& font = font_manager.get_font(text.id_font);
 
+		if (text_entity.has_component<uniform_array>())
+		{
+			auto& uniforms = reg.get<uniform_array>(id_entity);
+			uniforms.send(text_entity);
+		}
+
 		shader_manager.set_active_shader(text.id_shader);
-		
+
 		auto w = float{};
 		auto h = float{};
 		auto x = float{};
 		auto y = float{};
 		auto offset = float{};
-
 
 		for (auto const ch : text.text)
 		{

@@ -28,7 +28,7 @@ namespace agl
 
 	void camera_perspective::update_projection()
 	{
-		m_projection = glm::perspective(glm::radians(get_fov()), static_cast<float>(get_frame_dimensions().x) / static_cast<float>(get_frame_dimensions().y), get_planes().x, get_planes().y);
+		m_projection = glm::perspective(glm::radians(get_fov()), static_cast<float>(get_resolution().x) / static_cast<float>(get_resolution().y), get_planes().x, get_planes().y);
 	}
 
 }

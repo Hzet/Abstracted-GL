@@ -27,13 +27,13 @@ namespace agl
 		/// <returns>
 		/// The dimensions
 		/// </returns>
-		const glm::uvec2& get_frame_dimensions() const;
+		const glm::vec2& get_resolution() const;
 
 		/// <summary>
 		/// Set the dimension of the rendering screen.
 		/// </summary>
 		/// <param name="frame">The dimensions</returns>
-		void set_frame_dimensions(const glm::uvec2 &frame);
+		void set_resolution(const glm::vec2 &frame);
 
 		/// <summary>
 		/// Get the camera's near and far 'planes'.
@@ -90,7 +90,7 @@ namespace agl
 
 	private:
 		glm::vec2 m_planes; // near / far
-		glm::uvec2 m_frame_dimensions;
+		glm::vec2 m_resolution;
 		glm::vec3 m_look_at;
 
 		bool m_look_at_update;

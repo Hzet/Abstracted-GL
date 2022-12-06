@@ -12,11 +12,15 @@ void uniform<camera_uniform, TComponent>::send(const shader &sh, const entity &e
 		m_projection = sh.get_location(get_full_name() + "." + "projection");
 		m_view = sh.get_location(get_full_name() + "." + "view");
 
+		// optional
+		m_resolution = sh.ask_location(get_full_name() + "." + "resolution");
+
 		m_update_uniform_locations = false;
 	}
 
 	auto const& camera = e.get_component<TComponent>();
 
 	sh.set_uniform(m_projection, camera.get_projection());
+	sh.set_uniform(m_resolution, camera.get_resolution());
 	sh.set_uniform(m_view, camera.get_view());
 }

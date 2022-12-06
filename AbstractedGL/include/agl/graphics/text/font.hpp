@@ -9,7 +9,7 @@ namespace agl
 	class font
 	{
 	public:
-		bool load_from_file(std::string const& filepath);
+		bool load_from_file(std::string const& filepath, std::uint64_t size);
 
 		std::string const& get_filepath() const;
 

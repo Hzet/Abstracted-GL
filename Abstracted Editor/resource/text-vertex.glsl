@@ -8,6 +8,7 @@ out vec2 vtexture;
 struct agl_camera 
 {
 	mat4 projection;
+	vec2 resolution;
 	mat4 view;
 };
 
@@ -22,6 +23,7 @@ uniform agl_model model;
 void main()
 {
 	vtexture = texture;
+	vec3 pos = position / vec3(camera.resolution, 1.0);
 
-	gl_Position = camera.projection * camera.view * vec4(position.x / 800, position.y / 900, position.z, 1.0);
+	gl_Position = camera.projection * camera.view * model.transform * vec4(pos, 1.0);
 }

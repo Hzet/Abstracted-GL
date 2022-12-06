@@ -189,41 +189,65 @@ namespace agl
 
 	void shader::set_uniform(std::int32_t location, const float value) const
 	{
+		if (location == -1)
+			return;
+
 		glUniform1f(location, value);
 	}
 
 	void shader::set_uniform(std::int32_t location, const std::int32_t value) const
 	{
+		if (location == -1)
+			return;
+
 		AGL_CALL(glUniform1i(location, value));
 	}
 
 	void shader::set_uniform(std::int32_t location, const std::uint32_t value) const
 	{
+		if (location == -1)
+			return;
+
 		AGL_CALL(glUniform1ui(location, value));
 	}
 
 	void shader::set_uniform(std::int32_t location, const glm::vec2 &value) const
 	{
+		if (location == -1)
+			return;
+
 		AGL_CALL(glUniform2f(location, value.x, value.y));
 	}
 
 	void shader::set_uniform(std::int32_t location, const glm::vec3 &value) const
 	{
+		if (location == -1)
+			return;
+
 		AGL_CALL(glUniform3f(location, value.x, value.y, value.z));
 	}
 
 	void shader::set_uniform(std::int32_t location, const glm::vec4 &value) const
 	{
+		if (location == -1)
+			return;
+
 		AGL_CALL(glUniform4f(location, value.x, value.y, value.z, value.w));
 	}
 
 	void shader::set_uniform(std::int32_t location, const glm::mat4 &value) const
 	{
+		if (location == -1)
+			return;
+
 		AGL_CALL(glUniformMatrix4fv(location, 1u, GL_FALSE, glm::value_ptr(value)));
 	}
 
 	void shader::set_uniform(std::int32_t location, std::int32_t const * const value, std::uint64_t count) const
 	{
+		if (location == -1)
+			return;
+
 		AGL_CALL(glUniform1iv(location, count, value));
 	}
 
@@ -238,6 +262,15 @@ namespace agl
 
 		AGL_CALL(result = glGetUniformLocation(m_id_object, name.c_str()));
 		AGL_CORE_ASSERT(result != -1, "Uniform with such name does not exist!\nName: {}", name);
+
+		return result;
+	}
+
+	std::int32_t shader::ask_location(std::string const& name) const
+	{
+		auto result = std::int32_t{};
+
+		AGL_CALL(result = glGetUniformLocation(m_id_object, name.c_str()));
 
 		return result;
 	}

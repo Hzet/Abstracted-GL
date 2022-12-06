@@ -85,6 +85,10 @@ namespace agl
 		/// Reference to this
 		/// </returns>
 		transform& operator*=(const transform &other);
+		
+		template <typename T>
+		T operator*(T const& rhs) const;
+
 
 		/// <summary>
 		/// Get the combination transform of this transform with the 'other'.
@@ -93,9 +97,22 @@ namespace agl
 		/// <returns>
 		/// Newly created transform
 		/// </returns>
+		template <>
 		transform operator*(const transform &other) const;
 
 	private:
 		glm::mat4 m_matrix;
 	};
+
+	template <typename T>
+	T transform::operator*(T const& rhs) const
+	{
+		return m_matrix * rhs;
+	}	
+	
+	template <>
+	transform transform::operator*(transform const& rhs) const
+	{
+		return m_matrix * rhs.m_matrix;
+	}
 }

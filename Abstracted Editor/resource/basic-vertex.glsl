@@ -1,5 +1,5 @@
 #version 430 core
-layout (location = 0) in vec3 pos;
+layout (location = 0) in vec3 position;
 layout (location = 1) in vec4 color;
 layout (location = 2) in vec2 texture;
 
@@ -24,6 +24,5 @@ void main()
 {
 	vcolor = color;
 	vtexture = texture;
-
-	gl_Position = camera.projection * camera.view * model.transform * vec4(pos, 1.f);
+	gl_Position = camera.projection * camera.view * model.transform * vec4(position, 1.0);
 }

@@ -25,6 +25,7 @@ namespace agl
 
 	private:
 		std::int32_t m_projection;
+		std::int32_t m_resolution;
 		std::int32_t m_view;
 	};
 

@@ -16,16 +16,16 @@ namespace agl
 	{
 	}
 
-	const glm::uvec2& camera_base::get_frame_dimensions() const
+	const glm::vec2& camera_base::get_resolution() const
 	{
-		return m_frame_dimensions;
+		return m_resolution;
 	}
 
-	void camera_base::set_frame_dimensions(const glm::uvec2 &frame)
+	void camera_base::set_resolution(const glm::vec2 &frame)
 	{
 		m_needs_update = true;
 
-		m_frame_dimensions = frame;
+		m_resolution = frame;
 	}
 
 	const glm::vec2& camera_base::get_planes() const

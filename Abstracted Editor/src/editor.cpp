@@ -14,7 +14,7 @@ namespace agl
 
 		auto wnd = window{};
 
-		wnd.create("Test app", { 800, 600 });
+		wnd.create("Test app", { 1280, 1024 });
 		wnd.set_clear_color({ 0.f, 1.f, 1.f, 1.f });
 		wnd.set_clear_buffers(static_cast<gl_clear_type>(CLEAR_COLOR | CLEAR_DEPTH));
 		wnd.set_clear_color({ 0.05f, 0.1f, 0.2f, 1.f });

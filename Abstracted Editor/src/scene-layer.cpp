@@ -19,6 +19,8 @@ namespace editor
 {
 	void scene_layer::on_attach()
 	{
+		m_frame_count = 0;
+
 		auto& reg = agl::application::get_resource<agl::registry>();
 		auto& sh_manager = agl::application::get_resource<agl::shader_manager>();
 		auto& texture_manager = agl::application::get_resource<agl::texture_manager>();
@@ -31,7 +33,7 @@ namespace editor
 		sh_manager.link_all_shaders();
 
 		// load fonts 
-		auto const id_bahnschrift_font = font_manager.load_from_file("resource/bahnschrift.ttf");
+		auto const id_bahnschrift_font = font_manager.load_from_file("resource/bahnschrift.ttf", 48);
 
 		// camera orthographic
 		m_camera_orthographic = reg.create();
@@ -41,7 +43,7 @@ namespace editor
 			auto& camera_direction = m_camera_orthographic.attach_component<agl::direction>(agl::camera_base::s_world_direction);
 			auto& uniforms = m_camera_orthographic.attach_component<agl::uniform_array>();
 
-			camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
+			camera.set_resolution(agl::application::get_instance().get_window().get_data().resolution);
 			camera.set_planes({ -1.f, 1.f });
 
 			uniforms.add_uniform<agl::camera_uniform, agl::camera_orthographic>(id_text_shader);
@@ -59,12 +61,12 @@ namespace editor
 			auto& camera_direction = m_camera_perspective.attach_component<agl::direction>(agl::camera_base::s_world_direction);
 			auto& uniforms = m_camera_perspective.attach_component<agl::uniform_array>();
 
-			camera.set_frame_dimensions(agl::application::get_instance().get_window().get_data().resolution);
+			camera.set_resolution(agl::application::get_instance().get_window().get_data().resolution);
 			camera.set_planes({ 0.1f, 100000.f });
 			camera.set_fov(60.f);
 			camera.look_at({ 0.f, 0.f, 0.f });
 
-			camera_transform.set_position({ 0.f, 5.f, 0.f });
+			camera_transform.set_position({ 0.f, 0.f, 0.f });
 
 			uniforms.add_uniform<agl::camera_uniform, agl::camera_perspective>(id_basic_shader);
 		}
@@ -74,7 +76,7 @@ namespace editor
 
 		{
 			auto prism_entity = reg.create();
-			auto prism_builder = agl::prism_builder{ 4, glm::sqrt(2.f) / 2.f, 1.f };
+			auto prism_builder = agl::prism_builder{ 4, glm::sqrt(5.f) / 2.f, 2.5f };
 
 			auto const prism_positions = prism_builder.get_positions();
 			auto const prism_colors = prism_builder.get_colors(agl::color{ 0.f, 1.f, 0.f, 1.f });
@@ -85,6 +87,9 @@ namespace editor
 			prism_mesh.rbuffer.push_indices(prism_indices.cbegin(), prism_indices.cend());
 			prism_mesh.rbuffer.push_vertices<agl::position>(prism_positions.cbegin(), prism_positions.cend());
 			prism_mesh.rbuffer.push_vertices<agl::color>(prism_colors.cbegin(), prism_colors.cend());
+			
+			//for (auto i = 0; i < prism_positions.size(); ++i)
+			//	AGL_CORE_LOG_INFO("{{}, {}, {}}", prism_positions[i]->x / 1280.f, prism_positions[i]->y / 1024.f, prism_positions[i]->z);
 
 			for (auto i = 0; i < 1000; ++i)
 			{
@@ -148,9 +153,9 @@ namespace editor
 			auto& transform = m_fps_text.attach_component<agl::transformable>();
 			auto& uniforms = m_fps_text.attach_component<agl::uniform_array>();
 
-			transform.set_position({-800.f, 0.f, 0.f});
+			transform.set_position({-0.98f, 0.95f, 0.f});
 
-			//uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
+			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
 		}
 	}
 
@@ -158,6 +163,7 @@ namespace editor
 	{
 		auto frame_time = m_timer.elapsed().seconds();
 		m_timer.reset();
+		++m_frame_count;
 
 		auto e = agl::event{};
 		while (agl::application::get_instance().get_window().poll_event(e))
@@ -218,6 +224,8 @@ namespace editor
 		m_camera_perspective.get_component<agl::transformable>().rotate(rotation);
 		m_last_mouse_position = agl::input::get_mouse_position();
 
-		m_fps_text.get_component<agl::text>().text = std::to_string(frame_time * 1000.f) + "ms";
+		if(m_frame_count % 5 == 0)
+			m_fps_text.get_component<agl::text>().text = std::to_string(frame_time * 1000.f) + "ms";
+
 	}
 }

@@ -9,7 +9,7 @@
 
 namespace agl
 {
-	bool font::load_from_file(std::string const& filepath)
+	bool font::load_from_file(std::string const& filepath, std::uint64_t size)
 	{
 		m_filepath = filepath;
 
@@ -23,7 +23,7 @@ namespace agl
 		if (FT_New_Face(ft, filepath.c_str(), 0, &face))
 			return false;
 
-		FT_Set_Pixel_Sizes(face, 0, 48);
+		FT_Set_Pixel_Sizes(face, 0, size);
 
 		AGL_CALL(glPixelStorei(GL_UNPACK_ALIGNMENT, 1)); // disable byte-alignment restriction
 
