@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 
-#include "agl/utility/static-unique-identifier.hpp"
+#include "agl/uid/static-unique-identifier.hpp"
 
 namespace agl
 {

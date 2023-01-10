@@ -1,6 +1,6 @@
 #include "agl/graphics/shader/uniform-prototyper.hpp"
 #include "agl/graphics/shader/uniform-base.hpp"
-#include "agl/system/debug/assert.hpp"
+#include "agl/debug/assert.hpp"
 
 namespace agl
 {

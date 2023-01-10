@@ -3,7 +3,6 @@
 
 #include "agl/graphics/shader/shader-program.hpp"
 #include "agl/graphics/shader/shader-uid.hpp"
-#include "agl/core/app/resource.hpp"
 
 
 namespace agl
@@ -13,7 +12,6 @@ namespace agl
 	/// One can define a static variable atop of the object's .cpp file, attach required shaders, link it and then pass it to this class' constructor.
 	/// </summary>
 	class shader_manager
-		: public resource_base
 	{
 	public:
 		shader_uid load_from_file(const std::string &vertex, const std::string &fragment, const std::string &geometry = "", const std::string &tessControl = "", const std::string &tessEvaluation = "", const std::string &compute = "");
@@ -43,9 +41,6 @@ namespace agl
 
 	private:
 		static std::uint64_t get_index(const shader_uid &id_shader);
-
-	private:
-		virtual void dummy() const override {}
 
 	private:
 		shader_uid m_active_shader;

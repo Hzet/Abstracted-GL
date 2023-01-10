@@ -56,7 +56,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)include;$(SolutionDir)debug/include;$(SolutionDir)ecs/include;$(SolutionDir)uid/include;$(SolutionDir)logger/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AGL_DEBUG;STB_IMAGE_IMPLEMENTATION;GLM_FORCE_SWIZZLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessToFile>false</PreprocessToFile>
@@ -77,7 +77,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)include;$(SolutionDir)debug/include;$(SolutionDir)ecs/include;$(SolutionDir)uid/include;$(SolutionDir)logger/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;STB_IMAGE_IMPLEMENTATION;GLM_FORCE_SWIZZLE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -97,17 +97,19 @@
     <ClCompile Include="external\glad\glad.c" />
     <ClInclude Include="include\agl\core\app\layer-manager.hpp" />
     <ClInclude Include="include\agl\core\app\layer-type-uid.hpp" />
+    <ClInclude Include="include\agl\core\app\resource-destructor.hpp" />
+    <ClInclude Include="include\agl\core\app\resource-type-uid.hpp" />
+    <ClInclude Include="include\agl\core\app\resource.hpp" />
     <ClInclude Include="include\agl\core\enums\gl-blend-function.hpp" />
     <ClInclude Include="include\agl\core\enums\gl-clear-type.hpp" />
     <ClCompile Include="include\agl\core\app\layer-base.hpp" />
     <ClCompile Include="include\agl\core\enums\gl-buffer-usage-type.hpp" />
-    <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp" />
     <ClCompile Include="src\core\app\application.cpp" />
     <ClCompile Include="src\core\app\entry-point.cpp" />
     <ClCompile Include="src\core\app\input.cpp" />
     <ClCompile Include="src\core\app\layer-manager.cpp" />
+    <ClCompile Include="src\core\app\resource.cpp" />
     <ClCompile Include="src\core\app\window.cpp" />
-    <ClCompile Include="src\core\misc\log.cpp" />
     <ClCompile Include="src\core\misc\timer.cpp" />
     <ClCompile Include="src\core\misc\timestep.cpp" />
     <ClCompile Include="src\graphics\ecs\component\camera-base.cpp" />
@@ -138,19 +140,8 @@
     <ClCompile Include="src\graphics\texture\texture2d.cpp" />
     <ClCompile Include="src\graphics\text\font-manager.cpp" />
     <ClCompile Include="src\graphics\text\font.cpp" />
-    <ClCompile Include="src\system\debug\exceptions.cpp" />
     <ClCompile Include="src\system\glcore\destructive-move.cpp" />
     <ClCompile Include="src\system\glcore\gl-core.cpp" />
-    <ClCompile Include="src\utility\ecs\entity.cpp" />
-    <ClCompile Include="src\utility\ecs\group-base.cpp" />
-    <ClCompile Include="src\utility\ecs\registry-component.cpp" />
-    <ClCompile Include="src\utility\ecs\registry-entity.cpp" />
-    <ClCompile Include="src\utility\ecs\registry-system.cpp" />
-    <ClCompile Include="src\utility\ecs\registry.cpp" />
-    <ClCompile Include="src\utility\ecs\signature.cpp" />
-    <ClCompile Include="src\utility\ecs\system-base.cpp" />
-    <ClCompile Include="src\utility\type-unique-identifier.cpp" />
-    <ClCompile Include="src\utility\unique-identifier-manager.cpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\direction.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
@@ -181,7 +172,6 @@
   <ItemGroup>
     <ClInclude Include="include\agl\core\app\application.hpp" />
     <ClInclude Include="include\agl\core\app\input.hpp" />
-    <ClInclude Include="include\agl\core\app\resource.hpp" />
     <ClInclude Include="include\agl\core\app\window-data.hpp" />
     <ClInclude Include="include\agl\core\app\window.hpp" />
     <ClInclude Include="include\agl\core\enums\gl-draw-type.hpp" />
@@ -190,7 +180,6 @@
     <ClInclude Include="include\agl\core\enums\input-mode.hpp" />
     <ClInclude Include="include\agl\core\event-types.hpp" />
     <ClInclude Include="include\agl\core\event.hpp" />
-    <ClInclude Include="include\agl\core\misc\log.hpp" />
     <ClInclude Include="include\agl\core\misc\timer.hpp" />
     <ClInclude Include="include\agl\core\misc\timestep.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\camera-base.hpp" />
@@ -239,44 +228,16 @@
     <ClInclude Include="include\agl\graphics\types\texture-coordinates.hpp" />
     <ClInclude Include="include\agl\graphics\types\type-base.hpp" />
     <ClInclude Include="include\agl\graphics\types\types.hpp" />
-    <ClInclude Include="include\agl\system\debug\assert.hpp" />
-    <ClInclude Include="include\agl\system\debug\debug.hpp" />
-    <ClInclude Include="include\agl\system\debug\error.hpp" />
-    <ClInclude Include="include\agl\system\debug\exceptions.hpp" />
     <ClInclude Include="include\agl\system\glcore\destructive-move.hpp" />
     <ClInclude Include="include\agl\system\glcore\gl-core.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\ecs.hpp" />
-    <ClInclude Include="include\agl\utility\static-unique-identifier.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\component-array-base.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\component-array.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\component-type-uid.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\config.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\entity-uid.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\entity.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\group-base.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\group-type-uid.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\group.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\registry-component.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\registry-entity.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\registry-system.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\registry.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\signal.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\signature.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\system-base.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\system-register.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\system-type-uid.hpp" />
-    <ClInclude Include="include\agl\utility\ecs\view.hpp" />
     <ClInclude Include="include\agl\utility\inheritable-vector.hpp" />
     <ClInclude Include="include\agl\utility\ordered-list.hpp" />
-    <ClInclude Include="include\agl\utility\type-unique-identifier.hpp" />
-    <ClInclude Include="include\agl\utility\unique-identifier-manager.hpp" />
-    <ClInclude Include="include\agl\utility\unique-identifier.hpp" />
     <ClInclude Include="src\graphics\ecs\agl-system-order.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\agl\core\app\application.inl" />
     <None Include="include\agl\core\app\layer-manager.inl" />
-    <None Include="include\agl\core\misc\log.inl" />
+    <None Include="include\agl\core\app\resource.inl" />
     <None Include="include\agl\graphics\ecs\component\uniform\camera.inl" />
     <None Include="include\agl\graphics\ecs\component\uniform\direction.inl" />
     <None Include="include\agl\graphics\ecs\component\uniform\directional-light.inl" />
@@ -293,22 +254,22 @@
     <None Include="include\agl\graphics\shader\uniform-register.inl" />
     <None Include="include\agl\graphics\shader\uniform-wrapper.inl" />
     <None Include="include\agl\graphics\types\type-base.inl" />
-    <None Include="include\agl\utility\static-unique-identifier.inl" />
-    <None Include="include\agl\utility\ecs\component-array.inl" />
-    <None Include="include\agl\utility\ecs\entity.inl" />
-    <None Include="include\agl\utility\ecs\group.inl" />
-    <None Include="include\agl\utility\ecs\registry-component.inl" />
-    <None Include="include\agl\utility\ecs\registry-entity.inl" />
-    <None Include="include\agl\utility\ecs\registry-system.inl" />
-    <None Include="include\agl\utility\ecs\registry.inl" />
-    <None Include="include\agl\utility\ecs\signal.inl" />
-    <None Include="include\agl\utility\ecs\signature.inl" />
-    <None Include="include\agl\utility\ecs\system-register.inl" />
-    <None Include="include\agl\utility\ecs\view.inl" />
     <None Include="include\agl\utility\inheritable-vector.inl" />
     <None Include="include\agl\utility\ordered-list.inl" />
-    <None Include="include\agl\utility\type-unique-identifier.inl" />
-    <None Include="include\agl\utility\unique-identifier.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\debug\debug.vcxproj">
+      <Project>{8b243d0c-9cfe-4568-b018-1938b5ca330a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ecs\ecs.vcxproj">
+      <Project>{03d90fd1-0a1b-4ff5-8515-eb6ec808f70e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\logger\logger.vcxproj">
+      <Project>{917ebee9-5da0-4f48-ac54-be6c9c738049}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\uid\uid.vcxproj">
+      <Project>{fdcc95c8-5e18-4723-b6f3-e0d7f51c5a6c}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

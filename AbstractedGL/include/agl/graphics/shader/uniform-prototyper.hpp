@@ -3,7 +3,7 @@
 
 #include "agl/graphics/shader/uniform-wrapper.hpp"
 #include "agl/graphics/shader/uniform-type-uid.hpp"
-#include "agl/utility/ecs/component-type-uid.hpp"
+#include "agl/ecs/component-type-uid.hpp"
 
 namespace agl
 {

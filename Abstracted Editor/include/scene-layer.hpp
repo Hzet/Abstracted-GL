@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "agl/core/app/layer-base.hpp"
-#include "agl/utility/ecs/entity.hpp"
+#include "agl/ecs/entity.hpp"
 #include "agl/core/misc/timer.hpp"
 
 namespace editor

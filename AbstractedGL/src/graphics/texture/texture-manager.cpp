@@ -1,5 +1,5 @@
 #include "agl/graphics/texture/texture-manager.hpp"
-#include "agl/system/debug/error.hpp"
+#include "agl/debug/error.hpp"
 #include "agl/system/glcore/gl-core.hpp"
 
 namespace agl

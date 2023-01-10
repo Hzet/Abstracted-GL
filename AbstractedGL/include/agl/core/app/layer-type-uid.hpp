@@ -1,5 +1,5 @@
 #pragma once
-#include "agl/utility/type-unique-identifier.hpp"
+#include "agl/uid/type-unique-identifier.hpp"
 
 namespace agl
 {

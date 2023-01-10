@@ -19,9 +19,6 @@
     <Filter Include="src\system">
       <UniqueIdentifier>{92ac5055-9d89-4368-8088-884a64bc4c17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\system\debug">
-      <UniqueIdentifier>{5a01e9c9-e48f-4a45-91f1-955d83aeb4c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\system\glcore">
       <UniqueIdentifier>{4168e172-cbc1-4a41-a1cd-11f39aaaf36c}</UniqueIdentifier>
     </Filter>
@@ -30,39 +27,6 @@
     </Filter>
     <Filter Include="external">
       <UniqueIdentifier>{88879dd7-b77e-49b6-b946-eb60baad9f99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs">
-      <UniqueIdentifier>{98077b1a-1563-490e-90a1-1ee5605bdc40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\component">
-      <UniqueIdentifier>{baa72dc1-1c98-4948-855b-40def71adb7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\registry">
-      <UniqueIdentifier>{b630ffdd-e835-4350-8b59-7b87417edfdb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\registry\component">
-      <UniqueIdentifier>{19056726-e857-4bc8-86ae-da1cba17a7ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\registry\system">
-      <UniqueIdentifier>{86356da8-ab3a-4382-8e0c-dc0cab51a7d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\registry\entity">
-      <UniqueIdentifier>{64f048df-0280-463a-8313-4821c634457d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\entity">
-      <UniqueIdentifier>{94fef62b-de81-4ed7-80e5-eb84416e219c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\system">
-      <UniqueIdentifier>{ddc05a8b-e9ca-4183-b80d-c92ef99cfdb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\signal">
-      <UniqueIdentifier>{8f3e1f9b-0ab3-4d1c-b2c9-3eb19d9fe3c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\view">
-      <UniqueIdentifier>{296b0250-093a-4895-880e-d60759332ce6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\ecs\signature">
-      <UniqueIdentifier>{e820bf3f-3b6d-4def-99c3-32454fac2cc9}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\graphics\ecs">
       <UniqueIdentifier>{c07483ac-80c7-4950-b21e-84ff70b42e20}</UniqueIdentifier>
@@ -90,9 +54,6 @@
     </Filter>
     <Filter Include="src\graphics\shader\uniforms">
       <UniqueIdentifier>{0cb11dcb-4616-4097-97c9-c2f4798fae94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\utility\uid">
-      <UniqueIdentifier>{0e19f87d-d1e3-49c3-8477-a41f65a3353e}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\graphics\types">
       <UniqueIdentifier>{35387ca7-89fc-4e0b-a6b0-b4de0e819f53}</UniqueIdentifier>
@@ -159,9 +120,6 @@
     <ClCompile Include="src\graphics\texture\texture-base.cpp">
       <Filter>src\graphics\texture</Filter>
     </ClCompile>
-    <ClCompile Include="src\system\debug\exceptions.cpp">
-      <Filter>src\system\debug</Filter>
-    </ClCompile>
     <ClCompile Include="src\system\glcore\destructive-move.cpp">
       <Filter>src\system\glcore</Filter>
     </ClCompile>
@@ -170,24 +128,6 @@
     </ClCompile>
     <ClCompile Include="external\glad\glad.c">
       <Filter>external</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\ecs\registry.cpp">
-      <Filter>src\utility\ecs\registry</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\ecs\registry-component.cpp">
-      <Filter>src\utility\ecs\registry\component</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\ecs\registry-entity.cpp">
-      <Filter>src\utility\ecs\registry\entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\ecs\registry-system.cpp">
-      <Filter>src\utility\ecs\registry\system</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\ecs\entity.cpp">
-      <Filter>src\utility\ecs\entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\ecs\signature.cpp">
-      <Filter>src\utility\ecs\signature</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\ecs\component\transform.cpp">
       <Filter>src\graphics\ecs\component\transform</Filter>
@@ -204,20 +144,8 @@
     <ClCompile Include="src\graphics\ecs\component\camera-perspective.cpp">
       <Filter>src\graphics\ecs\component\camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\utility\ecs\group-base.cpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\ecs\system-base.cpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp">
       <Filter>src\graphics\ecs\component\transform</Filter>
-    </ClCompile>
-    <ClCompile Include="include\agl\utility\ecs\component-array-base.cpp">
-      <Filter>src\utility\ecs\component</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\unique-identifier-manager.cpp">
-      <Filter>src\utility\uid</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\render\render-buffer.cpp">
       <Filter>src\graphics\render</Filter>
@@ -226,9 +154,6 @@
       <Filter>src\system\core\misc</Filter>
     </ClCompile>
     <ClCompile Include="src\core\misc\timer.cpp">
-      <Filter>src\system\core\misc</Filter>
-    </ClCompile>
-    <ClCompile Include="src\core\misc\log.cpp">
       <Filter>src\system\core\misc</Filter>
     </ClCompile>
     <ClCompile Include="src\core\app\application.cpp">
@@ -251,9 +176,6 @@
     </ClCompile>
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp">
       <Filter>src\graphics\ecs\system\render</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility\type-unique-identifier.cpp">
-      <Filter>src\utility\uid</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\shader\uniform-prototyper.cpp">
       <Filter>src\graphics\shader\uniforms</Filter>
@@ -291,6 +213,9 @@
     <ClCompile Include="include\agl\core\enums\gl-buffer-usage-type.hpp">
       <Filter>src\system\core\enums</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\app\resource.cpp">
+      <Filter>src\system\core\app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
@@ -326,18 +251,6 @@
     <ClInclude Include="include\agl\graphics\texture\texture-uid.hpp">
       <Filter>src\graphics\texture</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\system\debug\assert.hpp">
-      <Filter>src\system\debug</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\system\debug\debug.hpp">
-      <Filter>src\system\debug</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\system\debug\error.hpp">
-      <Filter>src\system\debug</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\system\debug\exceptions.hpp">
-      <Filter>src\system\debug</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\system\glcore\destructive-move.hpp">
       <Filter>src\system\glcore</Filter>
     </ClInclude>
@@ -346,45 +259,6 @@
     </ClInclude>
     <ClInclude Include="include\agl\utility\inheritable-vector.hpp">
       <Filter>src\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\config.hpp">
-      <Filter>src\utility\ecs</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\component-array.hpp">
-      <Filter>src\utility\ecs\component</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\component-array-base.hpp">
-      <Filter>src\utility\ecs\component</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\component-type-uid.hpp">
-      <Filter>src\utility\ecs\component</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\registry.hpp">
-      <Filter>src\utility\ecs\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\registry-component.hpp">
-      <Filter>src\utility\ecs\registry\component</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\registry-entity.hpp">
-      <Filter>src\utility\ecs\registry\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\registry-system.hpp">
-      <Filter>src\utility\ecs\registry\system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\entity.hpp">
-      <Filter>src\utility\ecs\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\entity-uid.hpp">
-      <Filter>src\utility\ecs\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\signal.hpp">
-      <Filter>src\utility\ecs\signal</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\signature.hpp">
-      <Filter>src\utility\ecs\signature</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\view.hpp">
-      <Filter>src\utility\ecs\view</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\transform.hpp">
       <Filter>src\graphics\ecs\component\transform</Filter>
@@ -404,21 +278,6 @@
     <ClInclude Include="include\agl\graphics\ecs\system-group.hpp">
       <Filter>src\graphics\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\group.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\group-base.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\group-type-uid.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\system-base.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\system-type-uid.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\ecs\agl-system-order.cpp">
       <Filter>src\graphics\ecs</Filter>
     </ClInclude>
@@ -430,18 +289,6 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\transformable.hpp">
       <Filter>src\graphics\ecs\component\transform</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\type-unique-identifier.hpp">
-      <Filter>src\utility\uid</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\unique-identifier.hpp">
-      <Filter>src\utility\uid</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\unique-identifier-manager.hpp">
-      <Filter>src\utility\uid</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\static-unique-identifier.hpp">
-      <Filter>src\utility\uid</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\mesh.hpp">
       <Filter>src\graphics\ecs\component\render</Filter>
@@ -497,14 +344,8 @@
     <ClInclude Include="include\agl\core\misc\timestep.hpp">
       <Filter>src\system\core\misc</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\core\misc\log.hpp">
-      <Filter>src\system\core\misc</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\core\misc\timer.hpp">
       <Filter>src\system\core\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\core\app\resource.hpp">
-      <Filter>src\system\core\app</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\texture\texture-type.hpp">
       <Filter>src\graphics\texture</Filter>
@@ -520,9 +361,6 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\shader\shader-type.hpp">
       <Filter>src\graphics\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\ecs.hpp">
-      <Filter>src\utility\ecs</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\core\enums\gl-draw-type.hpp">
       <Filter>src\system\core\enums</Filter>
@@ -608,9 +446,6 @@
     <ClInclude Include="include\agl\core\app\layer-manager.hpp">
       <Filter>src\system\core\app\layer</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\utility\ecs\system-register.hpp">
-      <Filter>src\utility\ecs\system</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\uniform-build.hpp">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </ClInclude>
@@ -662,6 +497,15 @@
     <ClInclude Include="include\agl\core\enums\gl-blend-function.hpp">
       <Filter>src\system\core\enums</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\core\app\resource.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\resource-destructor.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\core\app\resource-type-uid.hpp">
+      <Filter>src\system\core\app</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\agl\graphics\render\vertex-layout.inl">
@@ -670,53 +514,14 @@
     <None Include="include\agl\utility\inheritable-vector.inl">
       <Filter>src\utility</Filter>
     </None>
-    <None Include="include\agl\utility\ecs\component-array.inl">
-      <Filter>src\utility\ecs\component</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\registry.inl">
-      <Filter>src\utility\ecs\registry</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\registry-component.inl">
-      <Filter>src\utility\ecs\registry\component</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\registry-system.inl">
-      <Filter>src\utility\ecs\registry\system</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\entity.inl">
-      <Filter>src\utility\ecs\entity</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\signal.inl">
-      <Filter>src\utility\ecs\signal</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\signature.inl">
-      <Filter>src\utility\ecs\signature</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\view.inl">
-      <Filter>src\utility\ecs\view</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\registry-entity.inl">
-      <Filter>src\utility\ecs\registry\entity</Filter>
-    </None>
-    <None Include="include\agl\utility\ecs\group.inl">
-      <Filter>src\utility\ecs\system</Filter>
-    </None>
     <None Include="include\agl\utility\ordered-list.inl">
       <Filter>src\utility</Filter>
-    </None>
-    <None Include="include\agl\utility\unique-identifier.inl">
-      <Filter>src\utility\uid</Filter>
-    </None>
-    <None Include="include\agl\utility\static-unique-identifier.inl">
-      <Filter>src\utility\uid</Filter>
     </None>
     <None Include="include\agl\graphics\render\render-buffer.inl">
       <Filter>src\graphics\render</Filter>
     </None>
     <None Include="include\agl\graphics\types\type-base.inl">
       <Filter>src\graphics\types</Filter>
-    </None>
-    <None Include="include\agl\core\misc\log.inl">
-      <Filter>src\system\core\misc</Filter>
     </None>
     <None Include="include\agl\core\app\application.inl">
       <Filter>src\system\core\app</Filter>
@@ -742,9 +547,6 @@
     <None Include="include\agl\graphics\ecs\component\uniform\texture-material.inl">
       <Filter>src\graphics\ecs\component\uniform</Filter>
     </None>
-    <None Include="include\agl\utility\type-unique-identifier.inl">
-      <Filter>src\utility\uid</Filter>
-    </None>
     <None Include="include\agl\graphics\shader\uniform-prototyper.inl">
       <Filter>src\graphics\shader\uniforms</Filter>
     </None>
@@ -766,8 +568,8 @@
     <None Include="include\agl\core\app\layer-manager.inl">
       <Filter>src\system\core\app\layer</Filter>
     </None>
-    <None Include="include\agl\utility\ecs\system-register.inl">
-      <Filter>src\utility\ecs\system</Filter>
+    <None Include="include\agl\core\app\resource.inl">
+      <Filter>src\system\core\app</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 #include "agl/graphics/shader/uniform-array.hpp"
 #include "agl/graphics/text/font-manager.hpp"
 #include "agl/graphics/texture/texture-manager.hpp"
-#include "agl/utility/ecs/ecs.hpp"
+#include "agl/ecs/ecs.hpp"
 
 namespace agl
 {

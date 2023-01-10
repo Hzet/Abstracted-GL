@@ -1,23 +1,44 @@
 #pragma once
-#include "agl/utility/type-unique-identifier.hpp"
+#include <cstddef>
+
+#include "agl/core/app/resource-type-uid.hpp"
+#include "agl/core/app/resource-destructor.hpp"
 
 namespace agl
 {
-	class resource_base
+	class resource
 	{
 	public:
-		resource_base() = default;
-		resource_base(resource_base&&) = default;
-		resource_base& operator=(resource_base&&) = default;
-		resource_base(resource_base const&) = delete;
-		resource_base& operator=(resource_base const&) = delete;
-		virtual ~resource_base() = default;
+		template <typename T, typename... TArgs>
+		static resource create(TArgs&&... args);
 
-	protected:
-		virtual void dummy() const = 0;
+	public:
+		resource() = default;
+		resource(resource&&) = default;
+		resource(resource const&) = delete;
+		resource& operator=(resource&&) = default;
+		resource& operator=(resource const&) = delete;
+		~resource();
+
+		void reset();
+
+		template <typename T, typename... TArgs>
+		void emplace(TArgs&&... args);
+
+		template <typename T>
+		T& get();
+
+		bool is_any() const;
+
+		resource_type_uid get_id() const;
+
+	private:
+		std::unique_ptr<resource_destructor_base> m_destructor;
+		resource_type_uid m_id;
+		std::vector<std::byte> m_buffer;
 	};
-	
-	using resource_type_uid = unique_type_id<resource_base>;
-	
+
+#include "agl/core/app/resource.inl"
+
 }
 

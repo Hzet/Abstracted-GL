@@ -1,8 +1,9 @@
 #pragma once
+#include <any>
 #include <vector>
 #include "agl/core/misc/timer.hpp"
-#include "agl/core/app/resource.hpp"
 #include "agl/core/app/window.hpp"
+#include "agl/core/app/resource.hpp"
 
 namespace agl
 {
@@ -41,7 +42,7 @@ namespace agl
 		void add_resource();
 
 	private:
-		std::vector<std::unique_ptr<resource_base>> m_resources;
+		std::vector<resource> m_resources;
 	};
 
 #include "agl/core/app/application.inl"

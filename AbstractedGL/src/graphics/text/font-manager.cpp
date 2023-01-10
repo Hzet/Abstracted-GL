@@ -1,6 +1,6 @@
 #include "agl/graphics/text/font-manager.hpp"
-#include "agl/core/misc/log.hpp"
-#include "agl/system/debug/assert.hpp"
+#include "agl/logger/log.hpp"
+#include "agl/debug/assert.hpp"
 
 namespace agl
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include "agl/graphics/shader/shader-uid.hpp"
-#include "agl/utility/ecs/entity-uid.hpp"
+#include "agl/ecs/entity-uid.hpp"
 
 namespace agl
 {

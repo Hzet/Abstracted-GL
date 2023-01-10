@@ -1,6 +1,6 @@
 #include "agl/graphics/shader/shader-sub-program.hpp"
 #include "agl/system/glcore/gl-core.hpp"
-#include "agl/system/debug/error.hpp"
+#include "agl/debug/error.hpp"
 
 #include <fstream>
 

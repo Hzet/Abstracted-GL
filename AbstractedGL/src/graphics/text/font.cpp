@@ -1,8 +1,8 @@
 #include "agl/system/glcore/gl-core.hpp"
 #include "agl/graphics/text/font.hpp"
 #include "agl/graphics/texture/texture2d.hpp"
-#include "agl/system/debug/error.hpp"
-#include "agl/system/debug/exceptions.hpp"
+#include "agl/debug/error.hpp"
+#include "agl/debug/exceptions.hpp"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H  

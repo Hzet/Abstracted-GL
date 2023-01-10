@@ -3,7 +3,7 @@
 #include "agl/graphics/ecs/component/camera-orthographic.hpp"
 #include "agl/graphics/ecs/component/transformable.hpp"
 #include "agl/graphics/shader/uniform-array.hpp"
-#include "agl/utility/ecs/entity.hpp"
+#include "agl/ecs/entity.hpp"
 
 namespace agl
 {

@@ -1,7 +1,6 @@
 #pragma once
 #include <unordered_map>
 
-#include "agl/core/app/resource.hpp"
 #include "agl/graphics/texture/texture2d.hpp"
 
 
@@ -11,7 +10,6 @@ namespace agl
 	/// A static / global container that stores textures.
 	/// </summary>
 	class texture_manager
-		: public resource_base
 	{
 	public:
 		void bind_texture(texture_uid const& id_texture);
@@ -76,9 +74,6 @@ namespace agl
 		/// false - atlas does not contain the texture
 		/// </returns>
 		bool has_texture_2d(const texture_uid &id_texture_2d);
-
-	private:
-		virtual void dummy() const override {}
 
 	private:
 		std::vector<texture_uid> m_bound_textures;

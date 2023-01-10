@@ -1,5 +1,5 @@
 #pragma once
-#include "agl/utility/ecs/system-register.hpp"
+#include "agl/ecs/system-register.hpp"
 #include "agl/graphics/ecs/system-group.hpp"
 #include "agl/graphics/ecs/component/mesh.hpp"
 

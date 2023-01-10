@@ -2,7 +2,7 @@
 #include "agl/graphics/ecs/component/transformable.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
 #include "agl/graphics/shader/uniform-register.hpp"
-#include "agl/utility/ecs/entity.hpp"
+#include "agl/ecs/entity.hpp"
 
 namespace agl
 {

@@ -3,8 +3,8 @@
 #include "agl/graphics/text/font-manager.hpp"
 #include "agl/graphics/texture/texture-manager.hpp"
 #include "agl/graphics/shader/shader-manager.hpp"
-#include "agl/utility/ecs/ecs.hpp"
-#include "agl/core/misc/log.hpp"
+#include "agl/ecs/ecs.hpp"
+#include "agl/logger/log.hpp"
 
 namespace agl
 {

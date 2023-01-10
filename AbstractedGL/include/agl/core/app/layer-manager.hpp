@@ -1,12 +1,10 @@
 #pragma once
-#include "agl/core/app/resource.hpp"
 #include "agl/core/app/layer-base.hpp"
 
 
 namespace agl
 {
 	class layer_manager
-		: public resource_base
 	{
 	public:
 		template <typename T>
@@ -28,9 +26,6 @@ namespace agl
 
 		layer_base& operator[](std::uint64_t index);
 		layer_base const& operator[](std::uint64_t index) const;
-
-	private:
-		virtual void dummy() const override {};
 
 	private:
 		std::vector<std::unique_ptr<layer_base>> m_layers;

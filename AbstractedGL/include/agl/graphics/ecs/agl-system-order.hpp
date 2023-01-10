@@ -1,5 +1,5 @@
 #pragma once
-#include "agl/utility/ecs/registry.hpp"
+#include "agl/ecs/registry.hpp"
 #include "agl/graphics/ecs/system-group.hpp"
 
 namespace agl

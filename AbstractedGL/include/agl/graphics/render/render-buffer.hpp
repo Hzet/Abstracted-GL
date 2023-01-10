@@ -1,5 +1,5 @@
 #pragma once
-#include "agl/system/debug/assert.hpp"
+#include "agl/debug/assert.hpp"
 #include "agl/graphics/render/vertex-array.hpp"
 #include "agl/graphics/render/render-type-uid.hpp"
 #include "agl/graphics/types/types.hpp"
