@@ -3,7 +3,6 @@
 
 namespace agl
 {
-	class resource;
-
-	using resource_type_uid = unique_type_id<resource>;
+	template <typename TName>
+	using resource_type_uid = unique_type_id<TName>;
 }

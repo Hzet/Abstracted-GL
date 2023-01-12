@@ -21,7 +21,7 @@ namespace agl
 		virtual std::uint64_t get_vertex_count() const override;
 		virtual std::uint64_t get_index_count() const override;
 		virtual std::vector<std::uint32_t> get_indices() const override;
-		virtual std::vector<position> get_positions() const override;
+		virtual std::vector<glm::vec3> get_positions() const override;
 
 	private:
 		prism m_specification;

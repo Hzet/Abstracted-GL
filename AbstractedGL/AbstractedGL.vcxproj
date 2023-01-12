@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\glad.c" />
+    <ClInclude Include="include\agl\core\app\application-resource.hpp" />
     <ClInclude Include="include\agl\core\app\layer-manager.hpp" />
     <ClInclude Include="include\agl\core\app\layer-type-uid.hpp" />
     <ClInclude Include="include\agl\core\app\resource-destructor.hpp" />
@@ -108,7 +109,6 @@
     <ClCompile Include="src\core\app\entry-point.cpp" />
     <ClCompile Include="src\core\app\input.cpp" />
     <ClCompile Include="src\core\app\layer-manager.cpp" />
-    <ClCompile Include="src\core\app\resource.cpp" />
     <ClCompile Include="src\core\app\window.cpp" />
     <ClCompile Include="src\core\misc\timer.cpp" />
     <ClCompile Include="src\core\misc\timestep.cpp" />
@@ -195,7 +195,7 @@
     <ClInclude Include="include\agl\graphics\ecs\system\render-system.hpp" />
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp" />
     <ClInclude Include="include\agl\graphics\render\render-buffer.hpp" />
-    <ClInclude Include="include\agl\graphics\render\render-type-uid.hpp" />
+    <ClInclude Include="include\agl\graphics\render\render-type.hpp" />
     <ClInclude Include="include\agl\graphics\render\vertex-array.hpp" />
     <ClInclude Include="include\agl\graphics\render\vertex-buffer.hpp" />
     <ClInclude Include="include\agl\graphics\render\vertex-layout.hpp" />
@@ -253,7 +253,6 @@
     <None Include="include\agl\graphics\shader\uniform-prototyper.inl" />
     <None Include="include\agl\graphics\shader\uniform-register.inl" />
     <None Include="include\agl\graphics\shader\uniform-wrapper.inl" />
-    <None Include="include\agl\graphics\types\type-base.inl" />
     <None Include="include\agl\utility\inheritable-vector.inl" />
     <None Include="include\agl\utility\ordered-list.inl" />
   </ItemGroup>

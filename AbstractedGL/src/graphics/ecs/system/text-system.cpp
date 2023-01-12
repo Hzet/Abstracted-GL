@@ -13,8 +13,8 @@ namespace agl
 	{
 		m_character_mesh.draw_type = DRAW_TRIANGLES;
 
-		auto positions = std::vector<position>(6);
-		auto texture_positions = std::vector<texture_position>{
+		auto positions = std::vector<glm::vec4>(6);
+		auto texture_positions = std::vector<glm::vec2>{
 			{ 0.f, 0.f }, // bottom left
 			{ 0.f, 1.f }, // top left
 			{ 1.f, 0.f }, // bottom right

@@ -27,6 +27,12 @@ namespace agl
 		return m_vertices.size();
 	}
 
+	render_buffer::~render_buffer()
+	{
+		if (!is_move_constructing())
+			clear();
+	}
+
 	std::uint64_t render_buffer::get_index_count() const
 	{
 		return m_indices.size();
@@ -67,14 +73,44 @@ namespace agl
 		return m_indices.data();
 	}
 
-	void render_buffer::reserve(std::uint64_t vertex_count)
+	void render_buffer::clear()
 	{
+		for (auto i = 0u; i < m_array_info.size(); ++i)
+			m_destructors[i]->destruct_element(m_vertices.data() + m_vlayout[i].offset, m_vcount, get_stride_size());
+
+		m_array_info.clear();
+		m_indices.clear();
+		m_vertices.clear();
+
+		m_vcount = 0;
+		m_require_update = false;
+		m_ibuffer = index_buffer{};
+		m_varray = vertex_array{};
+		m_vbuffer = vertex_buffer{};
+		m_vlayout = vertex_layout{};
+	}
+
+	void render_buffer::resize(std::uint64_t vertex_count)
+	{
+		if (m_vcount >= vertex_count)
+			return;
+
 		m_require_update = true;
 
-		m_vcount = vertex_count;
+		auto const old_count = vertex_count - m_vcount;
+		auto const new_size = vertex_count * get_stride_size();
+		auto const old_size = old_count * get_stride_size();
 
-		auto const new_count = get_vertex_count() * get_stride_size();
-		m_vertices.reserve(new_count);
+		m_vcount = vertex_count;
+		m_vertices.resize(new_size);
+
+		for (auto i = 0; i < m_array_info.size(); ++i)
+		{
+			auto* const buffer = m_vertices.data() + old_size * m_vlayout[i].offset;
+			auto const count = vertex_count - old_count;
+
+			m_destructors[i]->construct_element(buffer, count, get_stride_size());
+		}
 	}
 
 	void render_buffer::push_index(std::uint32_t index)

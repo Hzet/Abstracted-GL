@@ -84,11 +84,11 @@ namespace agl
 		return result;
 	}
 
-	std::vector<position> prism_builder::get_positions() const
-	{
+	std::vector<glm::vec3> prism_builder::get_positions() const
+{
 		auto alpha = 360.f / m_specification.side_count;
 		auto const yaxis = glm::vec3{ 0.f, 1.f, 0.f };
-		auto result = std::vector<position>{};
+		auto result = std::vector<glm::vec3>{};
 
 		// create top base
 		result.push_back(glm::vec3{ 0.f });
@@ -102,7 +102,7 @@ namespace agl
 		for (auto i = 0; i <= m_specification.side_count; ++i)
 		{
 			auto const vertex = result[i];
-			result.push_back(glm::vec3{ vertex->x, -m_specification.side_size.y, vertex->z });
+			result.push_back(glm::vec3{ vertex.x, -m_specification.side_size.y, vertex.z });
 		}
 
 		return result;

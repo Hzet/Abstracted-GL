@@ -6,6 +6,7 @@
 
 namespace agl
 {
+	template <typename TName>
 	class resource
 	{
 	public:
@@ -30,11 +31,11 @@ namespace agl
 
 		bool is_any() const;
 
-		resource_type_uid get_id() const;
+		resource_type_uid<TName> get_id() const;
 
 	private:
-		std::unique_ptr<resource_destructor_base> m_destructor;
-		resource_type_uid m_id;
+		std::unique_ptr<resource_destructor_base<TName>> m_destructor;
+		resource_type_uid<TName> m_id;
 		std::vector<std::byte> m_buffer;
 	};
 

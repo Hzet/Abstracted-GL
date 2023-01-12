@@ -3,7 +3,7 @@
 #include <vector>
 #include "agl/core/misc/timer.hpp"
 #include "agl/core/app/window.hpp"
-#include "agl/core/app/resource.hpp"
+#include "agl/core/app/application-resource.hpp"
 
 namespace agl
 {
@@ -42,7 +42,7 @@ namespace agl
 		void add_resource();
 
 	private:
-		std::vector<resource> m_resources;
+		std::vector<app_resource> m_resources;
 	};
 
 #include "agl/core/app/application.inl"

@@ -213,9 +213,6 @@
     <ClCompile Include="include\agl\core\enums\gl-buffer-usage-type.hpp">
       <Filter>src\system\core\enums</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\app\resource.cpp">
-      <Filter>src\system\core\app</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\agl\graphics\render\index-buffer.hpp">
@@ -322,9 +319,6 @@
     </ClInclude>
     <ClInclude Include="include\agl\graphics\types\color.hpp">
       <Filter>src\graphics\types</Filter>
-    </ClInclude>
-    <ClInclude Include="include\agl\graphics\render\render-type-uid.hpp">
-      <Filter>src\graphics\render</Filter>
     </ClInclude>
     <ClInclude Include="include\agl\graphics\types\types.hpp">
       <Filter>src\graphics\types</Filter>
@@ -506,6 +500,10 @@
     <ClInclude Include="include\agl\core\app\resource-type-uid.hpp">
       <Filter>src\system\core\app</Filter>
     </ClInclude>
+    <ClInclude Include="include\agl\core\app\application-resource.hpp" />
+    <ClInclude Include="include\agl\graphics\render\render-type.hpp">
+      <Filter>src\graphics\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\agl\graphics\render\vertex-layout.inl">
@@ -519,9 +517,6 @@
     </None>
     <None Include="include\agl\graphics\render\render-buffer.inl">
       <Filter>src\graphics\render</Filter>
-    </None>
-    <None Include="include\agl\graphics\types\type-base.inl">
-      <Filter>src\graphics\types</Filter>
     </None>
     <None Include="include\agl\core\app\application.inl">
       <Filter>src\system\core\app</Filter>

@@ -79,7 +79,7 @@ namespace editor
 			auto prism_builder = agl::prism_builder{ 4, glm::sqrt(5.f) / 2.f, 2.5f };
 
 			auto const prism_positions = prism_builder.get_positions();
-			auto const prism_colors = prism_builder.get_colors(agl::color{ 0.f, 1.f, 0.f, 1.f });
+			auto const prism_colors = prism_builder.get_colors(glm::vec4{ 0.f, 1.f, 0.f, 1.f });
 			auto const prism_indices = prism_builder.get_indices();
 
 			auto& prism_mesh = prism_entity.attach_component<agl::mesh>();
@@ -128,8 +128,8 @@ namespace editor
 			auto rect_builder = agl::rectangle_builder{ agl::rectangle{{10.f, 20.f}} };
 			auto const rect_indices = rect_builder.get_indices();
 			auto const rect_positions = rect_builder.get_positions();
-			auto const rect_colors = rect_builder.get_colors(agl::color{ 1.f, 1.f, 1.f, 1.f });
-			auto const rect_texture = std::vector<agl::texture_position>{
+			auto const rect_colors = rect_builder.get_colors(glm::vec4{ 1.f, 1.f, 1.f, 1.f });
+			auto const rect_texture = std::vector<glm::vec2>{
 				{0.f, 0.f}, // bottom left,
 				{0.f, 1.f}, // top left,
 				{1.f, 1.f}, // top right,

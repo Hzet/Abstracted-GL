@@ -1,14 +1,19 @@
 #pragma once
+#include "agl/core/app/resource-destructor.hpp"
 #include "agl/debug/assert.hpp"
 #include "agl/graphics/render/vertex-array.hpp"
-#include "agl/graphics/render/render-type-uid.hpp"
+#include "agl/graphics/render/render-type.hpp"
 #include "agl/graphics/types/types.hpp"
+#include "agl/system/glcore/destructive-move.hpp"
 
 namespace agl
 {
 	class render_buffer
+		: public destructive_move
 	{
 	public:
+		~render_buffer();
+
 		std::uint64_t get_index_count() const;
 		std::uint64_t get_index_size() const;
 
@@ -23,6 +28,8 @@ namespace agl
 
 		std::byte const * const get_vertices() const;
 		std::uint32_t const * const get_indices() const;
+
+		void clear();
 
 		void bind() const;
 		void unbind() const;
@@ -44,15 +51,15 @@ namespace agl
 		std::uint32_t& get_index(std::uint64_t index);
 		std::uint32_t const& get_index(std::uint64_t index) const;
 
-		template <typename T> T& get(std::uint64_t index);
-		template <typename T> const T& get(std::uint64_t index) const;
+		template <typename T> auto& get(std::uint64_t index);
+		template <typename T> auto const& get(std::uint64_t index) const;
 
 	private:
 		struct array_info
 		{
-			render_type_uid id_render;
-			std::uint64_t array_index;
-			std::uint64_t array_size;
+			render_type_uid id_render; // render id
+			std::uint64_t array_index; // index in m_array_info / index of destructor in m_destructors
+			std::uint64_t type_size;   // size of the stored type
 		};
 
 	private:
@@ -62,14 +69,15 @@ namespace agl
 		template <typename T>
 		array_info const& get_array_info() const;
 
-		void reserve(std::uint64_t new_count);
+		void resize(std::uint64_t new_count);
 
 		template <typename T> std::uint64_t get_offset(std::uint64_t index) const;
 
 	private:
-		std::vector<array_info> m_array_indexes;
+		std::vector<array_info> m_array_info;
 		std::vector<std::uint32_t> m_indices;
 		std::vector<std::byte> m_vertices;
+		std::vector<std::unique_ptr<render_type_destructor_base>> m_destructors;
 
 		std::uint64_t m_vcount;
 		bool m_require_update;

@@ -2,9 +2,9 @@
 
 namespace agl
 {
-	std::vector<color> shape_builder::get_colors(color const& c) const
+	std::vector<glm::vec4> shape_builder::get_colors(glm::vec4 const& c) const
 	{
-		return std::vector<color>(get_vertex_count(), c);
+		return std::vector<glm::vec4>(get_vertex_count(), c);
 	}
 
 }
