@@ -8,6 +8,7 @@
 #include "agl/system/glcore/gl-core.hpp"
 #include "agl/ecs/entity.hpp"
 
+#include <agl/graphics/types/types.hpp>
 namespace agl
 {
 	void render_system::render_mesh(entity_uid const& id_entity, registry &reg)
@@ -23,6 +24,12 @@ namespace agl
 			mesh.rbuffer.update_buffers();
 
 		mesh.rbuffer.bind();
+
+		//for (auto i = 0; i < mesh.rbuffer.get_vertex_count(); ++i)
+		//{
+		//	AGL_CORE_LOG_INFO("pos: {{}, {}, {}}", mesh.rbuffer.get<position>(i).x, mesh.rbuffer.get<position>(i).y, mesh.rbuffer.get<position>(i).z);
+		////	AGL_CORE_LOG_INFO("col: {{}, {}, {}}", mesh.rbuffer.get<color>(i).x, mesh.rbuffer.get<color>(i).y, mesh.rbuffer.get<color>(i).z);
+		//}
 
 		if (mesh.rbuffer.get_index_count() == 0u)
 			AGL_CALL(glDrawArrays(mesh.draw_type, 0u, mesh.rbuffer.get_vertex_count()));

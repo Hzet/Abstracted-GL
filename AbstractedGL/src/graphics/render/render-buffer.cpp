@@ -75,9 +75,6 @@ namespace agl
 
 	void render_buffer::clear()
 	{
-		for (auto i = 0u; i < m_array_info.size(); ++i)
-			m_destructors[i]->destruct_element(m_vertices.data() + m_vlayout[i].offset, m_vcount, get_stride_size());
-
 		m_array_info.clear();
 		m_indices.clear();
 		m_vertices.clear();
@@ -97,20 +94,10 @@ namespace agl
 
 		m_require_update = true;
 
-		auto const old_count = vertex_count - m_vcount;
 		auto const new_size = vertex_count * get_stride_size();
-		auto const old_size = old_count * get_stride_size();
 
 		m_vcount = vertex_count;
 		m_vertices.resize(new_size);
-
-		for (auto i = 0; i < m_array_info.size(); ++i)
-		{
-			auto* const buffer = m_vertices.data() + old_size * m_vlayout[i].offset;
-			auto const count = vertex_count - old_count;
-
-			m_destructors[i]->construct_element(buffer, count, get_stride_size());
-		}
 	}
 
 	void render_buffer::push_index(std::uint32_t index)

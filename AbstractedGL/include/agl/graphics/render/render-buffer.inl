@@ -6,11 +6,23 @@ render_buffer::array_info const& render_buffer::add_vertex_type()
 	if (has_vertex_type<T>())
 		return get_array_info<T>();
 
-	m_array_info.push_back(array_info{ id_render, m_vlayout.get_count(), sizeof(T::Type) });
-	m_destructors.push_back(std::unique_ptr<render_type_destructor_base>(new render_type_destructor<T::Type>()));
+	m_require_update = true;
+
+	auto const old_stride_size = get_stride_size();
+
+	m_array_info.push_back(array_info{ id_render, m_vlayout.get_count(), 0, sizeof(T::Type) });
 	m_vlayout.add_element<T::Type>();
 
-	m_require_update = true;
+	m_vertices.resize(m_vcount * get_stride_size());
+
+	if (get_vertex_count() > 0 && get_stride_count() > 1)
+	{
+		// reorganize the buffer to match modified stride layout
+		for (int i = get_vertex_count() - 1; i >= 0; --i)
+			for (int j = get_stride_count() - 2; j >= 0; --j) // one less for the one pushed to the end (line 15 of this file)
+				for (int k = m_vlayout[j].size - 1; k >= 0; --k)
+					m_vertices[i * get_stride_size() + m_vlayout[j].offset + k] = m_vertices[i * old_stride_size + k];
+	}
 
 	return m_array_info.back();
 }
@@ -58,11 +70,20 @@ void render_buffer::push_vertex(T vertex)
 {
 	auto ainfo = add_vertex_type<T>();
 	
-	resize(get_vertex_count() + 1);
+	auto vertex_index = std::uint64_t{};
+	if (ainfo.array_element_count < get_vertex_count())
+		vertex_index = ainfo.array_element_count;
+	else
+	{
+		vertex_index = m_vcount - 1;
+		resize(get_vertex_count() + 1);
+	}
 	
-	auto * const insertion_offset = m_vertices.data() + get_offset<T>(m_vcount - 1);
+	auto insertion_offset = get_offset<T>(vertex_index);
+	auto const* const buffer = reinterpret_cast<std::byte*>(&vertex);
 
-	new (insertion_offset) typename T::Type(vertex);
+	for (auto i = 0; i < sizeof(T::Type); ++i)
+		m_vertices[insertion_offset + i] = *(buffer + i);
 }
 
 template <typename T, typename TForwardIterator>
@@ -72,14 +93,22 @@ void render_buffer::push_vertices(TForwardIterator begin, TForwardIterator end)
 
 	auto ainfo = add_vertex_type<T>();
 
-	resize(get_vertex_count() + data_count);
-
-	auto i = get_vertex_count() - data_count;
-	for (auto it = begin; it != end; ++it, ++i)
+	auto vertex_index = std::uint64_t{};
+	if (ainfo.array_element_count < get_vertex_count())
+		vertex_index = ainfo.array_element_count;
+	else
 	{
-		auto * const insertion_offset = m_vertices.data() + get_offset<T>(i);
+		vertex_index = get_vertex_count();
+		resize(get_vertex_count() + data_count);
+	}
 
-		new (insertion_offset) typename T::Type(*it);
+	for (auto it = begin; it != end; ++it, ++vertex_index)
+	{
+		auto insertion_offset = get_offset<T>(vertex_index);
+		auto const* const buffer = reinterpret_cast<std::byte const* const>(&(*it));
+
+		for (auto i = 0; i < sizeof(T::Type); ++i)
+			m_vertices[insertion_offset + i] = *(buffer + i);
 	}
 }
 

@@ -70,11 +70,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)</OutDir>
-    <TargetName>$(ProjectName)-d</TargetName>
+    <OutDir>$(ProjectDir)build\debug</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <IntDir>$(ProjectDir)build\debug\tmp</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)</OutDir>
+    <OutDir>$(ProjectDir)build\release</OutDir>
+    <IntDir>$(ProjectDir)build\release\tmp</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

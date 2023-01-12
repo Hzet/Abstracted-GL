@@ -61,5 +61,5 @@ void resource<TName>::emplace(TArgs&&... args)
 	m_destructor = std::unique_ptr<resource_destructor_base<TName>>(new resource_destructor<TName, T>());
 	m_id = id_resource;
 
-	new (&m_buffer[0]) T(std::forward<TArgs>(args)...);
+	new (m_buffer.data()) T(std::forward<TArgs>(args)...);
 }

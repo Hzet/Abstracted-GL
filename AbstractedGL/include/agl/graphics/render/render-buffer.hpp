@@ -59,6 +59,7 @@ namespace agl
 		{
 			render_type_uid id_render; // render id
 			std::uint64_t array_index; // index in m_array_info / index of destructor in m_destructors
+			std::uint64_t array_element_count;
 			std::uint64_t type_size;   // size of the stored type
 		};
 
@@ -77,7 +78,6 @@ namespace agl
 		std::vector<array_info> m_array_info;
 		std::vector<std::uint32_t> m_indices;
 		std::vector<std::byte> m_vertices;
-		std::vector<std::unique_ptr<render_type_destructor_base>> m_destructors;
 
 		std::uint64_t m_vcount;
 		bool m_require_update;
