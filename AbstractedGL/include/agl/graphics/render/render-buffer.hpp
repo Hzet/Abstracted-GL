@@ -12,6 +12,96 @@ namespace agl
 		: public destructive_move
 	{
 	public:
+
+		template <typename T>
+		class iterator
+		{
+		public:
+			iterator();
+			~iterator();
+
+			iterator& operator++();
+			iterator operator++(int) const;
+			iterator& operator+=(int);
+
+			iterator& operator--();
+			iterator operator--(int) const;
+			iterator& operator-=(int);
+
+			typename T::Type& operator*();
+			typename T::Type* const operator->();
+
+		private:
+			friend class render_buffer;
+
+			friend iterator operator+(int lhs, iterator const& rhs);
+			friend iterator operator+(iterator const& lhs, int rhs);
+			friend iterator operator-(int lhs, iterator const& rhs);
+			friend iterator operator-(iterator const& lhs, int rhs);
+
+			friend bool operator==(iterator const& lhs, iterator const& rhs);
+			friend bool operator!=(iterator const& lhs, iterator const& rhs);
+			friend bool operator>(iterator const& lhs, iterator const& rhs);
+			friend bool operator>=(iterator const& lhs, iterator const& rhs);
+			friend bool operator<=(iterator const& lhs, iterator const& rhs);
+			friend bool operator<(iterator const& lhs, iterator const& rhs);
+
+		private:
+			iterator(std::byte* const buffer, std::uint64_t index, std::uint64_t offset, std::uint64_t stride);
+
+		private:
+
+			std::byte* const m_buffer; 
+			std::uint64_t m_index;
+			std::uint64_t m_offset;
+			std::uint64_t m_stride;
+		};
+
+		template <typename T>
+		class const_iterator
+		{
+		public:
+			const_iterator();
+			~const_iterator();
+
+			const_iterator& operator++();
+			const_iterator operator++(int) const;
+			const_iterator& operator+=(int);
+
+			const_iterator& operator--();
+			const_iterator operator--(int) const;
+			const_iterator& operator-=(int);
+
+			typename T::Type const& operator*();
+			typename T::Type const* const operator->();
+
+		private:
+			friend class render_buffer;
+
+			friend const_iterator operator+(int lhs, const_iterator const& rhs);
+			friend const_iterator operator+(const_iterator const& lhs, int rhs);
+			friend const_iterator operator-(int lhs, const_iterator const& rhs);
+			friend const_iterator operator-(const_iterator const& lhs, int rhs);
+
+			friend bool operator==(const_iterator const& lhs, const_iterator const& rhs);
+			friend bool operator!=(const_iterator const& lhs, const_iterator const& rhs);
+			friend bool operator>(const_iterator const& lhs, const_iterator const& rhs);
+			friend bool operator>=(const_iterator const& lhs, const_iterator const& rhs);
+			friend bool operator<=(const_iterator const& lhs, const_iterator const& rhs);
+			friend bool operator<(const_iterator const& lhs, const_iterator const& rhs);
+
+		private:
+			const_iterator(std::byte* const buffer, std::uint64_t index, std::uint64_t offset, std::uint64_t stride);
+
+		private:
+
+			std::byte* const m_buffer;
+			std::uint64_t m_index;
+			std::uint64_t m_offset;
+			std::uint64_t m_stride;
+		};
+
+	public:
 		~render_buffer();
 
 		std::uint64_t get_index_count() const;
@@ -28,6 +118,16 @@ namespace agl
 
 		std::byte const * const get_vertices() const;
 		std::uint32_t const * const get_indices() const;
+
+		template <typename T>
+		iterator<T> begin();
+		template <typename T>
+		iterator<T> end(); 
+
+		template <typename T>
+		const_iterator<T> cbegin() const;
+		template <typename T>
+		const_iterator<T> cend() const;
 
 		void clear();
 
@@ -89,4 +189,3 @@ namespace agl
 
 #include "agl/graphics/render/render-buffer.inl"
 }
-

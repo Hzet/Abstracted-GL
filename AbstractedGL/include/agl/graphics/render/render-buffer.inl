@@ -1,3 +1,298 @@
+
+// iterator
+
+template <typename T>
+bool operator==(render_buffer::iterator<T> const& lhs, render_buffer::iterator<T> const& rhs)
+{
+	return lhs.m_index == rhs.m_index;
+}
+
+template <typename T>
+bool operator!=(render_buffer::iterator<T> const& lhs, render_buffer::iterator<T> const& rhs)
+{
+	return lhs.m_index != rhs.m_index;
+}
+
+template <typename T>
+bool operator>(render_buffer::iterator<T> const& lhs, render_buffer::iterator<T> const& rhs)
+{
+	return lhs.m_index > rhs.m_index;
+}
+
+template <typename T>
+bool operator>=(render_buffer::iterator<T> const& lhs, render_buffer::iterator<T> const& rhs)
+{
+	return lhs.m_index >= rhs.m_index;
+}
+
+template <typename T>
+bool operator<=(render_buffer::iterator<T> const& lhs, render_buffer::iterator<T> const& rhs)
+{
+	return lhs.m_index <= rhs.m_index;
+}
+
+template <typename T>
+bool operator<(render_buffer::iterator<T> const& lhs, render_buffer::iterator<T> const& rhs)
+{
+	return lhs.m_index < rhs.m_index;
+}
+
+template <typename T>
+render_buffer::iterator<T> operator+(int lhs, render_buffer::iterator<T> const& rhs)
+{
+	auto result = rhs;
+	return result += lhs;
+}
+
+template <typename T>
+render_buffer::iterator<T> operator+(render_buffer::iterator<T> const& lhs, int rhs)
+{
+	auto result = lhs;
+	return result += rhs;
+}
+
+template <typename T>
+render_buffer::iterator<T> operator-(int lhs, render_buffer::iterator<T> const& rhs)
+{
+	auto result = rhs;
+	return result -= lhs;
+}
+
+template <typename T>
+render_buffer::iterator<T> operator-(render_buffer::iterator<T> const& lhs, int rhs)
+{
+	auto result = lhs;
+	return result -= rhs;
+}
+
+template <typename T>
+render_buffer::iterator<T>::iterator()
+	: iterator{ nullptr, 0, 0, 0 }
+{
+}
+
+template <typename T>
+render_buffer::iterator<T>::iterator(std::byte* const buffer, std::uint64_t index, std::uint64_t offset, std::uint64_t stride)
+	: m_buffer{ buffer }
+	, m_index{ index }
+	, m_offset{ offset }
+	, m_stride{ stride }
+{
+}
+
+template <typename T>
+render_buffer::iterator<T>::~iterator()
+{
+	m_buffer = nullptr;
+}
+
+template <typename T>
+render_buffer::iterator<T>& render_buffer::iterator<T>::operator++()
+{
+	++m_index;
+	return *this;
+}
+
+template <typename T>
+render_buffer::iterator<T> render_buffer::iterator<T>::operator++(int) const
+{
+	auto result = iterator{ *this };
+	result.m_index++;
+
+	return result;
+}
+
+template <typename T>
+render_buffer::iterator<T>& render_buffer::iterator<T>::operator+=(int n)
+{
+	m_index += n;
+	return *this;
+}
+
+
+template <typename T>
+render_buffer::iterator<T>& render_buffer::iterator<T>::operator--()
+{
+	--m_index;
+	return *this;
+}
+
+template <typename T>
+render_buffer::iterator<T> render_buffer::iterator<T>::operator--(int) const
+{
+	auto result = iterator{ *this };
+	result.m_index--;
+
+	return result;
+}
+
+template <typename T>
+render_buffer::iterator<T>& render_buffer::iterator<T>::operator-=(int n)
+{
+	m_index -= n;
+	return *this;
+}
+
+template <typename T>
+typename T::Type& render_buffer::iterator<T>::operator*()
+{
+	return *reinterpret_cast<typename T::Type*>(m_buffer + m_index * m_stride + m_offset);
+}
+
+template <typename T>
+typename T::Type* const render_buffer::iterator<T>::operator->()
+{
+	return reinterpret_cast<typename T::Type*>(m_buffer + m_index * m_stride + m_offset);
+}
+
+// const_iterator
+
+template <typename T>
+render_buffer::const_iterator<T> operator+(int lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	auto result = rhs;
+	return result += lhs;
+}
+
+template <typename T>
+render_buffer::const_iterator<T> operator+(render_buffer::const_iterator<T> const& lhs, int rhs)
+{
+	auto result = lhs;
+	return result += rhs;
+}
+
+template <typename T>
+render_buffer::const_iterator<T> operator-(int lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	auto result = rhs;
+	return result -= lhs;
+}
+
+template <typename T>
+render_buffer::const_iterator<T> operator-(render_buffer::const_iterator<T> const& lhs, int rhs)
+{
+	auto result = lhs;
+	return result -= rhs;
+}
+
+template <typename T>
+bool operator==(render_buffer::const_iterator<T> const& lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	return lhs.m_index == rhs.m_index;
+}
+
+template <typename T>
+bool operator!=(render_buffer::const_iterator<T> const& lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	return lhs.m_index != rhs.m_index;
+}
+
+template <typename T>
+bool operator>(render_buffer::const_iterator<T> const& lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	return lhs.m_index > rhs.m_index;
+}
+
+template <typename T>
+bool operator>=(render_buffer::const_iterator<T> const& lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	return lhs.m_index >= rhs.m_index;
+}
+
+template <typename T>
+bool operator<=(render_buffer::const_iterator<T> const& lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	return lhs.m_index <= rhs.m_index;
+}
+
+template <typename T>
+bool operator<(render_buffer::const_iterator<T> const& lhs, render_buffer::const_iterator<T> const& rhs)
+{
+	return lhs.m_index < rhs.m_index;
+}
+
+template <typename T>
+render_buffer::const_iterator<T>::const_iterator()
+	: const_iterator{ nullptr, 0, 0, 0 }
+{
+}
+
+template <typename T>
+render_buffer::const_iterator<T>::const_iterator(std::byte* const buffer, std::uint64_t index, std::uint64_t offset, std::uint64_t stride)
+	: m_buffer{ buffer }
+	, m_index{ index }
+	, m_offset{ offset }
+	, m_stride{ stride }
+{
+}
+
+template <typename T>
+render_buffer::const_iterator<T>::~const_iterator()
+{
+	m_buffer = nullptr;
+}
+
+template <typename T>
+render_buffer::const_iterator<T>& render_buffer::const_iterator<T>::operator++()
+{
+	++m_index;
+	return *this;
+}
+
+template <typename T>
+render_buffer::const_iterator<T> render_buffer::const_iterator<T>::operator++(int) const
+{
+	auto result = iterator{ *this };
+	result.m_index++;
+
+	return result;
+}
+
+template <typename T>
+render_buffer::const_iterator<T>& render_buffer::const_iterator<T>::operator+=(int n)
+{
+	m_index += n;
+	return *this;
+}
+
+
+template <typename T>
+render_buffer::const_iterator<T>& render_buffer::const_iterator<T>::operator--()
+{
+	--m_index;
+	return *this;
+}
+
+template <typename T>
+render_buffer::const_iterator<T> render_buffer::const_iterator<T>::operator--(int) const
+{
+	auto result = iterator{ *this };
+	result.m_index--;
+
+	return result;
+}
+
+template <typename T>
+render_buffer::const_iterator<T>& render_buffer::const_iterator<T>::operator-=(int n)
+{
+	m_index -= n;
+	return *this;
+}
+
+template <typename T>
+typename T::Type const& render_buffer::const_iterator<T>::operator*()
+{
+	return *reinterpret_cast<typename T::Type*>(m_buffer + m_index * m_stride + m_offset);
+}
+
+template <typename T>
+typename T::Type const* const render_buffer::const_iterator<T>::operator->()
+{
+	return reinterpret_cast<typename T::Type*>(m_buffer + m_index * m_stride + m_offset);
+}
+
+// render_buffer
+
 template <typename T>
 render_buffer::array_info const& render_buffer::add_vertex_type()
 {
@@ -131,4 +426,36 @@ std::uint64_t render_buffer::get_offset(std::uint64_t index) const
 {
 	const auto data = get_array_info<T>();
 	return m_vlayout[data.array_index].offset + (m_vlayout.get_size() * index);
+}
+
+template <typename T>
+render_buffer::iterator<T> render_buffer::begin()
+{
+	auto const ainfo = get_array_info<T>();
+
+	return iterator<T>{ m_vertices.data(), 0, m_vlayout[ainfo.array_index].offset, m_vlayout.get_size() };
+}
+
+template <typename T>
+render_buffer::iterator<T> render_buffer::end()
+{
+	auto const ainfo = get_array_info<T>();
+
+	return iterator<T>{ m_vertices.data(), get_vertex_count(), m_vlayout[ainfo.array_index].offset, m_vlayout.get_size() };
+}
+
+template <typename T>
+render_buffer::const_iterator<T> render_buffer::cbegin() const
+{
+	auto const ainfo = get_array_info<T>();
+
+	return iterator<T>{ m_vertices.data(), 0, m_vlayout[ainfo.array_index].offset, m_vlayout.get_size() };
+}
+
+template <typename T>
+render_buffer::const_iterator<T> render_buffer::cend() const
+{
+	auto const ainfo = get_array_info<T>();
+
+	return const_iterator<T>{ m_vertices.data(), get_vertex_count(), m_vlayout[ainfo.array_index].offset, m_vlayout.get_size() };
 }
