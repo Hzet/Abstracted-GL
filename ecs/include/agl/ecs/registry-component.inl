@@ -94,7 +94,9 @@ component_array<T>& registry_component::get_array()
 	auto &componentArray = m_arrays[index];
 
 	if (componentArray == nullptr)
+	{
 		componentArray = std::make_unique<component_array<T>>();
+	}
 
 	return *reinterpret_cast<component_array<T>*>(componentArray.get());
 }

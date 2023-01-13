@@ -6,7 +6,7 @@ T& component_array<T>::attach(const entity_uid &id_entity, Args&&... args)
 	m_changed = true;
 
 	m_active_entities[get_index(id_entity)] = true;
-	m_components[get_index(id_entity)] = { std::forward<Args>(args)... };
+	m_components[get_index(id_entity)] = T{ std::forward<Args>(args)... };
 
 	return m_components[get_index(id_entity)];
 }

@@ -298,6 +298,9 @@ render_buffer::array_info const& render_buffer::add_vertex_type()
 {
 	auto const id_render = render_type_uid::get_id<T>();
 
+	//AGL_CORE_ASSERT((!std::is_same_v<T, position_2d> && !has_vertex_type<position_3d>()), "\"position_3d\" vertices already set - cannot add \"position_2d\" vertices");
+	//AGL_CORE_ASSERT((!std::is_same_v<T, position_3d> && !has_vertex_type<position_2d>()), "\"position_2d\" vertices already set - cannot add \"position_3d\" vertices");
+
 	if (has_vertex_type<T>())
 		return get_array_info<T>();
 

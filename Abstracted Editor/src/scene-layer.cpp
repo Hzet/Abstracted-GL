@@ -7,6 +7,7 @@
 #include "agl/graphics/ecs/component/uniform/material.hpp"
 #include "agl/graphics/ecs/component/uniform/texture-material.hpp"
 #include "agl/graphics/ecs/component/renderable.hpp"
+#include "agl/graphics/ecs/component/gui/gui-element.hpp"
 #include "agl/graphics/ecs/component/text.hpp"
 #include "agl/graphics/ecs/component/mesh.hpp"
 #include "agl/graphics/shape/rectangle.hpp"
@@ -44,7 +45,7 @@ namespace editor
 			auto& uniforms = m_camera_orthographic.attach_component<agl::uniform_array>();
 
 			camera.set_resolution(agl::application::get_instance().get_window().get_data().resolution);
-			camera.set_planes({ -1.f, 1.f });
+			camera.set_planes({ 0.0f, 1.f });
 
 			uniforms.add_uniform<agl::camera_uniform, agl::camera_orthographic>(id_text_shader);
 		}
@@ -85,7 +86,7 @@ namespace editor
 			auto& prism_mesh = prism_entity.attach_component<agl::mesh>();
 			prism_mesh.draw_type = prism_builder.get_draw_type();
 			prism_mesh.rbuffer.push_indices(prism_indices.cbegin(), prism_indices.cend());
-			prism_mesh.rbuffer.push_vertices<agl::position>(prism_positions.cbegin(), prism_positions.cend());
+			prism_mesh.rbuffer.push_vertices<agl::position_3d>(prism_positions.cbegin(), prism_positions.cend());
 			prism_mesh.rbuffer.push_vertices<agl::color>(prism_colors.cbegin(), prism_colors.cend());
 			
 			//for (auto i = 0; i < prism_positions.size(); ++i)
@@ -99,7 +100,7 @@ namespace editor
 				auto& transform = e.attach_component<agl::transformable>();
 				auto& material = e.attach_component<agl::material>();
 				e.attach_component<agl::renderable>(renderable);
-				e.attach_component<agl::texture>(empty_texture_uid);
+				e.attach_component<agl::texture>(empty_texture_uid, empty_texture_uid, empty_texture_uid);
 
 				auto& uniforms = e.attach_component<agl::uniform_array>();
 				uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_basic_shader);
@@ -137,7 +138,7 @@ namespace editor
 			};
 			rect_mesh.draw_type = rect_builder.get_draw_type();
 			rect_mesh.rbuffer.push_indices(rect_indices.cbegin(), rect_indices.cend());
-			rect_mesh.rbuffer.push_vertices<agl::position>(rect_positions.cbegin(), rect_positions.cend());
+			rect_mesh.rbuffer.push_vertices<agl::position_2d>(rect_positions.cbegin(), rect_positions.cend());
 			rect_mesh.rbuffer.push_vertices<agl::color>(rect_colors.cbegin(), rect_colors.cend());
 			rect_mesh.rbuffer.push_vertices<agl::texture_position>(rect_texture.cbegin(), rect_texture.cend());
 
@@ -152,10 +153,22 @@ namespace editor
 			auto& text = m_frametime_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
 			auto& transform = m_frametime_text.attach_component<agl::transformable>();
 			auto& uniforms = m_frametime_text.attach_component<agl::uniform_array>();
+			auto& rect_mesh = m_frametime_text.attach_component<agl::mesh>();
+			auto& gui = m_frametime_text.attach_component<agl::gui_element>(m_frametime_text.get_entity_uid(), id_text_shader, agl::GUI_BUTTON);
 
 			transform.set_position({-0.98f, 0.95f, 0.f});
 
 			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
+
+			auto rect_builder = agl::rectangle_builder{ agl::rectangle{{150.f, 20.5f}} };
+			auto const rect_indices = rect_builder.get_indices();
+			auto const rect_positions = rect_builder.get_positions();
+			auto const rect_colors = rect_builder.get_colors(glm::vec4{ 0.f, 0.f, 0.f, 0.f });
+
+			rect_mesh.draw_type = rect_builder.get_draw_type();
+			rect_mesh.rbuffer.push_indices(rect_indices.cbegin(), rect_indices.cend());
+			rect_mesh.rbuffer.push_vertices<agl::position_2d>(rect_positions.cbegin(), rect_positions.cend());
+			rect_mesh.rbuffer.push_vertices<agl::color>(rect_colors.cbegin(), rect_colors.cend());
 		}
 
 		// avg fps text

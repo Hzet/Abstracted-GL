@@ -9,7 +9,7 @@ namespace agl
 	};
 
 	class rectangle_builder
-		: public shape_builder
+		: public shape_builder_2d
 	{
 	public:
 		rectangle_builder() = default;
@@ -19,7 +19,7 @@ namespace agl
 		virtual std::uint64_t get_vertex_count() const override;
 		virtual std::uint64_t get_index_count() const override;
 		virtual std::vector<std::uint32_t> get_indices() const override;
-		virtual std::vector<glm::vec3> get_positions() const override;
+		virtual std::vector<glm::vec2> get_positions() const override;
 
 	private:
 		rectangle m_specification;

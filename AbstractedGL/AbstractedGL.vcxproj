@@ -120,8 +120,8 @@
     <ClCompile Include="src\graphics\ecs\component\transform.cpp" />
     <ClCompile Include="src\graphics\ecs\component\transformable.cpp" />
     <ClCompile Include="src\graphics\ecs\system\camera-system.cpp" />
+    <ClCompile Include="src\graphics\ecs\system\gui-render-system.cpp" />
     <ClCompile Include="src\graphics\ecs\system\render-system.cpp" />
-    <ClCompile Include="src\graphics\ecs\system\text-system.cpp" />
     <ClCompile Include="src\graphics\render\index-buffer.cpp" />
     <ClCompile Include="src\graphics\render\render-buffer.cpp" />
     <ClCompile Include="src\graphics\render\vertex-array.cpp" />
@@ -136,7 +136,6 @@
     <ClCompile Include="src\graphics\shader\uniform-wrapper.cpp" />
     <ClCompile Include="src\graphics\shape\prism.cpp" />
     <ClCompile Include="src\graphics\shape\rectangle.cpp" />
-    <ClCompile Include="src\graphics\shape\shape-builder.cpp" />
     <ClCompile Include="src\graphics\texture\texture-manager.cpp" />
     <ClCompile Include="src\graphics\texture\texture-base.cpp" />
     <ClCompile Include="src\graphics\texture\texture2d.cpp" />
@@ -146,6 +145,7 @@
     <ClCompile Include="src\system\glcore\gl-core.cpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\direction.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\directional-light.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\component\gui\gui-element.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\material.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\renderable.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\spot-light.hpp" />
@@ -161,8 +161,9 @@
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\transform.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\component\uniform\uniform-build.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\camera-system.hpp" />
+    <ClInclude Include="include\agl\graphics\ecs\system\gui-render-system.hpp" />
     <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp" />
-    <ClInclude Include="include\agl\graphics\ecs\system\text-system.hpp" />
+    <ClInclude Include="include\agl\graphics\gui\gui-type.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-array.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-base.hpp" />
     <ClInclude Include="include\agl\graphics\shader\uniform-prototyper.hpp" />
@@ -255,6 +256,7 @@
     <None Include="include\agl\graphics\shader\uniform-prototyper.inl" />
     <None Include="include\agl\graphics\shader\uniform-register.inl" />
     <None Include="include\agl\graphics\shader\uniform-wrapper.inl" />
+    <None Include="include\agl\graphics\shape\shape-builder.inl" />
     <None Include="include\agl\utility\inheritable-vector.inl" />
     <None Include="include\agl\utility\ordered-list.inl" />
   </ItemGroup>

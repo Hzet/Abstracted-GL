@@ -91,6 +91,12 @@
     <Filter Include="src\graphics\text">
       <UniqueIdentifier>{df11fe69-e4b8-4d62-8b18-9109c6ecd6cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\graphics\gui">
+      <UniqueIdentifier>{591d7ff8-5eea-4e21-8fbc-599b3280ea76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\graphics\ecs\component\gui">
+      <UniqueIdentifier>{8cf6ea77-ed4a-4039-ae67-c32b7a474b62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\render\index-buffer.cpp">
@@ -195,9 +201,6 @@
     <ClCompile Include="src\graphics\shape\rectangle.cpp">
       <Filter>src\graphics\shape</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\shape\shape-builder.cpp">
-      <Filter>src\graphics\shape</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\texture\texture-manager.cpp">
       <Filter>src\graphics\texture</Filter>
     </ClCompile>
@@ -207,11 +210,11 @@
     <ClCompile Include="src\graphics\text\font-manager.cpp">
       <Filter>src\graphics\text</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\ecs\system\text-system.cpp">
-      <Filter>src\graphics\ecs\system\render</Filter>
-    </ClCompile>
     <ClCompile Include="include\agl\core\enums\gl-buffer-usage-type.hpp">
       <Filter>src\system\core\enums</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\ecs\system\gui-render-system.cpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -479,9 +482,6 @@
     <ClInclude Include="include\agl\graphics\text\font-uid.hpp">
       <Filter>src\graphics\text</Filter>
     </ClInclude>
-    <ClInclude Include="include\agl\graphics\ecs\system\text-system.hpp">
-      <Filter>src\graphics\ecs\system\render</Filter>
-    </ClInclude>
     <ClInclude Include="include\agl\graphics\ecs\system\system-build.hpp">
       <Filter>src\graphics\ecs\system</Filter>
     </ClInclude>
@@ -503,6 +503,15 @@
     <ClInclude Include="include\agl\core\app\application-resource.hpp" />
     <ClInclude Include="include\agl\graphics\render\render-type.hpp">
       <Filter>src\graphics\render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\gui\gui-type.hpp">
+      <Filter>src\graphics\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\component\gui\gui-element.hpp">
+      <Filter>src\graphics\ecs\component\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\graphics\ecs\system\gui-render-system.hpp">
+      <Filter>src\graphics\ecs\system\render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -565,6 +574,9 @@
     </None>
     <None Include="include\agl\core\app\resource.inl">
       <Filter>src\system\core\app</Filter>
+    </None>
+    <None Include="include\agl\graphics\shape\shape-builder.inl">
+      <Filter>src\graphics\shape</Filter>
     </None>
   </ItemGroup>
 </Project>

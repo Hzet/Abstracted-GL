@@ -9,11 +9,11 @@ namespace agl
 		: public system_register<render_group, gui_render_system>
 	{
 	public:
+		static void render_text(entity_uid const& id_entity, registry &reg);
+
+	public:
 		virtual void init(registry &reg) override;
 		virtual void update(registry &reg) override;
-
-	private:
-		void render_text(entity_uid const& id_entity, registry &reg);
 
 	private:
 		mesh m_character_mesh;

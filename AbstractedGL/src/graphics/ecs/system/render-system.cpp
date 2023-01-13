@@ -11,14 +11,9 @@
 #include <agl/graphics/types/types.hpp>
 namespace agl
 {
-	void render_system::render_mesh(entity_uid const& id_entity, registry &reg)
+	void render_system::render_mesh(entity_uid const& id_mesh, registry &reg)
 	{
-		static auto& shader_manager = application::get_resource<agl::shader_manager>();
-
-		auto const& renderable = reg.get<agl::renderable>(id_entity);
-		auto& mesh = reg.get<agl::mesh>(renderable.id_renderable);
-
-		shader_manager.set_active_shader(renderable.id_shader);
+		auto& mesh = reg.get<agl::mesh>(id_mesh);
 
 		if (mesh.rbuffer.require_update())
 			mesh.rbuffer.update_buffers();
@@ -47,6 +42,7 @@ namespace agl
 	void render_system::update(registry &reg)
 	{
 		static auto& manager = application::get_resource<shader_manager>();
+		static auto& shader_manager = application::get_resource<agl::shader_manager>();
 		static auto& texture_manager = application::get_resource<agl::texture_manager>();
 		static auto renderable_view = reg.inclusive_view<renderable>();
 
@@ -63,7 +59,11 @@ namespace agl
 				uniforms.send(e);
 			}
 
-			render_mesh(*it, reg);
+			auto const& renderable = reg.get<agl::renderable>(*it);
+
+			shader_manager.set_active_shader(renderable.id_shader);
+
+			render_mesh(renderable.id_renderable, reg);
 			texture_manager.unbind_textures();
 		}
 	}

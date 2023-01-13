@@ -11,7 +11,7 @@ namespace agl
 	};
 
 	class prism_builder
-		: public shape_builder
+		: public shape_builder_3d
 	{
 	public:
 		prism_builder() = default;

@@ -10,5 +10,6 @@ namespace agl
 		struct position {};
 	}
 
-	using position = base_type<detail::position, glm::vec3>;
+	using position_3d = base_type<detail::position, glm::vec3>;
+	using position_2d = base_type<detail::position, glm::vec2>;
 }

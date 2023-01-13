@@ -30,13 +30,13 @@ namespace agl
 		return 6;
 	}
 
-	std::vector<glm::vec3> rectangle_builder::get_positions() const
+	std::vector<glm::vec2> rectangle_builder::get_positions() const
 {
-		return std::vector<glm::vec3>{
-			{0.f, 0.f, 0.f },										 // left bottom
-			{ 0.f, m_specification.size.y, 0.f },					 // left top
-			{ m_specification.size.x, m_specification.size.y, 0.f }, // right top
-			{ m_specification.size.x, 0.f, 0.f }					 // right bottom
+		return std::vector<glm::vec2>{
+			{ 0.f, 0.f },										// left bottom
+			{ 0.f, m_specification.size.y },					// left top
+			{ m_specification.size.x, m_specification.size.y }, // right top
+			{ m_specification.size.x, 0.f }					    // right bottom
 		};
 	}
 }
