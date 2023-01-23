@@ -15,11 +15,14 @@ namespace agl
 		{
 			AGL_CORE_ASSERT(sig[m_uniforms[i]->get_component_type_uid()], "Entity is missing component {} for uniform {}", component_type_uid::get_name(m_uniforms[i]->get_component_type_uid()), uniform_type_uid::get_name(m_uniforms[i]->get_uniform_type_uid()));
 
-			sh_manager.set_active_shader(m_uniforms[i]->get_shader_uid());
+			for (auto const &sh : m_uniforms[i]->get_shader_uids())
+			{
+				sh_manager.set_active_shader(sh);
 
-			auto const& s = sh_manager.get_active_shader();
+				auto const& s = sh_manager.get_active_shader();
 
-			m_uniforms[i]->send(s, e);
+				m_uniforms[i]->send(s, e);
+			}
 		}
 	}
 

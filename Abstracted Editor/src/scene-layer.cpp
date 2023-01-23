@@ -28,9 +28,10 @@ namespace editor
 		auto& font_manager = agl::application::get_resource<agl::font_manager>();
 
 		// load shaders
-		auto const id_basic_shader = sh_manager.load_from_file("resource/basic-vertex.glsl", "resource/basic-fragment.glsl");
+		auto const id_basic_3d_shader = sh_manager.load_from_file("resource/basic-vertex.glsl", "resource/basic-fragment.glsl");
+		auto const id_basic_2d_shader = sh_manager.load_from_file("resource/basic-2d-vertex.glsl", "resource/basic-2d-fragment.glsl");
 		auto const id_light_shader = sh_manager.load_from_file("resource/light.vsh", "resource/light.fsh");
-		auto const id_text_shader = sh_manager.load_from_file("resource/text-vertex.glsl", "resource/text-fragment.glsl");
+		auto const id_gui_shader = sh_manager.load_from_file("resource/text-vertex.glsl", "resource/text-fragment.glsl");
 		sh_manager.link_all_shaders();
 
 		// load fonts 
@@ -47,7 +48,8 @@ namespace editor
 			camera.set_resolution(agl::application::get_instance().get_window().get_data().resolution);
 			camera.set_planes({ 0.0f, 1.f });
 
-			uniforms.add_uniform<agl::camera_uniform, agl::camera_orthographic>(id_text_shader);
+			uniforms.add_uniform<agl::camera_uniform, agl::camera_orthographic>(id_basic_2d_shader);
+			uniforms.add_uniform<agl::camera_uniform, agl::camera_orthographic>(id_gui_shader);
 		}
 
 		// camera perspective
@@ -69,7 +71,7 @@ namespace editor
 
 			camera_transform.set_position({ 0.f, 0.f, 0.f });
 
-			uniforms.add_uniform<agl::camera_uniform, agl::camera_perspective>(id_basic_shader);
+			uniforms.add_uniform<agl::camera_uniform, agl::camera_perspective>(id_basic_3d_shader);
 		}
 
 		// mesh 
@@ -94,7 +96,7 @@ namespace editor
 
 			for (auto i = 0; i < 1000; ++i)
 			{
-				auto renderable = agl::renderable{ prism_entity.get_entity_uid(), id_basic_shader };
+				auto renderable = agl::renderable{ prism_entity.get_entity_uid(), id_basic_3d_shader };
 
 				auto e = reg.create();
 				auto& transform = e.attach_component<agl::transformable>();
@@ -103,8 +105,8 @@ namespace editor
 				e.attach_component<agl::texture>(empty_texture_uid, empty_texture_uid, empty_texture_uid);
 
 				auto& uniforms = e.attach_component<agl::uniform_array>();
-				uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_basic_shader);
-				uniforms.add_uniform<agl::texture_uniform, agl::texture>(id_basic_shader);
+				uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_basic_3d_shader);
+				uniforms.add_uniform<agl::texture_uniform, agl::texture>(id_basic_3d_shader);
 				//uniforms.add_uniform<agl::material_uniform, agl::material>(basic_shader);
 
 				material.ambient = glm::vec4{ 0.f };
@@ -142,28 +144,28 @@ namespace editor
 			rect_mesh.rbuffer.push_vertices<agl::color>(rect_colors.cbegin(), rect_colors.cend());
 			rect_mesh.rbuffer.push_vertices<agl::texture_position>(rect_texture.cbegin(), rect_texture.cend());
 
-			rect_uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_basic_shader);
-			rect_uniforms.add_uniform<agl::texture_uniform, agl::texture>(id_basic_shader);
+			rect_uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_basic_3d_shader);
+			rect_uniforms.add_uniform<agl::texture_uniform, agl::texture>(id_basic_3d_shader);
 		}
 
 		// frame time text
 		m_frametime_text = reg.create();
 
 		{
-			auto& text = m_frametime_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
+			auto& text = m_frametime_text.attach_component<agl::text>(id_bahnschrift_font, id_gui_shader, "0.0");
 			auto& transform = m_frametime_text.attach_component<agl::transformable>();
 			auto& uniforms = m_frametime_text.attach_component<agl::uniform_array>();
 			auto& rect_mesh = m_frametime_text.attach_component<agl::mesh>();
-			auto& gui = m_frametime_text.attach_component<agl::gui_element>(m_frametime_text.get_entity_uid(), id_text_shader, agl::GUI_BUTTON);
+			auto& gui = m_frametime_text.attach_component<agl::gui_element>(m_frametime_text.get_entity_uid(), id_gui_shader, agl::GUI_BUTTON);
 
 			transform.set_position({-0.98f, 0.95f, 0.f});
 
-			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
+			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_gui_shader);
 
-			auto rect_builder = agl::rectangle_builder{ agl::rectangle{{150.f, 20.5f}} };
+			auto rect_builder = agl::rectangle_builder{ agl::rectangle{{100.f, 20.5f}} };
 			auto const rect_indices = rect_builder.get_indices();
 			auto const rect_positions = rect_builder.get_positions();
-			auto const rect_colors = rect_builder.get_colors(glm::vec4{ 0.f, 0.f, 0.f, 0.f });
+			auto const rect_colors = rect_builder.get_colors(glm::vec4{ 1.f, 0.f, 0.f, 1.f });
 
 			rect_mesh.draw_type = rect_builder.get_draw_type();
 			rect_mesh.rbuffer.push_indices(rect_indices.cbegin(), rect_indices.cend());
@@ -175,13 +177,14 @@ namespace editor
 		m_avg_fps_text = reg.create();
 
 		{
-			auto& text = m_avg_fps_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
+			auto& text = m_avg_fps_text.attach_component<agl::text>(id_bahnschrift_font, id_gui_shader, "0.0");
 			auto& transform = m_avg_fps_text.attach_component<agl::transformable>();
 			auto& uniforms = m_avg_fps_text.attach_component<agl::uniform_array>();
+			auto& gui = m_avg_fps_text.attach_component<agl::gui_element>(agl::entity_uid::INVALID, id_gui_shader, agl::GUI_BUTTON);
 
 			transform.set_position({ -0.98f, 0.90f, 0.f });
 
-			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_text_shader);
+			uniforms.add_uniform<agl::transform_uniform, agl::transformable>(id_gui_shader);
 		}
 	}
 

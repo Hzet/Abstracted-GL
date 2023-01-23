@@ -10,8 +10,24 @@ void uniform_array::add_uniform(shader_uid id_shader)
 
 	auto &u = *get_uniform_pointer<TName>();
 
-	u.set_shader_uid(id_shader);
+	u.add_shader_uid(id_shader);
 }
+
+template <typename TName, typename TComponent>
+void uniform_array::add_uniform(std::initializer_list<shader_uid> id_shader)
+{
+	if (!has_uniform<TName>())
+	{
+		auto u = uniform_prototyper::get_prototype(uniform_type_uid::get_id<TName>(), component_type_uid::get_id<TComponent>());
+
+		m_uniforms.push_back(std::move(u));
+	}
+
+	auto &u = *get_uniform_pointer<TName>();
+
+	u.add_shader_uid(id_shader);
+}
+
 
 template <typename TName>
 void uniform_array::remove_uniform()

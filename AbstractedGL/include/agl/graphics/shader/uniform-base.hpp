@@ -26,8 +26,9 @@ namespace agl
 		const std::string& get_name() const;
 		std::string get_full_name();
 
-		void set_shader_uid(shader_uid id_shader);
-		shader_uid get_shader_uid() const;
+		void add_shader_uid(shader_uid id_shaders);
+		void add_shader_uid(std::initializer_list<shader_uid> id_shaders);
+		std::vector<shader_uid> get_shader_uids() const;
 
 		virtual void send(shader const& sh, entity const& e) = 0;
 
@@ -43,7 +44,7 @@ namespace agl
 
 		std::int64_t m_index; 
 		component_type_uid m_id_component_type_uid;
-		shader_uid m_id_shader;
+		std::vector<shader_uid> m_id_shaders;
 		uniform_type_uid m_id_uniform_type;
 		std::string m_name;
 	};

@@ -53,15 +53,25 @@ namespace agl
 		return m_name;
 	}
 
-	void uniform_base::set_shader_uid(shader_uid id_shader)
+	void uniform_base::add_shader_uid(shader_uid id_shader)
 	{
 		m_update_uniform_locations = true;
 
-		m_id_shader = id_shader;
+		m_id_shaders.push_back(id_shader);
 	}
 
-	shader_uid uniform_base::get_shader_uid() const
+	void uniform_base::add_shader_uid(std::initializer_list<shader_uid> id_shaders)
 	{
-		return m_id_shader;
+		m_update_uniform_locations = true;
+
+		m_id_shaders.reserve(id_shaders.size());
+
+		for(auto const& id : id_shaders)
+			m_id_shaders.push_back(id);
+	}
+
+	std::vector<shader_uid> uniform_base::get_shader_uids() const
+	{
+		return m_id_shaders;
 	}
 }

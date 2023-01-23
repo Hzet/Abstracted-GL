@@ -15,6 +15,7 @@ namespace agl
 	{
 	public:
 		template <typename TName, typename TComponent> void add_uniform(shader_uid id_shader = {});
+		template <typename TName, typename TComponent> void add_uniform(std::initializer_list<shader_uid> id_shaders);
 
 		template <typename TName> void remove_uniform();
 
