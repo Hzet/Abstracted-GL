@@ -259,9 +259,6 @@
     <None Include="include\agl\utility\ordered-list.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\debug\debug.vcxproj">
-      <Project>{8b243d0c-9cfe-4568-b018-1938b5ca330a}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\ecs\ecs.vcxproj">
       <Project>{03d90fd1-0a1b-4ff5-8515-eb6ec808f70e}</Project>
     </ProjectReference>

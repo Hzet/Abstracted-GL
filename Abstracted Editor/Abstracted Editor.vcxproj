@@ -147,9 +147,6 @@
     <ProjectReference Include="..\AbstractedGL\AbstractedGL.vcxproj">
       <Project>{21cfb665-954c-4450-af3a-9bfa7bc8c542}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\debug\debug.vcxproj">
-      <Project>{8b243d0c-9cfe-4568-b018-1938b5ca330a}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\ecs\ecs.vcxproj">
       <Project>{03d90fd1-0a1b-4ff5-8515-eb6ec808f70e}</Project>
     </ProjectReference>
