@@ -2,9 +2,11 @@
 ### About 
 An ever demanding of features monstrocity which grows unpredictably in various directions. Or otherwise just an abstraction over the OpenGL functionalities with addition of various tools making working on the abstraction itself a bit more interesting. 
 It is build in a way I hope one day could be called a general purpose graphic engine with at least most basic features that this genre is offering. 
+
 #
 ### Currently supported features overview
 Most of the libraries and features are integrated within the AGL environment making them unusable in the outside of AGL.
+
 #### Entity component system
  An integrated package to manage the logic flow of the application by providing the end user with objects that can have properties assigned to it. Properties and sets of properties can be processed by systems in any given order. 
 This approach comes with certain benefits, which apply mostly but not limited to  memory heavy applications, since each type of property is stored independently of other types in a contiguous array, hence the processor can utilize it's cache to preload next objects.
@@ -26,7 +28,7 @@ If you were to open the editor and hoped that you will see what the name suggest
 
 #### Debug
 Boring stuff. Exceptions, asserts and macros (don't be thrown off by this - macros are nice to have sometimes)
-#
+
 #
 ### How to use?
 How you want! 
