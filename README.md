@@ -1,6 +1,6 @@
 # AbstractedGL
 ### About 
-An ever demanding of features monstrocity which grows unpredictably in various directions. Or otherwise just an abstraction over the OpenGL functionalities with addition of various tools making working on the abstraction itself a bit more interesting. 
+An ever in demand for features monstrocity which grows unpredictably in various directions. Or otherwise just an abstraction over the OpenGL functionalities with addition of various tools making working on the abstraction itself a bit more interesting. 
 It is build in a way I hope one day could be called a general purpose graphic engine with at least most basic features that this genre is offering. 
 
 #
