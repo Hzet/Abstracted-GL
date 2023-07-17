@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="external">
+      <UniqueIdentifier>{d8b956a0-6eb4-4130-a27d-5ee2fffd3209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{9c84f67c-f133-4e23-9c30-30ea3a54c4ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs">
+      <UniqueIdentifier>{8d8cb475-b481-4685-a35f-9fdc7502fcee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\component">
+      <UniqueIdentifier>{cd85745e-3971-48e4-93a0-9237b43a4871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\registry">
+      <UniqueIdentifier>{3a5ccd33-4d35-4337-9f56-6039e0d10013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\registry\component">
+      <UniqueIdentifier>{62aeaea6-0219-4e64-8e63-c7719d34d8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\registry\system">
+      <UniqueIdentifier>{66bfb606-43e2-4a67-bc83-8b23efab60a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\registry\entity">
+      <UniqueIdentifier>{36a9043e-ee26-4750-b820-cafe68e1069b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\entity">
+      <UniqueIdentifier>{1a3b5da8-ba7f-4513-8690-d1b0e12f5070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\system">
+      <UniqueIdentifier>{c1e49c7f-6d4b-4269-994f-7d4d6468fc4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\signal">
+      <UniqueIdentifier>{c6419daf-e8a2-414d-abec-35f79d1f804c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\view">
+      <UniqueIdentifier>{a829671b-67c0-4260-81a8-18f76159db8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ecs\signature">
+      <UniqueIdentifier>{1837a204-3d19-4a47-aa69-3fb438459858}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\agl\ecs\config.hpp">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\ecs.hpp">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\component-array.hpp">
+      <Filter>src\ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\component-array-base.hpp">
+      <Filter>src\ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\component-type-uid.hpp">
+      <Filter>src\ecs\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\entity.hpp">
+      <Filter>src\ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\entity-uid.hpp">
+      <Filter>src\ecs\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\group.hpp">
+      <Filter>src\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\group-base.hpp">
+      <Filter>src\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\group-type-uid.hpp">
+      <Filter>src\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\registry.hpp">
+      <Filter>src\ecs\registry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\registry-component.hpp">
+      <Filter>src\ecs\registry\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\registry-entity.hpp">
+      <Filter>src\ecs\registry\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\registry-system.hpp">
+      <Filter>src\ecs\registry\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\signature.hpp">
+      <Filter>src\ecs\signature</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\system-base.hpp">
+      <Filter>src\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\system-register.hpp">
+      <Filter>src\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\system-type-uid.hpp">
+      <Filter>src\ecs\system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\signal.hpp">
+      <Filter>src\ecs\signal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\view.hpp">
+      <Filter>src\ecs\view</Filter>
+    </ClInclude>
+    <ClInclude Include="include\agl\ecs\ordered-list.hpp">
+      <Filter>src\ecs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\agl\ecs\component-array.inl">
+      <Filter>src\ecs\component</Filter>
+    </None>
+    <None Include="include\agl\ecs\entity.inl">
+      <Filter>src\ecs\entity</Filter>
+    </None>
+    <None Include="include\agl\ecs\group.inl">
+      <Filter>src\ecs\system</Filter>
+    </None>
+    <None Include="include\agl\ecs\registry.inl">
+      <Filter>src\ecs\registry</Filter>
+    </None>
+    <None Include="include\agl\ecs\registry-component.inl">
+      <Filter>src\ecs\registry\component</Filter>
+    </None>
+    <None Include="include\agl\ecs\registry-entity.inl">
+      <Filter>src\ecs\registry\entity</Filter>
+    </None>
+    <None Include="include\agl\ecs\registry-system.inl">
+      <Filter>src\ecs\registry\system</Filter>
+    </None>
+    <None Include="include\agl\ecs\signature.inl">
+      <Filter>src\ecs\signature</Filter>
+    </None>
+    <None Include="include\agl\ecs\system-register.inl">
+      <Filter>src\ecs\system</Filter>
+    </None>
+    <None Include="include\agl\ecs\signal.inl">
+      <Filter>src\ecs\signal</Filter>
+    </None>
+    <None Include="include\agl\ecs\view.inl">
+      <Filter>src\ecs\view</Filter>
+    </None>
+    <None Include="include\agl\ecs\ordered-list.inl">
+      <Filter>src\ecs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\agl\ecs\component-array-base.cpp">
+      <Filter>src\ecs\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\entity.cpp">
+      <Filter>src\ecs\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\group-base.cpp">
+      <Filter>src\ecs\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\registry.cpp">
+      <Filter>src\ecs\registry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\registry-component.cpp">
+      <Filter>src\ecs\registry\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\registry-entity.cpp">
+      <Filter>src\ecs\registry\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\registry-system.cpp">
+      <Filter>src\ecs\registry\system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\signature.cpp">
+      <Filter>src\ecs\signature</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\system-base.cpp">
+      <Filter>src\ecs\system</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
