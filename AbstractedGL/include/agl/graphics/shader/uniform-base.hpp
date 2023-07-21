@@ -24,7 +24,7 @@ namespace agl
 
 		void set_name(const std::string &name, std::int64_t index = -1);
 		const std::string& get_name() const;
-		std::string get_full_name();
+		std::string get_indexed_name();
 
 		void set_shader_uid(shader_uid id_shader);
 		shader_uid get_shader_uid() const;

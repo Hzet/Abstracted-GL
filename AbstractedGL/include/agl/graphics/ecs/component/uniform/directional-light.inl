@@ -9,10 +9,10 @@ void uniform<directional_light_uniform, TComponent>::send(const shader &sh, cons
 {
 	if (m_update_uniform_locations)
 	{
-		m_ambient = sh.get_location(get_full_name() + "." + "ambient");
-		m_color = sh.get_location(get_full_name() + "." + "color");
-		m_diffuse = sh.get_location(get_full_name() + "." + "diffuse");
-		m_specular = sh.get_location(get_full_name() + "." + "specular");
+		m_ambient = sh.get_location(get_indexed_name() + "." + "ambient");
+		m_color = sh.get_location(get_indexed_name() + "." + "color");
+		m_diffuse = sh.get_location(get_indexed_name() + "." + "diffuse");
+		m_specular = sh.get_location(get_indexed_name() + "." + "specular");
 
 		m_update_uniform_locations = false;
 	}

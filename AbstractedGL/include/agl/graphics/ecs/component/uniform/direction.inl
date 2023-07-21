@@ -9,9 +9,9 @@ void uniform<direction_uniform, TComponent>::send(const shader &sh, const entity
 {
 	if (m_update_uniform_locations)
 	{
-		m_forward = sh.get_location(get_full_name() + "." + "forward");
-		m_right = sh.get_location(get_full_name() + "." + "right");
-		m_up = sh.get_location(get_full_name() + "." + "up");
+		m_forward = sh.get_location(get_indexed_name() + "." + "forward");
+		m_right = sh.get_location(get_indexed_name() + "." + "right");
+		m_up = sh.get_location(get_indexed_name() + "." + "up");
 
 		m_update_uniform_locations = false;
 	}

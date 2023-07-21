@@ -9,7 +9,7 @@ void uniform<inverse_transform_uniform, TComponent>::send(const shader &sh, cons
 {
 	if (m_update_uniform_locations)
 	{
-		m_inverse_transform = sh.get_location(get_full_name() + "." + "inverse_transform");
+		m_inverse_transform = sh.get_location(get_indexed_name() + "." + "inverse_transform");
 
 		m_update_uniform_locations = false;
 	}

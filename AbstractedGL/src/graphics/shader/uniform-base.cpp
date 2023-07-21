@@ -45,7 +45,7 @@ namespace agl
 		return m_name;
 	}
 
-	std::string uniform_base::get_full_name()
+	std::string uniform_base::get_indexed_name()
 	{
 		if (is_indexed())
 			return m_name + "[" + std::to_string(m_index) + "]";

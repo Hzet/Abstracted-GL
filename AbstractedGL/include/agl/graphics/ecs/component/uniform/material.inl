@@ -9,10 +9,10 @@ void uniform<material_uniform, TComponent>::send(const shader &sh, const entity 
 {
 	if (m_update_uniform_locations)
 	{
-		m_shininess = sh.get_location(get_full_name() + "." + "shininess");
-		m_ambient = sh.get_location(get_full_name() + "." + "ambient");
-		m_diffuse = sh.get_location(get_full_name() + "." + "diffuse");
-		m_specular = sh.get_location(get_full_name() + "." + "specular");
+		m_shininess = sh.get_location(get_indexed_name() + "." + "shininess");
+		m_ambient = sh.get_location(get_indexed_name() + "." + "ambient");
+		m_diffuse = sh.get_location(get_indexed_name() + "." + "diffuse");
+		m_specular = sh.get_location(get_indexed_name() + "." + "specular");
 		//m_emission = sh.get_location(get_full_name() + "." + "emission");
 
 		m_update_uniform_locations = false;

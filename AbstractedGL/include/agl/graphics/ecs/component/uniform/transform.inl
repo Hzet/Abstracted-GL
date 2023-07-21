@@ -9,7 +9,7 @@ void uniform<transform_uniform, TComponent>::send(const shader &sh, const entity
 {
 	if (m_update_uniform_locations)
 	{
-		m_transform = sh.get_location(get_full_name() + "." + "transform");
+		m_transform = sh.get_location(get_indexed_name() + "." + "transform");
 
 		m_update_uniform_locations = false;
 	}
