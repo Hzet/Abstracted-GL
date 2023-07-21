@@ -149,7 +149,7 @@ namespace editor
 		m_frametime_text = reg.create();
 
 		{
-			auto& text = m_frametime_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
+			//auto& text = m_frametime_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
 			auto& transform = m_frametime_text.attach_component<agl::transformable>();
 			auto& uniforms = m_frametime_text.attach_component<agl::uniform_array>();
 
@@ -162,7 +162,7 @@ namespace editor
 		m_avg_fps_text = reg.create();
 
 		{
-			auto& text = m_avg_fps_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
+			//auto& text = m_avg_fps_text.attach_component<agl::text>(id_bahnschrift_font, id_text_shader, "0.0");
 			auto& transform = m_avg_fps_text.attach_component<agl::transformable>();
 			auto& uniforms = m_avg_fps_text.attach_component<agl::uniform_array>();
 
