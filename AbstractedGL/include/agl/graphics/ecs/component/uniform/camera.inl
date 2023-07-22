@@ -18,9 +18,9 @@ void uniform<camera_uniform, TComponent>::send(const shader &sh, const entity &e
 		m_update_uniform_locations = false;
 	}
 
-	auto const& camera = e.get_component<TComponent>();
+	auto& camera = e.get_component<TComponent>();
 
-	sh.set_uniform(m_projection, camera.get_projection());
+	sh.set_uniform(m_projection, camera.calc_projection());
 	sh.set_uniform(m_resolution, camera.get_resolution());
 	sh.set_uniform(m_view, camera.get_view());
 }

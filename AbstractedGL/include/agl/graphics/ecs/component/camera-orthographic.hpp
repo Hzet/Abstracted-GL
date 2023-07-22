@@ -12,10 +12,6 @@ namespace agl
 	public:
 		using camera_base::camera_base;
 
-	protected:
-		/// <summary>
-		/// Update 'm_projection' matrix.
-		/// </summary>
-		virtual void update_projection() override;
+		const transform& calc_projection();
 	};
 }

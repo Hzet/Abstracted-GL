@@ -30,11 +30,10 @@ namespace agl
 		/// <param name="fov">The field of view</param>
 		void set_fov(float fov);
 
-	protected:
 		/// <summary>
 		/// Recalculate the projection matrix.
 		/// </summary>
-		virtual void update_projection() override;
+		const transform& calc_projection();
 
 	private:
 		float m_fov;

@@ -58,14 +58,6 @@ namespace agl
 		const transform& get_view() const;
 
 		/// <summary>
-		/// Get the 'm_projection' matrix.
-		/// </summary>
-		/// <returns>
-		/// The projection matrix
-		/// </returns>
-		const transform& get_projection() const;
-
-		/// <summary>
 		/// Directs the camera forward direction towards given 'position'.
 		/// </summary>
 		/// <param name="position"></param>
@@ -76,14 +68,10 @@ namespace agl
 	protected:
 		void update(transformable& transform, direction& dir);
 
-		/// <summary>
-		/// Recalculate the 'm_projection' matrix.
-		/// </summary>
-		virtual void update_projection() = 0;
-
 	protected:
 		transform m_projection;
-		bool m_needs_update;
+		bool m_view_update;
+		bool m_projection_update;
 
 	private:
 		friend class camera_system;

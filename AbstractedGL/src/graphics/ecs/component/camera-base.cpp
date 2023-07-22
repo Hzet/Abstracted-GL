@@ -10,7 +10,8 @@ namespace agl
 	camera_base::camera_base()
 		: m_planes{ 0.1f, 100.f }
 		, m_look_at{ 0.f, 0.f, 0.f }
-		, m_needs_update{ true }
+		, m_view_update{ true }
+		, m_projection_update{ true }
 		, m_view{ glm::mat4{ 1.f } }
 		, m_projection{ glm::mat4{ 1.f } }
 	{
@@ -23,7 +24,7 @@ namespace agl
 
 	void camera_base::set_resolution(const glm::vec2 &frame)
 	{
-		m_needs_update = true;
+		m_view_update = true;
 
 		m_resolution = frame;
 	}
@@ -35,7 +36,7 @@ namespace agl
 
 	void camera_base::set_planes(const glm::vec2 &planes)
 	{
-		m_needs_update = true;
+		m_view_update = true;
 
 		m_planes = planes;
 	}
@@ -43,11 +44,6 @@ namespace agl
 	const transform& camera_base::get_view() const
 	{
 		return m_view;
-	}
-
-	const transform& camera_base::get_projection() const
-	{
-		return m_projection;
 	}
 
 	void camera_base::look_at(const glm::vec3 &target)
@@ -58,7 +54,7 @@ namespace agl
 
 	bool camera_base::needs_update() const
 	{
-		return m_needs_update || m_look_at_update;
+		return m_view_update || m_look_at_update;
 	}
 
 	void camera_base::update(transformable& transform, direction& dir)
@@ -99,8 +95,7 @@ namespace agl
 		m_view = glm::lookAt(transform.get_origin() + transform.get_position(), transform.get_origin() + transform.get_position() + dir.forward, dir.up);
 		m_view.scale(transform.get_scale());
 
-		this->update_projection();
-
-		m_needs_update = true;
+		m_view_update = false;
+		m_projection_update = true;
 	}
 }

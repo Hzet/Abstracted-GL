@@ -16,7 +16,7 @@ namespace agl
 
 	void camera_perspective::set_fov(float fov)
 	{
-		m_needs_update = true;
+		m_projection_update = true;
 	
 		if (fov < 0.f)
 			fov = 0.f;
@@ -26,9 +26,16 @@ namespace agl
 		m_fov = fov;
 	}
 
-	void camera_perspective::update_projection()
+	const transform& camera_perspective::calc_projection()
 	{
-		m_projection = glm::perspective(glm::radians(get_fov()), static_cast<float>(get_resolution().x) / static_cast<float>(get_resolution().y), get_planes().x, get_planes().y);
+		if (m_projection_update)
+		{
+			m_projection = glm::perspective(glm::radians(get_fov()), static_cast<float>(get_resolution().x) / static_cast<float>(get_resolution().y), get_planes().x, get_planes().y);
+
+			m_projection_update = false;
+		}
+
+		return m_projection;
 	}
 
 }

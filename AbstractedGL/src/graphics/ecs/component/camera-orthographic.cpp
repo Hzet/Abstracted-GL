@@ -4,10 +4,17 @@
 
 namespace agl
 {
-	void camera_orthographic::update_projection()
+	const transform& camera_orthographic::calc_projection()
 	{
-		m_projection = glm::ortho(-static_cast<float>(get_resolution().x) / 2.f, static_cast<float>(get_resolution().x) / 2.f,
-								  -static_cast<float>(get_resolution().y) / 2.f, static_cast<float>(get_resolution().y) / 2.f, 
-								  get_planes().x, get_planes().y);
+		if (m_projection_update)
+		{
+			m_projection = glm::ortho(-static_cast<float>(get_resolution().x) / 2.f, static_cast<float>(get_resolution().x) / 2.f,
+				-static_cast<float>(get_resolution().y) / 2.f, static_cast<float>(get_resolution().y) / 2.f,
+				get_planes().x, get_planes().y);
+
+			m_projection_update = false;
+		}
+
+		return m_projection;
 	}
 }
