@@ -19,9 +19,6 @@ namespace agl
 
 	const char* exception::what() const noexcept
 	{
-		if (!m_initialized)
-			m_message = (defaultMessage() + m_message).c_str();
-
 		return m_message.c_str();
 	}
 }

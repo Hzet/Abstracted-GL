@@ -55,13 +55,13 @@ view<Args...>::~view()
 template <typename... Args>
 typename view<Args...>::iterator view<Args...>::cbegin() const
 {
-	return view<Args...>::iterator{ *this, m_entities.cbegin() };
+	return view::iterator{ *this, m_entities.cbegin() };
 }
 
 template <typename... Args>
 typename view<Args...>::iterator view<Args...>::cend() const
 {
-	return view<Args...>::iterator{ *this, m_entities.cend() };
+	return view::iterator{ *this, m_entities.cend() };
 }
 
 template <typename... Args>
