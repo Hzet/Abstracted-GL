@@ -23,38 +23,6 @@ option(AGL_ENABLE_PROFILING "Collet profiling measurements" true)
 
 project (AGL)
 
-if(AGL_ENABLE_PROFILING)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DAGL_ENABLE_PROFILING")
-endif()
-
-# AGL_PROFILER
-# ------------
-file (
-	GLOB_RECURSE 
-	AGL_PROFILER_SOURCES 
-	CONFIGURE_DEPENDS 
-	"profiler/src/*.cpp"
-)
-
-file (
-	GLOB_RECURSE 
-	AGL_PROFILER_HEADERS 
-	CONFIGURE_DEPENDS 
-	"profiler/include/*.hpp" 
-	"profiler/include/*.inl"
-)
-
-add_library(
-	AGL_PROFILER
-	${AGL_PROFILER_SOURCES}
-	${AGL_PROFILER_HEADERS}
-)
-
-target_include_directories(
-	AGL_PROFILER
-	PUBLIC "profiler/include/"
-)
-
 # AGL_LOGGER
 # ----------
 file (
@@ -121,6 +89,49 @@ target_link_libraries(
 	PUBLIC AGL_LOGGER
 )
 
+# AGL_PROFILER
+# ------------
+if(AGL_ENABLE_PROFILING)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DAGL_ENABLE_PROFILING")
+
+	file (
+		GLOB_RECURSE 
+		AGL_PROFILER_SOURCES 
+		CONFIGURE_DEPENDS 
+		"profiler/src/*.cpp"
+	)
+
+	file (
+		GLOB_RECURSE 
+		AGL_PROFILER_HEADERS 
+		CONFIGURE_DEPENDS 
+		"profiler/include/*.hpp" 
+		"profiler/include/*.inl"
+	)
+
+	add_library(
+		AGL_PROFILER
+		${AGL_PROFILER_SOURCES}
+		${AGL_PROFILER_HEADERS}
+	)
+
+	add_dependencies(
+		AGL_PROFILER
+		AGL_DEBUG
+	)
+
+	target_include_directories(
+		AGL_PROFILER
+		PUBLIC "profiler/include/"
+	)
+
+	target_link_libraries(
+		AGL_PROFILER
+		PUBLIC AGL_DEBUG
+	)
+endif()
+
+
 # AGL_UID
 # -------
 file (
@@ -154,15 +165,15 @@ target_include_directories(
 	PUBLIC "uid/include/"
 )
 
-target_link_libraries(
-	AGL_UID
-	PUBLIC AGL_DEBUG
-)
-
 if(AGL_ENABLE_PROFILING)
 	target_link_libraries(
 		AGL_UID
 		PUBLIC AGL_PROFILER
+	)
+else()
+	target_link_libraries(
+		AGL_UID
+		PUBLIC AGL_DEBUG
 	)
 endif()
 
