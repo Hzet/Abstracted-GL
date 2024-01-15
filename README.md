@@ -32,7 +32,7 @@ Boring stuff. Exceptions, asserts and macros (don't be thrown off by this - macr
 #
 ### How to use?
 How you want! 
-Actually it is a bit more difficult that I wrote before but we will get there.
+Actually, it is a bit more difficult that I wrote before but we will get there.
 In order to use the engine, you must create your application, which is nothing else that just initialization of the program's main loop. It is what the engine expects you to do. 
 An AGL dependent application class must inherit from ```agl::application``` and can optionally override ```init()``` method, which is later called by AGL Core after the ```agl::create_application()``` is called. The last function is also provided by the developer of dependent app.
 Here is a minimal example of the above.
